@@ -49,7 +49,7 @@
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         
         m_searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, HEIGHT_NAVIGATION)];
-        [m_searchBar setPlaceholder:@"可输入顾客名,车牌号,号码查询记录"];
+        [m_searchBar setPlaceholder:@"可输入客户名,车牌号,号码查询记录"];
         [m_searchBar setDelegate:self];
         m_searchBar.showsCancelButton = YES;
         self.tableView.tableHeaderView = m_searchBar;

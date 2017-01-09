@@ -10,7 +10,7 @@
 #define  XXT_xinjiang_PublicDefine_h
 
 
-#define  KEY_IS_DEV                   1
+#define  KEY_IS_DEV                   0
 #define  SERVER                       KEY_IS_DEV ? @"http://localhost:18080"  :  @"http://autorepairhelper.duapp.com"
 #define  JPUSH_APPKEY                 @"2c333bb853fee953412917d3"
 #define  JPUSH_SECRET                 @"78b67cb91bdd80f8c0fa92a9"
@@ -27,7 +27,7 @@
 #define  MAIN_WIDTH                   [UIScreen mainScreen].bounds.size.width
 #define  MAIN_FRAME                   [UIScreen mainScreen].bounds
 
-#define   PUBLIC_BACKGROUND_COLOR           UIColorFromRGB(0x1D5FB4)
+#define   PUBLIC_BACKGROUND_COLOR           UIColorFromRGB(0x66CDAA)
 #define  KEY_COMMON_CORLOR                   PUBLIC_BACKGROUND_COLOR
 
 #define  PUBLIC_RELEASE(id) \
@@ -469,10 +469,12 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 #define KEY_AUTO_TEL                @"KEY_AUTO_TEL"
 #define KEY_AUTO_LEVEL              @"KEY_AUTO_LEVEL"
 #define KEY_AUTO_UDID_MODIFYED      @"KEY_AUTO_UDID_MODIFYED"
-#define KEY_UDID                     [[UIDevice currentDevice]identifierForVendor].UUIDString
+#define KEY_UDID                     [[UIDevice currentDevice]identifierForVendor].UUIDString.length == 0 ? @"0" :  [[UIDevice currentDevice]identifierForVendor].UUIDString
 
 
 #define KEY_IS_TIPED_NEED_LOGIN     @"KEY_IS_TIPED_NEED_LOGIN" ///需要登录的说明
 #define KEY_IS_CONTACT_AYSNED       @"KEY_IS_CONTACT_AYSNED" ///是否已经同步过所有数据
 #define KEY_IS_REPAIR_AYSNED        @"KEY_IS_REPAIR_AYSNED" ///是否已经同步过所有数据
 
+#define KEY_LOGINED_NAME            @"KEY_LOGINED_NAME"
+#define KEY_LOGINED_PWD             @"KEY_LOGINED_PWD"

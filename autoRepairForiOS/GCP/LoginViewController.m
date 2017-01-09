@@ -22,6 +22,12 @@
     navigationBG.hidden = YES;
     [title setText:@"登录"];
     m_asyncCount = 0;
+    
+//    self.iconView.layer.cornerRadius = 4;
+//    self.iconView.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.iconView.layer.borderWidth = 0.5;
+    [self.loginBtn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
+    [self.registerBtn setTitleColor:PUBLIC_BACKGROUND_COLOR forState:UIControlStateNormal];
   
     
     
@@ -36,6 +42,9 @@
 {
     [super viewWillAppear:animated];
     
+    self.nameInput.text = [LoginUserUtil loginedName];
+    self.pwdInput.text = [LoginUserUtil loginedPwd];
+    
     NSString *key = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_IS_TIPED_NEED_LOGIN];
     if(key == nil)
     {
@@ -45,6 +54,7 @@
     
 
 }
+
 
 
 
@@ -65,6 +75,15 @@
     }
 }
 
+
+- (void)checkAndLogin
+{
+    m_asyncCount++;
+    if (m_asyncCount >= 2) {
+        [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
+        m_asyncCount = 0;
+    }
+}
 
 - (void)uploadContacts
 {
@@ -118,21 +137,33 @@
                                              }
                                          }
                                          
-                                         m_asyncCount++;
-                                         if (m_asyncCount == 2) {
-                                             [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
-                                         }
+                                        
+                                        [self checkAndLogin];
+
+                                         
+                                         
                                          
                                          
                                      } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                                          
+                                         [self checkAndLogin];
+
+                                         
                                      }];
                                  }
                              }
+                             else{
+                                 [self checkAndLogin];
+                             }
+                             
+
                              
                          }
                             failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                                 
+                                
+                                [self checkAndLogin];
+
                                 
                             }];
     }
@@ -161,13 +192,14 @@
                     }
                 
                 }
-                
-                m_asyncCount++;
-                if (m_asyncCount == 2) {
-                    [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
-                }
+            
+                                
+                [self checkAndLogin];
+
                 
             } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                
+                [self checkAndLogin];
                 
             }];
     }
@@ -182,6 +214,7 @@
     for(ADTRepairInfo *info in arrRepair)
     {
         NSDictionary *dic = @{
+                              @"id":@"",
                               @"carcode" : info.m_carCode,
                               @"totalkm" : info.m_km,
                               @"repairetime" : info.m_time,
@@ -204,15 +237,67 @@
                         {
                             [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_REPAIR_AYSNED];
                             
+                            [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_CONTACT_AYSNED];
                             
-                            m_asyncCount++;
-                            if (m_asyncCount == 2) {
-                                [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
+                            if([[SqliteDataManager sharedInstance]deleteAllRepair])
+                            {
+                                [HTTP_MANAGER queryAllRepair:[LoginUserUtil userTel]
+                                                successedBlock:^(NSDictionary *succeedResult) {
+                                                    
+                                                    if([succeedResult[@"code"]integerValue] == 1)
+                                                    {
+                                                        NSArray * arr = succeedResult[@"ret"];
+                                                        if(arr.count > 0)
+                                                        {
+                                                            for(NSDictionary *info in arr)
+                                                            {
+                                                                ADTRepairInfo *newRep = [[ADTRepairInfo alloc]init];
+                                                                newRep.m_more = info[@"addition"];
+                                                                newRep.m_carCode = info[@"carcode"];
+                                                                newRep.m_repairCircle = info[@"circle"];
+                                                                newRep.m_isreaded = [info[@"isclose"]integerValue] == 1;
+                                                                newRep.m_owner = info[@"owner"];
+                                                                newRep.m_time = info[@"repairetime"];
+                                                                newRep.m_repairType = info[@"repairtype"];
+                                                                newRep.m_owner = info[@"owner"];
+                                                                newRep.m_targetDate = info[@"tipcircle"];
+                                                                newRep.m_km = info[@"totalkm"];
+                                                                newRep.m_idFromNode = info[@"_id"];
+ 
+ 
+                                                                [[SqliteDataManager sharedInstance]insertRepair:newRep];
+                                                            }
+                                                        }
+                                                    }
+                                                    
+                                                    [self checkAndLogin];
+                                                    
+                                                    
+                                                } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                                    
+                                                    [self checkAndLogin];
+                                                    
+                                                    
+                                                }];
                             }
+                            else
+                            {
+                                [self checkAndLogin];
+
+                            }
+
+
                         }
+                        else{
+                            [self checkAndLogin];
+                        }
+                        
                         
                     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                         
+                        
+                        [self checkAndLogin];
+
                         
                     }];
 }
@@ -248,8 +333,10 @@
                           [self removeWaitingView];
                           if([succeedResult[@"code"]integerValue] == 1)
                           {
-                              [self.nameInput setText:nil];
-                              [self.pwdInput setText:nil];
+                              
+                              [[NSUserDefaults standardUserDefaults]setObject:self.nameInput.text forKey:KEY_LOGINED_NAME];
+                              [[NSUserDefaults standardUserDefaults]setObject:self.pwdInput.text forKey:KEY_LOGINED_PWD];
+                              
                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"username"] forKey:KEY_AUTO_NAME];
                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"tel"] forKey:KEY_AUTO_TEL];
                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"viplevel"] forKey:KEY_AUTO_LEVEL];
@@ -259,15 +346,22 @@
                               {
                                   [self uploadContacts];
                               }
-                              
+                              else
+                              {
+                                  m_asyncCount++;
+                              }
                           
                               if(![LoginUserUtil isRepairAsynced] || [LoginUserUtil isDeviceModifyed])
+//                              if(1)
                               {
                                   [self uploadRepairs];
                               }
-                         
-                        
-                        
+                              else
+                              {
+                                  m_asyncCount++;
+                              }
+                              
+                              [self checkAndLogin];
                           }
                           else
                           {

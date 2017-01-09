@@ -79,4 +79,7 @@
 
 + (BOOL)isContactAsynced;
 + (BOOL)isRepairAsynced;
+
++ (NSString *)loginedName;
++ (NSString *)loginedPwd;
 @end

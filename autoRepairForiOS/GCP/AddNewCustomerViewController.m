@@ -22,7 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [title setText:self.m_currentData ?@"顾客详情" : @"新增顾客"];
+    [title setText:self.m_currentData ?@"客户详情" : @"新增客户"];
     m_bg = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame)+20, MAIN_WIDTH, MAIN_HEIGHT-CGRectGetMaxY(navigationBG.frame))];
     
     
@@ -37,6 +37,7 @@
     m_userNameInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_userNameInput.layer.borderWidth = 0.5;
     m_userNameInput.delegate = self;
+    m_userNameInput.font = [UIFont systemFontOfSize:14];
     [m_userNameInput setPlaceholder:@"请输入车主名"];
     [m_userNameInput setTextColor:[UIColor blackColor]];
     if(self.m_currentData)
@@ -56,6 +57,7 @@
     m_carCodeInput.layer.cornerRadius = 3;
     m_carCodeInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_carCodeInput.layer.borderWidth = 0.5;
+    m_carCodeInput.font = [UIFont systemFontOfSize:14];
 
     [m_carCodeInput setPlaceholder:@"请输入车牌号码"];
     [m_carCodeInput setTextColor:[UIColor blackColor]];
@@ -71,11 +73,12 @@
     [tip3 setText:@"车主号码:"];
     [m_bg addSubview:tip3];
     m_telInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_carCodeInput.frame)+15, MAIN_WIDTH-110, 30)];
+    m_telInput.font = [UIFont systemFontOfSize:14];
     m_telInput.layer.cornerRadius = 3;
     m_telInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_telInput.layer.borderWidth = 0.5;
     m_telInput.delegate = self;
-    [m_telInput setPlaceholder:@"请输入车主号码 "];
+    [m_telInput setPlaceholder:@"提交后不可修改,除非删除重来"];
     [m_telInput setTextColor:[UIColor blackColor]];
     if(self.m_currentData)
     {
@@ -120,7 +123,17 @@
         [historyBtn setFrame:CGRectMake(20, CGRectGetMaxY(deleteBtn.frame)+20, MAIN_WIDTH-40, 40)];
         [historyBtn setBackgroundColor:KEY_COMMON_CORLOR];
         [m_bg addSubview:historyBtn];
-        [m_bg setContentSize:CGSizeMake(MAIN_HEIGHT, CGRectGetMaxY(historyBtn.frame)+20)];
+
+        UIButton *callBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        callBtn.layer.cornerRadius = 4;
+        [callBtn addTarget:self action:@selector(callBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        callBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+        [callBtn setTitle:@"联系客户" forState:UIControlStateNormal];
+        [callBtn setFrame:CGRectMake(20, CGRectGetMaxY(historyBtn.frame)+20, MAIN_WIDTH-40, 40)];
+        [callBtn setBackgroundColor:KEY_COMMON_CORLOR];
+        [m_bg addSubview:callBtn];
+        
+        [m_bg setContentSize:CGSizeMake(MAIN_HEIGHT, CGRectGetMaxY(callBtn.frame)+20)];
         
     }
     else
@@ -142,6 +155,11 @@
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
 
+}
+
+- (void)callBtnClicked
+{
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",self.m_currentData.m_tel]]];
 }
 
 - (void)seeAllBtnClicked

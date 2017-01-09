@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *telInput;
 @property (weak, nonatomic) IBOutlet UITextField *pwdInput;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPwdInput;
+@property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 
 @end

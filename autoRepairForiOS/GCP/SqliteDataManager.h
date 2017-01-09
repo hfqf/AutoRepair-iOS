@@ -42,9 +42,13 @@ SINGLETON_FOR_HEADER(SqliteDataManager)
 
 - (BOOL)updateOneHistory2Readed:(ADTRepairInfo *)info;
 
+- (BOOL)updateRepair:(ADTRepairInfo *)info;
+
 - (BOOL)deleteOneRepair:(ADTRepairInfo *)info;
 
 - (BOOL)deleteAllRepairWith:(NSString *)carCode;
+
+- (BOOL)deleteAllRepair;
 
 - (NSArray *)queryRepairs:(ADTContacterInfo *)custom;
 

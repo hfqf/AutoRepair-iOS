@@ -12,5 +12,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameInput;
 
 @property (weak, nonatomic) IBOutlet UITextField *pwdInput;
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 
 @end

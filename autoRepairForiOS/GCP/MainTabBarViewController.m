@@ -111,7 +111,7 @@
         }
         else
         {
-            title = @"设置";
+            title = @"公告";
             unSelectedImg = @"tabbar_bottom4_un@2x";
             selectedImg = @"tabbar_bottom4_on@2x";
         }

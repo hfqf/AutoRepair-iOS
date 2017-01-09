@@ -81,7 +81,7 @@
 					<string>TEXT</string>
 				</dict>
 				<dict>
-					<key>_id</key>
+					<key>idFromNode</key>
 					<string>TEXT</string>
 				</dict>
 			</array>

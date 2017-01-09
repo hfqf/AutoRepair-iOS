@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [title setText:@"注册"];
+    [self.commitBtn setBackgroundColor:KEY_COMMON_CORLOR];
 }
 
 - (void)didReceiveMemoryWarning {

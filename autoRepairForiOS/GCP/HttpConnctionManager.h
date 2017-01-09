@@ -134,4 +134,9 @@ typedef void (^FailBlock)(NSError *error);
 - (void)updateOneRepair:(ADTRepairInfo *)rep
        successedBlock:(SuccessedBlock)success
           failedBolck:(FailedBlock)failed;
+
+///获取所有维修记录
+- (void)queryAllRepair:(NSString *)owner
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed;
 @end

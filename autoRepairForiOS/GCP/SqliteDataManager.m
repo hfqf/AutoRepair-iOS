@@ -68,14 +68,9 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
     {
         while (sqlite3_step(statement) == SQLITE_ROW)
         {
-            ADTContacterInfo *info = [[ADTContacterInfo alloc]init];
-            info.m_carCode =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 0)  encoding:NSUTF8StringEncoding];
-            info.m_userName =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 1)  encoding:NSUTF8StringEncoding];
-            info.m_tel =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 2)  encoding:NSUTF8StringEncoding];
-            info.m_carType =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 3)  encoding:NSUTF8StringEncoding];
+            ADTContacterInfo *info = [self contactFrom:statement];
             NSArray *arrRepair = [self queryRepairs:info];
             [arr addObjectsFromArray:arrRepair];
-            info.m_owner =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 4)  encoding:NSUTF8StringEncoding];
         }
     }
     return arr;
@@ -90,16 +85,27 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
     {
         while (sqlite3_step(statement) == SQLITE_ROW)
         {
-            ADTContacterInfo *info = [[ADTContacterInfo alloc]init];
-            info.m_carCode =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 0)  encoding:NSUTF8StringEncoding];
-            info.m_userName =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 1)  encoding:NSUTF8StringEncoding];
-            info.m_tel =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 2)  encoding:NSUTF8StringEncoding];
-            info.m_carType =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 3)  encoding:NSUTF8StringEncoding];
+            ADTContacterInfo *info = [self contactFrom:statement];
             [arr addObject:info];
-            info.m_owner =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 4)  encoding:NSUTF8StringEncoding];
         }
     }
    return arr;
+}
+
+- (ADTContacterInfo *)contactFrom:(sqlite3_stmt * )statement
+{
+    ADTContacterInfo *info = [[ADTContacterInfo alloc]init];
+    info.m_carCode =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 0)  encoding:NSUTF8StringEncoding];
+    info.m_userName =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 1)  encoding:NSUTF8StringEncoding];
+    info.m_tel =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 2)  encoding:NSUTF8StringEncoding];
+    info.m_carType =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 3)  encoding:NSUTF8StringEncoding];
+    
+    NSInteger count = sqlite3_column_count(statement);
+    if(count > 4)
+    {
+        info.m_owner =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 4)  encoding:NSUTF8StringEncoding];
+    }
+    return info;
 }
 
 
@@ -159,6 +165,11 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
     return [self execSql: [NSString stringWithFormat:@"update repairHistoryTable set isCloseTip = '%@' where ID = '%@'",isClosed ? @"1" : @"0",info.m_Id]];
 }
 
+- (BOOL)updateRepair:(ADTRepairInfo *)info
+{
+     return [self execSql: [NSString stringWithFormat:@"update repairHistoryTable set totalKm = '%@', repairTime = '%@' ,repairType = '%@', addition = '%@', tipCircle = '%@',circle = '%@' , isreaded = '%@'  where idFromNode = '%@' ",info.m_km,info.m_time,info.m_repairType,info.m_more,info.m_targetDate,info.m_repairCircle,info.m_isClose ? @"1" : @"0",info.m_idFromNode]];
+}
+
 - (BOOL)deleteOneRepair:(ADTRepairInfo *)info
 {
     return [self execSql: [NSString stringWithFormat:@"delete from repairHistoryTable where ID = '%@'",info.m_Id]];
@@ -168,6 +179,13 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 {
     return [self execSql: [NSString stringWithFormat:@"delete from repairHistoryTable where carCode = '%@'",carCode]];
 }
+
+
+- (BOOL)deleteAllRepair
+{
+    return [self execSql: [NSString stringWithFormat:@"delete from repairHistoryTable"]];
+}
+
 
 - (NSArray *)queryRepairs:(ADTContacterInfo *)custom
 {
@@ -230,9 +248,23 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
     info.m_targetDate =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 6)  encoding:NSUTF8StringEncoding];
     info.m_isClose =  [[NSString stringWithCString:(char *)sqlite3_column_text(statement, 7)  encoding:NSUTF8StringEncoding]isEqualToString:@"1"];
     info.m_repairCircle = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 8)  encoding:NSUTF8StringEncoding];
-    info.m_isreaded = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 9)  encoding:NSUTF8StringEncoding];
-    info.m_owner = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 10)  encoding:NSUTF8StringEncoding];
-    info.m_idFromNode = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 11)  encoding:NSUTF8StringEncoding];
+    
+    
+    NSInteger count = sqlite3_column_count(statement);
+    if( count > 9)
+    {
+        info.m_isreaded = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 9)  encoding:NSUTF8StringEncoding];
+    }
+    
+    if(count > 10)
+    {
+        info.m_owner = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 10)  encoding:NSUTF8StringEncoding];
+    }
+    
+    if(count > 11)
+    {
+        info.m_idFromNode = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 11)  encoding:NSUTF8StringEncoding];
+    }
     
     return info;
 }

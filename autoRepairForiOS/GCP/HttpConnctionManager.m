@@ -353,6 +353,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
          failedBolck:(FailedBlock)failed
 {
     [self startNormalPostWith:@"/repair/add" paragram:@{
+                                                         @"id":@"",
                                                          @"carcode":newRep.m_carCode,
                                                          @"totalkm":newRep.m_km,
                                                          @"repairetime":newRep.m_time,
@@ -360,7 +361,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                          @"tipcircle":newRep.m_targetDate,
                                                          @"isclose":newRep.m_isClose ? @"1" : @"0",
                                                          @"circle":newRep.m_repairCircle,
-                                                         @"repairtype":newRep.m_repairType
+                                                         @"repairtype":newRep.m_repairType,
+                                                         @"owner":[LoginUserUtil userTel]
                                                          } successedBlock:success failedBolck:failed];
 }
 
@@ -370,6 +372,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
          failedBolck:(FailedBlock)failed
 {
     [self startNormalPostWith:@"/repair/del" paragram:@{
+                                                        @"id":newRep.m_idFromNode,
                                                         @"carcode":newRep.m_carCode,
                                                         @"totalkm":newRep.m_km,
                                                         @"repairetime":newRep.m_time,
@@ -377,7 +380,9 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                         @"tipcircle":newRep.m_targetDate,
                                                         @"isclose":newRep.m_isClose ? @"1" : @"0",
                                                         @"circle":newRep.m_repairCircle,
-                                                        @"repairtype":newRep.m_repairType
+                                                        @"repairtype":newRep.m_repairType,
+                                                        @"owner":[LoginUserUtil userTel]
+
                                                         } successedBlock:success failedBolck:failed];
 }
 
@@ -394,7 +399,9 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                         @"tipcircle":newRep.m_targetDate,
                                                         @"isclose":newRep.m_isClose ? @"1" : @"0",
                                                         @"circle":newRep.m_repairCircle,
-                                                        @"repairtype":newRep.m_repairType
+                                                        @"repairtype":newRep.m_repairType,
+                                                        @"owner":[LoginUserUtil userTel]
+
                                                         } successedBlock:success failedBolck:failed];
 }
 
@@ -404,7 +411,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
             failedBolck:(FailedBlock)failed
 {
     [self startNormalPostWith:@"/repair/update" paragram:@{
-                                                           @"id":newRep.m_Id,
+                                                           @"id":newRep.m_idFromNode,
                                                            @"carcode":newRep.m_carCode,
                                                            @"totalkm":newRep.m_km,
                                                            @"repairetime":newRep.m_time,
@@ -412,7 +419,24 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                            @"tipcircle":newRep.m_targetDate,
                                                            @"isclose":newRep.m_isClose ? @"1" : @"0",
                                                            @"circle":newRep.m_repairCircle,
-                                                           @"repairtype":newRep.m_repairType
+                                                           @"repairtype":newRep.m_repairType,
+                                                           @"owner":[LoginUserUtil userTel]
+
                                                            } successedBlock:success failedBolck:failed];
 }
+
+///获取所有记录
+- (void)queryAllRepair:(NSString *)owner
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/queryAll"
+                     paragram:@{
+                                @"owner":owner
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+    
+}
+
 @end

@@ -14,6 +14,7 @@
 - (id)initWithInfo:(ADTRepairInfo *)info
 {
     self.m_currentData = info;
+    self.m_currentData.m_owner = [LoginUserUtil userTel];
     if(self = [super init])
     {
         
@@ -46,7 +47,11 @@
     if(self.m_currentData.m_km)
     {
         [m_kmInput setText:self.m_currentData.m_km];
-        m_kmInput.userInteractionEnabled = NO;
+        m_isAdd = NO;
+    }
+    else
+    {
+        m_isAdd = YES;
     }
     [m_bg addSubview:m_kmInput];
     
@@ -68,7 +73,6 @@
     if(self.m_currentData.m_km)
     {
         [m_timeInput setText:self.m_currentData.m_time];
-        m_timeInput.userInteractionEnabled = NO;
     }
     [m_bg addSubview:m_timeInput];
     
@@ -87,7 +91,6 @@
     if(self.m_currentData.m_km)
     {
         [m_repairTypeInput setText:self.m_currentData.m_repairType];
-        m_repairTypeInput.userInteractionEnabled = NO;
     }
     [m_bg addSubview:m_repairTypeInput];
     
@@ -107,7 +110,6 @@
     if(self.m_currentData.m_km)
     {
         [m_moreInput setText:self.m_currentData.m_more];
-        m_moreInput.userInteractionEnabled = NO;
     }
     [m_bg addSubview:m_moreInput];
     
@@ -129,7 +131,6 @@
     if(self.m_currentData.m_km)
     {
         [m_tipCircleInput setText:self.m_currentData.m_repairCircle];
-        m_tipCircleInput.userInteractionEnabled = NO;
     }
     
     
@@ -149,23 +150,22 @@
     }
     [m_isNeedTipSwitcher addTarget:self action:@selector(switchTaped:) forControlEvents:UIControlEventValueChanged];
     [m_bg addSubview:m_isNeedTipSwitcher];
+    
+    
+    
     if(self.m_currentData.m_km)
     {
-        
-        UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [setBtn addTarget:self action:@selector(setBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        setBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-        [setBtn setTitle:@"设置该记录为已读状态" forState:UIControlStateNormal];
-        [setBtn setFrame:CGRectMake(20, CGRectGetMaxY(m_isNeedTipSwitcher.frame)+20, MAIN_WIDTH-40, 40)];
-        [setBtn setBackgroundColor:[UIColor redColor]];
-        
-        [m_bg addSubview:setBtn];
-        [m_bg setContentSize:CGSizeMake(MAIN_HEIGHT, CGRectGetMaxY(setBtn.frame)+20)];
-
+     
+        UIButton *delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [delBtn addTarget:self action:@selector(delBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [delBtn setFrame:CGRectMake(20, CGRectGetMaxY(m_isNeedTipSwitcher.frame)+20, MAIN_WIDTH-40, 40)];
+        [delBtn setBackgroundColor:[UIColor redColor]];
+        [delBtn setTitle:@"删除该记录" forState:UIControlStateNormal];
+        [m_bg addSubview:delBtn];
+        [m_bg setContentSize:CGSizeMake(MAIN_HEIGHT, CGRectGetMaxY(delBtn.frame)+20)];
     }
     else
     {
-        [m_bg addSubview:m_isNeedTipSwitcher];
         [m_bg setContentSize:CGSizeMake(MAIN_HEIGHT, CGRectGetMaxY(m_isNeedTipSwitcher.frame)+20)];
 
     }
@@ -185,7 +185,7 @@
         [addBtn setFrame:CGRectMake(MAIN_WIDTH-90, DISTANCE_TOP, 80, HEIGHT_NAVIGATION)];
 
     }
-    [addBtn setTitle:self.m_currentData.m_km ?@"删除该记录" : @"确认添加" forState:UIControlStateNormal];
+    [addBtn setTitle:self.m_currentData.m_km ?@"确认编辑" : @"确认添加" forState:UIControlStateNormal];
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
     
@@ -194,14 +194,46 @@
 }
 
 
-- (void)setBtnClicked
+- (void)delBtnClicked
 {
-    if([DB_Shared updateOneHistory2Readed:self.m_currentData] )
-    {
-        [self backBtnClicked];
-    }
-    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认删除?" message:@"该操作无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    [alert show];
 }
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        
+    }
+    else
+    {
+        
+        [HTTP_MANAGER delOneRepair:self.m_currentData
+                    successedBlock:^(NSDictionary *succeedResult) {
+           
+                        if([succeedResult[@"code"] integerValue] == 1)
+                        {
+                            if([DB_Shared deleteOneRepair:self.m_currentData])
+                            {
+                                [self backBtnClicked];
+                            }
+                        }
+                        else
+                        {
+                           [PubllicMaskViewHelper showTipViewWith:@"删除失败" inSuperView:self.view withDuration:1];
+                        }
+            
+        } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+            [PubllicMaskViewHelper showTipViewWith:@"删除失败" inSuperView:self.view withDuration:1];
+
+        }];
+       
+    }
+}
+
+
 
 
 - (void)tapped
@@ -213,97 +245,149 @@
     [m_tipCircleInput resignFirstResponder];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == 0)
-    {
-        
-    }
-    else
-    {
-        if([DB_Shared deleteOneRepair:self.m_currentData])
-        {
-            [self backBtnClicked];
-        }
-    }
-}
+
 
 - (void)addBtnClicked
 {
-    if(self.m_currentData.m_km)
+    
+    if(m_kmInput.text.length == 0)
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认删除?" message:@"该操作无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-        [alert show];
+        [PubllicMaskViewHelper showTipViewWith:@"公里数不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+    
+    if(m_timeInput.text.length == 0)
+    {
+        [PubllicMaskViewHelper showTipViewWith:@"维修日期不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+    
+    if(m_repairTypeInput.text.length == 0)
+    {
+        [PubllicMaskViewHelper showTipViewWith:@"保养项目不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+    
+    if(m_moreInput.text.length == 0)
+    {
+        [PubllicMaskViewHelper showTipViewWith:@"备注不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+    
+    self.m_currentData.m_km = m_kmInput.text;
+    self.m_currentData.m_time = m_timeInput.text;
+    self.m_currentData.m_repairType = m_repairTypeInput.text;
+    self.m_currentData.m_more = m_moreInput.text;
+    
+    NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
+    [df1 setDateFormat:@"yyyy-MM-dd"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    [df1 setLocale:locale];
+    NSDate *date=[df1 dateFromString:m_timeInput.text];
+    
+    NSDate *dateToDay = [NSDate dateWithTimeInterval:[m_tipCircleInput.text integerValue]*24*3600 sinceDate:date];//将获得当前时间
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    [df setLocale:locale];
+    NSString *strDate = [df stringFromDate:dateToDay];
+    self.m_currentData.m_targetDate = strDate;
+    self.m_currentData.m_repairCircle = m_tipCircleInput.text;
+    self.m_currentData.m_isClose = m_isNeedTipSwitcher.isOn;
+
+    
+    
+    if(!m_isAdd)
+    {
+       
+        [HTTP_MANAGER updateOneRepair:self.m_currentData
+                       successedBlock:^(NSDictionary *succeedResult) {
+                           
+                           if([succeedResult[@"code"]integerValue] == 1)
+                           {
+                               if( [[SqliteDataManager sharedInstance]updateRepair:self.m_currentData])
+                               {
+                                   [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view withDuration:1];
+                                   [self performSelector:@selector(backToMainTab) withObject:nil afterDelay:1];
+                                   
+                               }
+                               else
+                               {
+                                   [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
+                               }
+                           }
+                           else
+                           {
+                               [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
+
+                           }
+                       
+                           
+                           
+                       } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                           [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
+                       }];
+        
+        
     }
     else
     {
-        if(m_kmInput.text.length == 0)
-        {
-            [PubllicMaskViewHelper showTipViewWith:@"公里数不能为空" inSuperView:self.view withDuration:1];
-            return;
-        }
         
-        if(m_timeInput.text.length == 0)
-        {
-            [PubllicMaskViewHelper showTipViewWith:@"维修日期不能为空" inSuperView:self.view withDuration:1];
-            return;
-        }
-        
-        if(m_repairTypeInput.text.length == 0)
-        {
-            [PubllicMaskViewHelper showTipViewWith:@"保养项目不能为空" inSuperView:self.view withDuration:1];
-            return;
-        }
-        
-        if(m_moreInput.text.length == 0)
-        {
-            [PubllicMaskViewHelper showTipViewWith:@"备注不能为空" inSuperView:self.view withDuration:1];
-            return;
-        }
-        
-        self.m_currentData.m_km = m_kmInput.text;
-        self.m_currentData.m_time = m_timeInput.text;
-        self.m_currentData.m_repairType = m_repairTypeInput.text;
-        self.m_currentData.m_more = m_moreInput.text;
-        
-        NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
-        [df1 setDateFormat:@"yyyy-MM-dd"];
-        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-        [df1 setLocale:locale];
-        NSDate *date=[df1 dateFromString:m_timeInput.text];
-        
-        NSDate *dateToDay = [NSDate dateWithTimeInterval:[m_tipCircleInput.text integerValue]*24*3600 sinceDate:date];//将获得当前时间
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"yyyy-MM-dd"];
-        [df setLocale:locale];
-        NSString *strDate = [df stringFromDate:dateToDay];
-        self.m_currentData.m_targetDate = strDate;
-        self.m_currentData.m_repairCircle = m_tipCircleInput.text;
-        self.m_currentData.m_isClose = m_isNeedTipSwitcher.isOn;
-
-        if([DB_Shared insertRepair:self.m_currentData])
-        {
-            NSArray *arr = self.navigationController.viewControllers;
+        [HTTP_MANAGER addNewRepair:self.m_currentData
+                    successedBlock:^(NSDictionary *succeedResult) {
             
-            for(UIViewController *vc in arr)
+            self.m_currentData.m_idFromNode = succeedResult[@"ret"][@"_id"];
+                        
+            if([succeedResult[@"code"]integerValue] == 1)
             {
-                if([vc isKindOfClass:[MainTabBarViewController class]])
+                if([DB_Shared insertRepair:self.m_currentData])
                 {
-                    [self.navigationController popToViewController:vc animated:YES];
-                    return;
+                    [PubllicMaskViewHelper showTipViewWith:@"添加成功" inSuperView:self.view  withDuration:1];
+                    [self performSelector:@selector(backToMainTab) withObject:nil afterDelay:1];
+                }
+                else
+                {
+                    [PubllicMaskViewHelper showTipViewWith:@"添加失败" inSuperView:self.view  withDuration:1];
                 }
             }
+            else
+            {
+                [PubllicMaskViewHelper showTipViewWith:@"添加失败" inSuperView:self.view  withDuration:1];
+            }
+          
+        } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+           
+            [PubllicMaskViewHelper showTipViewWith:@"添加失败" inSuperView:self.view  withDuration:1];
             
-            [self backBtnClicked];
-        }
+        }];
+      
     }
 
+}
+
+
+- (void)backToMainTab
+{
+    NSArray *arr = self.navigationController.viewControllers;
+    
+    for(UIViewController *vc in arr)
+    {
+        if([vc isKindOfClass:[MainTabBarViewController class]])
+        {
+            [self.navigationController popToViewController:vc animated:YES];
+            return;
+        }
+    }
+    
+    [self backBtnClicked];
 }
 
 - (void)switchTaped:(UISwitch *)switcher
 {
     
-   if( [[SqliteDataManager sharedInstance]makeOneHistory:self.m_currentData isClosed:switcher.isOn])
+    [HTTP_MANAGER updateOneRepair:self.m_currentData
+                   successedBlock:^(NSDictionary *succeedResult) {
+        
+        if( [[SqliteDataManager sharedInstance]makeOneHistory:self.m_currentData isClosed:switcher.isOn])
         {
             [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view withDuration:1];
         }
@@ -312,8 +396,10 @@
             [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
         }
 
-  
-    
+        
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+        [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
+    }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -350,7 +436,7 @@
     }
     else if (textField == m_tipCircleInput)
     {
-        UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择提醒周期" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"1天",@"7天",@"14天",@"15天",@"21天",@"28天",@"30天",@"60天",@"90天",@"120天", nil];
+        UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择提醒周期" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"1天",@"7天",@"14天",@"15天",@"21天",@"28天",@"30天",@"60天",@"90天",@"120天",@"150天",@"180天",@"360天", nil];
         [act showInView:self.view];
         return NO;
     }
@@ -423,9 +509,22 @@
     else if (buttonIndex ==8)//90
     {
        [m_tipCircleInput setText:@"90"];
-    }else if(buttonIndex == 9)//120
+    }
+    else if(buttonIndex == 9)//120
     {
         [m_tipCircleInput setText:@"120"];
+    }
+    else if(buttonIndex == 10)//150
+    {
+        [m_tipCircleInput setText:@"150"];
+    }
+    else if(buttonIndex == 11)//180
+    {
+        [m_tipCircleInput setText:@"180"];
+    }
+    else if(buttonIndex == 12)//360
+    {
+        [m_tipCircleInput setText:@"360"];
     }
     else
     {

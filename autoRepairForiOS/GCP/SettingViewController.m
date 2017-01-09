@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
     backBtn.hidden = YES;
-    [title setText:@"设置"];
+    [title setText:@"公告"];
 }
 
 
@@ -43,7 +43,7 @@
 {
     self.m_arrData = @[
                        @"最新公告",
-                       @"这个软件是个人爱好,并且会一直维护并更新。软件后台管理系统需要些费用,如果您觉得软件还可以,可以请我喝杯咖啡",
+                     
                        @"退出"
                        ];
     [self reloadDeals];
@@ -53,12 +53,12 @@
 {
     if(indexPath.row == 0)
     {
-        return 180;
+        return 200;
     }
-    else if (indexPath.row == 1)
-    {
-        return 100;
-    }
+//    else if (indexPath.row == 1)
+//    {
+//        return 120;
+//    }
     return 80;
 }
 
@@ -72,7 +72,7 @@
     static NSString * identify = @"spe";
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryNone;
     
    
     
@@ -85,35 +85,43 @@
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.row]];
         [cell addSubview:_tit];
         
-        UIWebView *web= [[UIWebView alloc]initWithFrame:CGRectMake(0, 20, MAIN_WIDTH,150)];
+        UIWebView *web= [[UIWebView alloc]initWithFrame:CGRectMake(0, 40, MAIN_WIDTH,150)];
         [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://autorepairhelper.duapp.com/noticeboard/ios"]]];
+        web.scrollView.scrollEnabled = NO;
         [cell addSubview:web];
         
-        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 179.5, MAIN_WIDTH, 0.5)];
-        [sep setBackgroundColor:UIColorFromRGB(0xcfcfcf)];
+        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 199.5, MAIN_WIDTH, 0.5)];
+        [sep setBackgroundColor:KEY_COMMON_CORLOR];
         [cell addSubview:sep];
     
-        
-    }else if (indexPath.row == 1)
-    {
-        UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 200, 20)];
-        [_tit setTextColor:[UIColor blackColor]];
-        [_tit setFont:[UIFont systemFontOfSize:20]];
-        [_tit setText:@"请开发者喝杯咖啡"];
-        [cell addSubview:_tit];
-        
-        
-        UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake( 10, 50, MAIN_WIDTH-20, 40)];
-        [tip setTextColor:UIColorFromRGB(0x818181)];
-        tip.numberOfLines = 0;
-        [tip setFont:[UIFont systemFontOfSize:16]];
-        [tip setText:@""];
-        [cell addSubview:tip];
-        
-        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 99.5, MAIN_WIDTH, 0.5)];
-        [sep setBackgroundColor:UIColorFromRGB(0xcfcfcf)];
-        [cell addSubview:sep];
     }
+//    }else if (indexPath.row == 1)
+//    {
+//        UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 200, 20)];
+//        [_tit setTextColor:[UIColor blackColor]];
+//        [_tit setFont:[UIFont systemFontOfSize:20]];
+//        [_tit setText:@"请开发者喝杯咖啡"];
+//        [cell addSubview:_tit];
+//        
+//     
+//        
+//        UIImageView *wx = [[UIImageView alloc]initWithFrame:CGRectMake(10, 40, 70, 70)];
+//        [wx setImage:[UIImage imageNamed:@"weixin"]];
+//        [cell addSubview:wx];
+//        
+//        
+//        
+//        UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake( 10, 50, MAIN_WIDTH-20, 40)];
+//        [tip setTextColor:UIColorFromRGB(0x818181)];
+//        tip.numberOfLines = 0;
+//        [tip setFont:[UIFont systemFontOfSize:16]];
+//        [tip setText:@""];
+//        [cell addSubview:tip];
+//        
+//        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 119.5, MAIN_WIDTH, 0.5)];
+//        [sep setBackgroundColor:KEY_COMMON_CORLOR];
+//        [cell addSubview:sep];
+//    }
     else
     {
         UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 30, 200, 20)];
@@ -123,7 +131,7 @@
         [cell addSubview:_tit];
         
         UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 79.5, MAIN_WIDTH, 0.5)];
-        [sep setBackgroundColor:UIColorFromRGB(0xcfcfcf)];
+        [sep setBackgroundColor:KEY_COMMON_CORLOR];
         [cell addSubview:sep];
     }
     return cell;
@@ -133,7 +141,7 @@
 {
     if(indexPath.row == 0)
     {
-        [self sendMailInApp];
+        
     }
     else if (indexPath.row == 1)
     {

@@ -18,6 +18,7 @@
     UITextView *m_moreInput;
     UITextField *m_tipCircleInput;
     UISwitch *m_isNeedTipSwitcher;
+    BOOL        m_isAdd;
 }
 @property(nonatomic,strong)ADTRepairInfo *m_currentData;
 - (id)initWithInfo:(ADTRepairInfo *)info;

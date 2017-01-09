@@ -269,4 +269,17 @@
     NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_IS_REPAIR_AYSNED];
     return ret == nil ? 0 : [ret integerValue] == 1;
 }
+
++ (NSString *)loginedName
+{
+    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_LOGINED_NAME];
+    return ret;
+}
+
+
++ (NSString *)loginedPwd
+{
+    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_LOGINED_PWD];
+    return ret;
+}
 @end
