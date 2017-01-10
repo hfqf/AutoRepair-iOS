@@ -75,6 +75,7 @@
 
 + (NSInteger)userVipLevel;
 
+///查看绑定的设备是否变化,如果变化肯定要上传本地数据,并下载所有之前数据
 + (BOOL)isDeviceModifyed;
 
 + (BOOL)isContactAsynced;

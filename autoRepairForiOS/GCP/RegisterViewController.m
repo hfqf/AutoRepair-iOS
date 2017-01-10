@@ -78,16 +78,21 @@
                                             withPwd:self.pwdInput.text
                                      successedBlock:^(NSDictionary *succeedResult) {
                                          [self removeWaitingView];
-                                         [[NSUserDefaults standardUserDefaults]setObject:self.accountInput.text forKey:KEY_AUTO_NAME];
-                                         [[NSUserDefaults standardUserDefaults]setObject:self.telInput.text forKey:KEY_AUTO_TEL];
-                                         [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:KEY_AUTO_LEVEL];
-                                         [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:KEY_AUTO_UDID_MODIFYED];
-                                         [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
-                                         
+                                         if([succeedResult[@"code"]integerValue] == 1)
+                                         {
+                                             [PubllicMaskViewHelper showTipViewWith:@"注册成功" inSuperView:self.view  withDuration:1];
+                                             [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:2];
+                                         }
+                                         else
+                                         {
+                                             [PubllicMaskViewHelper showTipViewWith:@"注册失败" inSuperView:self.view  withDuration:1];
+                                         }
+                                      
                                          
                                      } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                                          
                                          [self removeWaitingView];
+                                         [PubllicMaskViewHelper showTipViewWith:@"注册失败" inSuperView:self.view  withDuration:1];
                                          
                                      }];
             }

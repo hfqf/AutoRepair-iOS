@@ -103,8 +103,18 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
     NSInteger count = sqlite3_column_count(statement);
     if(count > 4)
     {
-        info.m_owner =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 4)  encoding:NSUTF8StringEncoding];
+        const unsigned char *ower = sqlite3_column_text(statement, 4);
+        if(ower == NULL)
+        {
+            //第一次升级后的用户就是之前数据的用户
+            info.m_owner = [LoginUserUtil userTel];
+        }
+        else
+        {
+            info.m_owner =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 4)  encoding:NSUTF8StringEncoding];
+        }
     }
+    
     return info;
 }
 
@@ -132,12 +142,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
     {
         while (sqlite3_step(statement) == SQLITE_ROW)
         {
-            ADTContacterInfo *info = [[ADTContacterInfo alloc]init];
-            info.m_carCode =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 0)  encoding:NSUTF8StringEncoding];
-            info.m_userName =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 1)  encoding:NSUTF8StringEncoding];
-            info.m_tel =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 2)  encoding:NSUTF8StringEncoding];
-            info.m_carType =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 3)  encoding:NSUTF8StringEncoding];
-            info.m_owner =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 4)  encoding:NSUTF8StringEncoding];
+            ADTContacterInfo *info = [self contactFrom:statement];
             return info;
         }
     }
@@ -253,17 +258,44 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
     NSInteger count = sqlite3_column_count(statement);
     if( count > 9)
     {
-        info.m_isreaded = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 9)  encoding:NSUTF8StringEncoding];
+        char *ret = (char *)sqlite3_column_text(statement, 9);
+        if(ret == NULL)
+        {
+            info.m_isreaded = NO;
+        }
+        else
+        {
+            info.m_isreaded = [[NSString stringWithCString:ret  encoding:NSUTF8StringEncoding] integerValue] == 1;
+        }
     }
     
     if(count > 10)
     {
-        info.m_owner = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 10)  encoding:NSUTF8StringEncoding];
+        char *ret = (char *)sqlite3_column_text(statement, 10);
+        if(ret == NULL)
+        {
+            //第一次升级后的用户就是之前数据的用户
+            info.m_owner = [LoginUserUtil userTel];
+        }
+        else
+        {
+            info.m_owner = [NSString stringWithCString:ret  encoding:NSUTF8StringEncoding];
+        }
     }
     
     if(count > 11)
     {
-        info.m_idFromNode = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 11)  encoding:NSUTF8StringEncoding];
+        
+        char *ret = (char *)sqlite3_column_text(statement, 11);
+        if(ret == NULL)
+        {
+            //传空没关系,新版本第一次登录会上传所有本地数据,这个字段用不到
+            info.m_idFromNode = @"";
+        }
+        else
+        {
+            info.m_idFromNode = [NSString stringWithCString:ret  encoding:NSUTF8StringEncoding];
+        }
     }
     
     return info;

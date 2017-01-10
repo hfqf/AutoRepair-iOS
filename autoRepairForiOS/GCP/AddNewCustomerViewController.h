@@ -15,7 +15,7 @@
     UITextField *m_carCodeInput;
     UITextField *m_userNameInput;
     UITextField *m_telInput;
-    UITextView *m_carTypeInput;
+    UITextField *m_carTypeInput;
 }
 @property(nonatomic,strong)ADTContacterInfo *m_currentData;
 - (id)initWithContacer:(ADTContacterInfo *)info;

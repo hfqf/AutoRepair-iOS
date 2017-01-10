@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
     [title setText:self.m_currentData ?@"客户详情" : @"新增客户"];
-    m_bg = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame)+20, MAIN_WIDTH, MAIN_HEIGHT-CGRectGetMaxY(navigationBG.frame))];
+    m_bg = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame), MAIN_WIDTH, MAIN_HEIGHT-CGRectGetMaxY(navigationBG.frame))];
     
     
     UILabel *tip1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 80, 20)];
@@ -93,7 +93,7 @@
     [tip4 setFont:[UIFont systemFontOfSize:18]];
     [tip4 setText:@"车型:"];
     [m_bg addSubview:tip4];
-    m_carTypeInput = [[UITextView alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_telInput.frame)+15, MAIN_WIDTH-110, 80)];
+    m_carTypeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_telInput.frame)+15, MAIN_WIDTH-110, 30)];
     m_carTypeInput.layer.cornerRadius = 3;
     m_carTypeInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_carTypeInput.layer.borderWidth = 0.5;
@@ -112,7 +112,7 @@
         deleteBtn.layer.borderColor = [UIColor whiteColor].CGColor;
         [deleteBtn setTitle:@"删除该顾客,以及对应纪录" forState:UIControlStateNormal];
         [deleteBtn setFrame:CGRectMake(20, CGRectGetMaxY(m_carTypeInput.frame)+20, MAIN_WIDTH-40, 40)];
-        [deleteBtn setBackgroundColor:[UIColor redColor]];
+        [deleteBtn setBackgroundColor:KEY_DELETE_CORLOR];
         [m_bg addSubview:deleteBtn];
         
         UIButton *historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -133,12 +133,12 @@
         [callBtn setBackgroundColor:KEY_COMMON_CORLOR];
         [m_bg addSubview:callBtn];
         
-        [m_bg setContentSize:CGSizeMake(MAIN_HEIGHT, CGRectGetMaxY(callBtn.frame)+20)];
+        [m_bg setContentSize:CGSizeMake(MAIN_WIDTH, CGRectGetMaxY(callBtn.frame)+40)];
         
     }
     else
     {
-        [m_bg setContentSize:CGSizeMake(MAIN_HEIGHT, CGRectGetMaxY(m_carTypeInput.frame)+20)];
+        [m_bg setContentSize:CGSizeMake(MAIN_WIDTH, CGRectGetMaxY(m_carTypeInput.frame)+40)];
 
     }
 

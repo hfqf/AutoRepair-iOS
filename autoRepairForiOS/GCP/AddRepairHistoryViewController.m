@@ -26,7 +26,7 @@
 {
     [super viewDidLoad];
     [title setText:@"维修记录"];
-     m_bg = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame)+20, MAIN_WIDTH, MAIN_HEIGHT-CGRectGetMaxY(navigationBG.frame))];
+     m_bg = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame), MAIN_WIDTH, MAIN_HEIGHT-CGRectGetMaxY(navigationBG.frame))];
   
     
     UILabel *tip1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 80, 20)];
@@ -87,6 +87,7 @@
     m_repairTypeInput.layer.borderWidth = 0.5;
     m_repairTypeInput.delegate = self;
     [m_repairTypeInput setPlaceholder:@"请输入保养项目"];
+    m_repairTypeInput.returnKeyType = UIReturnKeyDone;
     [m_repairTypeInput setTextColor:[UIColor blackColor]];
     if(self.m_currentData.m_km)
     {
@@ -101,6 +102,7 @@
     [tip4 setText:@"备注:"];
     [m_bg addSubview:tip4];
     m_moreInput = [[UITextView alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_repairTypeInput.frame)+20, MAIN_WIDTH-110, 80)];
+    m_moreInput.font = [UIFont systemFontOfSize:16];
     m_moreInput.layer.cornerRadius = 3;
     m_moreInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_moreInput.layer.borderWidth = 0.5;
@@ -125,7 +127,7 @@
     m_tipCircleInput.layer.borderWidth = 0.5;
     m_tipCircleInput.delegate = self;
     m_tipCircleInput.returnKeyType = UIReturnKeyDone;
-    [m_tipCircleInput setPlaceholder:@"提醒周期,以天为单位"];
+    [m_tipCircleInput setPlaceholder:@"1~360天,任选"];
     [m_tipCircleInput setTextColor:[UIColor blackColor]];
     [m_bg addSubview:m_tipCircleInput];
     if(self.m_currentData.m_km)
@@ -157,16 +159,17 @@
     {
      
         UIButton *delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        delBtn.layer.cornerRadius = 4;
         [delBtn addTarget:self action:@selector(delBtnClicked) forControlEvents:UIControlEventTouchUpInside];
         [delBtn setFrame:CGRectMake(20, CGRectGetMaxY(m_isNeedTipSwitcher.frame)+20, MAIN_WIDTH-40, 40)];
-        [delBtn setBackgroundColor:[UIColor redColor]];
+        [delBtn setBackgroundColor:KEY_DELETE_CORLOR];
         [delBtn setTitle:@"删除该记录" forState:UIControlStateNormal];
         [m_bg addSubview:delBtn];
-        [m_bg setContentSize:CGSizeMake(MAIN_HEIGHT, CGRectGetMaxY(delBtn.frame)+20)];
+        [m_bg setContentSize:CGSizeMake(MAIN_WIDTH, CGRectGetMaxY(delBtn.frame)+100)];
     }
     else
     {
-        [m_bg setContentSize:CGSizeMake(MAIN_HEIGHT, CGRectGetMaxY(m_isNeedTipSwitcher.frame)+20)];
+        [m_bg setContentSize:CGSizeMake(MAIN_WIDTH, CGRectGetMaxY(m_isNeedTipSwitcher.frame)+160)];
 
     }
     
@@ -384,22 +387,37 @@
 - (void)switchTaped:(UISwitch *)switcher
 {
     
-    [HTTP_MANAGER updateOneRepair:self.m_currentData
-                   successedBlock:^(NSDictionary *succeedResult) {
-        
-        if( [[SqliteDataManager sharedInstance]makeOneHistory:self.m_currentData isClosed:switcher.isOn])
-        {
-            [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view withDuration:1];
-        }
-        else
-        {
-            [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
-        }
+    if(!m_isAdd)
+    {
+        [HTTP_MANAGER updateOneRepair:self.m_currentData
+                       successedBlock:^(NSDictionary *succeedResult) {
+                           
+                           if( [[SqliteDataManager sharedInstance]makeOneHistory:self.m_currentData isClosed:switcher.isOn])
+                           {
+                               [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view withDuration:1];
+                           }
+                           else
+                           {
+                               [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
+                           }
+                           
+                           
+                       } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                           [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
+                       }];
+    }
+ 
+}
 
-        
-    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-        [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
-    }];
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

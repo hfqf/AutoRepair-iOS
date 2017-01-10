@@ -228,7 +228,10 @@
 {
     NSDictionary *info = [notification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    if(MAIN_HEIGHT-m_currentInputY >(int)kbSize.height)
+    
+    NSInteger left = MAIN_HEIGHT-m_currentInputY;
+    
+    if(left >(int)kbSize.height+44)  //44是选择文字区域
     {
         return;
     }

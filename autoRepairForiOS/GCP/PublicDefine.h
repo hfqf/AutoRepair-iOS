@@ -29,6 +29,7 @@
 
 #define   PUBLIC_BACKGROUND_COLOR           UIColorFromRGB(0x66CDAA)
 #define  KEY_COMMON_CORLOR                   PUBLIC_BACKGROUND_COLOR
+#define  KEY_DELETE_CORLOR                  UIColorFromRGB(0xFA8072)
 
 #define  PUBLIC_RELEASE(id) \
 {\
@@ -478,3 +479,5 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 
 #define KEY_LOGINED_NAME            @"KEY_LOGINED_NAME"
 #define KEY_LOGINED_PWD             @"KEY_LOGINED_PWD"
+
+#define KEY_REPAIRS_SYNCED          @"KEY_REPAIRS_SYNCED"

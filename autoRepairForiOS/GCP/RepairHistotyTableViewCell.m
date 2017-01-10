@@ -43,7 +43,7 @@
 {
     ADTContacterInfo *contact = [DB_Shared contactWithCarCode:info.m_carCode];
     _info = info;
-    [m_lab1 setText:[NSString stringWithFormat:@"客户 : %@ : %@",contact.m_userName,contact.m_tel]];
+    [m_lab1 setText:[NSString stringWithFormat:@"客户 : %@ %@",contact.m_userName,contact.m_tel]];
     [m_lab2 setText:[NSString stringWithFormat:@"保养项目: %@",info.m_repairType]];
     [m_lab3 setText:[NSString stringWithFormat:@"备注 : %@",info.m_more]];
     [m_lab4 setText:[NSString stringWithFormat:@"上次时间 : %@",info.m_time]];

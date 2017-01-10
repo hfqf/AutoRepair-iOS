@@ -10,6 +10,9 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "SpeSqliteUpdateManager.h"
 @interface SettingViewController()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
+{
+    UIWebView *web;
+}
 
 @end
 @implementation SettingViewController
@@ -26,7 +29,9 @@
         [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         
-       
+        web= [[UIWebView alloc]initWithFrame:CGRectMake(0, 40, MAIN_WIDTH,150)];
+        [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://autorepairhelper.duapp.com/noticeboard/ios"]]];
+        web.scrollView.scrollEnabled = NO;
     }
     return self;
 }
@@ -43,7 +48,7 @@
 {
     self.m_arrData = @[
                        @"最新公告",
-                     
+                       @"请开发者喝杯咖啡",
                        @"退出"
                        ];
     [self reloadDeals];
@@ -55,10 +60,10 @@
     {
         return 200;
     }
-//    else if (indexPath.row == 1)
-//    {
-//        return 120;
-//    }
+    else if (indexPath.row == 1)
+    {
+        return 120;
+    }
     return 80;
 }
 
@@ -85,43 +90,38 @@
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.row]];
         [cell addSubview:_tit];
         
-        UIWebView *web= [[UIWebView alloc]initWithFrame:CGRectMake(0, 40, MAIN_WIDTH,150)];
-        [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://autorepairhelper.duapp.com/noticeboard/ios"]]];
-        web.scrollView.scrollEnabled = NO;
+     
         [cell addSubview:web];
-        
         UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 199.5, MAIN_WIDTH, 0.5)];
         [sep setBackgroundColor:KEY_COMMON_CORLOR];
         [cell addSubview:sep];
-    
+    }else if (indexPath.row == 1)
+    {
+        UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 200, 20)];
+        [_tit setTextColor:[UIColor blackColor]];
+        [_tit setFont:[UIFont systemFontOfSize:20]];
+        [_tit setText:[self.m_arrData objectAtIndex:indexPath.row]];
+        [cell addSubview:_tit];
+        
+     
+        
+        UIImageView *wx = [[UIImageView alloc]initWithFrame:CGRectMake(10, 40, 70, 70)];
+        [wx setImage:[UIImage imageNamed:@"weixin"]];
+        [cell addSubview:wx];
+        
+        
+        
+        UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake( 10, 50, MAIN_WIDTH-20, 40)];
+        [tip setTextColor:UIColorFromRGB(0x818181)];
+        tip.numberOfLines = 0;
+        [tip setFont:[UIFont systemFontOfSize:16]];
+        [tip setText:@""];
+        [cell addSubview:tip];
+        
+        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 119.5, MAIN_WIDTH, 0.5)];
+        [sep setBackgroundColor:KEY_COMMON_CORLOR];
+        [cell addSubview:sep];
     }
-//    }else if (indexPath.row == 1)
-//    {
-//        UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 200, 20)];
-//        [_tit setTextColor:[UIColor blackColor]];
-//        [_tit setFont:[UIFont systemFontOfSize:20]];
-//        [_tit setText:@"请开发者喝杯咖啡"];
-//        [cell addSubview:_tit];
-//        
-//     
-//        
-//        UIImageView *wx = [[UIImageView alloc]initWithFrame:CGRectMake(10, 40, 70, 70)];
-//        [wx setImage:[UIImage imageNamed:@"weixin"]];
-//        [cell addSubview:wx];
-//        
-//        
-//        
-//        UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake( 10, 50, MAIN_WIDTH-20, 40)];
-//        [tip setTextColor:UIColorFromRGB(0x818181)];
-//        tip.numberOfLines = 0;
-//        [tip setFont:[UIFont systemFontOfSize:16]];
-//        [tip setText:@""];
-//        [cell addSubview:tip];
-//        
-//        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 119.5, MAIN_WIDTH, 0.5)];
-//        [sep setBackgroundColor:KEY_COMMON_CORLOR];
-//        [cell addSubview:sep];
-//    }
     else
     {
         UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 30, 200, 20)];
@@ -145,7 +145,7 @@
     }
     else if (indexPath.row == 1)
     {
-        [self.navigationController pushViewController:[[NSClassFromString(@"ContactDeverViewController") alloc]init] animated:YES];
+//        [self.navigationController pushViewController:[[NSClassFromString(@"ContactDeverViewController") alloc]init] animated:YES];
     }
     else
     {

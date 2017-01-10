@@ -35,6 +35,11 @@
     [super viewWillAppear:animated];
     [self requestData:YES];
 }
+
+
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,6 +51,15 @@
     [addBtn setTitle:@"添加纪录" forState:UIControlStateNormal];
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
+    
+    
+    //登录完后的数据回来后再次刷新
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(forceRefresh) name:KEY_REPAIRS_SYNCED object:nil];
+}
+
+- (void)forceRefresh
+{
+    [self requestData:YES];
 }
 
 

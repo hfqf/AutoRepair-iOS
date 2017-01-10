@@ -210,17 +210,16 @@ SINGLETON_FOR_CLASS(SpeSqliteUpdateManager)
                             NSArray *addColumn =  [newSqlArr subarrayWithRange:NSMakeRange(localSqlArr.count, newSqlArr.count-localSqlArr.count)];
                             //更新表字段
                             __block  NSMutableString *alterSql = nil;
+                            
+                            
                             for(NSDictionary *addColumnDic in addColumn)
                             {
                                 alterSql = [NSMutableString stringWithFormat:@"alter table %@ add column",tableName];
                                 [addColumnDic enumerateKeysAndObjectsUsingBlock:^(id newParaKey, id newParaObj, BOOL * __unused stop) {
-                                    
                                     [alterSql appendFormat:@" %@ %@",newParaKey,newParaObj];
-                                    
+                                    [self execSql:alterSql];
                                 }];
                                 
-                                [self execSql:alterSql];
-                                break;
                             }
                             break;
                         }

@@ -23,11 +23,14 @@
     [title setText:@"登录"];
     m_asyncCount = 0;
     
-//    self.iconView.layer.cornerRadius = 4;
-//    self.iconView.layer.borderColor = [UIColor blackColor].CGColor;
-//    self.iconView.layer.borderWidth = 0.5;
+    self.registerBtn.layer.cornerRadius = 3;
+    self.registerBtn.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
+    self.registerBtn.layer.borderWidth = 0.5;
+    [self.registerBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
+    
     [self.loginBtn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
     [self.registerBtn setTitleColor:PUBLIC_BACKGROUND_COLOR forState:UIControlStateNormal];
+    
   
     
     
@@ -48,7 +51,7 @@
     NSString *key = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_IS_TIPED_NEED_LOGIN];
     if(key == nil)
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"重要通知:关于新版需要注册才能登录的说明" message:@"老版本的数据在登录后不会丢失,进入主页面会上传所有数据到云端,以后就可在任意客户端进行切换" delegate:self cancelButtonTitle:@"我已清楚" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"重要通知:关于新版需要注册才能登录的说明" message:@"老版本的数据在用新版登录后不会丢失,进入主页面会上传所有数据到云端,以后就可在任意客户端进行切换" delegate:self cancelButtonTitle:@"我已清楚" otherButtonTitles:nil];
         [alert show];
     }
     
@@ -136,34 +139,18 @@
                                                  }
                                              }
                                          }
-                                         
-                                        
-                                        [self checkAndLogin];
-
-                                         
-                                         
-                                         
-                                         
+     
                                      } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                                          
-                                         [self checkAndLogin];
 
                                          
                                      }];
                                  }
                              }
-                             else{
-                                 [self checkAndLogin];
-                             }
-                             
-
-                             
                          }
                             failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                                 
                                 
-                                [self checkAndLogin];
-
                                 
                             }];
     }
@@ -193,13 +180,9 @@
                 
                 }
             
-                                
-                [self checkAndLogin];
-
+                            
                 
             } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                
-                [self checkAndLogin];
                 
             }];
     }
@@ -214,7 +197,7 @@
     for(ADTRepairInfo *info in arrRepair)
     {
         NSDictionary *dic = @{
-                              @"id":@"",
+                              @"id":info.m_idFromNode,
                               @"carcode" : info.m_carCode,
                               @"totalkm" : info.m_km,
                               @"repairetime" : info.m_time,
@@ -267,37 +250,26 @@
  
                                                                 [[SqliteDataManager sharedInstance]insertRepair:newRep];
                                                             }
+                                                            
+                                                            
+                                                            //通知页面更新数据
+                                                            [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
+                                                            
                                                         }
                                                     }
-                                                    
-                                                    [self checkAndLogin];
                                                     
                                                     
                                                 } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                                                     
-                                                    [self checkAndLogin];
-                                                    
                                                     
                                                 }];
                             }
-                            else
-                            {
-                                [self checkAndLogin];
-
-                            }
-
 
                         }
-                        else{
-                            [self checkAndLogin];
-                        }
-                        
                         
                     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                         
                         
-                        [self checkAndLogin];
-
                         
                     }];
 }
@@ -312,7 +284,6 @@
 
 - (IBAction)loginBtnClicked:(UIButton *)sender {
     
-    [self showWaitingView];
     if(self.nameInput.text.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"用户名不能为空" inSuperView:self.view  withDuration:1];
@@ -325,6 +296,8 @@
         return;
     }
     
+    [self showWaitingView];
+
     
     [HTTP_MANAGER startLoginWithName:self.nameInput.text
                              withPwd:self.pwdInput.text
@@ -342,26 +315,10 @@
                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"viplevel"] forKey:KEY_AUTO_LEVEL];
                                [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"devicemodifyed"] forKey:KEY_AUTO_UDID_MODIFYED];
                               
-                              if(![LoginUserUtil isContactAsynced] || [LoginUserUtil isDeviceModifyed])
-                              {
-                                  [self uploadContacts];
-                              }
-                              else
-                              {
-                                  m_asyncCount++;
-                              }
-                          
-                              if(![LoginUserUtil isRepairAsynced] || [LoginUserUtil isDeviceModifyed])
-//                              if(1)
-                              {
-                                  [self uploadRepairs];
-                              }
-                              else
-                              {
-                                  m_asyncCount++;
-                              }
+                              [self chechAsync];
                               
-                              [self checkAndLogin];
+                             [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
+                              
                           }
                           else
                           {
@@ -376,6 +333,23 @@
     }];
     
 }
+
+
+///检查此次登录是否需要同步数据
+- (void)chechAsync
+{
+    if(![LoginUserUtil isContactAsynced] || [LoginUserUtil isDeviceModifyed])
+    {
+        [self uploadContacts];
+    }
+    
+    
+    if(![LoginUserUtil isRepairAsynced] || [LoginUserUtil isDeviceModifyed])
+    {
+        [self uploadRepairs];
+    }
+}
+
 
 - (IBAction)registerBtnClicked:(UIButton *)sender {
     [self.navigationController pushViewController:[[NSClassFromString(@"RegisterViewController") alloc]init] animated:YES];
@@ -397,5 +371,40 @@
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(textField == _nameInput && string.length > 0)
+    {
+        if(textField.text.length+string.length == 11)
+        {
+            [textField setText:[NSString stringWithFormat:@"%@%@",textField.text,string]];
+            [textField resignFirstResponder];
+            [self performSelector:@selector(resignPwdInput) withObject:nil afterDelay:0.5];
+            return YES;
 
+        }
+    }
+    
+    if(textField == self.pwdInput && string.length > 0)
+    {
+        if(textField.text.length+string.length == 8)
+        {
+            [textField setText:[NSString stringWithFormat:@"%@%@",textField.text,string]];
+            [textField resignFirstResponder];
+            return YES;
+        }
+    }
+    return YES;
+}
+
+- (void)resignPwdInput
+{
+    [self.pwdInput becomeFirstResponder];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.pwdInput resignFirstResponder];
+    [self.nameInput resignFirstResponder];
+}
 @end

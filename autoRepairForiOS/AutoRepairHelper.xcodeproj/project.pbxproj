@@ -117,6 +117,7 @@
 		7D432BE81AF218CB003F952B /* ADTRepairInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D432BE71AF218CB003F952B /* ADTRepairInfo.m */; };
 		7D432BEB1AF2193E003F952B /* ADTContacterInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D432BEA1AF2193E003F952B /* ADTContacterInfo.m */; };
 		7D432BEF1AF21D9A003F952B /* AddNewCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D432BEE1AF21D9A003F952B /* AddNewCustomerViewController.m */; };
+		7D448F5B1E247D55001536F4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D448F5A1E247D55001536F4 /* UserNotifications.framework */; };
 		7D458AE71ADBBE0B00BCACAB /* SqliteDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D458ADE1ADBBE0B00BCACAB /* SqliteDataManager.m */; };
 		7D458AEA1ADBBE0B00BCACAB /* SpeSqliteUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D458AE41ADBBE0B00BCACAB /* SpeSqliteUpdateManager.m */; };
 		7D458AEB1ADBBE0B00BCACAB /* SpeSqlSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D458AE51ADBBE0B00BCACAB /* SpeSqlSetting.plist */; };
@@ -357,6 +358,9 @@
 		7D432BEA1AF2193E003F952B /* ADTContacterInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTContacterInfo.m; sourceTree = "<group>"; };
 		7D432BED1AF21D9A003F952B /* AddNewCustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewCustomerViewController.h; sourceTree = "<group>"; };
 		7D432BEE1AF21D9A003F952B /* AddNewCustomerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewCustomerViewController.m; sourceTree = "<group>"; };
+		7D448F561E246B1F001536F4 /* AutoRepairHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = AutoRepairHelper.entitlements; path = AutoRepairHelper/AutoRepairHelper.entitlements; sourceTree = "<group>"; };
+		7D448F581E247BC4001536F4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		7D448F5A1E247D55001536F4 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		7D458ADD1ADBBE0B00BCACAB /* SqliteDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqliteDataManager.h; sourceTree = "<group>"; };
 		7D458ADE1ADBBE0B00BCACAB /* SqliteDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteDataManager.m; sourceTree = "<group>"; };
 		7D458AE31ADBBE0B00BCACAB /* SpeSqliteUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeSqliteUpdateManager.h; sourceTree = "<group>"; };
@@ -395,6 +399,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D448F5B1E247D55001536F4 /* UserNotifications.framework in Frameworks */,
 				7DF80D401E11FBFC0067FD49 /* libresolv.tbd in Frameworks */,
 				7D0DEB541DE342DB0032FBBC /* JavaScriptCore.framework in Frameworks */,
 				7D0DEB521DE342D00032FBBC /* MessageUI.framework in Frameworks */,
@@ -512,6 +517,7 @@
 		7D426DA01A62AA120004F3F6 = {
 			isa = PBXGroup;
 			children = (
+				7D448F561E246B1F001536F4 /* AutoRepairHelper.entitlements */,
 				7DF80D3F1E11FBFC0067FD49 /* libresolv.tbd */,
 				7DF80D391E11FACB0067FD49 /* jpush */,
 				7D0DEB531DE342DB0032FBBC /* JavaScriptCore.framework */,
@@ -536,6 +542,7 @@
 				7D426F011A62B1EC0004F3F6 /* UIKit.framework */,
 				7D426DAB1A62AA120004F3F6 /* GCP */,
 				7D426DAA1A62AA120004F3F6 /* Products */,
+				7D448F591E247D54001536F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -868,6 +875,14 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		7D448F591E247D54001536F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7D448F5A1E247D55001536F4 /* UserNotifications.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7D458AED1ADBBF4300BCACAB /* Tab1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -954,7 +969,7 @@
 		7D426DA11A62AA120004F3F6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Poitns;
 				TargetAttributes = {
 					7D426DA81A62AA120004F3F6 = {
@@ -1133,6 +1148,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7D426DB71A62AA120004F3F6 /* Base */,
+				7D448F581E247BC4001536F4 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1144,6 +1160,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1153,8 +1170,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: qifei huangfu (LMDV42LR62)";
@@ -1164,6 +1183,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1176,7 +1196,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "4af8daba-2bee-4d40-961a-cfd0877d28d9";
@@ -1189,6 +1209,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1198,8 +1219,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: qifei huangfu (LMDV42LR62)";
@@ -1208,13 +1231,14 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "4af8daba-2bee-4d40-961a-cfd0877d28d9";
 				SDKROOT = iphoneos;
@@ -1228,6 +1252,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: qifei huangfu (LMDV42LR62)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: qifei huangfu (LMDV42LR62)";
 				ENABLE_BITCODE = NO;
@@ -1238,7 +1263,7 @@
 				);
 				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper-Prefix.pch";
 				INFOPLIST_FILE = GCP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1248,6 +1273,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
 				PRODUCT_NAME = AutoRepairHelper;
 				PROVISIONING_PROFILE = "4af8daba-2bee-4d40-961a-cfd0877d28d9";
+				PROVISIONING_PROFILE_SPECIFIER = "汽修dev";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1257,8 +1283,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: qifei huangfu (LMDV42LR62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: qifei huangfu (LMDV42LR62)";
+				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: qifei huangfu (BJW9F34F29)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: qifei huangfu (BJW9F34F29)";
+				DEVELOPMENT_TEAM = BJW9F34F29;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1267,7 +1295,7 @@
 				);
 				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper-Prefix.pch";
 				INFOPLIST_FILE = GCP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1276,7 +1304,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
 				PRODUCT_NAME = AutoRepairHelper;
-				PROVISIONING_PROFILE = "4af8daba-2bee-4d40-961a-cfd0877d28d9";
+				PROVISIONING_PROFILE = "c83ac39a-b838-4ef2-9b20-b2baa3b795e4";
+				PROVISIONING_PROFILE_SPECIFIER = "汽车修理小助手";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
