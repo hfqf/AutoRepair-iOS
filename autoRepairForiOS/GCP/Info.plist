@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>13</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -29,6 +29,22 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSContactsUsageDescription</key>
+	<string>App需要您的同意,才能访问通讯录</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App需要您的同意,才能访问媒体资料库</string>
+	<key>Privacy - Bluetooth Peripheral Usage Description</key>
+	<string>App需要您的同意,才能访问蓝牙</string>
+	<key>Privacy - Calendars Usage Description</key>
+	<string>App需要您的同意,才能访问日历</string>
+	<key>Privacy - Camera Usage Description</key>
+	<string>App需要您的同意,才能访问相机</string>
+	<key>Privacy - Location Always Usage Description</key>
+	<string>App需要您的同意,才能始终访问位置</string>
+	<key>Privacy - Location When In Use Usage Description</key>
+	<string>App需要您的同意,才能在使用期间访问位置</string>
+	<key>Privacy - Microphone Usage Description</key>
+	<string>App需要您的同意,才能访问麦克风</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -39,6 +55,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
