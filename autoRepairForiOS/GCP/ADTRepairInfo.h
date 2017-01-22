@@ -21,5 +21,6 @@
 @property (nonatomic,assign)BOOL   m_isreaded;
 @property (nonatomic,strong)NSString *m_owner;
 @property (nonatomic,strong)NSString *m_idFromNode;
+@property (nonatomic,strong)NSString *m_insertTime;
 
 @end

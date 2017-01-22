@@ -14,4 +14,8 @@
 @property (nonatomic,strong)NSString *m_tel;
 @property (nonatomic,strong)NSString *m_carType;
 @property (nonatomic,strong)NSString *m_owner;
+@property (nonatomic,strong)NSString *m_idFromServer;
+@property (nonatomic,strong) NSString *m_strFirstChar;
+@property (assign)BOOL m_isSearch;
+
 @end

@@ -1,7 +1,7 @@
 
 
 #import "HttpConnctionManager.h"
-
+#import "JPUSHService.h"
 @implementation HttpConnctionManager
 
 - (id)init
@@ -230,7 +230,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
            successedBlock:(SuccessedBlock)success
               failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/async/contact" paragram:@{
+    [self startNormalPostWith:@"/async/contact2" paragram:@{
                                                               @"contact"  : str
                                                               } successedBlock:success failedBolck:failed];
 }
@@ -240,7 +240,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/async/repair" paragram:@{
+    [self startNormalPostWith:@"/async/repair2" paragram:@{
                                                            @"repair"  : str
                                                            } successedBlock:success failedBolck:failed];
 }
@@ -251,11 +251,15 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
             successedBlock:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/users/login" paragram:@{
+    [self startNormalPostWith:@"/users/login2" paragram:@{
                                                           @"username"  : name,
                                                           @"pwd":pwd,
-                                                          @"udid":KEY_UDID
-                                                          } successedBlock:success failedBolck:failed];
+                                                          @"udid":KEY_UDID,
+                                                          @"ostype":OS_TYPE,
+                                                          @"version":VERSION,
+                                                          @"pushid":PUSH_ID
+                                                          } successedBlock:success
+                                                failedBolck:failed];
 }
 
 ///注册
@@ -265,13 +269,17 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                successedBlock:(SuccessedBlock)success
                   failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/register/addNewUser"
+    
+    
+    [self startNormalPostWith:@"/register/addNewUser2"
                      paragram:@{
-                                 @"username"  : name,
+                                 @"username":name,
                                  @"pwd":pwd,
                                  @"tel":tel,
                                  @"viplevel":@"0",//暂时没有vip
-                                 @"udid":KEY_UDID
+                                 @"udid":KEY_UDID,
+                                 @"ostype":OS_TYPE,
+                                 @"version":VERSION
                                  }
                successedBlock:success
                   failedBolck:failed];
@@ -296,7 +304,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                         @"name":newContact.m_userName,
                                                         @"tel":newContact.m_tel,
                                                         @"cartype":newContact.m_carType,
-                                                        @"owner":[LoginUserUtil userTel]
+                                                        @"owner":[LoginUserUtil userTel],
                                                         } successedBlock:success failedBolck:failed];
 }
 
@@ -305,12 +313,13 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/contact/del" paragram:@{
+    [self startNormalPostWith:@"/contact/del2" paragram:@{
                                                         @"carcode":newContact.m_carCode,
                                                         @"name":newContact.m_userName,
                                                         @"tel":newContact.m_tel,
                                                         @"cartype":newContact.m_carType,
-                                                        @"owner":[LoginUserUtil userTel]
+                                                        @"owner":[LoginUserUtil userTel],
+                                                        @"id":newContact.m_idFromServer
                                                         } successedBlock:success failedBolck:failed];
 
 }
@@ -320,12 +329,13 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
        successedBlock:(SuccessedBlock)success
           failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/contact/update" paragram:@{
+    [self startNormalPostWith:@"/contact/update2" paragram:@{
                                                            @"carcode":newContact.m_carCode,
                                                            @"name":newContact.m_userName,
                                                            @"tel":newContact.m_tel,
                                                            @"cartype":newContact.m_carType,
-                                                           @"owner":[LoginUserUtil userTel]
+                                                           @"owner":[LoginUserUtil userTel],
+                                                           @"id":newContact.m_idFromServer
                                                            } successedBlock:success failedBolck:failed];
 
 }
@@ -352,7 +362,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
       successedBlock:(SuccessedBlock)success
          failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/repair/add" paragram:@{
+    [self startNormalPostWith:@"/repair/add2" paragram:@{
                                                          @"id":@"",
                                                          @"carcode":newRep.m_carCode,
                                                          @"totalkm":newRep.m_km,
@@ -362,7 +372,9 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                          @"isclose":newRep.m_isClose ? @"1" : @"0",
                                                          @"circle":newRep.m_repairCircle,
                                                          @"repairtype":newRep.m_repairType,
-                                                         @"owner":[LoginUserUtil userTel]
+                                                         @"isreaded":newRep.m_isClose ? @"1" : @"0",
+                                                         @"owner":[LoginUserUtil userTel],
+                                                         @"inserttime":newRep.m_insertTime
                                                          } successedBlock:success failedBolck:failed];
 }
 
@@ -373,14 +385,6 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 {
     [self startNormalPostWith:@"/repair/del" paragram:@{
                                                         @"id":newRep.m_idFromNode,
-                                                        @"carcode":newRep.m_carCode,
-                                                        @"totalkm":newRep.m_km,
-                                                        @"repairetime":newRep.m_time,
-                                                        @"addition":newRep.m_more,
-                                                        @"tipcircle":newRep.m_targetDate,
-                                                        @"isclose":newRep.m_isClose ? @"1" : @"0",
-                                                        @"circle":newRep.m_repairCircle,
-                                                        @"repairtype":newRep.m_repairType,
                                                         @"owner":[LoginUserUtil userTel]
 
                                                         } successedBlock:success failedBolck:failed];
@@ -393,13 +397,6 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 {
     [self startNormalPostWith:@"/repair/delAll" paragram:@{
                                                         @"carcode":newRep.m_carCode,
-                                                        @"totalkm":newRep.m_km,
-                                                        @"repairetime":newRep.m_time,
-                                                        @"addition":newRep.m_more,
-                                                        @"tipcircle":newRep.m_targetDate,
-                                                        @"isclose":newRep.m_isClose ? @"1" : @"0",
-                                                        @"circle":newRep.m_repairCircle,
-                                                        @"repairtype":newRep.m_repairType,
                                                         @"owner":[LoginUserUtil userTel]
 
                                                         } successedBlock:success failedBolck:failed];
@@ -418,10 +415,12 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                            @"addition":newRep.m_more,
                                                            @"tipcircle":newRep.m_targetDate,
                                                            @"isclose":newRep.m_isClose ? @"1" : @"0",
+                                                           @"isreaded":newRep.m_isClose ? @"1" : @"0",
+
                                                            @"circle":newRep.m_repairCircle,
                                                            @"repairtype":newRep.m_repairType,
-                                                           @"owner":[LoginUserUtil userTel]
-
+                                                           @"owner":[LoginUserUtil userTel],
+                                                           @"inserttime":newRep.m_insertTime
                                                            } successedBlock:success failedBolck:failed];
 }
 

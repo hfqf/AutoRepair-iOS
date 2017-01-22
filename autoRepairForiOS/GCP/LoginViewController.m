@@ -6,6 +6,8 @@
 //  Copyright © 2016年 Poitns. All rights reserved.
 //
 
+#define MAX_PACKET_NUM   100.0
+
 #import "LoginViewController.h"
 #import "ADTContacterInfo.h"
 @interface LoginViewController ()<UIAlertViewDelegate>
@@ -72,21 +74,15 @@
         
         NSString *jsonString = [[NSString alloc] initWithData:jsonData
                                                      encoding:NSUTF8StringEncoding];
-        return jsonString;
+        jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\n" withString:@""];
+        jsonString = [jsonString stringByReplacingOccurrencesOfString:@" " withString:@""];
+return jsonString;
     }else{
         return nil;
     }
 }
 
-
-- (void)checkAndLogin
-{
-    m_asyncCount++;
-    if (m_asyncCount >= 2) {
-        [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
-        m_asyncCount = 0;
-    }
-}
 
 - (void)uploadContacts
 {
@@ -103,66 +99,93 @@
                                   @"name" : info.m_userName,
                                   @"tel" : info.m_tel,
                                   @"cartype" : info.m_carType,
-                                  @"owner":[LoginUserUtil userTel]
+                                  @"owner":[LoginUserUtil userTel],
+                                  @"id":info.m_idFromServer
                                   } ;
             [arrFinal addObject:dic];
         }
         
         
+        long  uploadNum = ceil(arrFinal.count*1.0/MAX_PACKET_NUM);
+        __block long uploadCompleted = 0;
+
+        for(int i = 0;i<uploadNum;i++)
+        {
+            NSArray *arr = nil;
+            if(i == uploadNum-1)
+            {
+                arr =  [arrFinal subarrayWithRange:NSMakeRange(MAX_PACKET_NUM*i, arrFinal.count-MAX_PACKET_NUM*i)];
+            }
+            else
+            {
+                arr =  [arrFinal subarrayWithRange:NSMakeRange(MAX_PACKET_NUM*i, MAX_PACKET_NUM)];
+            }
+            
         
-        [HTTP_MANAGER uploadAllContacts:[self toJSONString:arrFinal]
+        [HTTP_MANAGER uploadAllContacts:[self toJSONString:arr]
                          successedBlock:^(NSDictionary *succeedResult) {
                              
                              if([succeedResult[@"code"]integerValue] == 1)
                              {
-                                 [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_CONTACT_AYSNED];
                                  
-                                 if([[SqliteDataManager sharedInstance]deleteContacts])
+                                 uploadCompleted++;
+                                 if(uploadCompleted == uploadNum)//所有数据同步完成才是数据同步结束
                                  {
-                                     [HTTP_MANAGER queryAllContacts:[LoginUserUtil userTel]
-                                                     successedBlock:^(NSDictionary *succeedResult) {
-                                         
-                                         if([succeedResult[@"code"]integerValue] == 1)
-                                         {
-                                             NSArray * arr = succeedResult[@"ret"];
-                                             if(arr.count > 0)
-                                             {
-                                                 for(NSDictionary *info in arr)
-                                                 {
-                                                     ADTContacterInfo *newCon = [[ADTContacterInfo alloc]init];
-                                                     newCon.m_owner = info[@"owner"];
-                                                     newCon.m_carType = info[@"cartype"];
-                                                     newCon.m_carCode = info[@"carcode"];
-                                                     newCon.m_userName = info[@"name"];
-                                                     newCon.m_tel = info[@"tel"];
-                                                     [[SqliteDataManager sharedInstance]insertNewCustom:newCon];
-                                                 }
-                                             }
-                                         }
-     
-                                     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                                         
-
-                                         
-                                     }];
+                                     [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_CONTACT_AYSNED];
+                                     
+                                     if([[SqliteDataManager sharedInstance]deleteContacts])
+                                     {
+                                         [HTTP_MANAGER queryAllContacts:[LoginUserUtil userTel]
+                                                         successedBlock:^(NSDictionary *succeedResult) {
+                                                             
+                                                             if([succeedResult[@"code"]integerValue] == 1)
+                                                             {
+                                                                 NSArray * arr = succeedResult[@"ret"];
+                                                                 if(arr.count > 0)
+                                                                 {
+                                                                     for(NSDictionary *info in arr)
+                                                                     {
+                                                                         ADTContacterInfo *newCon = [[ADTContacterInfo alloc]init];
+                                                                         newCon.m_owner = info[@"owner"];
+                                                                         newCon.m_carType = info[@"cartype"];
+                                                                         newCon.m_carCode = info[@"carcode"];
+                                                                         newCon.m_carCode = [newCon.m_carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
+                                                                         newCon.m_userName = info[@"name"];
+                                                                         newCon.m_tel = info[@"tel"];
+                                                                         newCon.m_idFromServer = info[@"_id"];
+                                                                         [[SqliteDataManager sharedInstance]insertNewCustom:newCon];
+                                                                     }
+                                                                 }
+                                                                 //通知页面更新数据
+                                                                 [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
+                                                             }
+                                                             
+                                                         } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                                             
+                                                             
+                                                             
+                                                         }];
+                                     }
                                  }
-                             }
+                            }
+                               
                          }
                             failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                                 
                                 
                                 
                             }];
+        }
     }
     else
     {
-        [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_CONTACT_AYSNED];
 
             [HTTP_MANAGER queryAllContacts:[LoginUserUtil userTel]
                             successedBlock:^(NSDictionary *succeedResult) {
                 
                 if([succeedResult[@"code"]integerValue] == 1)
                 {
+                    [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_CONTACT_AYSNED];
                     NSArray * arr = succeedResult[@"ret"];
                     if(arr.count > 0)
                     {
@@ -172,11 +195,16 @@
                             newCon.m_owner = info[@"owner"];
                             newCon.m_carType = info[@"cartype"];
                             newCon.m_carCode = info[@"carcode"];
+                            newCon.m_carCode = [newCon.m_carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
                             newCon.m_userName = info[@"name"];
                             newCon.m_tel = info[@"tel"];
+                            newCon.m_idFromServer = info[@"_id"];
                             [[SqliteDataManager sharedInstance]insertNewCustom:newCon];
                         }
                     }
+                    
+                    //通知页面更新数据
+                    [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
                 
                 }
             
@@ -192,86 +220,165 @@
 - (void)uploadRepairs
 {
     NSArray *arrRepair = [[SqliteDataManager sharedInstance]queryAllRepairs];
-    NSMutableArray * arrFinal = [NSMutableArray array];
     
-    for(ADTRepairInfo *info in arrRepair)
+    
+    if(arrRepair.count > 0)
     {
-        NSDictionary *dic = @{
-                              @"id":info.m_idFromNode,
-                              @"carcode" : info.m_carCode,
-                              @"totalkm" : info.m_km,
-                              @"repairetime" : info.m_time,
-                              @"addition":info.m_more,
-                              @"repairtype":info.m_repairType,
-                              @"tipcircle":info.m_targetDate,
-                              @"isclose":info.m_isClose ? @"1" : @"0",
-                              @"circle":info.m_repairCircle,
-                              @"isreaded":info.m_isClose ? @"1" : @"0",
-                              @"owner":[LoginUserUtil userTel]
-                              } ;
-        [arrFinal addObject:dic];
-    }
-    
-    
-    [HTTP_MANAGER uploadAllRepairs:[self toJSONString:arrFinal]
-                    successedBlock:^(NSDictionary *succeedResult) {
-                        
-                        if([succeedResult[@"code"]integerValue] == 1)
-                        {
-                            [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_REPAIR_AYSNED];
-                            
-                            [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_CONTACT_AYSNED];
-                            
-                            if([[SqliteDataManager sharedInstance]deleteAllRepair])
-                            {
-                                [HTTP_MANAGER queryAllRepair:[LoginUserUtil userTel]
-                                                successedBlock:^(NSDictionary *succeedResult) {
-                                                    
-                                                    if([succeedResult[@"code"]integerValue] == 1)
-                                                    {
-                                                        NSArray * arr = succeedResult[@"ret"];
-                                                        if(arr.count > 0)
-                                                        {
-                                                            for(NSDictionary *info in arr)
-                                                            {
-                                                                ADTRepairInfo *newRep = [[ADTRepairInfo alloc]init];
-                                                                newRep.m_more = info[@"addition"];
-                                                                newRep.m_carCode = info[@"carcode"];
-                                                                newRep.m_repairCircle = info[@"circle"];
-                                                                newRep.m_isreaded = [info[@"isclose"]integerValue] == 1;
-                                                                newRep.m_owner = info[@"owner"];
-                                                                newRep.m_time = info[@"repairetime"];
-                                                                newRep.m_repairType = info[@"repairtype"];
-                                                                newRep.m_owner = info[@"owner"];
-                                                                newRep.m_targetDate = info[@"tipcircle"];
-                                                                newRep.m_km = info[@"totalkm"];
-                                                                newRep.m_idFromNode = info[@"_id"];
- 
- 
-                                                                [[SqliteDataManager sharedInstance]insertRepair:newRep];
-                                                            }
-                                                            
-                                                            
-                                                            //通知页面更新数据
-                                                            [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
-                                                            
-                                                        }
-                                                    }
-                                                    
-                                                    
-                                                } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                                                    
-                                                    
-                                                }];
-                            }
+        NSMutableArray * arrFinal = [NSMutableArray array];
+        
+        for(ADTRepairInfo *info in arrRepair)
+        {
+            NSDictionary *dic = @{
+                                  @"id":info.m_idFromNode,
+                                  @"carcode" : info.m_carCode,
+                                  @"totalkm" : info.m_km,
+                                  @"repairetime" : info.m_time,
+                                  @"addition":info.m_more,
+                                  @"repairtype":info.m_repairType,
+                                  @"tipcircle":info.m_targetDate,
+                                  @"isclose":info.m_isClose ? @"1" : @"0",
+                                  @"circle":info.m_repairCircle,
+                                  @"isreaded":info.m_isClose ? @"1" : @"0",
+                                  @"owner":[LoginUserUtil userTel],
+                                  @"inserttime":info.m_insertTime
+                                  } ;
+            [arrFinal addObject:dic];
+        }
+        
+        
+        long  uploadNum = ceil(arrFinal.count*1.0/MAX_PACKET_NUM);
+        __block long uploadCompleted = 0;
+        
+        for(int i = 0;i<uploadNum;i++)
+        {
+            NSArray *arr = nil;
+            if(i == uploadNum-1)
+            {
+                arr =  [arrFinal subarrayWithRange:NSMakeRange(MAX_PACKET_NUM*i, arrFinal.count-MAX_PACKET_NUM*i)];
+            }
+            else
+            {
+                arr =  [arrFinal subarrayWithRange:NSMakeRange(MAX_PACKET_NUM*i, MAX_PACKET_NUM)];
+            }
+            
+            
+            [HTTP_MANAGER uploadAllRepairs:[self toJSONString:arr]
+                            successedBlock:^(NSDictionary *succeedResult) {
+                                
+                                if([succeedResult[@"code"]integerValue] == 1)
+                                {
+                                    uploadCompleted++;
+                                    if(uploadCompleted == uploadNum)//所有数据同步完成才是数据同步结束
+                                    {
+                                        
+                                        
+                                        if([[SqliteDataManager sharedInstance]deleteAllRepair])
+                                        {
+                                            [HTTP_MANAGER queryAllRepair:[LoginUserUtil userTel]
+                                                          successedBlock:^(NSDictionary *succeedResult) {
+                                                              
+                                                              if([succeedResult[@"code"]integerValue] == 1)
+                                                              {
+                                                                  [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_REPAIR_AYSNED];
 
-                        }
-                        
-                    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                        
-                        
-                        
-                    }];
+                                                                  NSArray * arr = succeedResult[@"ret"];
+                                                                  if(arr.count > 0)
+                                                                  {
+                                                                      for(NSDictionary *info in arr)
+                                                                      {
+                                                                          ADTRepairInfo *newRep = [[ADTRepairInfo alloc]init];
+                                                                          newRep.m_more = info[@"addition"];
+                                                                          newRep.m_carCode = info[@"carcode"];
+                                                                          newRep.m_repairCircle = info[@"circle"];
+                                                                          newRep.m_isreaded = [info[@"isclose"]integerValue] == 1;
+                                                                          newRep.m_owner = info[@"owner"];
+                                                                          newRep.m_time = info[@"repairetime"];
+                                                                          newRep.m_repairType = info[@"repairtype"];
+                                                                          newRep.m_owner = info[@"owner"];
+                                                                          newRep.m_targetDate = info[@"tipcircle"];
+                                                                          newRep.m_km = info[@"totalkm"];
+                                                                          newRep.m_idFromNode = info[@"_id"];
+                                                                          newRep.m_insertTime = info[@"inserttime"];
+                                                                          
+                                                                          [[SqliteDataManager sharedInstance]insertRepair:newRep];
+                                                                      }
+                                                                      
+                                                                      
+                                                                      //通知页面更新数据
+                                                                      [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
+                                                                      
+                                                                  }
+                                                              }
+                                                              
+                                                              
+                                                          } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                                              
+                                                              
+                                                          }];
+                                        }
+                                    }
+                                    
+                                    
+                                }
+                                
+                            } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                
+                                
+                                
+                            }];
+        }
+    }
+    else
+    {
+        [HTTP_MANAGER queryAllRepair:[LoginUserUtil userTel]
+                      successedBlock:^(NSDictionary *succeedResult) {
+                          
+                          if([succeedResult[@"code"]integerValue] == 1)
+                          {
+                              
+                              [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_REPAIR_AYSNED];
+
+                              
+                              NSArray * arr = succeedResult[@"ret"];
+                              if(arr.count > 0)
+                              {
+                                  for(NSDictionary *info in arr)
+                                  {
+                                      ADTRepairInfo *newRep = [[ADTRepairInfo alloc]init];
+                                      newRep.m_more = info[@"addition"];
+                                      newRep.m_carCode = info[@"carcode"];
+                                      newRep.m_repairCircle = info[@"circle"];
+                                      newRep.m_isreaded = [info[@"isclose"]integerValue] == 1;
+                                      newRep.m_owner = info[@"owner"];
+                                      newRep.m_time = info[@"repairetime"];
+                                      newRep.m_repairType = info[@"repairtype"];
+                                      newRep.m_owner = info[@"owner"];
+                                      newRep.m_targetDate = info[@"tipcircle"];
+                                      newRep.m_km = info[@"totalkm"];
+                                      newRep.m_idFromNode = info[@"_id"];
+                                      newRep.m_insertTime = info[@"inserttime"];
+                                      
+                                      [[SqliteDataManager sharedInstance]insertRepair:newRep];
+                                  }
+                                  
+                                  
+                                  //通知页面更新数据
+                                  [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
+                                  
+                              }
+                          }
+                          
+                          
+                      } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                          
+                          
+                      }];
+    }
+
+    
+    
+    
+
 }
 
 
@@ -299,8 +406,8 @@
     [self showWaitingView];
 
     
-    [HTTP_MANAGER startLoginWithName:self.nameInput.text
-                             withPwd:self.pwdInput.text
+    [HTTP_MANAGER startLoginWithName:@"13813313631"
+                             withPwd:@"11111111"
                       successedBlock:^(NSDictionary *succeedResult) {
                           
                           [self removeWaitingView];
@@ -338,6 +445,7 @@
 ///检查此次登录是否需要同步数据
 - (void)chechAsync
 {
+    
     if(![LoginUserUtil isContactAsynced] || [LoginUserUtil isDeviceModifyed])
     {
         [self uploadContacts];

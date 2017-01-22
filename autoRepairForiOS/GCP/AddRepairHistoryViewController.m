@@ -31,11 +31,12 @@
     
     UILabel *tip1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 80, 20)];
     [tip1 setBackgroundColor:[UIColor clearColor]];
-    [tip1 setFont:[UIFont systemFontOfSize:18]];
+    [tip1 setFont:[UIFont systemFontOfSize:14]];
     [tip1 setText:@"公里数:"];
     [m_bg addSubview:tip1];
     
     m_kmInput = [[UITextField alloc]initWithFrame:CGRectMake(100,20, MAIN_WIDTH-110, 30)];
+    [m_kmInput setFont:[UIFont systemFontOfSize:14]];
     m_kmInput.layer.cornerRadius = 3;
     m_kmInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_kmInput.layer.borderWidth = 0.5;
@@ -58,10 +59,11 @@
     
     UILabel *tip2 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_kmInput.frame)+20, 80, 20)];
     [tip2  setBackgroundColor:[UIColor clearColor]];
-    [tip2 setFont:[UIFont systemFontOfSize:18]];
+    [tip2 setFont:[UIFont systemFontOfSize:14]];
     [tip2 setText:@"维修日期:"];
     [m_bg addSubview:tip2];
     m_timeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_kmInput.frame)+20, MAIN_WIDTH-110, 30)];
+    [m_timeInput setFont:[UIFont systemFontOfSize:14]];
     m_timeInput.layer.cornerRadius = 3;
     m_timeInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_timeInput.layer.borderWidth = 0.5;
@@ -78,10 +80,11 @@
     
     UILabel *tip3 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_timeInput.frame)+20, 80, 20)];
     [tip3  setBackgroundColor:[UIColor clearColor]];
-    [tip3 setFont:[UIFont systemFontOfSize:18]];
+    [tip3 setFont:[UIFont systemFontOfSize:14]];
     [tip3 setText:@"保养项目:"];
     [m_bg addSubview:tip3];
     m_repairTypeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_timeInput.frame)+20, MAIN_WIDTH-110, 30)];
+    [m_repairTypeInput setFont:[UIFont systemFontOfSize:14]];
     m_repairTypeInput.layer.cornerRadius = 3;
     m_repairTypeInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_repairTypeInput.layer.borderWidth = 0.5;
@@ -98,11 +101,12 @@
 
     UILabel *tip4 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_repairTypeInput.frame)+20, 80, 20)];
     [tip4  setBackgroundColor:[UIColor clearColor]];
-    [tip4 setFont:[UIFont systemFontOfSize:18]];
+    [tip4 setFont:[UIFont systemFontOfSize:14]];
     [tip4 setText:@"备注:"];
     [m_bg addSubview:tip4];
     m_moreInput = [[UITextView alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_repairTypeInput.frame)+20, MAIN_WIDTH-110, 80)];
-    m_moreInput.font = [UIFont systemFontOfSize:16];
+    m_moreInput.font = [UIFont systemFontOfSize:14];
+    [m_moreInput setFont:[UIFont systemFontOfSize:14]];
     m_moreInput.layer.cornerRadius = 3;
     m_moreInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_moreInput.layer.borderWidth = 0.5;
@@ -118,10 +122,11 @@
     
     UILabel *tip5 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_moreInput.frame)+20, 80, 20)];
     [tip5  setBackgroundColor:[UIColor clearColor]];
-    [tip5 setFont:[UIFont systemFontOfSize:18]];
+    [tip5 setFont:[UIFont systemFontOfSize:14]];
     [tip5 setText:@"提醒周期:"];
     [m_bg addSubview:tip5];
     m_tipCircleInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_moreInput.frame)+20, MAIN_WIDTH-110, 30)];
+    [m_tipCircleInput setFont:[UIFont systemFontOfSize:14]];
     m_tipCircleInput.layer.cornerRadius = 3;
     m_tipCircleInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_tipCircleInput.layer.borderWidth = 0.5;
@@ -138,7 +143,7 @@
     
     UILabel *tip6 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_tipCircleInput.frame)+20, 120, 20)];
     [tip6  setBackgroundColor:[UIColor clearColor]];
-    [tip6 setFont:[UIFont systemFontOfSize:18]];
+    [tip6 setFont:[UIFont systemFontOfSize:14]];
     [tip6 setText:@"是否关闭提醒:"];
     [m_bg addSubview:tip6];
     m_isNeedTipSwitcher = [[UISwitch alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2,CGRectGetMaxY(m_tipCircleInput.frame)+20, 50, 30)];
@@ -277,6 +282,14 @@
         return;
     }
     
+    if(m_tipCircleInput.text.length == 0)
+    {
+        [PubllicMaskViewHelper showTipViewWith:@"提醒周期不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+    
+    
+    
     self.m_currentData.m_km = m_kmInput.text;
     self.m_currentData.m_time = m_timeInput.text;
     self.m_currentData.m_repairType = m_repairTypeInput.text;
@@ -296,7 +309,7 @@
     self.m_currentData.m_targetDate = strDate;
     self.m_currentData.m_repairCircle = m_tipCircleInput.text;
     self.m_currentData.m_isClose = m_isNeedTipSwitcher.isOn;
-
+    self.m_currentData.m_insertTime = [LocalTimeUtil getCurrentTime];
     
     
     if(!m_isAdd)

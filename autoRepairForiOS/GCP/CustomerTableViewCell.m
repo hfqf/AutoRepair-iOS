@@ -19,19 +19,20 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         m_carCodeLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, MAIN_WIDTH/2-20, 20)];
+        [m_carCodeLab setFont:[UIFont systemFontOfSize:14]];
         [self addSubview:m_carCodeLab];
         
-        UIView *SEP = [[UIView alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2, 1, 1, 38)];
-        SEP.alpha = 0.2;
-        [SEP setBackgroundColor:[UIColor grayColor]];
+        UIView *SEP = [[UIView alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2,0,0.5, 40)];
+        [SEP setBackgroundColor:KEY_COMMON_CORLOR];
         [self addSubview:SEP];
         
         m_nameLab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2+10, 10, MAIN_WIDTH/2-20, 20)];
+        [m_nameLab setFont:[UIFont systemFontOfSize:14]];
         [self addSubview:m_nameLab];
         
         UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0,39.5,MAIN_WIDTH,0.5)];
         line.alpha = 0.3;
-        [line setBackgroundColor:[UIColor grayColor]];
+        [line setBackgroundColor:KEY_COMMON_CORLOR];
         [self addSubview:line];
     }
     return self;
@@ -40,7 +41,7 @@
 
 - (void)setInfoData:(ADTContacterInfo *)infoData
 {
-    [m_carCodeLab setText:infoData.m_carCode];
-    [m_nameLab setText:infoData.m_userName];
+    [m_carCodeLab setText:infoData.m_userName];
+    [m_nameLab setText:infoData.m_carCode];
 }
 @end

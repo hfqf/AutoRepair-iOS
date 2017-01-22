@@ -15,13 +15,18 @@
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
         m_lab1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 5,MAIN_WIDTH-20, 20)];
-        m_lab1.font = [UIFont systemFontOfSize:16];
+        m_lab1.font = [UIFont systemFontOfSize:14];
+        m_lab1.textColor = UIColorFromRGB(0x1A1A1A);
         m_lab2 = [[UILabel alloc]initWithFrame:CGRectMake(10, 30,MAIN_WIDTH-20, 20)];
         m_lab3 = [[UILabel alloc]initWithFrame:CGRectMake(10, 55,MAIN_WIDTH-20, 20)];
         m_lab4 = [[UILabel alloc]initWithFrame:CGRectMake(10, 80,MAIN_WIDTH-20, 20)];
-        m_lab2.font = [UIFont systemFontOfSize:16];
-        m_lab3.font = [UIFont systemFontOfSize:16];
-        m_lab4.font = [UIFont systemFontOfSize:16];
+        m_lab2.font = [UIFont systemFontOfSize:13];
+        m_lab3.font = [UIFont systemFontOfSize:12];
+        
+        [m_lab2  setTextColor:UIColorFromRGB(0x878787)];
+        [m_lab3  setTextColor:UIColorFromRGB(0x707070)];
+        [m_lab4 setTextColor:UIColorFromRGB(0x707070)];
+        m_lab4.font = [UIFont systemFontOfSize:12];
         
         [self addSubview:m_lab2];
         [self addSubview:m_lab1];

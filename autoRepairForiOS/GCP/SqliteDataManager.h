@@ -21,11 +21,12 @@ SINGLETON_FOR_HEADER(SqliteDataManager)
 
 - (BOOL)insertNewCustom:(ADTContacterInfo *)info;
 
+///同时还要修改所有 所有维修记录里的carcode
 - (BOOL)updateCustom:(NSDictionary *)info;
 
 - (NSArray *)queryHistoryWithKey:(NSString *)key;
 
-- (BOOL)deleteCustomAndRepairHisotry:(NSString *)carCode;
+- (BOOL)deleteCustomAndRepairHisotry:(NSString *)_id with:(NSString *)carCode;
 
 - (ADTContacterInfo *)contactWithCarCode:(NSString *)carCode;
 

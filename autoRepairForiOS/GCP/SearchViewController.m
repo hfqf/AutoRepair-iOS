@@ -14,11 +14,13 @@
     UISearchBar *m_searchBar;
 }
 
+@property(nonatomic,strong)ADTContacterInfo *m_contact;
 @end
 @implementation SearchViewController
 
-- (id)initWith:(NSString *)carCode
+- (id)initWith:(ADTContacterInfo *)contact
 {
+    self.m_contact = contact;
     self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO];
     if (self)
     {
@@ -28,10 +30,7 @@
         [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         
-        m_searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, HEIGHT_NAVIGATION)];
-        [m_searchBar setText:carCode];
-        [m_searchBar setDelegate:self];
-        m_searchBar.showsCancelButton = YES;
+       
     }
     return self;
 }
@@ -99,16 +98,25 @@
 
 - (void)requestData:(BOOL)isRefresh
 {
-    if(m_searchBar.text.length == 0)
+    if(self.m_contact)
     {
-        self.m_arrData =nil;
+        self.m_arrData =[DB_Shared queryRepairs:self.m_contact];
         [self reloadDeals];
-        return;
+    }
+    else
+    {
+        if(m_searchBar.text.length == 0)
+        {
+            self.m_arrData = nil;
+        }
+        else
+        {
+            self.m_arrData = [DB_Shared queryHistoryWithKey:m_searchBar.text];
+        }
+        [self reloadDeals];
     }
     
-    
-    self.m_arrData = [DB_Shared queryHistoryWithKey:m_searchBar.text];
-    [self reloadDeals];
+
 }
 
 

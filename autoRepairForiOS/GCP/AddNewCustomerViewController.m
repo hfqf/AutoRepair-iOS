@@ -28,11 +28,12 @@
     
     UILabel *tip1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 80, 20)];
     [tip1 setBackgroundColor:[UIColor clearColor]];
-    [tip1 setFont:[UIFont systemFontOfSize:18]];
+    [tip1 setFont:[UIFont systemFontOfSize:14]];
     [tip1 setText:@"车主名:"];
     [m_bg addSubview:tip1];
     
     m_userNameInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-110, 30)];
+    [m_userNameInput setFont:[UIFont systemFontOfSize:14]];
     m_userNameInput.layer.cornerRadius = 3;
     m_userNameInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_userNameInput.layer.borderWidth = 0.5;
@@ -49,40 +50,43 @@
     
     UILabel *tip2 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_userNameInput.frame)+20, 80, 20)];
     [tip2  setBackgroundColor:[UIColor clearColor]];
-    [tip2 setFont:[UIFont systemFontOfSize:18]];
+    [tip2 setFont:[UIFont systemFontOfSize:14]];
     [tip2 setText:@"车牌号:"];
     [m_bg addSubview:tip2];
     m_carCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_userNameInput.frame)+15, MAIN_WIDTH-110, 30)];
+    [m_carCodeInput setFont:[UIFont systemFontOfSize:14]];
     m_carCodeInput.delegate = self;
     m_carCodeInput.layer.cornerRadius = 3;
     m_carCodeInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_carCodeInput.layer.borderWidth = 0.5;
     m_carCodeInput.font = [UIFont systemFontOfSize:14];
 
-    [m_carCodeInput setPlaceholder:@"请输入车牌号码"];
+    [m_carCodeInput setPlaceholder:@"输入车牌号码,请勿填错"];
     [m_carCodeInput setTextColor:[UIColor blackColor]];
     if(self.m_currentData)
     {
+        //TODO 目前由于之前的字段设置,这个车牌号不能被修改，等所有版本都升级完成后，再加上这个修改
+        m_carCodeInput.userInteractionEnabled = NO;
         [m_carCodeInput setText:self.m_currentData.m_carCode];
     }
     [m_bg addSubview:m_carCodeInput];
     
     UILabel *tip3 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_carCodeInput.frame)+20, 80, 20)];
     [tip3  setBackgroundColor:[UIColor clearColor]];
-    [tip3 setFont:[UIFont systemFontOfSize:18]];
+    [tip3 setFont:[UIFont systemFontOfSize:14]];
     [tip3 setText:@"车主号码:"];
     [m_bg addSubview:tip3];
     m_telInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_carCodeInput.frame)+15, MAIN_WIDTH-110, 30)];
+    [m_telInput setFont:[UIFont systemFontOfSize:14]];
     m_telInput.font = [UIFont systemFontOfSize:14];
     m_telInput.layer.cornerRadius = 3;
     m_telInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_telInput.layer.borderWidth = 0.5;
     m_telInput.delegate = self;
-    [m_telInput setPlaceholder:@"提交后不可修改,除非删除重来"];
+    [m_telInput setPlaceholder:@"11位的手机号码"];
     [m_telInput setTextColor:[UIColor blackColor]];
     if(self.m_currentData)
     {
-        m_telInput.userInteractionEnabled = NO;
         [m_telInput setText:self.m_currentData.m_tel];
     }
     [m_bg addSubview:m_telInput];
@@ -90,10 +94,11 @@
     
     UILabel *tip4 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_telInput.frame)+20, 80, 20)];
     [tip4  setBackgroundColor:[UIColor clearColor]];
-    [tip4 setFont:[UIFont systemFontOfSize:18]];
+    [tip4 setFont:[UIFont systemFontOfSize:14]];
     [tip4 setText:@"车型:"];
     [m_bg addSubview:tip4];
     m_carTypeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_telInput.frame)+15, MAIN_WIDTH-110, 30)];
+    [m_carTypeInput setFont:[UIFont systemFontOfSize:14]];
     m_carTypeInput.layer.cornerRadius = 3;
     m_carTypeInput.layer.borderColor = [UIColor grayColor].CGColor;
     m_carTypeInput.layer.borderWidth = 0.5;
@@ -164,15 +169,15 @@
 
 - (void)seeAllBtnClicked
 {
-    SearchViewController *vc = [[SearchViewController alloc]initWith:self.m_currentData.m_carCode];
+    SearchViewController *vc = [[SearchViewController alloc]initWith:self.m_currentData];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)addBtnClicked
 {
-    if(m_carCodeInput.text.length == 0)
+    if(m_carCodeInput.text.length < 5)
     {
-        [PubllicMaskViewHelper showTipViewWith:@"车牌号不能为空" inSuperView:self.view withDuration:1];
+        [PubllicMaskViewHelper showTipViewWith:@"车牌号不能小于5位" inSuperView:self.view withDuration:1];
         return;
     }
     
@@ -182,24 +187,30 @@
         return;
     }
     
+    if(m_telInput.text.length != 11)
+    {
+        [PubllicMaskViewHelper showTipViewWith:@"手机号码必须是11位" inSuperView:self.view withDuration:1];
+        return;
+    }
+    
+    
     if(m_carTypeInput.text.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"车型为空" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(m_carCodeInput.text.length == 0)
-    {
-        [PubllicMaskViewHelper showTipViewWith:@"车主号码不能为空" inSuperView:self.view withDuration:1];
-        return;
-    }
-    
+ 
     
     ADTContacterInfo *new = [[ADTContacterInfo alloc]init];
     new.m_carCode = m_carCodeInput.text;
+    new.m_carCode = [new.m_carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
     new.m_userName = m_userNameInput.text;
+    new.m_userName = [new.m_userName stringByReplacingOccurrencesOfString:@" " withString:@""];
     new.m_tel = m_telInput.text;
     new.m_carType = m_carTypeInput.text;
+    new.m_idFromServer = self.m_currentData.m_idFromServer;
+
     
     if(self.m_currentData)
     {
@@ -213,7 +224,8 @@
                                                          @"name":m_userNameInput.text,
                                                          @"tel":m_telInput.text,
                                                          @"carType":m_carTypeInput.text,
-                                                         @"owner":[LoginUserUtil userTel]
+                                                         @"owner":[LoginUserUtil userTel],
+                                                         @"id":self.m_currentData.m_idFromServer
                                                  }])
                         {
                             [self backBtnClicked];
@@ -275,10 +287,31 @@
     }
     else
     {
-        if([DB_Shared deleteCustomAndRepairHisotry:self.m_currentData.m_carCode])
-        {
-            [self backBtnClicked];
-        }
+        [HTTP_MANAGER deleteOneContact:self.m_currentData
+                        successedBlock:^(NSDictionary *succeedResult) {
+                            
+                            if([succeedResult[@"code"]integerValue] == 1)
+                            {
+                                if([DB_Shared deleteCustomAndRepairHisotry:self.m_currentData.m_idFromServer with:self.m_currentData.m_carCode])
+                                {
+                                    [self backBtnClicked];
+                                }
+                                else
+                                {
+                                    [PubllicMaskViewHelper showTipViewWith:@"操作失败" inSuperView:self.view  withDuration:1];
+                                }
+                            }
+                            else
+                            {
+                                [PubllicMaskViewHelper showTipViewWith:@"操作失败" inSuperView:self.view  withDuration:1];
+                            }
+            
+        } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+            
+            [PubllicMaskViewHelper showTipViewWith:@"操作失败" inSuperView:self.view  withDuration:1];
+
+        }];
+       
     }
 }
 

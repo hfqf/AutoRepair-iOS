@@ -10,10 +10,14 @@
 #define  XXT_xinjiang_PublicDefine_h
 
 
-#define  KEY_IS_DEV                   0
-#define  SERVER                       KEY_IS_DEV ? @"http://localhost:18080"  :  @"http://autorepairhelper.duapp.com"
+#define  KEY_IS_DEV                   1
+#define  SERVER                       KEY_IS_DEV ? @"http://192.168.43.252:18080"  :  @"http://autorepairhelper.duapp.com"
 #define  JPUSH_APPKEY                 @"2c333bb853fee953412917d3"
 #define  JPUSH_SECRET                 @"78b67cb91bdd80f8c0fa92a9"
+
+#define  OS_TYPE                      @"ios"
+#define  VERSION                      [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]
+#define  PUSH_ID                      [JPUSHService registrationID] == nil ? @"" : [JPUSHService registrationID]
 
 
 #pragma  mark - end

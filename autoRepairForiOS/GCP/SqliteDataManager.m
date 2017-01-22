@@ -50,13 +50,14 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (BOOL)insertNewCustom:(ADTContacterInfo *)info
 {
-    NSString *sql = [NSString stringWithFormat:@"INSERT INTO 'contactsTable' ( 'carCode','name','tel','carType','owner') VALUES ('%@','%@','%@','%@','%@')",info.m_carCode,info.m_userName,info.m_tel,info.m_carType,info.m_owner];
+    NSString *sql = [NSString stringWithFormat:@"INSERT INTO 'contactsTable' ( 'carCode','name','tel','carType','owner','idFromNode') VALUES ('%@','%@','%@','%@','%@','%@')",info.m_carCode,info.m_userName,info.m_tel,info.m_carType,info.m_owner,info.m_idFromServer];
     return [self execSql:sql];
 }
 
 - (BOOL)updateCustom:(NSDictionary *)info
 {
-    return [self execSql: [NSString stringWithFormat:@"update contactsTable set name = '%@' , carCode = '%@',carType = '%@' where  tel = '%@'",info[@"name"],info[@"carCode"],info[@"carType"],info[@"tel"]]];
+    
+    return [self execSql: [NSString stringWithFormat:@"update contactsTable set name = '%@' , carCode = '%@',carType = '%@' ,tel= '%@' where  idFromNode = '%@'",info[@"name"],info[@"carCode"],info[@"carType"],info[@"tel" ],info[@"id"]]];
 }
 
 - (NSArray *)queryHistoryWithKey:(NSString *)key
@@ -115,6 +116,21 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
         }
     }
     
+    if(count > 5)
+    {
+        
+        char *ret = (char *)sqlite3_column_text(statement, 5);
+        if(ret == NULL)
+        {
+            //传空没关系,新版本第一次登录会上传所有本地数据,这个字段用不到
+            info.m_idFromServer = @"";
+        }
+        else
+        {
+            info.m_idFromServer = [NSString stringWithCString:ret  encoding:NSUTF8StringEncoding];
+        }
+    }
+    
     return info;
 }
 
@@ -124,11 +140,11 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
       return  [self execSql: [NSString stringWithFormat:@"delete from contactsTable"]];
 }
 
-- (BOOL)deleteCustomAndRepairHisotry:(NSString *)carCode
+- (BOOL)deleteCustomAndRepairHisotry:(NSString *)_id with:(NSString *)carCode;
 {
     if([self deleteAllRepairWith:carCode])
     {
-        return  [self execSql: [NSString stringWithFormat:@"delete from contactsTable where carCode = '%@'",carCode]];
+        return  [self execSql: [NSString stringWithFormat:@"delete from contactsTable where idFromNode = '%@'",_id]];
     }
     return NO;
     
@@ -155,7 +171,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (BOOL)insertRepair:(ADTRepairInfo *)info
 {
-    NSString *sql = [NSString stringWithFormat:@"INSERT INTO 'repairHistoryTable' ( 'carCode','totalKm','repairTime','repairType','addition','tipCircle','isCloseTip','circle','isreaded','owner','idFromNode') VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",info.m_carCode,info.m_km,info.m_time,info.m_repairType,info.m_more,info.m_targetDate,info.m_isClose?@"1" : @"0",info.m_repairCircle,info.m_isClose?@"1" : @"0",info.m_owner,info.m_idFromNode];
+    NSString *sql = [NSString stringWithFormat:@"INSERT INTO 'repairHistoryTable' ( 'carCode','totalKm','repairTime','repairType','addition','tipCircle','isCloseTip','circle','isreaded','owner','idFromNode' ,'insertTime') VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",info.m_carCode,info.m_km,info.m_time,info.m_repairType,info.m_more,info.m_targetDate,info.m_isClose?@"1" : @"0",info.m_repairCircle,info.m_isClose?@"1" : @"0",info.m_owner,info.m_idFromNode,info.m_insertTime];
     return [self execSql:sql];
 }
 
@@ -194,7 +210,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (NSArray *)queryRepairs:(ADTContacterInfo *)custom
 {
-    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' where carCode = '%@'",custom.m_carCode];
+    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' where carCode = '%@' order by insertTime desc",custom.m_carCode];
     sqlite3_stmt * statement;
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     if (sqlite3_prepare_v2(m_db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK)
@@ -211,7 +227,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (NSArray *)queryAllRepairs
 {
-    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable'"];
+    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' order by insertTime desc"];
     sqlite3_stmt * statement;
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     if (sqlite3_prepare_v2(m_db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK)
@@ -227,7 +243,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (NSArray *)queryTipRepair
 {
-    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' where date(tipCircle,'localtime') <= date('now','localtime') and isCloseTip = '0'"];
+    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' where date(tipCircle,'localtime') <= date('now','localtime') and isCloseTip = '0' order by insertTime desc"];
     sqlite3_stmt * statement;
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     if (sqlite3_prepare_v2(m_db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK)
@@ -295,6 +311,21 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
         else
         {
             info.m_idFromNode = [NSString stringWithCString:ret  encoding:NSUTF8StringEncoding];
+        }
+    }
+    
+    if(count > 12)
+    {
+        
+        char *ret = (char *)sqlite3_column_text(statement, 12);
+        if(ret == NULL)
+        {
+            //传空没关系,新版本第一次登录会上传所有本地数据,这个字段用不到
+            info.m_insertTime = [LocalTimeUtil getCurrentTime];
+        }
+        else
+        {
+            info.m_insertTime = [NSString stringWithCString:ret  encoding:NSUTF8StringEncoding];
         }
     }
     

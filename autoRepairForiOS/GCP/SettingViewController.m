@@ -85,8 +85,8 @@
     if(indexPath.row == 0)
     {
         UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 200, 20)];
-        [_tit setTextColor:[UIColor blackColor]];
-        [_tit setFont:[UIFont systemFontOfSize:20]];
+        [_tit setTextColor:UIColorFromRGB(0x4D4D4D)];
+        [_tit setFont:[UIFont systemFontOfSize:16]];
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.row]];
         [cell addSubview:_tit];
         
@@ -98,8 +98,8 @@
     }else if (indexPath.row == 1)
     {
         UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 200, 20)];
-        [_tit setTextColor:[UIColor blackColor]];
-        [_tit setFont:[UIFont systemFontOfSize:20]];
+        [_tit setTextColor:UIColorFromRGB(0x4D4D4D)];
+        [_tit setFont:[UIFont systemFontOfSize:16]];
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.row]];
         [cell addSubview:_tit];
         
@@ -125,8 +125,8 @@
     else
     {
         UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 30, 200, 20)];
-        [_tit setTextColor:[UIColor blackColor]];
-        [_tit setFont:[UIFont systemFontOfSize:20]];
+        [_tit setTextColor:UIColorFromRGB(0x4D4D4D)];
+        [_tit setFont:[UIFont systemFontOfSize:16]];
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.row]];
         [cell addSubview:_tit];
         

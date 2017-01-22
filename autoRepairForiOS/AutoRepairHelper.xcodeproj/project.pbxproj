@@ -121,6 +121,7 @@
 		7D458AE71ADBBE0B00BCACAB /* SqliteDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D458ADE1ADBBE0B00BCACAB /* SqliteDataManager.m */; };
 		7D458AEA1ADBBE0B00BCACAB /* SpeSqliteUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D458AE41ADBBE0B00BCACAB /* SpeSqliteUpdateManager.m */; };
 		7D458AEB1ADBBE0B00BCACAB /* SpeSqlSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D458AE51ADBBE0B00BCACAB /* SpeSqlSetting.plist */; };
+		7D5DDD9A1E30B9380065FAED /* NSArray+SortByFisrtChar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */; };
 		7DAE144B1DDE05B00082C0AB /* HttpConnctionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE144A1DDE05B00082C0AB /* HttpConnctionManager.m */; };
 		7DCBC9791DC2EF09006BA2C8 /* ContactDeverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCBC9781DC2EF09006BA2C8 /* ContactDeverViewController.m */; };
 		7DCBC97D1DC2F264006BA2C8 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCBC97C1DC2F264006BA2C8 /* UMMobClick.framework */; };
@@ -366,6 +367,8 @@
 		7D458AE31ADBBE0B00BCACAB /* SpeSqliteUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeSqliteUpdateManager.h; sourceTree = "<group>"; };
 		7D458AE41ADBBE0B00BCACAB /* SpeSqliteUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeSqliteUpdateManager.m; sourceTree = "<group>"; };
 		7D458AE51ADBBE0B00BCACAB /* SpeSqlSetting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SpeSqlSetting.plist; sourceTree = "<group>"; };
+		7D5DDD981E30B9380065FAED /* NSArray+SortByFisrtChar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SortByFisrtChar.h"; sourceTree = "<group>"; };
+		7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SortByFisrtChar.m"; sourceTree = "<group>"; };
 		7DAE14491DDE05B00082C0AB /* HttpConnctionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConnctionManager.h; sourceTree = "<group>"; };
 		7DAE144A1DDE05B00082C0AB /* HttpConnctionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpConnctionManager.m; sourceTree = "<group>"; };
 		7DCBC9771DC2EF09006BA2C8 /* ContactDeverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDeverViewController.h; sourceTree = "<group>"; };
@@ -642,6 +645,8 @@
 		7D426DEF1A62ABC20004F3F6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7D5DDD981E30B9380065FAED /* NSArray+SortByFisrtChar.h */,
+				7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */,
 				7D426F301A62B8F80004F3F6 /* GTMDefines.h */,
 				7D426F2D1A62B8DF0004F3F6 /* GTMBase64.h */,
 				7D426F311A62B9370004F3F6 /* ConverUtil.h */,
@@ -1068,6 +1073,7 @@
 				7DFC90371AEFC9A900B4EB59 /* SearchViewController.m in Sources */,
 				7D426EC31A62AE770004F3F6 /* MJRefreshHeaderView.m in Sources */,
 				7D0DEB0A1DE1688D0032FBBC /* LoginViewController.m in Sources */,
+				7D5DDD9A1E30B9380065FAED /* NSArray+SortByFisrtChar.m in Sources */,
 				7D426EE91A62AE770004F3F6 /* UIImage+MultiFormat.m in Sources */,
 				7D426EEB1A62AE770004F3F6 /* UIImageView+HighlightedWebCache.m in Sources */,
 				7D426F221A62B5D60004F3F6 /* TabbarButtonsBGView.m in Sources */,

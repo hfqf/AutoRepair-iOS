@@ -10,5 +10,5 @@
 
 @interface SearchViewController : SpeRefreshAndLoadViewController
 
-- (id)initWith:(NSString *)carCode;
+- (id)initWith:(ADTContacterInfo *)contact;
 @end
