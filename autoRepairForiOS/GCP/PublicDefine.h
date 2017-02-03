@@ -10,7 +10,7 @@
 #define  XXT_xinjiang_PublicDefine_h
 
 
-#define  KEY_IS_DEV                   1
+#define  KEY_IS_DEV                   0
 #define  SERVER                       KEY_IS_DEV ? @"http://192.168.43.252:18080"  :  @"http://autorepairhelper.duapp.com"
 #define  JPUSH_APPKEY                 @"2c333bb853fee953412917d3"
 #define  JPUSH_SECRET                 @"78b67cb91bdd80f8c0fa92a9"
@@ -478,6 +478,7 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 
 
 #define KEY_IS_TIPED_NEED_LOGIN     @"KEY_IS_TIPED_NEED_LOGIN" ///需要登录的说明
+#define KEY_IS_FIRST_LOGIN          @"KEY_IS_FIRST_LOGIN" ///需要登录的说明
 #define KEY_IS_CONTACT_AYSNED       @"KEY_IS_CONTACT_AYSNED" ///是否已经同步过所有数据
 #define KEY_IS_REPAIR_AYSNED        @"KEY_IS_REPAIR_AYSNED" ///是否已经同步过所有数据
 

@@ -15,6 +15,9 @@
 
 SINGLETON_FOR_HEADER(SqliteDataManager)
 
+///因为版本升级原因,需要同步服务器的数据，本地的数据库记录需要删除掉
+- (BOOL)clearAllLocalDBHistory;
+
 - (BOOL)createTable:(NSString *)tableName;
 
 #pragma mark - 顾客

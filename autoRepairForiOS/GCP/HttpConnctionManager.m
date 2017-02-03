@@ -251,13 +251,16 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
             successedBlock:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed
 {
+    NSString *isFirstLogin = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_IS_FIRST_LOGIN];
     [self startNormalPostWith:@"/users/login2" paragram:@{
                                                           @"username"  : name,
                                                           @"pwd":pwd,
                                                           @"udid":KEY_UDID,
                                                           @"ostype":OS_TYPE,
                                                           @"version":VERSION,
-                                                          @"pushid":PUSH_ID
+                                                          @"pushid":PUSH_ID,
+                                                          @"isfirstlogin":isFirstLogin == nil ? @"1" : @"0"
+//                                                          @"isfirstlogin":@"1"
                                                           } successedBlock:success
                                                 failedBolck:failed];
 }

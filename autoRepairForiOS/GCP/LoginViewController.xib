@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
+                <outlet property="forgetPwdBtn" destination="0ub-l3-eTs" id="tI3-Fm-cQT"/>
                 <outlet property="iconView" destination="jXb-bn-zA9" id="w7E-NQ-0va"/>
                 <outlet property="loginBtn" destination="e2G-bO-z2Z" id="gO2-ZV-X1u"/>
                 <outlet property="nameInput" destination="DNu-Oa-uMy" id="7wa-vt-3jI"/>
@@ -70,8 +71,8 @@
                         <outlet property="delegate" destination="-1" id="c8W-22-Kuc"/>
                     </connections>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-bO-z2Z">
-                    <rect key="frame" x="60" y="371.66666666666669" width="294" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2G-bO-z2Z">
+                    <rect key="frame" x="68" y="461" width="294" height="40"/>
                     <color key="backgroundColor" red="0.1152431411024737" green="0.37259090300635439" blue="0.70769230769230762" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="KsG-pT-CmM"/>
@@ -84,7 +85,7 @@
                         <action selector="loginBtnClicked:" destination="-1" eventType="touchUpInside" id="76L-aH-VS3"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="汽车修理小助手 v2.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ll5-XX-eQl">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="汽修小助手 v2.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ll5-XX-eQl">
                     <rect key="frame" x="0.0" y="559" width="600" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="o8T-a1-PYg"/>
@@ -119,16 +120,31 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="jXb-bn-zA9">
-                    <rect key="frame" x="147.66666666666669" y="80" width="120.00000000000006" height="120"/>
+                    <rect key="frame" x="147" y="80" width="120" height="120"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="SC2-Fl-Z48"/>
                         <constraint firstAttribute="height" constant="120" id="bCg-Xx-Km5"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ub-l3-eTs">
+                    <rect key="frame" x="323" y="357" width="78" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="78" id="3qe-ew-1FD"/>
+                        <constraint firstAttribute="height" constant="30" id="VEe-Eu-Dt0"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="忘记密码">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="forgetBtnClicked:" destination="-1" eventType="touchUpInside" id="WGe-db-zKH"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.98473388097019177" green="1" blue="0.99603837244030524" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="0ub-l3-eTs" firstAttribute="top" secondItem="bGV-db-aP8" secondAttribute="bottom" constant="5" id="0Zo-2B-nTQ"/>
                 <constraint firstItem="jXb-bn-zA9" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="3Rz-45-J2K"/>
                 <constraint firstAttribute="trailing" secondItem="ll5-XX-eQl" secondAttribute="trailing" id="5Ak-eM-Mox"/>
                 <constraint firstAttribute="trailing" secondItem="DNu-Oa-uMy" secondAttribute="trailing" constant="80" id="6tK-Tg-Zs4"/>
@@ -142,6 +158,7 @@
                 <constraint firstItem="ll5-XX-eQl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UwS-G6-1nu"/>
                 <constraint firstItem="e2G-bO-z2Z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="YG0-NU-d7z"/>
                 <constraint firstItem="qb6-5g-kp3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="enN-kY-lfR"/>
+                <constraint firstItem="0ub-l3-eTs" firstAttribute="trailing" secondItem="bGV-db-aP8" secondAttribute="trailing" id="fmg-XF-sOE"/>
                 <constraint firstAttribute="trailing" secondItem="e2G-bO-z2Z" secondAttribute="trailing" constant="60" id="gqN-fH-uzR"/>
                 <constraint firstItem="LDX-yj-A8f" firstAttribute="top" secondItem="K75-B7-eUy" secondAttribute="bottom" constant="25" id="huo-R2-VXR"/>
                 <constraint firstItem="bGV-db-aP8" firstAttribute="leading" secondItem="LDX-yj-A8f" secondAttribute="trailing" constant="20" id="ipG-2i-jCs"/>

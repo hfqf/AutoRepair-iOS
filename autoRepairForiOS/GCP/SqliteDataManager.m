@@ -18,6 +18,8 @@
         
         [SpeSqliteUpdateManager createOrUpdateDB];
          m_db = [SpeSqliteUpdateManager db];
+        
+        
     }
     return self;
 }
@@ -40,6 +42,15 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 }
 
 #pragma mark -  数据库操作
+
+///因为版本升级原因,需要同步服务器的数据，本地的数据库记录需要删除掉
+- (BOOL)clearAllLocalDBHistory
+{
+    [self deleteContacts];
+    [self deleteAllRepair];
+    return YES;
+}
+
 - (BOOL)createTable:(NSString *)sql
 {
    return [self execSql:sql];
@@ -152,6 +163,9 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (ADTContacterInfo *)contactWithCarCode:(NSString *)carCode
 {
+    carCode = [carCode stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    carCode = [carCode stringByReplacingOccurrencesOfString:@"\\n" withString:@""];
+    carCode = [carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'contactsTable' where carCode = '%@'",carCode];
     sqlite3_stmt * statement;
     if (sqlite3_prepare_v2(m_db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK)
@@ -198,6 +212,9 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (BOOL)deleteAllRepairWith:(NSString *)carCode
 {
+    carCode = [carCode stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    carCode = [carCode stringByReplacingOccurrencesOfString:@"\\n" withString:@""];
+    carCode = [carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
     return [self execSql: [NSString stringWithFormat:@"delete from repairHistoryTable where carCode = '%@'",carCode]];
 }
 
@@ -210,7 +227,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (NSArray *)queryRepairs:(ADTContacterInfo *)custom
 {
-    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' where carCode = '%@' order by insertTime desc",custom.m_carCode];
+    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' where carCode = '%@' order by repairTime desc",custom.m_carCode];
     sqlite3_stmt * statement;
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     if (sqlite3_prepare_v2(m_db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK)
@@ -227,7 +244,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (NSArray *)queryAllRepairs
 {
-    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' order by insertTime desc"];
+    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' order by repairTime desc"];
     sqlite3_stmt * statement;
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     if (sqlite3_prepare_v2(m_db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK)
@@ -243,7 +260,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (NSArray *)queryTipRepair
 {
-    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' where date(tipCircle,'localtime') <= date('now','localtime') and isCloseTip = '0' order by insertTime desc"];
+    NSString *sqlQuery = [NSString stringWithFormat:@"SELECT * FROM 'repairHistoryTable' where date(tipCircle,'localtime') <= date('now','localtime') and isCloseTip = '0' order by  repairTime desc"];
     sqlite3_stmt * statement;
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     if (sqlite3_prepare_v2(m_db, [sqlQuery UTF8String], -1, &statement, nil) == SQLITE_OK)
@@ -267,7 +284,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
     info.m_repairType =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 4)  encoding:NSUTF8StringEncoding];
     info.m_more =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 5)  encoding:NSUTF8StringEncoding];
     info.m_targetDate =  [NSString stringWithCString:(char *)sqlite3_column_text(statement, 6)  encoding:NSUTF8StringEncoding];
-    info.m_isClose =  [[NSString stringWithCString:(char *)sqlite3_column_text(statement, 7)  encoding:NSUTF8StringEncoding]isEqualToString:@"1"];
+    info.m_isClose =  [[NSString stringWithCString:(char *)sqlite3_column_text(statement, 7)  encoding:NSUTF8StringEncoding]isEqualToString:@"0"];
     info.m_repairCircle = [NSString stringWithCString:(char *)sqlite3_column_text(statement, 8)  encoding:NSUTF8StringEncoding];
     
     

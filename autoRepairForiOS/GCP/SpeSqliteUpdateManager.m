@@ -51,8 +51,20 @@ SINGLETON_FOR_CLASS(SpeSqliteUpdateManager)
             [self updateLocalDB];
             [m_sqlSettingDic writeToFile:sqlPath atomically:YES];
         }
+        
+        //清楚空格
+        [self clearAllSpace];
     }
     return self;
+}
+
+///清除空格
+- (BOOL)clearAllSpace
+{
+    NSString *sql1 = @"select replace(carCode,' ','') from repairHistoryTable";
+    NSString *sql2 = @"select replace(carCode,' ','') from contactsTable";
+    [self execSql:sql1];
+    return  [self execSql:sql2];
 }
 
 + (sqlite3 *)db

@@ -10,6 +10,7 @@
 
 #import "LoginViewController.h"
 #import "ADTContacterInfo.h"
+#import "NSDictionary+ValueCheck.h"
 @interface LoginViewController ()<UIAlertViewDelegate>
 {
     NSInteger  m_asyncCount;
@@ -33,7 +34,9 @@
     [self.loginBtn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
     [self.registerBtn setTitleColor:PUBLIC_BACKGROUND_COLOR forState:UIControlStateNormal];
     
-  
+//    self.forgetPwdBtn.layer.cornerRadius = 3;
+//    self.forgetPwdBtn.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
+//    self.forgetPwdBtn.layer.borderWidth = 0.5;
     
     
 }
@@ -238,7 +241,7 @@ return jsonString;
                                   @"tipcircle":info.m_targetDate,
                                   @"isclose":info.m_isClose ? @"1" : @"0",
                                   @"circle":info.m_repairCircle,
-                                  @"isreaded":info.m_isClose ? @"1" : @"0",
+                                  @"isreaded":info.m_isreaded ? @"1" : @"0",
                                   @"owner":[LoginUserUtil userTel],
                                   @"inserttime":info.m_insertTime
                                   } ;
@@ -390,7 +393,7 @@ return jsonString;
 }
 
 - (IBAction)loginBtnClicked:(UIButton *)sender {
-    
+
     if(self.nameInput.text.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"用户名不能为空" inSuperView:self.view  withDuration:1];
@@ -406,10 +409,12 @@ return jsonString;
     [self showWaitingView];
 
     
-    [HTTP_MANAGER startLoginWithName:@"13813313631"
-                             withPwd:@"11111111"
+    [HTTP_MANAGER startLoginWithName:self.nameInput.text
+                             withPwd:self.pwdInput.text
                       successedBlock:^(NSDictionary *succeedResult) {
                           
+
+
                           [self removeWaitingView];
                           if([succeedResult[@"code"]integerValue] == 1)
                           {
@@ -422,7 +427,16 @@ return jsonString;
                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"viplevel"] forKey:KEY_AUTO_LEVEL];
                                [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"devicemodifyed"] forKey:KEY_AUTO_UDID_MODIFYED];
                               
+                              ///因为版本升级原因,需要同步服务器的数据，本地的数据库记录需要删除掉
+                              BOOL isNeedAsync = [[succeedResult[@"ret"]stringWithFilted:@"needasnc"]integerValue] == 1;
+                              if(isNeedAsync)
+                              {
+                                  [[SqliteDataManager sharedInstance]clearAllLocalDBHistory];
+                              }
+                              
+                              
                               [self chechAsync];
+                              [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:KEY_IS_FIRST_LOGIN];
                               
                              [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
                               
@@ -514,5 +528,9 @@ return jsonString;
 {
     [self.pwdInput resignFirstResponder];
     [self.nameInput resignFirstResponder];
+}
+- (IBAction)forgetBtnClicked:(UIButton *)sender {
+    
+    [PubllicMaskViewHelper showTipViewWith:@"暂时请请联系开发者,后续会再优化" inSuperView:self.view  withDuration:2];
 }
 @end

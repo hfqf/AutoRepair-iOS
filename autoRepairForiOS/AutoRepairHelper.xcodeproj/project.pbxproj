@@ -123,6 +123,7 @@
 		7D458AEB1ADBBE0B00BCACAB /* SpeSqlSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D458AE51ADBBE0B00BCACAB /* SpeSqlSetting.plist */; };
 		7D5DDD9A1E30B9380065FAED /* NSArray+SortByFisrtChar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */; };
 		7DAE144B1DDE05B00082C0AB /* HttpConnctionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE144A1DDE05B00082C0AB /* HttpConnctionManager.m */; };
+		7DB338C91E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB338C81E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m */; };
 		7DCBC9791DC2EF09006BA2C8 /* ContactDeverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCBC9781DC2EF09006BA2C8 /* ContactDeverViewController.m */; };
 		7DCBC97D1DC2F264006BA2C8 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCBC97C1DC2F264006BA2C8 /* UMMobClick.framework */; };
 		7DCBC97F1DC2F2B8006BA2C8 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCBC97E1DC2F2B8006BA2C8 /* CoreTelephony.framework */; };
@@ -371,6 +372,8 @@
 		7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SortByFisrtChar.m"; sourceTree = "<group>"; };
 		7DAE14491DDE05B00082C0AB /* HttpConnctionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConnctionManager.h; sourceTree = "<group>"; };
 		7DAE144A1DDE05B00082C0AB /* HttpConnctionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpConnctionManager.m; sourceTree = "<group>"; };
+		7DB338C71E3F8C2C002DAE79 /* NSDictionary+ValueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ValueCheck.h"; sourceTree = "<group>"; };
+		7DB338C81E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ValueCheck.m"; sourceTree = "<group>"; };
 		7DCBC9771DC2EF09006BA2C8 /* ContactDeverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDeverViewController.h; sourceTree = "<group>"; };
 		7DCBC9781DC2EF09006BA2C8 /* ContactDeverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDeverViewController.m; sourceTree = "<group>"; };
 		7DCBC97C1DC2F264006BA2C8 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
@@ -645,6 +648,8 @@
 		7D426DEF1A62ABC20004F3F6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7DB338C71E3F8C2C002DAE79 /* NSDictionary+ValueCheck.h */,
+				7DB338C81E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m */,
 				7D5DDD981E30B9380065FAED /* NSArray+SortByFisrtChar.h */,
 				7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */,
 				7D426F301A62B8F80004F3F6 /* GTMDefines.h */,
@@ -980,6 +985,7 @@
 					7D426DA81A62AA120004F3F6 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = BJW9F34F29;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1060,6 +1066,7 @@
 				7D458AEA1ADBBE0B00BCACAB /* SpeSqliteUpdateManager.m in Sources */,
 				7D426DFE1A62ABCA0004F3F6 /* LoginUserUtil.m in Sources */,
 				7D426EEC1A62AE770004F3F6 /* UIImageView+WebCache.m in Sources */,
+				7DB338C91E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m in Sources */,
 				7D426EB91A62AE770004F3F6 /* EGOImageButton.m in Sources */,
 				7D0DEB4A1DE3427F0032FBBC /* SMSUIContactsFriendsViewController.m in Sources */,
 				7D1D62161AF311CF00252B07 /* CustomerTableViewCell.m in Sources */,
@@ -1260,7 +1267,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: qifei huangfu (LMDV42LR62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: qifei huangfu (LMDV42LR62)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1278,8 +1286,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
 				PRODUCT_NAME = AutoRepairHelper;
-				PROVISIONING_PROFILE = "4af8daba-2bee-4d40-961a-cfd0877d28d9";
-				PROVISIONING_PROFILE_SPECIFIER = "汽修dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1291,8 +1299,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: qifei huangfu (BJW9F34F29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: qifei huangfu (BJW9F34F29)";
-				DEVELOPMENT_TEAM = BJW9F34F29;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1310,8 +1318,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
 				PRODUCT_NAME = AutoRepairHelper;
-				PROVISIONING_PROFILE = "c83ac39a-b838-4ef2-9b20-b2baa3b795e4";
-				PROVISIONING_PROFILE_SPECIFIER = "汽车修理小助手";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

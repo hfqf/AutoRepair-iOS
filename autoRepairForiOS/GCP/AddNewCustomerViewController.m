@@ -39,6 +39,7 @@
     m_userNameInput.layer.borderWidth = 0.5;
     m_userNameInput.delegate = self;
     m_userNameInput.font = [UIFont systemFontOfSize:14];
+    m_userNameInput.returnKeyType = UIReturnKeyNext;
     [m_userNameInput setPlaceholder:@"请输入车主名"];
     [m_userNameInput setTextColor:[UIColor blackColor]];
     if(self.m_currentData)
@@ -54,6 +55,7 @@
     [tip2 setText:@"车牌号:"];
     [m_bg addSubview:tip2];
     m_carCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_userNameInput.frame)+15, MAIN_WIDTH-110, 30)];
+    m_carCodeInput.returnKeyType = UIReturnKeyNext;
     [m_carCodeInput setFont:[UIFont systemFontOfSize:14]];
     m_carCodeInput.delegate = self;
     m_carCodeInput.layer.cornerRadius = 3;
@@ -77,6 +79,7 @@
     [tip3 setText:@"车主号码:"];
     [m_bg addSubview:tip3];
     m_telInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_carCodeInput.frame)+15, MAIN_WIDTH-110, 30)];
+    m_telInput.returnKeyType = UIReturnKeyNext;
     [m_telInput setFont:[UIFont systemFontOfSize:14]];
     m_telInput.font = [UIFont systemFontOfSize:14];
     m_telInput.layer.cornerRadius = 3;
@@ -104,6 +107,7 @@
     m_carTypeInput.layer.borderWidth = 0.5;
     m_carTypeInput.delegate = self;
     [m_carTypeInput setTextColor:[UIColor blackColor]];
+    m_carTypeInput.returnKeyType = UIReturnKeyDone;
     if(self.m_currentData)
     {
         [m_carTypeInput setText:self.m_currentData.m_carType];
@@ -294,6 +298,15 @@
                             {
                                 if([DB_Shared deleteCustomAndRepairHisotry:self.m_currentData.m_idFromServer with:self.m_currentData.m_carCode])
                                 {
+                                    ADTRepairInfo *rep = [[ADTRepairInfo alloc]init];
+                                    rep.m_carCode = self.m_currentData.m_carCode;
+                                    [HTTP_MANAGER delAllRepair:rep
+                                                successedBlock:^(NSDictionary *succeedResult) {
+                                        
+                                    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                        
+                                    }];
+                                    
                                     [self backBtnClicked];
                                 }
                                 else
@@ -315,4 +328,12 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField == m_carTypeInput)
+    {
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
 @end
