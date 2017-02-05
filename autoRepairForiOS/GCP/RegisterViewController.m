@@ -80,12 +80,12 @@
                                          [self removeWaitingView];
                                          if([succeedResult[@"code"]integerValue] == 1)
                                          {
-                                             [PubllicMaskViewHelper showTipViewWith:@"注册成功" inSuperView:self.view  withDuration:1];
+                                             [PubllicMaskViewHelper showTipViewWith:@"注册成功" inSuperView:self.view  withDuration:2];
                                              [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:2];
                                          }
                                          else
                                          {
-                                             [PubllicMaskViewHelper showTipViewWith:@"注册失败" inSuperView:self.view  withDuration:1];
+                                             [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:2];
                                          }
                                       
                                          

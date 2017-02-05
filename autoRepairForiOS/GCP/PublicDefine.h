@@ -11,7 +11,7 @@
 
 
 #define  KEY_IS_DEV                   0
-#define  SERVER                       KEY_IS_DEV ? @"http://192.168.43.252:18080"  :  @"http://autorepairhelper.duapp.com"
+#define  SERVER                       KEY_IS_DEV ? @"http://localhost:18080"  :  @"http://autorepairhelper.duapp.com"
 #define  JPUSH_APPKEY                 @"2c333bb853fee953412917d3"
 #define  JPUSH_SECRET                 @"78b67cb91bdd80f8c0fa92a9"
 

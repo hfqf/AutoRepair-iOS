@@ -149,7 +149,7 @@
     m_isNeedTipSwitcher = [[UISwitch alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2,CGRectGetMaxY(m_tipCircleInput.frame)+20, 50, 30)];
     if(self.m_currentData.m_km)
     {
-        [m_isNeedTipSwitcher setOn:self.m_currentData.m_isClose];
+        [m_isNeedTipSwitcher setOn:!self.m_currentData.m_isClose];
     }
     else
     {
@@ -402,6 +402,7 @@
     
     if(!m_isAdd)
     {
+        self.m_currentData.m_isClose = switcher.isOn;
         [HTTP_MANAGER updateOneRepair:self.m_currentData
                        successedBlock:^(NSDictionary *succeedResult) {
                            

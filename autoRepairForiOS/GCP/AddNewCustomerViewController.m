@@ -259,6 +259,7 @@
                         newCon.m_carCode = m_carCodeInput.text;
                         newCon.m_userName = m_userNameInput.text;
                         newCon.m_tel = m_telInput.text;
+                        newCon.m_idFromServer= succeedResult[@"ret"][@"_id"];
                         if([DB_Shared  insertNewCustom:newCon])
                         {
                             [self backBtnClicked];

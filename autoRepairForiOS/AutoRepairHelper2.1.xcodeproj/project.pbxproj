@@ -194,7 +194,7 @@
 		7D1D62151AF311CF00252B07 /* CustomerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerTableViewCell.m; sourceTree = "<group>"; };
 		7D2904FA1AF134FF00039CEF /* AddRepairHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRepairHistoryViewController.h; sourceTree = "<group>"; };
 		7D2904FB1AF134FF00039CEF /* AddRepairHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRepairHistoryViewController.m; sourceTree = "<group>"; };
-		7D426DA91A62AA120004F3F6 /* AutoRepairHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoRepairHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D426DA91A62AA120004F3F6 /* AutoRepairHelper2.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoRepairHelper2.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D426DAD1A62AA120004F3F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D426DAE1A62AA120004F3F6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7D426DB01A62AA120004F3F6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -323,7 +323,7 @@
 		7D426EAC1A62AE770004F3F6 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		7D426EAD1A62AE770004F3F6 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		7D426EAE1A62AE770004F3F6 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		7D426EF91A62AEFF0004F3F6 /* AutoRepairHelper-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AutoRepairHelper-Prefix.pch"; sourceTree = "<group>"; };
+		7D426EF91A62AEFF0004F3F6 /* AutoRepairHelper2.1-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AutoRepairHelper2.1-Prefix.pch"; sourceTree = "<group>"; };
 		7D426EFA1A62B0390004F3F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7D426F011A62B1EC0004F3F6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7D426F031A62B1F20004F3F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -555,7 +555,7 @@
 		7D426DAA1A62AA120004F3F6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7D426DA91A62AA120004F3F6 /* AutoRepairHelper.app */,
+				7D426DA91A62AA120004F3F6 /* AutoRepairHelper2.1.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -589,7 +589,7 @@
 			children = (
 				7D426DAD1A62AA120004F3F6 /* Info.plist */,
 				7D426DAE1A62AA120004F3F6 /* main.m */,
-				7D426EF91A62AEFF0004F3F6 /* AutoRepairHelper-Prefix.pch */,
+				7D426EF91A62AEFF0004F3F6 /* AutoRepairHelper2.1-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -956,9 +956,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7D426DA81A62AA120004F3F6 /* AutoRepairHelper */ = {
+		7D426DA81A62AA120004F3F6 /* AutoRepairHelper2.1 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D426DCC1A62AA120004F3F6 /* Build configuration list for PBXNativeTarget "AutoRepairHelper" */;
+			buildConfigurationList = 7D426DCC1A62AA120004F3F6 /* Build configuration list for PBXNativeTarget "AutoRepairHelper2.1" */;
 			buildPhases = (
 				7D426DA51A62AA120004F3F6 /* Sources */,
 				7D426DA61A62AA120004F3F6 /* Frameworks */,
@@ -968,9 +968,9 @@
 			);
 			dependencies = (
 			);
-			name = AutoRepairHelper;
+			name = AutoRepairHelper2.1;
 			productName = GCP;
-			productReference = 7D426DA91A62AA120004F3F6 /* AutoRepairHelper.app */;
+			productReference = 7D426DA91A62AA120004F3F6 /* AutoRepairHelper2.1.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -997,7 +997,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7D426DA41A62AA120004F3F6 /* Build configuration list for PBXProject "AutoRepairHelper" */;
+			buildConfigurationList = 7D426DA41A62AA120004F3F6 /* Build configuration list for PBXProject "AutoRepairHelper2.1" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1016,7 +1016,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				7D426DA81A62AA120004F3F6 /* AutoRepairHelper */,
+				7D426DA81A62AA120004F3F6 /* AutoRepairHelper2.1 */,
 			);
 		};
 /* End PBXProject section */
@@ -1275,7 +1275,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SMS_SDK",
 				);
-				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper-Prefix.pch";
+				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper2.1-Prefix.pch";
 				INFOPLIST_FILE = GCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1285,7 +1285,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
-				PRODUCT_NAME = AutoRepairHelper;
+				PRODUCT_NAME = AutoRepairHelper2.1;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1307,7 +1307,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SMS_SDK",
 				);
-				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper-Prefix.pch";
+				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper2.1-Prefix.pch";
 				INFOPLIST_FILE = GCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1317,7 +1317,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
-				PRODUCT_NAME = AutoRepairHelper;
+				PRODUCT_NAME = AutoRepairHelper2.1;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1327,7 +1327,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7D426DA41A62AA120004F3F6 /* Build configuration list for PBXProject "AutoRepairHelper" */ = {
+		7D426DA41A62AA120004F3F6 /* Build configuration list for PBXProject "AutoRepairHelper2.1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D426DCA1A62AA120004F3F6 /* Debug */,
@@ -1336,7 +1336,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D426DCC1A62AA120004F3F6 /* Build configuration list for PBXNativeTarget "AutoRepairHelper" */ = {
+		7D426DCC1A62AA120004F3F6 /* Build configuration list for PBXNativeTarget "AutoRepairHelper2.1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D426DCD1A62AA120004F3F6 /* Debug */,
