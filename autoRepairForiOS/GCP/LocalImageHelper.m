@@ -60,7 +60,7 @@
 + (BOOL)saveOriginalImage:(NSString *)cutedPath withImage:(UIImage *)image error:(NSError *)error
 
 {
-    NSData * picData  = UIImageJPEGRepresentation(image, 1.0);
+    NSData * picData  = UIImageJPEGRepresentation(image, 0.001);
     [picData writeToFile:cutedPath atomically:YES];
     return error == nil;
 }
@@ -99,7 +99,7 @@
     if([self saveOriginalImage:maxPicPath withImage:tempImage error:error])
     {
         SpeLog(@"大图写入:%@",maxPicPath);
-        return fileName;
+        return maxPicPath;
     }
     else
     {
@@ -251,7 +251,7 @@
 + (NSString *)getStoredFilePath:(BOOL)isPic
 {
 
-    NSString *imageDir = [NSString stringWithFormat:@"%@/uploadFile/%@/%@", [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"],[LoginUserUtil userId],(isPic ?@"picture":@"audio")];
+    NSString *imageDir = [NSString stringWithFormat:@"%@/uploadFile%@/%@", [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"],[LoginUserUtil userId],(isPic ?@"picture":@"audio")];
     return imageDir;
 }
 
@@ -292,7 +292,7 @@
     [df setLocale:locale];
     NSString *strDate = [df stringFromDate:dateToDay];
     SpeLog(@"getPicNameFromCurrentTime==%@",strDate);
-    return [NSString stringWithFormat:@"%@.png",strDate];
+    return [NSString stringWithFormat:@"%@.jpg",strDate];
 }
 
 + (NSString *)getAudioNameFromCurrentTime

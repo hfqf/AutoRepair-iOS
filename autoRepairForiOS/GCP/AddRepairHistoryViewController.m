@@ -311,6 +311,7 @@
     self.m_currentData.m_isClose = m_isNeedTipSwitcher.isOn;
     self.m_currentData.m_insertTime = [LocalTimeUtil getCurrentTime];
     
+    [self showWaitingView];
     
     if(!m_isAdd)
     {
@@ -318,6 +319,7 @@
         [HTTP_MANAGER updateOneRepair:self.m_currentData
                        successedBlock:^(NSDictionary *succeedResult) {
                            
+                           [self removeWaitingView];
                            if([succeedResult[@"code"]integerValue] == 1)
                            {
                                if( [[SqliteDataManager sharedInstance]updateRepair:self.m_currentData])
@@ -340,6 +342,7 @@
                            
                            
                        } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                           [self removeWaitingView];
                            [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
                        }];
         
@@ -350,7 +353,7 @@
         
         [HTTP_MANAGER addNewRepair:self.m_currentData
                     successedBlock:^(NSDictionary *succeedResult) {
-            
+            [self removeWaitingView];
             self.m_currentData.m_idFromNode = succeedResult[@"ret"][@"_id"];
                         
             if([succeedResult[@"code"]integerValue] == 1)
@@ -371,7 +374,7 @@
             }
           
         } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-           
+           [self removeWaitingView];
             [PubllicMaskViewHelper showTipViewWith:@"添加失败" inSuperView:self.view  withDuration:1];
             
         }];

@@ -83,4 +83,7 @@
 
 + (NSString *)loginedName;
 + (NSString *)loginedPwd;
+
++ (NSString *)shopName;
++ (NSString *)headUrl;
 @end

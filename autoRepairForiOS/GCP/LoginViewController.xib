@@ -85,7 +85,7 @@
                         <action selector="loginBtnClicked:" destination="-1" eventType="touchUpInside" id="76L-aH-VS3"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="汽修小助手 v2.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ll5-XX-eQl">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="汽修小助手 v3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ll5-XX-eQl">
                     <rect key="frame" x="0.0" y="559" width="600" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="o8T-a1-PYg"/>

@@ -10,7 +10,8 @@
 #define  XXT_xinjiang_PublicDefine_h
 
 
-#define  KEY_IS_DEV                   0
+#define  KEY_IS_DEV                   1
+
 #define  SERVER                       KEY_IS_DEV ? @"http://localhost:18080"  :  @"http://autorepairhelper.duapp.com"
 #define  JPUSH_APPKEY                 @"2c333bb853fee953412917d3"
 #define  JPUSH_SECRET                 @"78b67cb91bdd80f8c0fa92a9"
@@ -474,6 +475,8 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 #define KEY_AUTO_TEL                @"KEY_AUTO_TEL"
 #define KEY_AUTO_LEVEL              @"KEY_AUTO_LEVEL"
 #define KEY_AUTO_UDID_MODIFYED      @"KEY_AUTO_UDID_MODIFYED"
+#define KEY_AUTO_HEAD               @"KEY_AUTO_HEAD"
+#define KEY_AUTO_SHOP_NAME          @"KEY_AUTO_SHOP_NAME"
 #define KEY_UDID                     [[UIDevice currentDevice]identifierForVendor].UUIDString.length == 0 ? @"0" :  [[UIDevice currentDevice]identifierForVendor].UUIDString
 
 

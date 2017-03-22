@@ -283,4 +283,17 @@
     NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_LOGINED_PWD];
     return ret;
 }
+
++ (NSString *)shopName
+{
+    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_SHOP_NAME];
+    return ret == nil ?@"一流4s店" :ret;
+}
+
++ (NSString *)headUrl
+{
+    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_HEAD];
+    return @"https://avatars2.githubusercontent.com/u/6100695?v=3&s=460";
+//    return ret == nil ?@"https://avatars2.githubusercontent.com/u/6100695?v=3&s=460" :ret;
+}
 @end

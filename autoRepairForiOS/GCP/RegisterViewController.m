@@ -50,6 +50,18 @@
         return;
     }
     
+    if(self.pwdInput.text.length > 8)
+    {
+        [PubllicMaskViewHelper showTipViewWith:@"密码不能超过八位" inSuperView:self.view  withDuration:1];
+        return;
+    }
+    
+    if(self.confirmPwdInput.text.length > 8)
+    {
+        [PubllicMaskViewHelper showTipViewWith:@"确认密码不能超过八位" inSuperView:self.view  withDuration:1];
+        return;
+    }
+    
     if(self.confirmPwdInput.text.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"确认密码不能为空" inSuperView:self.view  withDuration:1];

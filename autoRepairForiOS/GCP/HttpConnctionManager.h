@@ -139,4 +139,9 @@ typedef void (^FailBlock)(NSError *error);
 - (void)queryAllRepair:(NSString *)owner
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed;
+
+- (void)uploadBOSFile:(NSString *)path
+         withFileName:(NSString *)fileName
+    successedBlock:(SuccessedBlock)success
+       failedBolck:(FailedBlock)failed;
 @end

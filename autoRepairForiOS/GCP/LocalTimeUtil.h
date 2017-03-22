@@ -14,6 +14,8 @@
 
 + (NSString *)getCurrentTime;
 
++ (NSString *)getCurrentTime2;
+
 
 + (BOOL)isToday:(NSString *)time;
 

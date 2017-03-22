@@ -2,6 +2,8 @@
 
 #import "HttpConnctionManager.h"
 #import "JPUSHService.h"
+#import <BaiduBCEBOS/BaiduBCEBOS.h>
+#import <BaiduBCEBasic/BaiduBCEBasic.h>
 @implementation HttpConnctionManager
 
 - (id)init
@@ -441,4 +443,55 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
     
 }
 
+- (void)uploadBOSFile:(NSString *)path
+         withFileName:(NSString *)fileName
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed
+{
+    NSString* ak = @"fd1a99ecacc646378349c9bf18ca63cf";
+    NSString* sk = @"704ec5d754d1433ca6317ec09e263cd4";
+    NSString* host = @"http://bj.bcebos.com";
+    NSString* bucket = @"autorepaier";
+    
+    // step1: create a BOS client
+    BCECredentials* credentials = [[BCECredentials alloc] init];
+    credentials.accessKey = ak;
+    credentials.secretKey = sk;
+    
+    BOSClientConfiguration* configuration = [[BOSClientConfiguration alloc] init];
+    configuration.endpoint = host;
+    configuration.credentials = credentials;
+    
+    BOSClient* client = [[BOSClient alloc] initWithConfiguration:configuration];
+    
+    // step2: prepare data
+    BOSObjectContent* content = [[BOSObjectContent alloc] init];
+    content.objectData.data = [NSData dataWithContentsOfFile:path];
+    
+    // step3: upload
+    BOSPutObjectRequest* request = [[BOSPutObjectRequest alloc] init];
+    request.bucket = bucket;
+    request.key = fileName;
+    request.objectContent = content;
+    
+    __block BOSPutObjectResponse* response = nil;
+    BCETask* task = [client putObject: request];
+    task.then(^(BCEOutput* output) {
+        if (output.progress) {
+            NSLog(@"put object progress is %@", output.progress);
+        }
+        
+        if (output.response) {
+            response = (BOSPutObjectResponse*)output.response;
+            NSLog(@"put object success!");
+        }
+        
+        if (output.error) {
+            NSLog(@"put object failure");
+        }
+    });
+    [task waitUtilFinished];
+    
+    
+    }
 @end

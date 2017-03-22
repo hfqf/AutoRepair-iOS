@@ -5,7 +5,7 @@
 	<key>dbName</key>
 	<string>local.db</string>
 	<key>dbVersion</key>
-	<integer>3</integer>
+	<integer>4</integer>
 	<key>dbTables</key>
 	<array>
 		<dict>

@@ -9,7 +9,7 @@
 #import "SettingViewController.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import "SpeSqliteUpdateManager.h"
-@interface SettingViewController()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
+@interface SettingViewController()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UIWebView *web;
 }
@@ -29,7 +29,9 @@
         [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         
-        web= [[UIWebView alloc]initWithFrame:CGRectMake(0, 40, MAIN_WIDTH,150)];
+        web= [[UIWebView alloc]initWithFrame:CGRectMake(0,40, MAIN_WIDTH,150)];
+        [web setBackgroundColor:[UIColor clearColor]];
+        [web.scrollView setBackgroundColor:[UIColor clearColor]];
         [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://autorepairhelper.duapp.com/noticeboard/ios"]]];
         web.scrollView.scrollEnabled = NO;
     }
@@ -40,12 +42,53 @@
 {
     [super viewDidLoad];
     backBtn.hidden = YES;
-    [title setText:@"公告"];
+    [title setText:@"我的"];
 }
+
+- (void)createHeadView
+{
+    UIView *bg = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, 200)];
+    [bg setBackgroundColor:UIColorFromRGB(0xE7D5A2)];
+    ClassIconImageView *head = [[ClassIconImageView alloc]initWithFrame:CGRectMake((MAIN_WIDTH-80)/2, 20, 80, 80)];
+    head.userInteractionEnabled = YES;
+    [head setNewImage:[LoginUserUtil headUrl] WithSpeWith:5 withDefaultImg:@"icon"];
+    [bg addSubview:head];
+    self.tableView.tableHeaderView = bg;
+    
+    UITapGestureRecognizer *updateHeadGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(updateHead)];
+    [head addGestureRecognizer:updateHeadGest];
+    
+    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(head.frame)+20, MAIN_WIDTH, 20)];
+    [name setTextAlignment:NSTextAlignmentCenter];
+    [name setTextColor:[UIColor whiteColor]];
+    [name setFont:[UIFont boldSystemFontOfSize:20]];
+    [name setBackgroundColor:[UIColor clearColor]];
+    [name setText:[LoginUserUtil userName]];
+    [bg addSubview:name];
+    
+    
+    UILabel *shopname = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(name.frame)+20, MAIN_WIDTH, 20)];
+    [shopname setTextAlignment:NSTextAlignmentCenter];
+    [shopname setTextColor:[UIColor whiteColor]];
+    [shopname setFont:[UIFont systemFontOfSize:14]];
+    [shopname setBackgroundColor:[UIColor clearColor]];
+    [shopname setText:[LoginUserUtil shopName]];
+    [bg addSubview:shopname];
+    
+}
+
+- (void)updateHead
+{
+    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择来源" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"图库", nil];
+    [act showInView:self.view];
+}
+
 
 
 - (void)requestData:(BOOL)isRefresh
 {
+    
+    [self createHeadView];
     self.m_arrData = @[
                        @"最新公告",
                        @"请开发者喝杯咖啡",
@@ -78,7 +121,7 @@
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
-    
+    [cell setBackgroundColor:UIColorFromRGB(0xFAFAFA)];
    
     
 
@@ -92,8 +135,8 @@
         
      
         [cell addSubview:web];
-        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 199.5, MAIN_WIDTH, 0.5)];
-        [sep setBackgroundColor:KEY_COMMON_CORLOR];
+        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(10, 199.5, MAIN_WIDTH-20, 0.5)];
+        [sep setBackgroundColor:UIColorFromRGB(0xdcdcdc)];
         [cell addSubview:sep];
     }else if (indexPath.row == 1)
     {
@@ -118,8 +161,8 @@
         [tip setText:@""];
         [cell addSubview:tip];
         
-        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 119.5, MAIN_WIDTH, 0.5)];
-        [sep setBackgroundColor:KEY_COMMON_CORLOR];
+        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(10, 119.5, MAIN_WIDTH-20, 0.5)];
+        [sep setBackgroundColor:UIColorFromRGB(0xdcdcdc)];
         [cell addSubview:sep];
     }
     else
@@ -130,8 +173,8 @@
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.row]];
         [cell addSubview:_tit];
         
-        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 79.5, MAIN_WIDTH, 0.5)];
-        [sep setBackgroundColor:KEY_COMMON_CORLOR];
+        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(10, 79.5, MAIN_WIDTH-20, 0.5)];
+        [sep setBackgroundColor:UIColorFromRGB(0xdcdcdc)];
         [cell addSubview:sep];
     }
     return cell;
@@ -217,6 +260,44 @@
             break;
     }
     [PubllicMaskViewHelper showTipViewWith:msg inSuperView:self.view  withDuration:1];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        [LocalImageHelper selectPhotoFromCamera:self];
+    }else if (buttonIndex == 1)
+    {
+        [LocalImageHelper selectPhotoFromLibray:self];
+    }
+    else
+    {
+        
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void) imagePickerController: (UIImagePickerController *) picker
+ didFinishPickingMediaWithInfo: (NSDictionary *) info
+{
+    UIImage *image = [info objectForKey: UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:NO completion:NULL];
+    NSString *path = [LocalImageHelper saveImage:image];
+    [HTTP_MANAGER uploadBOSFile:path
+                   withFileName:[LocalTimeUtil getCurrentTime2]
+                 successedBlock:^(NSDictionary *succeedResult) {
+        
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+        
+    }];
+    
 }
 
 

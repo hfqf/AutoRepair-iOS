@@ -34,6 +34,18 @@
     return strDate;
 }
 
++ (NSString *)getCurrentTime2
+{
+    NSDate *dateToDay = [NSDate date];//将获得当前时间
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyyMMddHHmmss"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    [df setLocale:locale];
+    NSString *strDate = [df stringFromDate:dateToDay];
+    return strDate;
+}
+
+
 + (BOOL)isToday:(NSString *)time
 {
     NSString * todatTime = [self getCurrentTime];

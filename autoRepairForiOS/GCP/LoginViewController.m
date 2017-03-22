@@ -426,6 +426,8 @@ return jsonString;
                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"tel"] forKey:KEY_AUTO_TEL];
                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"viplevel"] forKey:KEY_AUTO_LEVEL];
                                [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"devicemodifyed"] forKey:KEY_AUTO_UDID_MODIFYED];
+                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"head"] forKey:KEY_AUTO_HEAD];
+                               [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"shopname"] forKey:KEY_AUTO_SHOP_NAME];
                               
                               ///因为版本升级原因,需要同步服务器的数据，本地的数据库记录需要删除掉
                               BOOL isNeedAsync = [[succeedResult[@"ret"]stringWithFilted:@"needasnc"]integerValue] == 1;

@@ -215,12 +215,14 @@
     new.m_carType = m_carTypeInput.text;
     new.m_idFromServer = self.m_currentData.m_idFromServer;
 
-    
+    [self showWaitingView];
     if(self.m_currentData)
     {
         
         [HTTP_MANAGER updateContact:new
                   successedBlock:^(NSDictionary *succeedResult) {
+                      
+                      [self removeWaitingView];
                       if([succeedResult[@"code"]integerValue] == 1)
                       {
                         if([DB_Shared  updateCustom:@{
@@ -240,7 +242,7 @@
                           [PubllicMaskViewHelper showTipViewWith:@"操作失败" inSuperView:self.view  withDuration:1];
                       }
                   } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                      
+                      [self removeWaitingView];
                       [PubllicMaskViewHelper showTipViewWith:@"操作失败" inSuperView:self.view  withDuration:1];
                       
                   }];
@@ -250,6 +252,7 @@
        
         [HTTP_MANAGER addContact:new
                   successedBlock:^(NSDictionary *succeedResult) {
+                      [self removeWaitingView];
                     if([succeedResult[@"code"]integerValue] == 1)
                     {
                         
@@ -270,7 +273,7 @@
                         [PubllicMaskViewHelper showTipViewWith:@"操作失败" inSuperView:self.view  withDuration:1];
                     }
         } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-           
+           [self removeWaitingView];
             [PubllicMaskViewHelper showTipViewWith:@"操作失败" inSuperView:self.view  withDuration:1];
             
         }];

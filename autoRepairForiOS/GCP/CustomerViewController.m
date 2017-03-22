@@ -11,7 +11,10 @@
 #import "CustomerTableViewCell.h"
 #import "AddRepairHistoryViewController.h"
 #import "NSArray+SortByFisrtChar.h"
-@interface CustomerViewController()<UITableViewDataSource,UITableViewDelegate>
+@interface CustomerViewController()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+{
+    UISearchBar *m_searchBar;
+}
 @property (nonatomic,strong) NSArray *m_arrIndexTitle;
 
 @end
@@ -28,6 +31,13 @@
         [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        
+        
+        m_searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, HEIGHT_NAVIGATION)];
+        [m_searchBar setPlaceholder:@"可输入客户号码,车牌号"];
+        [m_searchBar setDelegate:self];
+        m_searchBar.showsCancelButton = YES;
+        self.tableView.tableHeaderView = m_searchBar;
     }
     return self;
 }
@@ -47,8 +57,39 @@
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         //登录完后的数据回来后再次刷新
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(forceRefresh) name:KEY_REPAIRS_SYNCED object:nil];
+        
+        m_searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, HEIGHT_NAVIGATION)];
+        [m_searchBar setPlaceholder:@"可输入客户号码,车牌号"];
+        [m_searchBar setDelegate:self];
+        m_searchBar.showsCancelButton = YES;
+        self.tableView.tableHeaderView = m_searchBar;
     }
     return self;
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self requestData:YES];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    [self requestData:YES];
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    return YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    [self requestData:YES];
 }
 
 

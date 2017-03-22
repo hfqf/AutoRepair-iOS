@@ -80,6 +80,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     DB_Shared;
+    [LocalImageHelper createUploadFileInDocument];
     [self umengTrack];
     [self addSMSCode];
     [self addJPush:launchOptions];
