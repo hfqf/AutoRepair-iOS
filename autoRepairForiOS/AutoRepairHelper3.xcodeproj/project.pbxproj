@@ -30,6 +30,7 @@
 		7D0DEB541DE342DB0032FBBC /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0DEB531DE342DB0032FBBC /* JavaScriptCore.framework */; };
 		7D1D62161AF311CF00252B07 /* CustomerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D62151AF311CF00252B07 /* CustomerTableViewCell.m */; };
 		7D2904FC1AF134FF00039CEF /* AddRepairHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2904FB1AF134FF00039CEF /* AddRepairHistoryViewController.m */; };
+		7D3779401E87903600560B70 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D37793F1E87903600560B70 /* AssetsLibrary.framework */; };
 		7D426DAF1A62AA120004F3F6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DAE1A62AA120004F3F6 /* main.m */; };
 		7D426DB21A62AA120004F3F6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DB11A62AA120004F3F6 /* AppDelegate.m */; };
 		7D426DB81A62AA120004F3F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D426DB61A62AA120004F3F6 /* Main.storyboard */; };
@@ -125,6 +126,38 @@
 		7D8D30171E7AC76C0071DC90 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D8D30161E7AC76C0071DC90 /* 4.png */; };
 		7D8D30441E7C46430071DC90 /* requirements.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D8D30431E7C46430071DC90 /* requirements.txt */; };
 		7DAE144B1DDE05B00082C0AB /* HttpConnctionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE144A1DDE05B00082C0AB /* HttpConnctionManager.m */; };
+		7DB082B31E82A7F100709BDD /* GlobalData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB0828F1E82A7F100709BDD /* GlobalData.cpp */; };
+		7DB082B41E82A7F100709BDD /* UIImageCVMatConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082921E82A7F100709BDD /* UIImageCVMatConverter.mm */; };
+		7DB082B51E82A7F100709BDD /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082941E82A7F100709BDD /* ViewController.mm */; };
+		7DB082E61E82A94B00709BDD /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB082B61E82A94B00709BDD /* opencv2.framework */; };
+		7DB082E71E82A94B00709BDD /* chars_identify.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082B91E82A94B00709BDD /* chars_identify.cpp */; };
+		7DB082E81E82A94B00709BDD /* chars_recognise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082BA1E82A94B00709BDD /* chars_recognise.cpp */; };
+		7DB082E91E82A94B00709BDD /* chars_segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082BB1E82A94B00709BDD /* chars_segment.cpp */; };
+		7DB082EA1E82A94B00709BDD /* core_func.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082BC1E82A94B00709BDD /* core_func.cpp */; };
+		7DB082EB1E82A94B00709BDD /* feature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082BD1E82A94B00709BDD /* feature.cpp */; };
+		7DB082EC1E82A94B00709BDD /* params.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082BE1E82A94B00709BDD /* params.cpp */; };
+		7DB082EE1E82A94B00709BDD /* plate_detect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082C01E82A94B00709BDD /* plate_detect.cpp */; };
+		7DB082EF1E82A94B00709BDD /* plate_judge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082C11E82A94B00709BDD /* plate_judge.cpp */; };
+		7DB082F01E82A94B00709BDD /* plate_locate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082C21E82A94B00709BDD /* plate_locate.cpp */; };
+		7DB082F11E82A94B00709BDD /* plate_recognize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082C31E82A94B00709BDD /* plate_recognize.cpp */; };
+		7DB082F21E82A94B00709BDD /* deface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082C51E82A94B00709BDD /* deface.cpp */; };
+		7DB082F31E82A94B00709BDD /* gdts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082C61E82A94B00709BDD /* gdts.cpp */; };
+		7DB082F41E82A94B00709BDD /* mc_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082C71E82A94B00709BDD /* mc_data.cpp */; };
+		7DB082F51E82A94B00709BDD /* ann_train.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082C91E82A94B00709BDD /* ann_train.cpp */; };
+		7DB082F61E82A94B00709BDD /* svm_train.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082CA1E82A94B00709BDD /* svm_train.cpp */; };
+		7DB082F71E82A94B00709BDD /* train.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082CB1E82A94B00709BDD /* train.cpp */; };
+		7DB082F81E82A94B00709BDD /* kv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082CD1E82A94B00709BDD /* kv.cpp */; };
+		7DB082F91E82A94B00709BDD /* program_options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082CE1E82A94B00709BDD /* program_options.cpp */; };
+		7DB082FA1E82A94B00709BDD /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082CF1E82A94B00709BDD /* util.cpp */; };
+		7DB082FB1E82A94B00709BDD /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DB082D01E82A94B00709BDD /* SVProgressHUD.bundle */; };
+		7DB082FC1E82A94B00709BDD /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082D21E82A94B00709BDD /* SVProgressHUD.m */; };
+		7DB082FD1E82A94B00709BDD /* helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082D51E82A94B00709BDD /* helper.cpp */; };
+		7DB082FE1E82A94B00709BDD /* lbp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082D71E82A94B00709BDD /* lbp.cpp */; };
+		7DB082FF1E82A94B00709BDD /* mser2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082DA1E82A94B00709BDD /* mser2.cpp */; };
+		7DB083001E82A94B00709BDD /* erfilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082DD1E82A94B00709BDD /* erfilter.cpp */; };
+		7DB083011E82A94B00709BDD /* AFPL-license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7DB082E01E82A94B00709BDD /* AFPL-license.txt */; };
+		7DB083021E82A94B00709BDD /* xmlParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082E11E82A94B00709BDD /* xmlParser.cpp */; };
+		7DB083031E82A94B00709BDD /* VideoProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB082E51E82A94B00709BDD /* VideoProcess.m */; };
 		7DB338C91E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB338C81E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m */; };
 		7DCBC9791DC2EF09006BA2C8 /* ContactDeverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCBC9781DC2EF09006BA2C8 /* ContactDeverViewController.m */; };
 		7DCBC97D1DC2F264006BA2C8 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCBC97C1DC2F264006BA2C8 /* UMMobClick.framework */; };
@@ -183,6 +216,7 @@
 		7D1D62151AF311CF00252B07 /* CustomerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerTableViewCell.m; sourceTree = "<group>"; };
 		7D2904FA1AF134FF00039CEF /* AddRepairHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRepairHistoryViewController.h; sourceTree = "<group>"; };
 		7D2904FB1AF134FF00039CEF /* AddRepairHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRepairHistoryViewController.m; sourceTree = "<group>"; };
+		7D37793F1E87903600560B70 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		7D426DA91A62AA120004F3F6 /* AutoRepairHelper3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoRepairHelper3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D426DAD1A62AA120004F3F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D426DAE1A62AA120004F3F6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -361,6 +395,48 @@
 		7D8D30431E7C46430071DC90 /* requirements.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = requirements.txt; sourceTree = "<group>"; };
 		7DAE14491DDE05B00082C0AB /* HttpConnctionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConnctionManager.h; sourceTree = "<group>"; };
 		7DAE144A1DDE05B00082C0AB /* HttpConnctionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpConnctionManager.m; sourceTree = "<group>"; };
+		7DB0828F1E82A7F100709BDD /* GlobalData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlobalData.cpp; sourceTree = "<group>"; };
+		7DB082901E82A7F100709BDD /* GlobalData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GlobalData.hpp; sourceTree = "<group>"; };
+		7DB082911E82A7F100709BDD /* UIImageCVMatConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageCVMatConverter.h; sourceTree = "<group>"; };
+		7DB082921E82A7F100709BDD /* UIImageCVMatConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UIImageCVMatConverter.mm; sourceTree = "<group>"; };
+		7DB082931E82A7F100709BDD /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7DB082941E82A7F100709BDD /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		7DB082B61E82A94B00709BDD /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		7DB082B91E82A94B00709BDD /* chars_identify.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chars_identify.cpp; sourceTree = "<group>"; };
+		7DB082BA1E82A94B00709BDD /* chars_recognise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chars_recognise.cpp; sourceTree = "<group>"; };
+		7DB082BB1E82A94B00709BDD /* chars_segment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chars_segment.cpp; sourceTree = "<group>"; };
+		7DB082BC1E82A94B00709BDD /* core_func.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = core_func.cpp; sourceTree = "<group>"; };
+		7DB082BD1E82A94B00709BDD /* feature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = feature.cpp; sourceTree = "<group>"; };
+		7DB082BE1E82A94B00709BDD /* params.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = params.cpp; sourceTree = "<group>"; };
+		7DB082C01E82A94B00709BDD /* plate_detect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plate_detect.cpp; sourceTree = "<group>"; };
+		7DB082C11E82A94B00709BDD /* plate_judge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plate_judge.cpp; sourceTree = "<group>"; };
+		7DB082C21E82A94B00709BDD /* plate_locate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plate_locate.cpp; sourceTree = "<group>"; };
+		7DB082C31E82A94B00709BDD /* plate_recognize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plate_recognize.cpp; sourceTree = "<group>"; };
+		7DB082C51E82A94B00709BDD /* deface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = deface.cpp; sourceTree = "<group>"; };
+		7DB082C61E82A94B00709BDD /* gdts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gdts.cpp; sourceTree = "<group>"; };
+		7DB082C71E82A94B00709BDD /* mc_data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mc_data.cpp; sourceTree = "<group>"; };
+		7DB082C91E82A94B00709BDD /* ann_train.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ann_train.cpp; sourceTree = "<group>"; };
+		7DB082CA1E82A94B00709BDD /* svm_train.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = svm_train.cpp; sourceTree = "<group>"; };
+		7DB082CB1E82A94B00709BDD /* train.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = train.cpp; sourceTree = "<group>"; };
+		7DB082CD1E82A94B00709BDD /* kv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kv.cpp; sourceTree = "<group>"; };
+		7DB082CE1E82A94B00709BDD /* program_options.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = program_options.cpp; sourceTree = "<group>"; };
+		7DB082CF1E82A94B00709BDD /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		7DB082D01E82A94B00709BDD /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		7DB082D11E82A94B00709BDD /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		7DB082D21E82A94B00709BDD /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		7DB082D51E82A94B00709BDD /* helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = helper.cpp; sourceTree = "<group>"; };
+		7DB082D61E82A94B00709BDD /* helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = helper.hpp; sourceTree = "<group>"; };
+		7DB082D71E82A94B00709BDD /* lbp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lbp.cpp; sourceTree = "<group>"; };
+		7DB082D81E82A94B00709BDD /* lbp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lbp.hpp; sourceTree = "<group>"; };
+		7DB082DA1E82A94B00709BDD /* mser2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mser2.cpp; sourceTree = "<group>"; };
+		7DB082DB1E82A94B00709BDD /* mser2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mser2.hpp; sourceTree = "<group>"; };
+		7DB082DD1E82A94B00709BDD /* erfilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = erfilter.cpp; sourceTree = "<group>"; };
+		7DB082DE1E82A94B00709BDD /* erfilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = erfilter.hpp; sourceTree = "<group>"; };
+		7DB082E01E82A94B00709BDD /* AFPL-license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "AFPL-license.txt"; sourceTree = "<group>"; };
+		7DB082E11E82A94B00709BDD /* xmlParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xmlParser.cpp; sourceTree = "<group>"; };
+		7DB082E21E82A94B00709BDD /* xmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xmlParser.h; sourceTree = "<group>"; };
+		7DB082E41E82A94B00709BDD /* VideoProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoProcess.h; sourceTree = "<group>"; };
+		7DB082E51E82A94B00709BDD /* VideoProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoProcess.m; sourceTree = "<group>"; };
 		7DB338C71E3F8C2C002DAE79 /* NSDictionary+ValueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ValueCheck.h"; sourceTree = "<group>"; };
 		7DB338C81E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ValueCheck.m"; sourceTree = "<group>"; };
 		7DCBC9771DC2EF09006BA2C8 /* ContactDeverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDeverViewController.h; sourceTree = "<group>"; };
@@ -394,11 +470,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D3779401E87903600560B70 /* AssetsLibrary.framework in Frameworks */,
 				7D0DEB541DE342DB0032FBBC /* JavaScriptCore.framework in Frameworks */,
 				7D448F5B1E247D55001536F4 /* UserNotifications.framework in Frameworks */,
 				7DF80D401E11FBFC0067FD49 /* libresolv.tbd in Frameworks */,
 				7D0DEB521DE342D00032FBBC /* MessageUI.framework in Frameworks */,
 				7D0DEB1D1DE3424C0032FBBC /* SMS_SDK.framework in Frameworks */,
+				7DB082E61E82A94B00709BDD /* opencv2.framework in Frameworks */,
 				7DCBC97F1DC2F2B8006BA2C8 /* CoreTelephony.framework in Frameworks */,
 				7D426F1A1A62B2750004F3F6 /* CoreFoundation.framework in Frameworks */,
 				7D8D30101E799A2C0071DC90 /* BaiduBCEBOS.framework in Frameworks */,
@@ -505,6 +583,13 @@
 		7D426DA01A62AA120004F3F6 = {
 			isa = PBXGroup;
 			children = (
+				7DB082B61E82A94B00709BDD /* opencv2.framework */,
+				7DB082B71E82A94B00709BDD /* src */,
+				7DB082D01E82A94B00709BDD /* SVProgressHUD.bundle */,
+				7DB082D11E82A94B00709BDD /* SVProgressHUD.h */,
+				7DB082D21E82A94B00709BDD /* SVProgressHUD.m */,
+				7DB082D31E82A94B00709BDD /* thirdparty */,
+				7DB082E31E82A94B00709BDD /* VideoCamera */,
 				7D448F561E246B1F001536F4 /* AutoRepairHelper.entitlements */,
 				7DF80D3F1E11FBFC0067FD49 /* libresolv.tbd */,
 				7DF80D391E11FACB0067FD49 /* jpush */,
@@ -608,6 +693,7 @@
 				7D0DEB0E1DE18A200032FBBC /* RegisterViewController.xib */,
 				7D426DE51A62AB440004F3F6 /* MainTabBarViewController.h */,
 				7D426DE61A62AB440004F3F6 /* MainTabBarViewController.m */,
+				7DB0825D1E82A6FB00709BDD /* EasyPR */,
 				7D458AED1ADBBF4300BCACAB /* Tab1 */,
 				7D458AEE1ADBBF4F00BCACAB /* Tab2 */,
 				7D458AEF1ADBBF5600BCACAB /* Tab3 */,
@@ -782,6 +868,7 @@
 		7D448F591E247D54001536F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D37793F1E87903600560B70 /* AssetsLibrary.framework */,
 				7D448F5A1E247D55001536F4 /* UserNotifications.framework */,
 			);
 			name = Frameworks;
@@ -925,6 +1012,144 @@
 			path = Library/SDWebImage;
 			sourceTree = "<group>";
 		};
+		7DB0825D1E82A6FB00709BDD /* EasyPR */ = {
+			isa = PBXGroup;
+			children = (
+				7DB0828E1E82A7F100709BDD /* ViewController */,
+			);
+			path = EasyPR;
+			sourceTree = "<group>";
+		};
+		7DB0828E1E82A7F100709BDD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7DB0828F1E82A7F100709BDD /* GlobalData.cpp */,
+				7DB082901E82A7F100709BDD /* GlobalData.hpp */,
+				7DB082911E82A7F100709BDD /* UIImageCVMatConverter.h */,
+				7DB082921E82A7F100709BDD /* UIImageCVMatConverter.mm */,
+				7DB082931E82A7F100709BDD /* ViewController.h */,
+				7DB082941E82A7F100709BDD /* ViewController.mm */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7DB082B71E82A94B00709BDD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082B81E82A94B00709BDD /* core */,
+				7DB082C41E82A94B00709BDD /* preprocess */,
+				7DB082C81E82A94B00709BDD /* train */,
+				7DB082CC1E82A94B00709BDD /* util */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		7DB082B81E82A94B00709BDD /* core */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082B91E82A94B00709BDD /* chars_identify.cpp */,
+				7DB082BA1E82A94B00709BDD /* chars_recognise.cpp */,
+				7DB082BB1E82A94B00709BDD /* chars_segment.cpp */,
+				7DB082BC1E82A94B00709BDD /* core_func.cpp */,
+				7DB082BD1E82A94B00709BDD /* feature.cpp */,
+				7DB082BE1E82A94B00709BDD /* params.cpp */,
+				7DB082C01E82A94B00709BDD /* plate_detect.cpp */,
+				7DB082C11E82A94B00709BDD /* plate_judge.cpp */,
+				7DB082C21E82A94B00709BDD /* plate_locate.cpp */,
+				7DB082C31E82A94B00709BDD /* plate_recognize.cpp */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		7DB082C41E82A94B00709BDD /* preprocess */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082C51E82A94B00709BDD /* deface.cpp */,
+				7DB082C61E82A94B00709BDD /* gdts.cpp */,
+				7DB082C71E82A94B00709BDD /* mc_data.cpp */,
+			);
+			path = preprocess;
+			sourceTree = "<group>";
+		};
+		7DB082C81E82A94B00709BDD /* train */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082C91E82A94B00709BDD /* ann_train.cpp */,
+				7DB082CA1E82A94B00709BDD /* svm_train.cpp */,
+				7DB082CB1E82A94B00709BDD /* train.cpp */,
+			);
+			path = train;
+			sourceTree = "<group>";
+		};
+		7DB082CC1E82A94B00709BDD /* util */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082CD1E82A94B00709BDD /* kv.cpp */,
+				7DB082CE1E82A94B00709BDD /* program_options.cpp */,
+				7DB082CF1E82A94B00709BDD /* util.cpp */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		7DB082D31E82A94B00709BDD /* thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082D41E82A94B00709BDD /* LBP */,
+				7DB082D91E82A94B00709BDD /* mser */,
+				7DB082DC1E82A94B00709BDD /* textDetect */,
+				7DB082DF1E82A94B00709BDD /* xmlParser */,
+			);
+			path = thirdparty;
+			sourceTree = "<group>";
+		};
+		7DB082D41E82A94B00709BDD /* LBP */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082D51E82A94B00709BDD /* helper.cpp */,
+				7DB082D61E82A94B00709BDD /* helper.hpp */,
+				7DB082D71E82A94B00709BDD /* lbp.cpp */,
+				7DB082D81E82A94B00709BDD /* lbp.hpp */,
+			);
+			path = LBP;
+			sourceTree = "<group>";
+		};
+		7DB082D91E82A94B00709BDD /* mser */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082DA1E82A94B00709BDD /* mser2.cpp */,
+				7DB082DB1E82A94B00709BDD /* mser2.hpp */,
+			);
+			path = mser;
+			sourceTree = "<group>";
+		};
+		7DB082DC1E82A94B00709BDD /* textDetect */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082DD1E82A94B00709BDD /* erfilter.cpp */,
+				7DB082DE1E82A94B00709BDD /* erfilter.hpp */,
+			);
+			path = textDetect;
+			sourceTree = "<group>";
+		};
+		7DB082DF1E82A94B00709BDD /* xmlParser */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082E01E82A94B00709BDD /* AFPL-license.txt */,
+				7DB082E11E82A94B00709BDD /* xmlParser.cpp */,
+				7DB082E21E82A94B00709BDD /* xmlParser.h */,
+			);
+			path = xmlParser;
+			sourceTree = "<group>";
+		};
+		7DB082E31E82A94B00709BDD /* VideoCamera */ = {
+			isa = PBXGroup;
+			children = (
+				7DB082E41E82A94B00709BDD /* VideoProcess.h */,
+				7DB082E51E82A94B00709BDD /* VideoProcess.m */,
+			);
+			path = VideoCamera;
+			sourceTree = "<group>";
+		};
 		7DF80D391E11FACB0067FD49 /* jpush */ = {
 			isa = PBXGroup;
 			children = (
@@ -1007,6 +1232,8 @@
 				7D426DBA1A62AA120004F3F6 /* Images.xcassets in Resources */,
 				7D426EBF1A62AE770004F3F6 /* MJRefresh.bundle in Resources */,
 				7D8D30171E7AC76C0071DC90 /* 4.png in Resources */,
+				7DB083011E82A94B00709BDD /* AFPL-license.txt in Resources */,
+				7DB082FB1E82A94B00709BDD /* SVProgressHUD.bundle in Resources */,
 				7D458AEB1ADBBE0B00BCACAB /* SpeSqlSetting.plist in Resources */,
 				7D8D30441E7C46430071DC90 /* requirements.txt in Resources */,
 				7D0DEB101DE18A200032FBBC /* RegisterViewController.xib in Resources */,
@@ -1028,6 +1255,7 @@
 				7D432BEF1AF21D9A003F952B /* AddNewCustomerViewController.m in Sources */,
 				7D426EB71A62AE770004F3F6 /* AFURLSessionManager.m in Sources */,
 				7D426EB41A62AE770004F3F6 /* AFURLConnectionOperation.m in Sources */,
+				7DB082F51E82A94B00709BDD /* ann_train.cpp in Sources */,
 				7D426F331A62B9370004F3F6 /* ConverUtil.m in Sources */,
 				7D458AEA1ADBBE0B00BCACAB /* SpeSqliteUpdateManager.m in Sources */,
 				7D426DFE1A62ABCA0004F3F6 /* LoginUserUtil.m in Sources */,
@@ -1036,12 +1264,18 @@
 				7D8D300B1E798E3E0071DC90 /* ClassIconImageView.m in Sources */,
 				7D1D62161AF311CF00252B07 /* CustomerTableViewCell.m in Sources */,
 				7D426EC11A62AE770004F3F6 /* MJRefreshConst.m in Sources */,
+				7DB082FC1E82A94B00709BDD /* SVProgressHUD.m in Sources */,
 				7D0DEB431DE3427F0032FBBC /* SMSSDKUI.m in Sources */,
+				7DB082B41E82A7F100709BDD /* UIImageCVMatConverter.mm in Sources */,
 				7D426EBD1A62AE770004F3F6 /* JSONKit.m in Sources */,
+				7DB082F11E82A94B00709BDD /* plate_recognize.cpp in Sources */,
 				7D8D2FF71E7982240071DC90 /* SDWebImageDownloader.m in Sources */,
 				7D0DEB401DE3427F0032FBBC /* SMS_HYZBadgeView.m in Sources */,
+				7DB082F61E82A94B00709BDD /* svm_train.cpp in Sources */,
+				7DB082EC1E82A94B00709BDD /* params.cpp in Sources */,
 				7DFC90271AEFBE9A00B4EB59 /* SpeRefreshAndLoadViewController.m in Sources */,
 				7D8D2FF81E7982240071DC90 /* SDWebImageDownloaderOperation.m in Sources */,
+				7DB083021E82A94B00709BDD /* xmlParser.cpp in Sources */,
 				7D0DEB411DE3427F0032FBBC /* SMS_MBProgressHUD.m in Sources */,
 				7DFC903A1AEFCD1F00B4EB59 /* SettingViewController.m in Sources */,
 				7DFC90371AEFC9A900B4EB59 /* SearchViewController.m in Sources */,
@@ -1058,22 +1292,33 @@
 				7D426DE71A62AB440004F3F6 /* MainTabBarViewController.m in Sources */,
 				7D426DFF1A62ABCA0004F3F6 /* PubllicMaskViewHelper.m in Sources */,
 				7D426E001A62ABCA0004F3F6 /* FontSizeUtil.m in Sources */,
+				7DB082EE1E82A94B00709BDD /* plate_detect.cpp in Sources */,
 				7D8D2FFC1E7982240071DC90 /* UIImage+GIF.m in Sources */,
+				7DB082F31E82A94B00709BDD /* gdts.cpp in Sources */,
 				7D426DDF1A62AACC0004F3F6 /* TabbarBaseViewController.m in Sources */,
 				7D426EB31A62AE770004F3F6 /* AFSecurityPolicy.m in Sources */,
+				7DB082EA1E82A94B00709BDD /* core_func.cpp in Sources */,
 				7D458AE71ADBBE0B00BCACAB /* SqliteDataManager.m in Sources */,
 				7D426E041A62ABD30004F3F6 /* EGOImageView+SetImage.m in Sources */,
+				7DB082FE1E82A94B00709BDD /* lbp.cpp in Sources */,
 				7D0DEB461DE3427F0032FBBC /* RegViewController.m in Sources */,
+				7DB082F21E82A94B00709BDD /* deface.cpp in Sources */,
 				7D8D2FFA1E7982240071DC90 /* SDWebImagePrefetcher.m in Sources */,
 				7D8D30151E799F260071DC90 /* SectionsViewControllerFriends.m in Sources */,
 				7D8D2FC81E7982240071DC90 /* EGOImageView.m in Sources */,
+				7DB083001E82A94B00709BDD /* erfilter.cpp in Sources */,
 				7D0DEB4B1DE3427F0032FBBC /* SMSUIVerificationCodeViewController.m in Sources */,
 				7D426DE31A62AB020004F3F6 /* XTNavigationController.m in Sources */,
 				7D0DEB471DE3427F0032FBBC /* VerifyViewController.m in Sources */,
+				7DB082FD1E82A94B00709BDD /* helper.cpp in Sources */,
 				7DFC902A1AEFBEBA00B4EB59 /* SpeCommonTableView.m in Sources */,
+				7DB082E91E82A94B00709BDD /* chars_segment.cpp in Sources */,
 				7DCBC9791DC2EF09006BA2C8 /* ContactDeverViewController.m in Sources */,
 				7D0DEB451DE3427F0032FBBC /* InvitationViewControllerEx.m in Sources */,
 				7D426EBE1A62AE770004F3F6 /* MBProgressHUD.m in Sources */,
+				7DB082B31E82A7F100709BDD /* GlobalData.cpp in Sources */,
+				7DB082FA1E82A94B00709BDD /* util.cpp in Sources */,
+				7DB082F91E82A94B00709BDD /* program_options.cpp in Sources */,
 				7D426DB21A62AA120004F3F6 /* AppDelegate.m in Sources */,
 				7D426EB01A62AE770004F3F6 /* AFHTTPRequestOperationManager.m in Sources */,
 				7D426EDC1A62AE770004F3F6 /* Reachability.m in Sources */,
@@ -1081,9 +1326,13 @@
 				7D432BEB1AF2193E003F952B /* ADTContacterInfo.m in Sources */,
 				7D0DEB441DE3427F0032FBBC /* CustomCell.m in Sources */,
 				7D8D2FF61E7982240071DC90 /* SDWebImageDecoder.m in Sources */,
+				7DB082EB1E82A94B00709BDD /* feature.cpp in Sources */,
+				7DB082EF1E82A94B00709BDD /* plate_judge.cpp in Sources */,
 				7D426F2F1A62B8DF0004F3F6 /* GTMBase64.m in Sources */,
 				7D426EF31A62AE770004F3F6 /* UIProgressView+AFNetworking.m in Sources */,
+				7DB082F71E82A94B00709BDD /* train.cpp in Sources */,
 				7D426DDE1A62AACC0004F3F6 /* BaseViewController.m in Sources */,
+				7DB082F41E82A94B00709BDD /* mc_data.cpp in Sources */,
 				7D426F291A62B8C20004F3F6 /* DES3Util.m in Sources */,
 				7D8D2FC41E7982240071DC90 /* EGOCache.m in Sources */,
 				7D8D2FFF1E7982240071DC90 /* UIImageView+WebCache.m in Sources */,
@@ -1098,25 +1347,32 @@
 				7D426DFC1A62ABCA0004F3F6 /* ReachabilityObserver.m in Sources */,
 				7D8D2FF41E7982240071DC90 /* SDImageCache.m in Sources */,
 				7D0DEB0F1DE18A200032FBBC /* RegisterViewController.m in Sources */,
+				7DB082F01E82A94B00709BDD /* plate_locate.cpp in Sources */,
 				7D8D2FC71E7982240071DC90 /* EGOImageLoader.m in Sources */,
 				7D426F251A62B5F40004F3F6 /* TabbarCustomButton.m in Sources */,
 				7DDA54841AF4CDC700216905 /* RepairHistotyTableViewCell.m in Sources */,
+				7DB082E81E82A94B00709BDD /* chars_recognise.cpp in Sources */,
 				7D0DEB421DE3427F0032FBBC /* YJLocalCountryData.m in Sources */,
 				7D426EF01A62AE770004F3F6 /* UIAlertView+AFNetworking.m in Sources */,
 				7D426EF21A62AE770004F3F6 /* UIImageView+AFNetworking.m in Sources */,
 				7D426EB51A62AE770004F3F6 /* AFURLRequestSerialization.m in Sources */,
 				7D8D30001E7982240071DC90 /* UIView+WebCacheOperation.m in Sources */,
 				7D8D2FF31E7982240071DC90 /* NSData+ImageContentType.m in Sources */,
+				7DB083031E82A94B00709BDD /* VideoProcess.m in Sources */,
+				7DB082F81E82A94B00709BDD /* kv.cpp in Sources */,
+				7DB082FF1E82A94B00709BDD /* mser2.cpp in Sources */,
 				7DFC902D1AEFBEC700B4EB59 /* EmptyTipView.m in Sources */,
 				7D8D2FF91E7982240071DC90 /* SDWebImageManager.m in Sources */,
 				7D426EEF1A62AE770004F3F6 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				7D426EAF1A62AE770004F3F6 /* AFHTTPRequestOperation.m in Sources */,
+				7DB082B51E82A7F100709BDD /* ViewController.mm in Sources */,
 				7D426EEE1A62AE770004F3F6 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				7D426F1D1A62B4C00004F3F6 /* XXTEncrypt.m in Sources */,
 				7D426EF41A62AE770004F3F6 /* UIWebView+AFNetworking.m in Sources */,
 				7D426EB61A62AE770004F3F6 /* AFURLResponseSerialization.m in Sources */,
 				7D426E011A62ABCA0004F3F6 /* LocalImageHelper.m in Sources */,
 				7DFC90301AEFC05A00B4EB59 /* NewTipViewController.m in Sources */,
+				7DB082E71E82A94B00709BDD /* chars_identify.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,6 +1499,10 @@
 					"$(PROJECT_DIR)/GCP",
 				);
 				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper3-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include/",
+					"$(SRCROOT)/",
+				);
 				INFOPLIST_FILE = GCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1277,6 +1537,10 @@
 					"$(PROJECT_DIR)/GCP",
 				);
 				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper3-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include/",
+					"$(SRCROOT)/",
+				);
 				INFOPLIST_FILE = GCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
