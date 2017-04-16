@@ -9,5 +9,5 @@
 #import "SpeRefreshAndLoadViewController.h"
 
 @interface NewTipViewController : SpeRefreshAndLoadViewController
-
+- (void)addBtnClicked;
 @end

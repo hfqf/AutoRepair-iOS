@@ -100,4 +100,26 @@
     return dateString;
 }
 
++ (NSString *)getLocalTimeWith3:(NSDate *)date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"zh_CN"];
+    [dateFormatter setTimeZone:timeZone];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    return dateString;
+}
+
+
++ (BOOL)isValid2:(NSString *)beginTime endTime:(NSString *)endTime
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"zh_CN"];
+    [dateFormatter setTimeZone:timeZone];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *begin = [dateFormatter dateFromString:beginTime];
+    NSDate *end = [dateFormatter dateFromString:endTime];
+    NSTimeInterval secondsInterval= [end timeIntervalSinceDate:begin];
+    return secondsInterval > 0;
+}
 @end

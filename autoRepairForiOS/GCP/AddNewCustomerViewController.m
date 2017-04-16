@@ -13,147 +13,63 @@
 - (id)initWithContacer:(ADTContacterInfo *)info
 {
     self.m_currentData = info;
-    if(self = [super init])
-    {
-        
+    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO])
+        {
+            self.tableView.delegate = self;
+            self.tableView.dataSource = self;
+            [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+            [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+            [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:)name:UIKeyboardDidShowNotification object:nil];
+            //注册键盘消失通知；
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide:)name:UIKeyboardDidHideNotification object:nil];
+            
+        }
+    return self;
+}
+
+
+- (id)initWithCarcode:(NSString *)carcode
+{
+    self.m_carcode = carcode;
+    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO])
+     {
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:)name:UIKeyboardDidShowNotification object:nil];
+        //注册键盘消失通知；
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide:)name:UIKeyboardDidHideNotification object:nil];
     }
     return self;
 }
+
+- (void)requestData:(BOOL)isRefresh
+{
+    [self reloadDeals];
+}
+- (void)keyboardDidShow:(NSNotification *)aNotification
+{
+    NSDictionary *userInfo =[aNotification userInfo];
+    NSValue*aValue =[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect=[aValue CGRectValue];
+    int height =keyboardRect.size.height;
+    //    int width =keyboardRect.size.width;
+    [self.tableView setFrame:CGRectMake(0,self.tableView.frame.origin.y, self.tableView.frame.size.width, MAIN_HEIGHT-height-self.tableView.frame.origin.y)];
+}
+
+- (void)keyboardDidHide:(NSNotification*)aNotification
+
+{
+    [self.tableView setFrame:CGRectMake(0,self.tableView.frame.origin.y, self.tableView.frame.size.width, MAIN_HEIGHT-self.tableView.frame.origin.y)];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [title setText:self.m_currentData ?@"客户详情" : @"新增客户"];
-    m_bg = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame), MAIN_WIDTH, MAIN_HEIGHT-CGRectGetMaxY(navigationBG.frame))];
-    
-    
-    UILabel *tip1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 80, 20)];
-    [tip1 setBackgroundColor:[UIColor clearColor]];
-    [tip1 setFont:[UIFont systemFontOfSize:14]];
-    [tip1 setText:@"车主名:"];
-    [m_bg addSubview:tip1];
-    
-    m_userNameInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-110, 30)];
-    [m_userNameInput setFont:[UIFont systemFontOfSize:14]];
-    m_userNameInput.layer.cornerRadius = 3;
-    m_userNameInput.layer.borderColor = [UIColor grayColor].CGColor;
-    m_userNameInput.layer.borderWidth = 0.5;
-    m_userNameInput.delegate = self;
-    m_userNameInput.font = [UIFont systemFontOfSize:14];
-    m_userNameInput.returnKeyType = UIReturnKeyNext;
-    [m_userNameInput setPlaceholder:@"请输入车主名"];
-    [m_userNameInput setTextColor:[UIColor blackColor]];
-    if(self.m_currentData)
-    {
-        [m_userNameInput setText:self.m_currentData.m_userName];
-    }
-    [m_bg addSubview:m_userNameInput];
-    
-    
-    UILabel *tip2 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_userNameInput.frame)+20, 80, 20)];
-    [tip2  setBackgroundColor:[UIColor clearColor]];
-    [tip2 setFont:[UIFont systemFontOfSize:14]];
-    [tip2 setText:@"车牌号:"];
-    [m_bg addSubview:tip2];
-    m_carCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_userNameInput.frame)+15, MAIN_WIDTH-110, 30)];
-    m_carCodeInput.returnKeyType = UIReturnKeyNext;
-    [m_carCodeInput setFont:[UIFont systemFontOfSize:14]];
-    m_carCodeInput.delegate = self;
-    m_carCodeInput.layer.cornerRadius = 3;
-    m_carCodeInput.layer.borderColor = [UIColor grayColor].CGColor;
-    m_carCodeInput.layer.borderWidth = 0.5;
-    m_carCodeInput.font = [UIFont systemFontOfSize:14];
-
-    [m_carCodeInput setPlaceholder:@"输入车牌号码,请勿填错"];
-    [m_carCodeInput setTextColor:[UIColor blackColor]];
-    if(self.m_currentData)
-    {
-        //TODO 目前由于之前的字段设置,这个车牌号不能被修改，等所有版本都升级完成后，再加上这个修改
-        m_carCodeInput.userInteractionEnabled = NO;
-        [m_carCodeInput setText:self.m_currentData.m_carCode];
-    }
-    [m_bg addSubview:m_carCodeInput];
-    
-    UILabel *tip3 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_carCodeInput.frame)+20, 80, 20)];
-    [tip3  setBackgroundColor:[UIColor clearColor]];
-    [tip3 setFont:[UIFont systemFontOfSize:14]];
-    [tip3 setText:@"车主号码:"];
-    [m_bg addSubview:tip3];
-    m_telInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_carCodeInput.frame)+15, MAIN_WIDTH-110, 30)];
-    m_telInput.returnKeyType = UIReturnKeyNext;
-    [m_telInput setFont:[UIFont systemFontOfSize:14]];
-    m_telInput.font = [UIFont systemFontOfSize:14];
-    m_telInput.layer.cornerRadius = 3;
-    m_telInput.layer.borderColor = [UIColor grayColor].CGColor;
-    m_telInput.layer.borderWidth = 0.5;
-    m_telInput.delegate = self;
-    [m_telInput setPlaceholder:@"11位的手机号码"];
-    [m_telInput setTextColor:[UIColor blackColor]];
-    if(self.m_currentData)
-    {
-        [m_telInput setText:self.m_currentData.m_tel];
-    }
-    [m_bg addSubview:m_telInput];
-    
-    
-    UILabel *tip4 = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(m_telInput.frame)+20, 80, 20)];
-    [tip4  setBackgroundColor:[UIColor clearColor]];
-    [tip4 setFont:[UIFont systemFontOfSize:14]];
-    [tip4 setText:@"车型:"];
-    [m_bg addSubview:tip4];
-    m_carTypeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,CGRectGetMaxY(m_telInput.frame)+15, MAIN_WIDTH-110, 30)];
-    [m_carTypeInput setFont:[UIFont systemFontOfSize:14]];
-    m_carTypeInput.layer.cornerRadius = 3;
-    m_carTypeInput.layer.borderColor = [UIColor grayColor].CGColor;
-    m_carTypeInput.layer.borderWidth = 0.5;
-    m_carTypeInput.delegate = self;
-    [m_carTypeInput setTextColor:[UIColor blackColor]];
-    m_carTypeInput.returnKeyType = UIReturnKeyDone;
-    if(self.m_currentData)
-    {
-        [m_carTypeInput setText:self.m_currentData.m_carType];
-    }
-    
-    if(self.m_currentData)
-    {
-        UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        deleteBtn.layer.cornerRadius = 4;
-        [deleteBtn addTarget:self action:@selector(deleteBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        deleteBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-        [deleteBtn setTitle:@"删除该顾客,以及对应纪录" forState:UIControlStateNormal];
-        [deleteBtn setFrame:CGRectMake(20, CGRectGetMaxY(m_carTypeInput.frame)+20, MAIN_WIDTH-40, 40)];
-        [deleteBtn setBackgroundColor:KEY_DELETE_CORLOR];
-        [m_bg addSubview:deleteBtn];
-        
-        UIButton *historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        historyBtn.layer.cornerRadius = 4;
-        [historyBtn addTarget:self action:@selector(seeAllBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        historyBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-        [historyBtn setTitle:@"查看该顾客的所有维修记录" forState:UIControlStateNormal];
-        [historyBtn setFrame:CGRectMake(20, CGRectGetMaxY(deleteBtn.frame)+20, MAIN_WIDTH-40, 40)];
-        [historyBtn setBackgroundColor:KEY_COMMON_CORLOR];
-        [m_bg addSubview:historyBtn];
-
-        UIButton *callBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        callBtn.layer.cornerRadius = 4;
-        [callBtn addTarget:self action:@selector(callBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        callBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-        [callBtn setTitle:@"联系客户" forState:UIControlStateNormal];
-        [callBtn setFrame:CGRectMake(20, CGRectGetMaxY(historyBtn.frame)+20, MAIN_WIDTH-40, 40)];
-        [callBtn setBackgroundColor:KEY_COMMON_CORLOR];
-        [m_bg addSubview:callBtn];
-        
-        [m_bg setContentSize:CGSizeMake(MAIN_WIDTH, CGRectGetMaxY(callBtn.frame)+40)];
-        
-    }
-    else
-    {
-        [m_bg setContentSize:CGSizeMake(MAIN_WIDTH, CGRectGetMaxY(m_carTypeInput.frame)+40)];
-
-    }
-
-    [m_bg addSubview:m_carTypeInput];
-
-    
     
     [self.view addSubview:m_bg];
 
@@ -164,6 +80,174 @@
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
 
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.m_currentData ? 5 : 4;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return section == 4 ? 3 : 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * identify = @"spe";
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if(indexPath.section == 0)
+    {
+        UILabel *tip1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, 80, 20)];
+        [tip1 setBackgroundColor:[UIColor clearColor]];
+        [tip1 setFont:[UIFont systemFontOfSize:14]];
+        [tip1 setText:@"车主名:"];
+        [cell addSubview:tip1];
+        
+        m_userNameInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        [m_userNameInput setFont:[UIFont systemFontOfSize:14]];
+        m_userNameInput.layer.cornerRadius = 3;
+        m_userNameInput.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
+        m_userNameInput.layer.borderWidth = 0.5;
+        m_userNameInput.delegate = self;
+        m_userNameInput.font = [UIFont systemFontOfSize:14];
+        m_userNameInput.returnKeyType = UIReturnKeyNext;
+        [m_userNameInput setPlaceholder:@"请输入车主名"];
+        [m_userNameInput setTextColor:[UIColor blackColor]];
+        if(self.m_currentData)
+        {
+            [m_userNameInput setText:self.m_currentData.m_userName];
+        }
+        [cell addSubview:m_userNameInput];
+
+    }else if (indexPath.section == 1)
+    {
+        UILabel *tip2 = [[UILabel alloc]initWithFrame:CGRectMake(10,20, 80, 20)];
+        [tip2  setBackgroundColor:[UIColor clearColor]];
+        [tip2 setFont:[UIFont systemFontOfSize:14]];
+        [tip2 setText:@"车牌号:"];
+        [cell addSubview:tip2];
+        m_carCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        m_carCodeInput.returnKeyType = UIReturnKeyNext;
+        [m_carCodeInput setFont:[UIFont systemFontOfSize:14]];
+        m_carCodeInput.delegate = self;
+        m_carCodeInput.layer.cornerRadius = 3;
+        m_carCodeInput.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
+        m_carCodeInput.layer.borderWidth = 0.5;
+        m_carCodeInput.font = [UIFont systemFontOfSize:14];
+        
+        [m_carCodeInput setPlaceholder:@"输入车牌号码,请勿填错"];
+        [m_carCodeInput setTextColor:[UIColor blackColor]];
+        if(self.m_currentData)
+        {
+            //TODO 目前由于之前的字段设置,这个车牌号不能被修改，等所有版本都升级完成后，再加上这个修改
+            m_carCodeInput.userInteractionEnabled = NO;
+            [m_carCodeInput setEnabled:NO];
+            [m_carCodeInput setText:self.m_currentData.m_carCode];
+            [m_carCodeInput setTextColor:UIColorFromRGB(0xdcdcdc)];
+        }
+        else
+        {
+            [m_carCodeInput setText:self.m_carcode];
+        }
+        
+        [cell addSubview:m_carCodeInput];
+
+    }else if (indexPath.section == 2)
+    {
+        UILabel *tip3 = [[UILabel alloc]initWithFrame:CGRectMake(10,20, 80, 20)];
+        [tip3  setBackgroundColor:[UIColor clearColor]];
+        [tip3 setFont:[UIFont systemFontOfSize:14]];
+        [tip3 setText:@"车主号码:"];
+        [cell addSubview:tip3];
+        m_telInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        m_telInput.returnKeyType = UIReturnKeyNext;
+        [m_telInput setFont:[UIFont systemFontOfSize:14]];
+        m_telInput.font = [UIFont systemFontOfSize:14];
+        m_telInput.layer.cornerRadius = 3;
+        m_telInput.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
+        m_telInput.layer.borderWidth = 0.5;
+        m_telInput.delegate = self;
+        [m_telInput setPlaceholder:@"11位的手机号码"];
+        [m_telInput setTextColor:[UIColor blackColor]];
+        if(self.m_currentData)
+        {
+            [m_telInput setText:self.m_currentData.m_tel];
+        }
+        [cell addSubview:m_telInput];
+    }else if (indexPath.section == 3)
+    {
+        UILabel *tip4 = [[UILabel alloc]initWithFrame:CGRectMake(10,20, 80, 20)];
+        [tip4  setBackgroundColor:[UIColor clearColor]];
+        [tip4 setFont:[UIFont systemFontOfSize:14]];
+        [tip4 setText:@"车型:"];
+        [cell addSubview:tip4];
+        
+        m_carTypeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        [m_carTypeInput setFont:[UIFont systemFontOfSize:14]];
+        m_carTypeInput.layer.cornerRadius = 3;
+        m_carTypeInput.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
+        m_carTypeInput.layer.borderWidth = 0.5;
+        m_carTypeInput.delegate = self;
+        [m_carTypeInput setTextColor:[UIColor blackColor]];
+        m_carTypeInput.returnKeyType = UIReturnKeyDone;
+        if(self.m_currentData)
+        {
+            [m_carTypeInput setText:self.m_currentData.m_carType];
+        }
+        [cell addSubview:m_carTypeInput];
+
+    }else
+    {
+        if(indexPath.row == 0)
+        {
+            UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            deleteBtn.layer.cornerRadius = 4;
+            [deleteBtn addTarget:self action:@selector(deleteBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+            deleteBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+            [deleteBtn setTitle:@"删除该顾客,以及对应纪录" forState:UIControlStateNormal];
+            [deleteBtn setFrame:CGRectMake(20,10, MAIN_WIDTH-40, 40)];
+            [deleteBtn setBackgroundColor:KEY_DELETE_CORLOR];
+            [cell addSubview:deleteBtn];
+
+        }
+        else if (indexPath.row == 1)
+        {
+            UIButton *historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            historyBtn.layer.cornerRadius = 4;
+            [historyBtn addTarget:self action:@selector(seeAllBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+            historyBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+            [historyBtn setTitle:@"查看该顾客的所有维修记录" forState:UIControlStateNormal];
+            [historyBtn setFrame:CGRectMake(20,10, MAIN_WIDTH-40, 40)];
+            [historyBtn setBackgroundColor:KEY_COMMON_CORLOR];
+            [cell addSubview:historyBtn];
+        }
+        else
+        {
+            
+            UIButton *callBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            callBtn.layer.cornerRadius = 4;
+            [callBtn addTarget:self action:@selector(callBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+            callBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+            [callBtn setTitle:@"联系客户" forState:UIControlStateNormal];
+            [callBtn setFrame:CGRectMake(20,10, MAIN_WIDTH-40, 40)];
+            [callBtn setBackgroundColor:KEY_COMMON_CORLOR];
+            [cell addSubview:callBtn];
+        }
+    }
+    
+    return cell;
 }
 
 - (void)callBtnClicked
@@ -234,6 +318,7 @@
                                                          @"id":self.m_currentData.m_idFromServer
                                                  }])
                         {
+                            [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
                             [self backBtnClicked];
                         }
                       }
@@ -340,4 +425,26 @@
     }
     return YES;
 }
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if(textField == m_carCodeInput)
+    {
+        [textField resignFirstResponder];
+        AddNewCarcodeSelectViewController *add = [[AddNewCarcodeSelectViewController alloc]init];
+        add.m_selectDelegate = self;
+        [self.navigationController pushViewController:add animated:YES];
+        return NO;
+    }
+    return YES;
+}
+
+
+#pragma mark - AddNewCarcodeSelectViewControllerDelegate
+
+- (void)onInputedCarcode:(NSString *)carcode
+{
+    [m_carCodeInput setText:carcode];
+}
+
 @end

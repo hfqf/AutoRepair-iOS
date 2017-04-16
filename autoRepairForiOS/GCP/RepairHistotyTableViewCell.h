@@ -11,6 +11,7 @@
 @interface RepairHistotyTableViewCell : UITableViewCell
 {
     UILabel *m_lab1;
+    UILabel *m_labTime;
     UILabel *m_lab2;
     UILabel *m_lab3;
     UILabel *m_lab4;

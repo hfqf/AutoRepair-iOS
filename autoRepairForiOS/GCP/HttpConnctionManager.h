@@ -87,6 +87,12 @@ typedef void (^FailBlock)(NSError *error);
              successedBlock:(SuccessedBlock)success
                 failedBolck:(FailedBlock)failed;
 
+///重置密码
+- (void)regetPwd:(NSString *)tel
+         withPwd:(NSString *)pwd
+  successedBlock:(SuccessedBlock)success
+     failedBolck:(FailedBlock)failed;
+
 ///检查更新
 - (void)checkUpdateVersion:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed;
@@ -140,8 +146,30 @@ typedef void (^FailBlock)(NSError *error);
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed;
 
+- (void)queryAllTipedRepair:(NSString *)owner
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed;
+
 - (void)uploadBOSFile:(NSString *)path
          withFileName:(NSString *)fileName
     successedBlock:(SuccessedBlock)success
        failedBolck:(FailedBlock)failed;
+
+#pragma mark - 收费记录
+
+- (void)addRepairItem:(ADTRepairItemInfo *)info
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed;
+
+- (void)deleteRepairItem:(ADTRepairItemInfo *)info
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed;
+
+- (void)deleteRepairItems:(NSString *)contactId
+           successedBlock:(SuccessedBlock)success
+              failedBolck:(FailedBlock)failed;
+
+- (void)queryAllRepairItem:(NSString *)repId
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed;
 @end

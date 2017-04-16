@@ -6,10 +6,20 @@
 //  Copyright (c) 2015年 Poitns. All rights reserved.
 //
 
+@protocol CustomerViewControllerDelegate <NSObject>
+
+@required
+- (void)onSelectContact:(ADTContacterInfo *)contact;
+@end
+
 #import "SpeRefreshAndLoadViewController.h"
 
 @interface CustomerViewController : SpeRefreshAndLoadViewController
 
 @property(nonatomic,assign)BOOL m_isAdd;
+
+@property(nonatomic,weak)id<CustomerViewControllerDelegate>m_selectDelegate;
 - (id)initForAddRepair;
+
+- (void)addBtnClicked;
 @end

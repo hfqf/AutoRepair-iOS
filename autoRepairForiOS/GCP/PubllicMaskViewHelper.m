@@ -12,7 +12,7 @@
 @implementation PubllicMaskViewHelper
 
 //给一个消息提示
-+ (void)showTipViewWith:(NSString *)tip inSuperView:(UIView*)superView withDuration:(int)duration
++ (void)showTipViewWith:(NSString *)tip inSuperView:(UIView*)superView withDuration:(NSTimeInterval)duration
 {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:superView animated:YES];
         hud.minSize  = CGSizeMake(80, 80);

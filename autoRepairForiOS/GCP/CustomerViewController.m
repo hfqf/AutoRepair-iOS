@@ -34,7 +34,7 @@
         
         
         m_searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, HEIGHT_NAVIGATION)];
-        [m_searchBar setPlaceholder:@"可输入客户号码,车牌号"];
+        [m_searchBar setPlaceholder:@"可输入手机号码,车牌号,客户名搜索用户"];
         [m_searchBar setDelegate:self];
         m_searchBar.showsCancelButton = YES;
         self.tableView.tableHeaderView = m_searchBar;
@@ -59,7 +59,7 @@
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(forceRefresh) name:KEY_REPAIRS_SYNCED object:nil];
         
         m_searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, HEIGHT_NAVIGATION)];
-        [m_searchBar setPlaceholder:@"可输入客户号码,车牌号"];
+        [m_searchBar setPlaceholder:@"可输入手机号码,车牌号,客户名搜索用户"];
         [m_searchBar setDelegate:self];
         m_searchBar.showsCancelButton = YES;
         self.tableView.tableHeaderView = m_searchBar;
@@ -110,7 +110,7 @@
 {
     [super viewDidLoad];
     
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(addNewContactForEasyPR:) name:KEY_AUTO_ADD_CONTACT object:nil];
     
     if(!self.m_isAdd)
     {
@@ -125,9 +125,16 @@
     }
     else
     {
-        [title setText:@"选择客户，添加纪录"];
+        [title setText:@"选择客户"];
     }
 
+}
+
+- (void)addNewContactForEasyPR:(NSNotification *)noti
+{
+    AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithCarcode:noti.object];
+    vc.m_delegate = self.m_delegate;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)addBtnClicked
@@ -195,10 +202,21 @@
     
     if(self.m_isAdd)
     {
-        ADTRepairInfo *data = [[ADTRepairInfo alloc]init];
-        data.m_carCode = info.m_carCode;
-        AddRepairHistoryViewController *vc = [[AddRepairHistoryViewController alloc]initWithInfo:data];
-        [self.navigationController pushViewController:vc animated:YES];
+        if(self.m_selectDelegate)
+        {
+            [self.m_selectDelegate onSelectContact:info];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            ADTRepairInfo *data = [[ADTRepairInfo alloc]init];
+            data.m_carCode = info.m_carCode;
+            data.m_isAddNewRepair = YES;
+            AddRepairHistoryViewController *vc = [[AddRepairHistoryViewController alloc]initWithInfo:data];
+            vc.m_delegate = self.m_delegate;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+
     }
     else
     {
@@ -218,7 +236,7 @@
 
 - (void)requestData:(BOOL)isRefresh
 {
-    NSArray *arr = [DB_Shared quertAllCustoms];
+    NSArray *arr = [DB_Shared quertAllCustoms:m_searchBar.text];
     
     NSMutableArray *arrLast = [NSMutableArray array];
     for(ADTContacterInfo *m_contact in arr)

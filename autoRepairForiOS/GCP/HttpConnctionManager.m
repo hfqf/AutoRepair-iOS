@@ -290,6 +290,21 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+///重置密码
+- (void)regetPwd:(NSString *)tel
+         withPwd:(NSString *)pwd
+  successedBlock:(SuccessedBlock)success
+     failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/users/regetpwd"
+                     paragram:@{
+                                @"pwd":pwd,
+                                @"tel":tel
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
 ///检查更新
 - (void)checkUpdateVersion:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed
@@ -367,7 +382,12 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
       successedBlock:(SuccessedBlock)success
          failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/repair/add2" paragram:@{
+    NSMutableArray *arrItems = [NSMutableArray array];
+    for(ADTRepairItemInfo *info in newRep.m_arrRepairItem)
+    {
+        [arrItems addObject:info.m_id];
+    }
+    [self startNormalPostWith:@"/repair/add3" paragram:@{
                                                          @"id":@"",
                                                          @"carcode":newRep.m_carCode,
                                                          @"totalkm":newRep.m_km,
@@ -379,7 +399,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                          @"repairtype":newRep.m_repairType,
                                                          @"isreaded":newRep.m_isClose ? @"1" : @"0",
                                                          @"owner":[LoginUserUtil userTel],
-                                                         @"inserttime":newRep.m_insertTime
+                                                         @"inserttime":newRep.m_insertTime,
+                                                         @"items":arrItems
                                                          } successedBlock:success failedBolck:failed];
 }
 
@@ -412,7 +433,12 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
          successedBlock:(SuccessedBlock)success
             failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/repair/update" paragram:@{
+    NSMutableArray *arrItems = [NSMutableArray array];
+    for(ADTRepairItemInfo *info in newRep.m_arrRepairItem)
+    {
+        [arrItems addObject:info.m_id];
+    }
+    [self startNormalPostWith:@"/repair/update3" paragram:@{
                                                            @"id":newRep.m_idFromNode,
                                                            @"carcode":newRep.m_carCode,
                                                            @"totalkm":newRep.m_km,
@@ -425,7 +451,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                            @"circle":newRep.m_repairCircle,
                                                            @"repairtype":newRep.m_repairType,
                                                            @"owner":[LoginUserUtil userTel],
-                                                           @"inserttime":newRep.m_insertTime
+                                                           @"inserttime":newRep.m_insertTime,
+                                                           @"items":arrItems
                                                            } successedBlock:success failedBolck:failed];
 }
 
@@ -435,6 +462,19 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
              failedBolck:(FailedBlock)failed
 {
     [self startNormalPostWith:@"/repair/queryAll"
+                     paragram:@{
+                                @"owner":owner
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+    
+}
+
+- (void)queryAllTipedRepair:(NSString *)owner
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/queryAllTiped"
                      paragram:@{
                                 @"owner":owner
                                 }
@@ -494,4 +534,54 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
     
     
     }
+
+
+#pragma mark - 收费记录
+
+- (void)addRepairItem:(ADTRepairItemInfo *)info
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/repairitem/add" paragram:@{
+                                                            @"repid":info.m_repid == nil ? @"" : info.m_repid,
+                                                            @"contactid":info.m_contactid == nil ? @"" :info.m_contactid,
+                                                           @"price":info.m_price,
+                                                           @"num":info.m_num,
+                                                           @"type":info.m_type
+                                                           }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)deleteRepairItem:(ADTRepairItemInfo *)info
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/repairitem/del" paragram:@{
+                                                            @"id":info.m_id,
+                                                            }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)deleteRepairItems:(NSString *)contactId
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/repairitem/delAll" paragram:@{
+                                                            @"contactid":contactId
+                                                            }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)queryAllRepairItem:(NSString *)repId
+                  successedBlock:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repairitem/query" paragram:@{
+                                                            @"repid":repId,
+                                                            }
+               successedBlock:success
+                  failedBolck:failed];
+}
 @end

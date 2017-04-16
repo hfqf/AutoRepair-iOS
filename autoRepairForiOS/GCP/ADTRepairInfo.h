@@ -22,5 +22,9 @@
 @property (nonatomic,strong)NSString *m_owner;
 @property (nonatomic,strong)NSString *m_idFromNode;
 @property (nonatomic,strong)NSString *m_insertTime;
+@property (nonatomic,assign)NSInteger m_totalPrice;
+@property (nonatomic,assign)BOOL   m_isAddNewRepair;
+@property (nonatomic,strong)NSMutableArray  *m_arrRepairItem;///维续内容，个数，价格
 
++ (ADTRepairInfo *)from:(NSDictionary *)info;
 @end

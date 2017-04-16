@@ -21,7 +21,7 @@
 - (id)initWith:(ADTContacterInfo *)contact
 {
     self.m_contact = contact;
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO];
     if (self)
     {
         self.tableView.delegate = self;
@@ -98,23 +98,31 @@
 
 - (void)requestData:(BOOL)isRefresh
 {
-    if(self.m_contact)
-    {
-        self.m_arrData =[DB_Shared queryRepairs:self.m_contact];
-        [self reloadDeals];
-    }
-    else
-    {
-        if(m_searchBar.text.length == 0)
+    [self showWaitingView];
+
+    [HTTP_MANAGER queryAllRepair:[LoginUserUtil userTel]
+                  successedBlock:^(NSDictionary *succeedResult) {
+        [self removeWaitingView];
+        if([succeedResult[@"code"]integerValue] == 1)
         {
-            self.m_arrData = nil;
+            NSArray *arr = succeedResult[@"ret"];
+            NSMutableArray *_arrInsert = [NSMutableArray array];
+            for(NSDictionary *info in arr)
+            {
+                ADTRepairInfo *rep = [ADTRepairInfo from:info];
+                [_arrInsert addObject:rep];
+            }
+            self.m_arrData = _arrInsert;
         }
         else
         {
-            self.m_arrData = [DB_Shared queryHistoryWithKey:m_searchBar.text];
+            [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:1];
         }
         [self reloadDeals];
-    }
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+        [self removeWaitingView];
+        [self reloadDeals];
+    }];
     
 
 }
@@ -136,7 +144,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * identify = @"spe";
-    RepairHistotyTableViewCell *cell = [[RepairHistotyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+    RepairHistotyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    if (cell == nil) {
+        cell = [[RepairHistotyTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+    }
+    
     ADTRepairInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
     cell.info = info;
     return cell;
@@ -145,6 +157,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ADTRepairInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
+    info.m_isAddNewRepair = NO;
     AddRepairHistoryViewController *vc = [[AddRepairHistoryViewController alloc]initWithInfo:info];
     [self.navigationController pushViewController:vc animated:YES];
     

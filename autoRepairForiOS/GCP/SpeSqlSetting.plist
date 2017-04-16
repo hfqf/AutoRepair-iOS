@@ -5,7 +5,7 @@
 	<key>dbName</key>
 	<string>local.db</string>
 	<key>dbVersion</key>
-	<integer>4</integer>
+	<integer>5</integer>
 	<key>dbTables</key>
 	<array>
 		<dict>
@@ -90,6 +90,35 @@
 				</dict>
 				<dict>
 					<key>insertTime</key>
+					<string>TEXT</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>repairchargetable</key>
+			<array>
+				<dict>
+					<key>repid</key>
+					<string>TEXT</string>
+				</dict>
+				<dict>
+					<key>contactid</key>
+					<string>TEXT</string>
+				</dict>
+				<dict>
+					<key>price</key>
+					<string>TEXT</string>
+				</dict>
+				<dict>
+					<key>num</key>
+					<string>TEXT</string>
+				</dict>
+				<dict>
+					<key>type</key>
+					<string>TEXT</string>
+				</dict>
+				<dict>
+					<key>id</key>
 					<string>TEXT</string>
 				</dict>
 			</array>

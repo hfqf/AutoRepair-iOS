@@ -32,7 +32,7 @@
 #define  MAIN_WIDTH                   [UIScreen mainScreen].bounds.size.width
 #define  MAIN_FRAME                   [UIScreen mainScreen].bounds
 
-#define   PUBLIC_BACKGROUND_COLOR           UIColorFromRGB(0x66CDAA)
+#define   PUBLIC_BACKGROUND_COLOR           UIColorFromRGB(0xFF4080)  //UIColorFromRGB(0xCC3341) 苹果7红
 #define  KEY_COMMON_CORLOR                   PUBLIC_BACKGROUND_COLOR
 #define  KEY_DELETE_CORLOR                  UIColorFromRGB(0xFA8072)
 
@@ -489,3 +489,6 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 #define KEY_LOGINED_PWD             @"KEY_LOGINED_PWD"
 
 #define KEY_REPAIRS_SYNCED          @"KEY_REPAIRS_SYNCED"
+#pragma mark - EasyPR
+
+#define  KEY_AUTO_ADD_CONTACT        @"KEY_AUTO_ADD_CONTACT"

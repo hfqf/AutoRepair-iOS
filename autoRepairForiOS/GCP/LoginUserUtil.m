@@ -241,34 +241,12 @@
 
 + (BOOL)isContactAsynced
 {
-    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_IS_CONTACT_AYSNED];
-    if(ret == nil)
-    {
-        return NO;
-    }
-    else
-    {
-        if([[SqliteDataManager sharedInstance]quertAllCustoms].count == 0)
-        {
-            return NO;
-        }
-        else
-        {
-            return YES;
-        }
-    }
-    return  NO;
+    return YES;
 }
 
 + (BOOL)isRepairAsynced
 {
-    if([[SqliteDataManager sharedInstance]queryAllRepairs].count == 0)
-    {
-        return NO;
-    }
-    
-    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_IS_REPAIR_AYSNED];
-    return ret == nil ? 0 : [ret integerValue] == 1;
+    return YES;
 }
 
 + (NSString *)loginedName

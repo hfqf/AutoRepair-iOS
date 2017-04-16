@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+
+#import "ADTRepairItemInfo.h"
 @interface SqliteDataManager : NSObject
 {
     sqlite3   *m_db;
@@ -33,30 +35,38 @@ SINGLETON_FOR_HEADER(SqliteDataManager)
 
 - (ADTContacterInfo *)contactWithCarCode:(NSString *)carCode;
 
-- (NSArray *)quertAllCustoms;
+- (NSArray *)quertAllCustoms:(NSString *)key;
 
 - (BOOL)deleteContacts;
 #pragma mark - end
 
-#pragma mark - 维修记录
-
-- (BOOL)insertRepair:(ADTRepairInfo *)info;
-
-- (BOOL)makeOneHistory:(ADTRepairInfo *)info isClosed:(BOOL)isClosed;
-
-- (BOOL)updateOneHistory2Readed:(ADTRepairInfo *)info;
-
-- (BOOL)updateRepair:(ADTRepairInfo *)info;
-
-- (BOOL)deleteOneRepair:(ADTRepairInfo *)info;
-
-- (BOOL)deleteAllRepairWith:(NSString *)carCode;
-
-- (BOOL)deleteAllRepair;
-
-- (NSArray *)queryRepairs:(ADTContacterInfo *)custom;
-
-- (NSArray *)queryAllRepairs;
-
-- (NSArray *)queryTipRepair;
+//#pragma mark - 维修记录
+//
+//- (BOOL)insertRepair:(ADTRepairInfo *)info;
+//
+//- (BOOL)makeOneHistory:(ADTRepairInfo *)info isClosed:(BOOL)isClosed;
+//
+//- (BOOL)updateOneHistory2Readed:(ADTRepairInfo *)info;
+//
+//- (BOOL)updateRepair:(ADTRepairInfo *)info;
+//
+//- (BOOL)deleteOneRepair:(ADTRepairInfo *)info;
+//
+//- (BOOL)deleteAllRepairWith:(NSString *)carCode;
+//
+//- (BOOL)deleteAllRepair;
+//
+//- (NSArray *)queryRepairs:(ADTContacterInfo *)custom;
+//
+//- (NSArray *)queryAllRepairs;
+//
+//- (NSArray *)queryTipRepair;
+//
+//#pragma mark - 维修记录收费详情
+//
+//- (BOOL)insertRepairItem:(ADTRepairItemInfo *)item;
+//
+//- (NSArray *)quertRrpairItemsWithRepId:(NSString *)repId;
+//
+//- (NSArray *)quertRrpairItemsWithContactId:(NSString *)contactId;
 @end

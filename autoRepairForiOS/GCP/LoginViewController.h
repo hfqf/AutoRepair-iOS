@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *forgetPwdBtn;
+@property (weak, nonatomic) IBOutlet EGOImageView *m_head;
 
 @end

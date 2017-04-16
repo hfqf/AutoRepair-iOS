@@ -11,7 +11,7 @@
 @interface PubllicMaskViewHelper : NSObject
 
 //给一个消息提示
-+ (void)showTipViewWith:(NSString *)tip inSuperView:(UIView*)superView withDuration:(int)duration;
++ (void)showTipViewWith:(NSString *)tip inSuperView:(UIView*)superView withDuration:(NSTimeInterval)duration;
 
 + (void)hideView:(UIView *)view  animated:(BOOL)animated;
 

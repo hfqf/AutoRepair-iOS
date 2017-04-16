@@ -32,4 +32,6 @@
     #import "EGOImageView.h"
     #import "EGOImageView+SetImage.h"
     #import "ClassIconImageView.h"
+    #import "ADTRepairItemInfo.h"
+
 #endif

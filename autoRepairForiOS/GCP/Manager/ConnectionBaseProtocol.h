@@ -41,6 +41,10 @@
 
 //侧滑栏几个试图推出一层并显示侧滑栏
 - (void)onBackAnaShowSliderView;
+
+
+///通知父页面刷新数据
+- (void)onRefreshParentData;
 @end
 
 #endif

@@ -6,19 +6,20 @@
 //  Copyright (c) 2015年 Poitns. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "SpeRefreshAndLoadViewController.h"
 
-@interface AddRepairHistoryViewController : BaseViewController<UITextFieldDelegate,UITextViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
-{
-    UIScrollView *m_bg;
-    
+@interface AddRepairHistoryViewController : SpeRefreshAndLoadViewController<UITextFieldDelegate,UITextViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate,UITableViewDelegate,UITableViewDataSource>
+{    
     UITextField *m_kmInput;
     UITextField *m_timeInput;
-    UITextField *m_repairTypeInput;
+    UITextView *m_repairTypeInput;
     UITextView *m_moreInput;
     UITextField *m_tipCircleInput;
+    
+    UITextField *m_payDesc;
+    UITextField *m_payNum;
+    UITextField *m_payPrice;
     UISwitch *m_isNeedTipSwitcher;
-    BOOL        m_isAdd;
 }
 @property(nonatomic,strong)ADTRepairInfo *m_currentData;
 - (id)initWithInfo:(ADTRepairInfo *)info;

@@ -25,4 +25,8 @@
 + (NSString *)getCurrentMonth;
 
 + (NSString *)getLocalTimeWith:(NSDate *)date;
+
++ (NSString *)getLocalTimeWith3:(NSDate *)date;
+
++ (BOOL)isValid2:(NSString *)beginTime endTime:(NSString *)endTime;
 @end

@@ -33,7 +33,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self requestData:YES];
 }
 
 
@@ -44,7 +43,7 @@
 {
     [super viewDidLoad];
     backBtn.hidden = YES;
-    [title setText:@"到期提醒"];
+    [title setText:@"到期记录"];
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setFrame:CGRectMake(MAIN_WIDTH-90, DISTANCE_TOP,80, HEIGHT_NAVIGATION)];
@@ -66,6 +65,7 @@
 - (void)addBtnClicked
 {
     CustomerViewController *vc = [[CustomerViewController  alloc]initForAddRepair];
+    vc.m_delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -95,15 +95,47 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ADTRepairInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
+    info.m_isAddNewRepair = NO;
     AddRepairHistoryViewController *vc = [[AddRepairHistoryViewController alloc]initWithInfo:info];
+    vc.m_delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)requestData:(BOOL)isRefresh
 {
-    self.m_arrData = [DB_Shared queryTipRepair];
-    [self reloadDeals];
+    [self showWaitingView];
+    [HTTP_MANAGER queryAllTipedRepair:[LoginUserUtil userTel]
+                       successedBlock:^(NSDictionary *succeedResult) {
+                           
+                           [self removeWaitingView];
+                           if([succeedResult[@"code"]integerValue] == 1)
+                           {
+                               NSArray *arr = succeedResult[@"ret"];
+                               NSMutableArray *_arrInsert = [NSMutableArray array];
+                               for(NSDictionary *info in arr)
+                               {
+                                   ADTRepairInfo *rep = [ADTRepairInfo from:info];
+                                   [_arrInsert addObject:rep];
+                               }
+                               self.m_arrData = _arrInsert;
+                           }
+                           else
+                           {
+                               [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:1];
+                           }
+                           [self reloadDeals];
+                       }
+                          failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                              [self removeWaitingView];
+                              [self reloadDeals];
+    }];
 }
 
 
+#pragma mark - BaseViewControllerDelegate
+
+- (void)onRefreshParentData
+{
+    [self requestData:YES];
+}
 @end

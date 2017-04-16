@@ -6,9 +6,10 @@
 //  Copyright (c) 2015年 Poitns. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "SpeRefreshAndLoadViewController.h"
+#import "AddNewCarcodeSelectViewController.h"
 
-@interface AddNewCustomerViewController : BaseViewController<UITextFieldDelegate,UITextViewDelegate,UIAlertViewDelegate>
+@interface AddNewCustomerViewController : SpeRefreshAndLoadViewController<UITextFieldDelegate,UITextViewDelegate,UIAlertViewDelegate,AddNewCarcodeSelectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     UIScrollView *m_bg;
     
@@ -18,7 +19,8 @@
     UITextField *m_carTypeInput;
 }
 @property(nonatomic,strong)ADTContacterInfo *m_currentData;
+@property(nonatomic,strong)NSString *m_carcode;
 - (id)initWithContacer:(ADTContacterInfo *)info;
 
-
+- (id)initWithCarcode:(NSString *)carcode;
 @end
