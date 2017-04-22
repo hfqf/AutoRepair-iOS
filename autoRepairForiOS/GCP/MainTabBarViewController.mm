@@ -154,7 +154,7 @@
                     NSLog(@"选中%@项",item.title);
                     if([item.title isEqualToString:@"扫描车牌添加客户"])
                     {
-                        [self showPhotoPickerSheetTitle:@"go" message:nil needOpenFrontCamera:NO cameraActionTitle:@"拍照" photoLibraryActionTitle:@"从相册中选取" canOpenLibrary:YES complete:^(NSArray *assetsImageArray) {
+                        [self showPhotoPickerSheetTitle:@"尽量拉近距离,调正角度,可提高识别率" message:nil needOpenFrontCamera:NO cameraActionTitle:@"拍照" photoLibraryActionTitle:@"从相册中选取" canOpenLibrary:YES complete:^(NSArray *assetsImageArray) {
                             
                             if (!assetsImageArray || assetsImageArray.count == 0) {
                                 [PubllicMaskViewHelper showTipViewWith:@"未选择车牌" inSuperView:self.view  withDuration:1];
@@ -163,14 +163,17 @@
                             }
                             UIImage *assetImage = assetsImageArray.firstObject;
                             
+                            [self  showWaitingView];
                             [[XYPlateRecognizeUtil new] recognizePateWithImage:assetImage
                                                                       complete:^(NSArray *plateStringArray,int code){
-                                                                          if(code == 0){
-                                                                            [PubllicMaskViewHelper showTipViewWith:@"未识别到车牌,请调整距离和角度" inSuperView:self.view  withDuration:1];
-                                                                          }else{
-                                                                              [self selectWithIndex:1];
-                                                                              [[NSNotificationCenter defaultCenter]postNotificationName:KEY_AUTO_ADD_CONTACT object:[plateStringArray firstObject]];
-                                                                          }
+                                                                          [self removeWaitingView];
+                                  if(code == 0){
+                                    [PubllicMaskViewHelper showTipViewWith:@"未识别到车牌,请调整距离和角度" inSuperView:self.view  withDuration:1];
+                                  }else{
+                                      NSArray *arr = [[plateStringArray firstObject]componentsSeparatedByString:@":"];
+                                      [[NSNotificationCenter defaultCenter]postNotificationName:KEY_AUTO_ADD_CONTACT object:[arr lastObject]];
+                                      [self selectWithIndex:1];
+                                  }
                                 NSLog(@"%@",plateStringArray);
                             }];
                         }];
@@ -217,6 +220,28 @@
     self.selectedIndex = index;
     [self.m_tabbar refreshWithCurrentSelected:index];
 }
+
+#pragma mark -public
+
+- (void)showWaitingView
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.minSize  = CGSizeMake(80, 80);
+    UIImageView *waitView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,80, 80)];
+    [waitView setImage:[UIImage imageNamed:@"Icon@2x"]];
+    hud.customView = waitView;
+    hud.margin = 10.f;
+    hud.yOffset = 0;
+    hud.removeFromSuperViewOnHide = YES;
+    [hud hide:YES afterDelay:100];
+}
+
+- (void)removeWaitingView
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
 
 #pragma mark - TabbarButtonsBGViewDelegate
 - (void)onSelectedWithButtonIndex:(int)index

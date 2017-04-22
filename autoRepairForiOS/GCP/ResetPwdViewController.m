@@ -70,7 +70,10 @@
         [tip setFont:[UIFont systemFontOfSize:16]];
         [cell addSubview:tip];
         
-        input1 = [[UITextField alloc]initWithFrame:CGRectMake(110, 10, MAIN_WIDTH-120, 30)];
+        if(input1 == nil)
+        {
+            input1 = [[UITextField alloc]initWithFrame:CGRectMake(110, 10, MAIN_WIDTH-120, 30)];
+        }
         input1.layer.cornerRadius = 5;
         input1.layer.borderColor = UIColorFromRGB(0xf2f2f2).CGColor;
         input1.layer.borderWidth = 1;
@@ -90,7 +93,10 @@
         [tip setFont:[UIFont systemFontOfSize:16]];
         [cell addSubview:tip];
         
-        input2 = [[UITextField alloc]initWithFrame:CGRectMake(110, 10, MAIN_WIDTH-120, 30)];
+        if(input2 == nil)
+        {
+            input2 = [[UITextField alloc]initWithFrame:CGRectMake(110, 10, MAIN_WIDTH-120, 30)];
+        }
         input2.delegate = self;
         input2.layer.cornerRadius = 5;
         input2.layer.borderColor = UIColorFromRGB(0xf2f2f2).CGColor;
@@ -109,7 +115,10 @@
         [tip setFont:[UIFont systemFontOfSize:16]];
         [cell addSubview:tip];
         
-        input3 = [[UITextField alloc]initWithFrame:CGRectMake(110, 10, MAIN_WIDTH-120, 30)];
+        if(input3 == nil)
+        {
+            input3 = [[UITextField alloc]initWithFrame:CGRectMake(110, 10, MAIN_WIDTH-120, 30)];
+        }
         input3.delegate = self;
         input3.layer.cornerRadius = 5;
         input3.layer.borderColor = UIColorFromRGB(0xf2f2f2).CGColor;
@@ -147,9 +156,21 @@
         return;
     }
     
+    if(input2.text.length >8)
+    {
+        [PubllicMaskViewHelper showTipViewWith:@"新密码不能长于8位" inSuperView:self.view  withDuration:1];
+        return;
+    }
+    
     if(input3.text.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"确认密码不能为空" inSuperView:self.view  withDuration:1];
+        return;
+    }
+    
+    if(input3.text.length >8)
+    {
+        [PubllicMaskViewHelper showTipViewWith:@"确认密码不能长于8位" inSuperView:self.view  withDuration:1];
         return;
     }
     
@@ -198,5 +219,11 @@
         }
         
     }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

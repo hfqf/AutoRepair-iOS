@@ -197,6 +197,7 @@
             m_payPrice.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
             m_payPrice.layer.borderWidth = 0.2;
             m_payPrice.delegate = self;
+            m_payPrice.keyboardType = UIKeyboardTypePhonePad;
             [m_payPrice setPlaceholder:@"请输入收费价格"];
             [cell addSubview:m_payPrice];
             m_payNum =[[UITextField alloc]initWithFrame:CGRectMake(100,120, MAIN_WIDTH-110, 30)];
@@ -545,6 +546,8 @@
                         
             if([succeedResult[@"code"]integerValue] == 1)
             {
+
+                    [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
 
                     [PubllicMaskViewHelper showTipViewWith:@"添加成功" inSuperView:self.view  withDuration:1];
                     [self.m_delegate onRefreshParentData];

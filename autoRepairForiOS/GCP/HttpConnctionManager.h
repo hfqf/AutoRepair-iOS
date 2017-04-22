@@ -93,6 +93,16 @@ typedef void (^FailBlock)(NSError *error);
   successedBlock:(SuccessedBlock)success
      failedBolck:(FailedBlock)failed;
 
+///更新头像
+- (void)updateHead:(NSString *)headUrl
+    successedBlock:(SuccessedBlock)success
+       failedBolck:(FailedBlock)failed;
+
+///更新姓名
+- (void)updateUserName:(NSString *)userName
+    successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed;
+
 ///检查更新
 - (void)checkUpdateVersion:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed;
@@ -145,6 +155,20 @@ typedef void (^FailBlock)(NSError *error);
 - (void)queryAllRepair:(NSString *)owner
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed;
+
+///获取某个客户的所有记录
+- (void)queryOneAllRepair:(NSString *)carcode
+           successedBlock:(SuccessedBlock)success
+              failedBolck:(FailedBlock)failed;
+
+/**
+ 获取当前账单
+ 
+ @param success
+ @param failed
+ */
+- (void)queryTodayBills:(SuccessedBlock)success
+            failedBolck:(FailedBlock)failed;
 
 - (void)queryAllTipedRepair:(NSString *)owner
         successedBlock:(SuccessedBlock)success

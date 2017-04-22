@@ -18,8 +18,8 @@
         m_lab1.font = [UIFont systemFontOfSize:14];
         m_lab1.textColor = UIColorFromRGB(0x1A1A1A);
         
-        m_labTime = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2, 7,MAIN_WIDTH/2-10, 20)];
-        m_labTime.font = [UIFont systemFontOfSize:13];
+        m_labTime = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2, 5,MAIN_WIDTH/2, 20)];
+        m_labTime.font = [UIFont systemFontOfSize:12];
         [m_labTime setTextAlignment:NSTextAlignmentLeft];
         [m_labTime  setTextColor:UIColorFromRGB(0x878787)];
         
@@ -59,7 +59,7 @@
     [m_lab1 setText:[NSString stringWithFormat:@"客户 : %@",contact.m_userName]];
     [m_lab2 setText:[NSString stringWithFormat:@"保养项目: %@",info.m_repairType]];
     [m_lab3 setText:[NSString stringWithFormat:@"备注 : %@",info.m_more]];
-    [m_labTime setText:[NSString stringWithFormat:@"登记时间 : %@",info.m_insertTime]];
+    [m_labTime setText:[NSString stringWithFormat:@"登记时间:%@",info.m_insertTime]];
     [m_lab4 setText:[NSString stringWithFormat:@"总收费 : %ld",(long)info.m_totalPrice]];
 }
 

@@ -13,7 +13,7 @@
     UIWebView *m_web;
     UITextField *m_input1;
     UITextField *m_input2;
-    UIButton *m_input3;
+    UITextField *m_input3;
 }
 @property(nonatomic,strong) NSString *m_startTime;
 @property(nonatomic,strong) NSString *m_endTime;
@@ -23,7 +23,7 @@
 @implementation RepairPrintViewController
 
 - (id)init{
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:YES];
     if (self)
     {
         self.tableView.delegate = self;
@@ -33,8 +33,8 @@
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
         UIView *bg = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame), MAIN_WIDTH, 210)];
-        [self.view addSubview:bg];
-        [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(bg.frame), MAIN_WIDTH, MAIN_HEIGHT-CGRectGetMaxY(bg.frame)-HEIGHT_MAIN_BOTTOM)];
+
+        self.tableView.tableHeaderView = bg;
         
         m_input1 = [[UITextField alloc]initWithFrame:CGRectMake(20, 10, MAIN_WIDTH-40, 40)];
         m_input1.delegate = self;
@@ -44,7 +44,7 @@
         m_input1.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
         m_input1.layer.borderWidth = 0.5;
         [m_input1 setTextColor:[UIColor blackColor]];
-        [m_input1 setFont:[UIFont systemFontOfSize:14]];
+        [m_input1 setFont:[UIFont systemFontOfSize:20]];
         [m_input1 setBackgroundColor:[UIColor clearColor]];
         [bg addSubview:m_input1];
         [m_input1 setInputView:[self getSelectTimePicker:0]];
@@ -57,44 +57,46 @@
         [m_input2 setPlaceholder:@"输入查询的结束时间"];
         [m_input2 setTextAlignment:NSTextAlignmentCenter];
         [m_input2 setTextColor:[UIColor blackColor]];
-        [m_input2 setFont:[UIFont systemFontOfSize:14]];
+        [m_input2 setFont:[UIFont systemFontOfSize:20]];
         [m_input2 setBackgroundColor:[UIColor clearColor]];
         [bg addSubview:m_input2];
         [m_input2 setInputView:[self getSelectTimePicker:1]];
         
-        m_input3 = [UIButton buttonWithType:UIButtonTypeCustom];
-        m_input3.frame =  CGRectMake(20, 110, MAIN_WIDTH-40, 40);
+        m_input3 = [[UITextField alloc]initWithFrame:CGRectMake(20, 110, MAIN_WIDTH-40, 40)];
         m_input3.layer.cornerRadius = 2;
         m_input3.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
+        m_input3.delegate = self;
         m_input3.layer.borderWidth = 0.5;
-        [m_input3 setTitle:@"点击选择客户" forState:UIControlStateNormal];
-        [m_input3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [m_input3.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        m_input3.returnKeyType = UIReturnKeySearch;
+        [m_input3 setPlaceholder:@"点击键盘搜索查单个客户/不填则查所有"];
+        [m_input3 setTextAlignment:NSTextAlignmentCenter];
+        [m_input3 setTextColor:[UIColor blackColor]];
+        [m_input3 setFont:[UIFont systemFontOfSize:14]];
         [m_input3 setBackgroundColor:[UIColor clearColor]];
-        [m_input3 addTarget:self action:@selector(selectContactClicked) forControlEvents:UIControlEventTouchUpInside];
         [bg addSubview:m_input3];
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setFrame:CGRectMake(20, 160, MAIN_WIDTH-40, 40)];
         btn.layer.cornerRadius =2;
         [btn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
-        [btn setTitle:@"开始搜索" forState:UIControlStateNormal];
+        [btn setTitle:@"开始搜索维修记录" forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
         [bg addSubview:btn];
         [btn addTarget:self action:@selector(btnClicked) forControlEvents:UIControlEventTouchUpInside];
         
-        m_web = [[UIWebView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(navigationBG.frame), MAIN_WIDTH, MAIN_HEIGHT-CGRectGetMaxY(navigationBG.frame))];
+        m_web = [[UIWebView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(navigationBG.frame), MAIN_WIDTH, MAIN_HEIGHT*2)];
         m_web.delegate = self;
         m_web.scalesPageToFit = YES;
-        self.tableView.tableHeaderView = m_web;
+        self.tableView.tableFooterView = m_web;
     }
     return self;
 }
 
 - (void)selectContactClicked
 {
-    CustomerViewController *vc = [[CustomerViewController alloc]initForAddRepair];
+    self.m_selectContact = nil;
+    CustomerViewController *vc = [[CustomerViewController alloc]initForSelectContact:@""];
     vc.m_selectDelegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -113,11 +115,21 @@
         return;
     }
     
-    if(self.m_selectContact == nil)
+    if(m_input3.text.length == 0)
     {
-        [PubllicMaskViewHelper showTipViewWith:@"客户不能为空" inSuperView:self.view  withDuration:1];
-        return;
+        [m_input3 resignFirstResponder];
     }
+    else
+    {
+        if(m_input3.isEditing)
+        {
+            [PubllicMaskViewHelper showTipViewWith:@"搜索对象还未选择好" inSuperView:self.view  withDuration:1];
+            return;
+        }
+    }
+    
+  
+    
     [self refreshWebView];
 }
 
@@ -129,7 +141,7 @@
 
 - (void)refreshWebView
 {
-    NSString *urlString= [NSString stringWithFormat:@"%@/repair/print?carcode=%@&start=%@&end=%@",SERVER,self.m_selectContact.m_carCode,self.m_startTime,self.m_endTime];
+    NSString *urlString= [NSString stringWithFormat:@"%@/repair/print?owner=%@&carcode=%@&start=%@&end=%@",SERVER,[LoginUserUtil userTel],self.m_selectContact ? self.m_selectContact.m_carCode : @"",self.m_startTime,self.m_endTime];
     // 将地址编码
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     // 实例化NSMutableURLRequest，并进行参数配置
@@ -216,6 +228,18 @@
     [super viewDidLoad];
     backBtn.hidden = YES;
     [title setText:@"统计"];
+    
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-60, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+    [addBtn setTitle:@"分享" forState:UIControlStateNormal];
+    [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [navigationBG addSubview:addBtn];
+}
+
+- (void)addBtnClicked
+{
+    [ShareSdkUtil startShare:@"统计" url:m_web.request.URL.absoluteString title:@"统计数据"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -244,9 +268,27 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if(textField == m_input3)
+    {
+
+//        [self selectContactClicked];
+        return YES;
+    }
     return YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField == m_input3)
+    {
+        [m_input1 resignFirstResponder];
+        [m_input2 resignFirstResponder];
+        [m_input3 resignFirstResponder];
+        [self selectContactClicked];
+        return YES;
+    }
+    return YES;
+}
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
@@ -268,6 +310,6 @@
 - (void)onSelectContact:(ADTContacterInfo *)contact
 {
     self.m_selectContact = contact;
-    [m_input3 setTitle:contact.m_userName forState:UIControlStateNormal];
+    [m_input3 setText:contact.m_userName];
 }
 @end

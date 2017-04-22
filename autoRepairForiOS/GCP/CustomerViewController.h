@@ -22,4 +22,6 @@
 - (id)initForAddRepair;
 
 - (void)addBtnClicked;
+
+- (id)initForSelectContact:(NSString *)key;
 @end

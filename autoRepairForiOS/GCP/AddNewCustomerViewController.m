@@ -8,6 +8,7 @@
 
 #import "AddNewCustomerViewController.h"
 #import "SearchViewController.h"
+#import "AddRepairHistoryViewController.h"
 @implementation AddNewCustomerViewController
 
 - (id)initWithContacer:(ADTContacterInfo *)info
@@ -50,6 +51,7 @@
 {
     [self reloadDeals];
 }
+
 - (void)keyboardDidShow:(NSNotification *)aNotification
 {
     NSDictionary *userInfo =[aNotification userInfo];
@@ -94,7 +96,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 4 ? 3 : 1;
+    return section == 4 ? 4 : 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,7 +117,10 @@
         [tip1 setText:@"车主名:"];
         [cell addSubview:tip1];
         
-        m_userNameInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        if(m_userNameInput == nil)
+        {
+            m_userNameInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        }
         [m_userNameInput setFont:[UIFont systemFontOfSize:14]];
         m_userNameInput.layer.cornerRadius = 3;
         m_userNameInput.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
@@ -138,7 +143,11 @@
         [tip2 setFont:[UIFont systemFontOfSize:14]];
         [tip2 setText:@"车牌号:"];
         [cell addSubview:tip2];
-        m_carCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        
+        if(m_carCodeInput == nil)
+        {
+            m_carCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        }
         m_carCodeInput.returnKeyType = UIReturnKeyNext;
         [m_carCodeInput setFont:[UIFont systemFontOfSize:14]];
         m_carCodeInput.delegate = self;
@@ -171,7 +180,11 @@
         [tip3 setFont:[UIFont systemFontOfSize:14]];
         [tip3 setText:@"车主号码:"];
         [cell addSubview:tip3];
-        m_telInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        
+        if(m_telInput == nil)
+        {
+            m_telInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        }
         m_telInput.returnKeyType = UIReturnKeyNext;
         [m_telInput setFont:[UIFont systemFontOfSize:14]];
         m_telInput.font = [UIFont systemFontOfSize:14];
@@ -194,7 +207,10 @@
         [tip4 setText:@"车型:"];
         [cell addSubview:tip4];
         
-        m_carTypeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        if(m_carTypeInput == nil)
+        {
+            m_carTypeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        }
         [m_carTypeInput setFont:[UIFont systemFontOfSize:14]];
         m_carTypeInput.layer.cornerRadius = 3;
         m_carTypeInput.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
@@ -233,7 +249,7 @@
             [historyBtn setBackgroundColor:KEY_COMMON_CORLOR];
             [cell addSubview:historyBtn];
         }
-        else
+        else if (indexPath.row == 2)
         {
             
             UIButton *callBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -245,6 +261,19 @@
             [callBtn setBackgroundColor:KEY_COMMON_CORLOR];
             [cell addSubview:callBtn];
         }
+        else
+        {
+            
+            UIButton *callBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            callBtn.layer.cornerRadius = 4;
+            [callBtn addTarget:self action:@selector(addRepBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+            callBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+            [callBtn setTitle:@"新增维修记录" forState:UIControlStateNormal];
+            [callBtn setFrame:CGRectMake(20,10, MAIN_WIDTH-40, 40)];
+            [callBtn setBackgroundColor:KEY_COMMON_CORLOR];
+            [cell addSubview:callBtn];
+        }
+
     }
     
     return cell;
@@ -253,6 +282,16 @@
 - (void)callBtnClicked
 {
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",self.m_currentData.m_tel]]];
+}
+
+
+- (void)addRepBtnClicked
+{
+    ADTRepairInfo *data = [[ADTRepairInfo alloc]init];
+    data.m_carCode = self.m_currentData.m_carCode;
+    data.m_isAddNewRepair = YES;
+    AddRepairHistoryViewController *vc = [[AddRepairHistoryViewController alloc]initWithInfo:data];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)seeAllBtnClicked
@@ -444,6 +483,7 @@
 
 - (void)onInputedCarcode:(NSString *)carcode
 {
+    self.m_carcode = carcode;
     [m_carCodeInput setText:carcode];
 }
 

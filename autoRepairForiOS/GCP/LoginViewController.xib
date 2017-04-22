@@ -18,6 +18,7 @@
                 <outlet property="nameInput" destination="DNu-Oa-uMy" id="7wa-vt-3jI"/>
                 <outlet property="pwdInput" destination="bGV-db-aP8" id="eQv-9P-cbc"/>
                 <outlet property="registerBtn" destination="qb6-5g-kp3" id="DEh-fF-ztU"/>
+                <outlet property="versionLab" destination="ll5-XX-eQl" id="mSQ-Hz-y7Y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -120,7 +121,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="jXb-bn-zA9" customClass="EGOImageView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jXb-bn-zA9" customClass="EGOImageView">
                     <rect key="frame" x="147" y="80" width="120" height="120"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -185,7 +186,4 @@
             <point key="canvasLocation" x="40" y="233"/>
         </view>
     </objects>
-    <resources>
-        <image name="icon" width="60" height="60"/>
-    </resources>
 </document>

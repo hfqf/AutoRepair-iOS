@@ -305,6 +305,34 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+///更新头像
+- (void)updateHead:(NSString *)headUrl
+  successedBlock:(SuccessedBlock)success
+     failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/users/update"
+                     paragram:@{
+                                @"headurl":headUrl,
+                                @"tel":[LoginUserUtil userTel]
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+///更新姓名
+- (void)updateUserName:(NSString *)userName
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/users/updateName"
+                     paragram:@{
+                                @"username":userName,
+                                @"tel":[LoginUserUtil userTel]
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
 ///检查更新
 - (void)checkUpdateVersion:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed
@@ -469,6 +497,42 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
     
 }
+///获取某个客户的所有记录
+- (void)queryOneAllRepair:(NSString *)carcode
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/queryOneAll"
+                     paragram:@{
+                                @"carcode":carcode,
+                                @"owner":[LoginUserUtil userTel]
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+    
+}
+
+
+/**
+ 获取当前账单
+
+ @param success
+ @param failed
+ */
+- (void)queryTodayBills:(SuccessedBlock)success
+              failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/getTodayBills"
+                     paragram:@{
+                                @"day":[LocalTimeUtil getLocalTimeWith:[NSDate date]],
+                                @"owner":[LoginUserUtil userTel]
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+    
+}
+
+
 
 - (void)queryAllTipedRepair:(NSString *)owner
         successedBlock:(SuccessedBlock)success
@@ -511,7 +575,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
     // step3: upload
     BOSPutObjectRequest* request = [[BOSPutObjectRequest alloc] init];
     request.bucket = bucket;
-    request.key = fileName;
+    request.key = [NSString stringWithFormat:@"%@_%@.png",[LoginUserUtil userTel],fileName];
+;
     request.objectContent = content;
     
     __block BOSPutObjectResponse* response = nil;
@@ -524,10 +589,17 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
         if (output.response) {
             response = (BOSPutObjectResponse*)output.response;
             NSLog(@"put object success!");
+            success(@{@"code":@"1",
+                      @"url":request.key
+                      });
         }
         
         if (output.error) {
             NSLog(@"put object failure");
+            success(@{
+                      @"code":@"0",
+                      @"msg":output.error.description
+                      });
         }
     });
     [task waitUtilFinished];

@@ -60,7 +60,7 @@
 + (BOOL)saveOriginalImage:(NSString *)cutedPath withImage:(UIImage *)image error:(NSError *)error
 
 {
-    NSData * picData  = UIImageJPEGRepresentation(image, 0.001);
+    NSData * picData  = UIImageJPEGRepresentation(image, 0.01);
     [picData writeToFile:cutedPath atomically:YES];
     return error == nil;
 }

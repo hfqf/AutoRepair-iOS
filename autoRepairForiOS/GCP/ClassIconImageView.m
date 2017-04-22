@@ -44,12 +44,13 @@
 
 - (void)setNewImage:(id)url WithSpeWith:(int)sepWidth withDefaultImg:(NSString *)defaultImgage
 {
-    [self setBackgroundColor:[UIColor whiteColor]];
+    [self setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
     [classIconView setFrame:CGRectMake(sepWidth,sepWidth, self.frame.size.width-sepWidth*2, self.frame.size.height-sepWidth*2)];
     [classIconView setPlaceholderImage:[UIImage imageNamed:defaultImgage]];
     classIconView.layer.masksToBounds = YES;
     classIconView.layer.cornerRadius = (self.frame.size.width-sepWidth*2)/2;
     self.layer.cornerRadius = self.frame.size.width/2;
+    classIconView.contentMode = UIViewContentModeScaleAspectFill;
     if([url isKindOfClass:[NSURL class]])
     {
         [classIconView setImageURL:url];

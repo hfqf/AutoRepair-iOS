@@ -12,6 +12,8 @@
 {
     UILabel *m_carCodeLab;
     UILabel *m_nameLab;
+    UILabel *m_telLab;
+    UILabel *m_carTypeLab;
 }
 
 @property (nonatomic,strong)ADTContacterInfo *infoData;

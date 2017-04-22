@@ -82,8 +82,14 @@
 + (BOOL)isRepairAsynced;
 
 + (NSString *)loginedName;
+
 + (NSString *)loginedPwd;
 
 + (NSString *)shopName;
+
 + (NSString *)headUrl;
+
++ (NSString *)totalMoneyOfToday;
+
++ (NSString *)totalRepairNumOfToday;
 @end

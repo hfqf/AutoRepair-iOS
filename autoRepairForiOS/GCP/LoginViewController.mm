@@ -27,7 +27,12 @@
     m_asyncCount = 0;
     
     [self.m_head setPlaceholderImage:[UIImage imageNamed:@"icon"]];
-    [self.m_head setImageURL:[NSURL URLWithString:[LoginUserUtil headUrl]]];
+    self.m_head.clipsToBounds = YES;
+    self.m_head.contentMode = UIViewContentModeScaleAspectFill;
+    self.m_head.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
+    self.m_head.layer.borderWidth = 0.5;
+    self.m_head.layer.cornerRadius = 2;
+    
     
     self.registerBtn.clipsToBounds = YES;
     self.registerBtn.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
@@ -39,33 +44,114 @@
     
     self.loginBtn.layer.cornerRadius = 5;
 
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:)name:UIKeyboardDidShowNotification object:nil];
+    //注册键盘消失通知；
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide:)name:UIKeyboardDidHideNotification object:nil];
 //    self.forgetPwdBtn.layer.cornerRadius = 3;
 //    self.forgetPwdBtn.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
 //    self.forgetPwdBtn.layer.borderWidth = 0.5;
     
+
+}
+
+- (void)showVersionUpdateView:(NSDictionary *)info
+{
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+
     
+    BOOL isNeedShow = [info[@"isneedshow"]integerValue] == 1;
+
+    if(([info[@"lastest"]integerValue] > [build integerValue]) && isNeedShow)
+    {
+        BOOL isForceUp = [info[@"isforceup"]integerValue] == 1;
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"版本升级"
+                                                       message:info[@"newfeature"]
+                                                      delegate:self
+                                             cancelButtonTitle:isForceUp ? nil : @"稍后升级"
+                                             otherButtonTitles: @"马上升级", nil];
+        
+        CGSize size = [FontSizeUtil sizeOfString:alert.message withFont:[UIFont systemFontOfSize:16] withWidth:400];
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -20,240, size.height)];
+        textLabel.font = [UIFont systemFontOfSize:16];
+        textLabel.textColor = [UIColor blackColor];
+        textLabel.backgroundColor = [UIColor clearColor];
+        textLabel.lineBreakMode =NSLineBreakByWordWrapping;
+        textLabel.numberOfLines =0;
+        textLabel.textAlignment =NSTextAlignmentLeft;
+        textLabel.text = @"";
+        [alert setValue:textLabel forKey:@"accessoryView"];
+        [alert show];
+    }
+}
+
+- (void)keyboardDidShow:(NSNotification *)aNotification
+{
+    NSDictionary *userInfo =[aNotification userInfo];
+    NSValue*aValue =[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect=[aValue CGRectValue];
+    int height =keyboardRect.size.height;
+    //    int width =keyboardRect.size.width;
+    [UIView animateKeyframesWithDuration:0.3
+                                   delay:0
+                                 options:UIViewKeyframeAnimationOptionCalculationModeDiscrete animations:^{
+        [self.view setFrame:CGRectMake(0,-height,MAIN_WIDTH, MAIN_HEIGHT)];
+
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)keyboardDidHide:(NSNotification*)aNotification
+{
+    [UIView animateKeyframesWithDuration:0.3
+                                   delay:0
+                                 options:UIViewKeyframeAnimationOptionCalculationModeDiscrete animations:^{
+                                     [self.view setFrame:CGRectMake(0,0, MAIN_WIDTH, MAIN_HEIGHT)];                                     
+                                 } completion:^(BOOL finished) {
+                                     
+                                 }];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:KEY_IS_TIPED_NEED_LOGIN];
+    if(alertView.numberOfButtons == 1)
+    {
+        if(buttonIndex == 0)
+        {
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/%E6%B1%BD%E4%BF%AE%E5%B0%8F%E5%8A%A9%E6%89%8B/id1106728499?mt=8"]];
+
+        }
+    }
+    else
+    {
+        if(buttonIndex == 1)
+        {
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/%E6%B1%BD%E4%BF%AE%E5%B0%8F%E5%8A%A9%E6%89%8B/id1106728499?mt=8"]];
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self.loginBtn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
+    [self.registerBtn setTitleColor:PUBLIC_BACKGROUND_COLOR forState:UIControlStateNormal];
+    self.registerBtn.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
+    [self.m_head setImageURL:[NSURL URLWithString:[LoginUserUtil headUrl]]];
+    self.m_head.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
+    [self.versionLab setTextColor:PUBLIC_BACKGROUND_COLOR];
     self.nameInput.text = [LoginUserUtil loginedName];
     self.pwdInput.text = [LoginUserUtil loginedPwd];
     
-    NSString *key = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_IS_TIPED_NEED_LOGIN];
-    if(key == nil)
-    {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"重要通知:关于新版需要注册才能登录的说明" message:@"老版本的数据在用新版登录后不会丢失,进入主页面会上传所有数据到云端,以后就可在任意客户端进行切换" delegate:self cancelButtonTitle:@"我已清楚" otherButtonTitles:nil];
-        [alert show];
-    }
-    
-
+    [HTTP_MANAGER checkUpdateVersion:^(NSDictionary *succeedResult) {
+        
+        if([succeedResult[@"code"]integerValue] == 1){
+            [self showVersionUpdateView:succeedResult[@"ret"]];
+        }
+        
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+        
+    }];
 }
 
 
@@ -89,172 +175,6 @@ return jsonString;
     }else{
         return nil;
     }
-}
-
-
-- (void)queryContacts
-{
-    if([[SqliteDataManager sharedInstance]deleteContacts])
-    {
-        [HTTP_MANAGER queryAllContacts:[LoginUserUtil userTel]
-                        successedBlock:^(NSDictionary *succeedResult) {
-                            
-                            if([succeedResult[@"code"]integerValue] == 1)
-                            {
-                                NSArray * arr = succeedResult[@"ret"];
-                                if(arr.count > 0)
-                                {
-                                    for(NSDictionary *info in arr)
-                                    {
-                                        ADTContacterInfo *newCon = [[ADTContacterInfo alloc]init];
-                                        newCon.m_owner = info[@"owner"];
-                                        newCon.m_carType = info[@"cartype"];
-                                        newCon.m_carCode = info[@"carcode"];
-                                        newCon.m_carCode = [newCon.m_carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
-                                        newCon.m_userName = info[@"name"];
-                                        newCon.m_tel = info[@"tel"];
-                                        newCon.m_idFromServer = info[@"_id"];
-                                        [[SqliteDataManager sharedInstance]insertNewCustom:newCon];
-                                    }
-                                }
-                                //通知页面更新数据
-                                [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
-                            }
-                            
-                        } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                            
-                            
-                            
-                        }];
-    }
-    
-//    NSArray *arr = [[SqliteDataManager sharedInstance]quertAllCustoms];
-//    NSMutableArray * arrFinal = [NSMutableArray array];
-//
-//    if(arr.count > 0)
-//    {
-//        for(ADTContacterInfo *info in arr)
-//        {
-//            NSDictionary *dic = @{
-//                                  @"carcode" : info.m_carCode,
-//                                  @"name" : info.m_userName,
-//                                  @"tel" : info.m_tel,
-//                                  @"cartype" : info.m_carType,
-//                                  @"owner":[LoginUserUtil userTel],
-//                                  @"id":info.m_idFromServer
-//                                  } ;
-//            [arrFinal addObject:dic];
-//        }
-//
-//
-//        long  uploadNum = ceil(arrFinal.count*1.0/MAX_PACKET_NUM);
-//        __block long uploadCompleted = 0;
-//
-//        for(int i = 0;i<uploadNum;i++)
-//        {
-//            NSArray *arr = nil;
-//            if(i == uploadNum-1)
-//            {
-//                arr =  [arrFinal subarrayWithRange:NSMakeRange(MAX_PACKET_NUM*i, arrFinal.count-MAX_PACKET_NUM*i)];
-//            }
-//            else
-//            {
-//                arr =  [arrFinal subarrayWithRange:NSMakeRange(MAX_PACKET_NUM*i, MAX_PACKET_NUM)];
-//            }
-//            
-//        
-//        [HTTP_MANAGER uploadAllContacts:[self toJSONString:arr]
-//                         successedBlock:^(NSDictionary *succeedResult) {
-//                             
-//                             if([succeedResult[@"code"]integerValue] == 1)
-//                             {
-//                                 
-//                                 uploadCompleted++;
-//                                 if(uploadCompleted == uploadNum)//所有数据同步完成才是数据同步结束
-//                                 {
-//                                     [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_CONTACT_AYSNED];
-//                                     
-//                                     if([[SqliteDataManager sharedInstance]deleteContacts])
-//                                     {
-//                                         [HTTP_MANAGER queryAllContacts:[LoginUserUtil userTel]
-//                                                         successedBlock:^(NSDictionary *succeedResult) {
-//                                                             
-//                                                             if([succeedResult[@"code"]integerValue] == 1)
-//                                                             {
-//                                                                 NSArray * arr = succeedResult[@"ret"];
-//                                                                 if(arr.count > 0)
-//                                                                 {
-//                                                                     for(NSDictionary *info in arr)
-//                                                                     {
-//                                                                         ADTContacterInfo *newCon = [[ADTContacterInfo alloc]init];
-//                                                                         newCon.m_owner = info[@"owner"];
-//                                                                         newCon.m_carType = info[@"cartype"];
-//                                                                         newCon.m_carCode = info[@"carcode"];
-//                                                                         newCon.m_carCode = [newCon.m_carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
-//                                                                         newCon.m_userName = info[@"name"];
-//                                                                         newCon.m_tel = info[@"tel"];
-//                                                                         newCon.m_idFromServer = info[@"_id"];
-//                                                                         [[SqliteDataManager sharedInstance]insertNewCustom:newCon];
-//                                                                     }
-//                                                                 }
-//                                                                 //通知页面更新数据
-//                                                                 [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
-//                                                             }
-//                                                             
-//                                                         } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-//                                                             
-//                                                             
-//                                                             
-//                                                         }];
-//                                     }
-//                                 }
-//                            }
-//                               
-//                         }
-//                            failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-//                                
-//                                
-//                                
-//                            }];
-//        }
-//    }
-//    else
-//    {
-//
-//            [HTTP_MANAGER queryAllContacts:[LoginUserUtil userTel]
-//                            successedBlock:^(NSDictionary *succeedResult) {
-//                
-//                if([succeedResult[@"code"]integerValue] == 1)
-//                {
-//                    [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:KEY_IS_CONTACT_AYSNED];
-//                    NSArray * arr = succeedResult[@"ret"];
-//                    if(arr.count > 0)
-//                    {
-//                        for(NSDictionary *info in arr)
-//                        {
-//                            ADTContacterInfo *newCon = [[ADTContacterInfo alloc]init];
-//                            newCon.m_owner = info[@"owner"];
-//                            newCon.m_carType = info[@"cartype"];
-//                            newCon.m_carCode = info[@"carcode"];
-//                            newCon.m_carCode = [newCon.m_carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
-//                            newCon.m_userName = info[@"name"];
-//                            newCon.m_tel = info[@"tel"];
-//                            newCon.m_idFromServer = info[@"_id"];
-//                            [[SqliteDataManager sharedInstance]insertNewCustom:newCon];
-//                        }
-//                    }
-//                    
-//                    //通知页面更新数据
-//                    [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
-//                
-//                }
-//            
-//                            
-//                
-//            } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-//                
-//            }];
-//    }
 }
 
 
@@ -285,9 +205,6 @@ return jsonString;
                              withPwd:self.pwdInput.text
                       successedBlock:^(NSDictionary *succeedResult) {
                           
-
-
-                          [self removeWaitingView];
                           if([succeedResult[@"code"]integerValue] == 1)
                           {
                               
@@ -298,18 +215,17 @@ return jsonString;
                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"tel"] forKey:KEY_AUTO_TEL];
                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"viplevel"] forKey:KEY_AUTO_LEVEL];
                                [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"devicemodifyed"] forKey:KEY_AUTO_UDID_MODIFYED];
-                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"head"] forKey:KEY_AUTO_HEAD];
                                [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"shopname"] forKey:KEY_AUTO_SHOP_NAME];
-                              
-                              [self chechAsync];
+                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
+
+                              [self queryContacts];
                               
                               [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:KEY_IS_FIRST_LOGIN];
-                              
-                             [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
                               
                           }
                           else
                           {
+                              [self removeWaitingView];
                               [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:1];
                           }
         
@@ -323,19 +239,45 @@ return jsonString;
 }
 
 
-///检查此次登录是否需要同步数据
-- (void)chechAsync
+
+- (void)queryContacts
 {
-    if([LoginUserUtil isDeviceModifyed])
-    {
-        [self queryContacts];
-    }
-//    
-//    if(![LoginUserUtil isRepairAsynced] || [LoginUserUtil isDeviceModifyed])
-//    {
-//        [self uploadRepairs];
-//    }
+    [[SqliteDataManager sharedInstance]deleteContacts];
+    [HTTP_MANAGER queryAllContacts:[LoginUserUtil userTel]
+                    successedBlock:^(NSDictionary *succeedResult) {
+                        [self removeWaitingView];
+                        if([succeedResult[@"code"]integerValue] == 1)
+                        {
+                            NSArray * arr = succeedResult[@"ret"];
+                            if(arr.count > 0)
+                            {
+                                for(NSDictionary *info in arr)
+                                {
+                                    ADTContacterInfo *newCon = [[ADTContacterInfo alloc]init];
+                                    newCon.m_owner = info[@"owner"];
+                                    newCon.m_carType = info[@"cartype"];
+                                    newCon.m_carCode = info[@"carcode"];
+                                    newCon.m_carCode = [newCon.m_carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
+                                    newCon.m_userName = info[@"name"];
+                                    newCon.m_tel = info[@"tel"];
+                                    newCon.m_idFromServer = info[@"_id"];
+                                    [[SqliteDataManager sharedInstance]insertNewCustom:newCon];
+                                }
+                            }
+                            
+                            [self.navigationController pushViewController:[[NSClassFromString(@"MainTabBarViewController") alloc]init] animated:YES];
+                        }else{
+                            [self removeWaitingView];
+                            [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:1];
+                        }
+                        
+                    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                        
+                        [self removeWaitingView];
+                        [PubllicMaskViewHelper showTipViewWith:@"登录失败" inSuperView:self.view  withDuration:1];
+                    }];
 }
+
 
 
 - (IBAction)registerBtnClicked:(UIButton *)sender {
@@ -344,7 +286,6 @@ return jsonString;
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    m_currentInputY = textField.frame.origin.y;
     return YES;
 }
 

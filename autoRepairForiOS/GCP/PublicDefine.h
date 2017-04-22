@@ -10,12 +10,15 @@
 #define  XXT_xinjiang_PublicDefine_h
 
 
-#define  KEY_IS_DEV                   1
+#define  KEY_IS_DEV                                 0 //是否是测试环境
+#define  KEY_IS_DEVICE                              1 //是否是真机运行
+#define  KEY_IS_PRODUCT_SERVER                      1 //是否是正式商用环境，否则是欲上线正式环境
 
-#define  SERVER                       KEY_IS_DEV ? @"http://localhost:18080"  :  @"http://autorepairhelper.duapp.com"
+#define  SERVER                       KEY_IS_DEV ?( KEY_IS_DEVICE ? @"http://192.168.30.17:18080" : @"http://localhost:18080")   :          (KEY_IS_PRODUCT_SERVER ? @"http://autorepairhelper.duapp.com" :@"http://autoreview.duapp.com")
 #define  JPUSH_APPKEY                 @"2c333bb853fee953412917d3"
 #define  JPUSH_SECRET                 @"78b67cb91bdd80f8c0fa92a9"
 
+#define  BOS_SERVER                   @"http://autorepaier.bj.bcebos.com"
 #define  OS_TYPE                      @"ios"
 #define  VERSION                      [[[NSBundle mainBundle] infoDictionary]objectForKey:@"CFBundleShortVersionString"]
 #define  PUSH_ID                      [JPUSHService registrationID] == nil ? @"" : [JPUSHService registrationID]
@@ -32,7 +35,7 @@
 #define  MAIN_WIDTH                   [UIScreen mainScreen].bounds.size.width
 #define  MAIN_FRAME                   [UIScreen mainScreen].bounds
 
-#define   PUBLIC_BACKGROUND_COLOR           UIColorFromRGB(0xFF4080)  //UIColorFromRGB(0xCC3341) 苹果7红
+#define   PUBLIC_BACKGROUND_COLOR          UIColorFromRGB([ConverUtil getCurrentSkin])
 #define  KEY_COMMON_CORLOR                   PUBLIC_BACKGROUND_COLOR
 #define  KEY_DELETE_CORLOR                  UIColorFromRGB(0xFA8072)
 
@@ -492,3 +495,4 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 #pragma mark - EasyPR
 
 #define  KEY_AUTO_ADD_CONTACT        @"KEY_AUTO_ADD_CONTACT"
+#define  KEY_CURRENT_SKIN            @"KEY_CURRENT_SKIN"

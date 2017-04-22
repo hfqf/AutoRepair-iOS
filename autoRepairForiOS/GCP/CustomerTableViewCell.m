@@ -22,7 +22,14 @@
         [m_carCodeLab setFont:[UIFont systemFontOfSize:14]];
         [self addSubview:m_carCodeLab];
         
-        UIView *SEP = [[UIView alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2,0,0.5, 40)];
+        m_telLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, MAIN_WIDTH/2-20, 20)];
+        [m_telLab setFont:[UIFont systemFontOfSize:14]];
+        [m_telLab setTextAlignment:NSTextAlignmentLeft];
+        [self addSubview:m_telLab];
+        
+        
+        
+        UIView *SEP = [[UIView alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2,0,0.5, 60)];
         [SEP setBackgroundColor:KEY_COMMON_CORLOR];
         [self addSubview:SEP];
         
@@ -30,10 +37,22 @@
         [m_nameLab setFont:[UIFont systemFontOfSize:14]];
         [self addSubview:m_nameLab];
         
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0,39.5,MAIN_WIDTH,0.5)];
-        line.alpha = 0.3;
-        [line setBackgroundColor:KEY_COMMON_CORLOR];
-        [self addSubview:line];
+        m_carTypeLab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2+10, 30, MAIN_WIDTH/2-20, 20)];
+        [m_carTypeLab setFont:[UIFont systemFontOfSize:14]];
+        [m_carTypeLab setTextAlignment:NSTextAlignmentLeft];
+        
+  
+     
+        [self addSubview:m_carTypeLab];
+        
+        UIView *topLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, 0.5)];
+        topLine.backgroundColor = PUBLIC_BACKGROUND_COLOR;
+        [self addSubview:topLine];
+        
+        UIView *bottomLine = [[UIView alloc]initWithFrame:CGRectMake(0,59.5, MAIN_WIDTH, 0.5)];
+        bottomLine.backgroundColor = PUBLIC_BACKGROUND_COLOR;
+        [self addSubview:bottomLine];
+        
     }
     return self;
 }
@@ -43,5 +62,7 @@
 {
     [m_carCodeLab setText:infoData.m_userName];
     [m_nameLab setText:infoData.m_carCode];
+    [m_telLab setText:infoData.m_tel];
+    [m_carTypeLab setText:infoData.m_carType];
 }
 @end

@@ -26,4 +26,14 @@
  */
 +(NSData*) parseHexToByteArray:(NSString*) hexString;
 
++ (NSString *)convertHexStrToString:(NSString *)str;
+
+//将NSString转换成十六进制的字符串则可使用如下方式:
++ (NSString *)convertStringToHexStr:(NSString *)str;
+
++ (unsigned long)reverted:(NSString *)hex;
+
++ (unsigned long)getCurrentSkin;
+
++ (unsigned long)getCurrentSkin:(NSString *)hex;
 @end

@@ -20,6 +20,29 @@
 @end
 @implementation CustomerViewController
 
+- (id)initForSelectContact:(NSString *)key
+{
+    self.m_isAdd = YES;
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO];
+    if (self)
+    {
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        
+        
+        m_searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, HEIGHT_NAVIGATION)];
+        [m_searchBar setPlaceholder:@"可输入手机号码,车牌号,客户名搜索用户"];
+        [m_searchBar setText:key];
+        [m_searchBar setDelegate:self];
+        m_searchBar.showsCancelButton = YES;
+        self.tableView.tableHeaderView = m_searchBar;
+    }
+    return self;
+}
+
 - (id)initForAddRepair
 {
     self.m_isAdd = YES;
@@ -150,7 +173,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    return 60;
 }
 
 
@@ -173,6 +196,8 @@
     NSArray *arr = [self.m_arrData objectAtIndex:indexPath.section];
     ADTContacterInfo *info = [arr objectAtIndex:indexPath.row];
     cell.infoData = info;
+    
+  
     return cell;
 }
 

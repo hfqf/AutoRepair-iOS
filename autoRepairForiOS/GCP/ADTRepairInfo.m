@@ -24,16 +24,20 @@
     newRep.m_km = info[@"totalkm"];
     newRep.m_idFromNode = info[@"_id"];
     newRep.m_insertTime = info[@"inserttime"];
+    
     NSArray *arr = info[@"items"];
     NSInteger total = 0;
     
-    NSMutableArray *_insertArr = [NSMutableArray array];
-    for(NSDictionary *itemInfo in arr){
-        ADTRepairItemInfo *item = [ADTRepairItemInfo from:itemInfo];
-        [_insertArr addObject:item];
-        total+=item.m_currentPrice;
+    if([arr isKindOfClass:[NSArray class]])
+    {
+        NSMutableArray *_insertArr = [NSMutableArray array];
+        for(NSDictionary *itemInfo in arr){
+            ADTRepairItemInfo *item = [ADTRepairItemInfo from:itemInfo];
+            [_insertArr addObject:item];
+            total+=item.m_currentPrice;
+        }
+        newRep.m_arrRepairItem = _insertArr;
     }
-    newRep.m_arrRepairItem = _insertArr;
     newRep.m_totalPrice = total;
     return newRep;
 }

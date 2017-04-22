@@ -100,7 +100,7 @@
 {
     [self showWaitingView];
 
-    [HTTP_MANAGER queryAllRepair:[LoginUserUtil userTel]
+    [HTTP_MANAGER queryOneAllRepair:self.m_contact.m_carCode
                   successedBlock:^(NSDictionary *succeedResult) {
         [self removeWaitingView];
         if([succeedResult[@"code"]integerValue] == 1)
