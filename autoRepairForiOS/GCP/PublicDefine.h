@@ -10,8 +10,8 @@
 #define  XXT_xinjiang_PublicDefine_h
 
 
-#define  KEY_IS_DEV                                 0 //是否是测试环境
-#define  KEY_IS_DEVICE                              1 //是否是真机运行
+#define  KEY_IS_DEV                                 1 //是否是测试环境
+#define  KEY_IS_DEVICE                              0 //是否是真机运行
 #define  KEY_IS_PRODUCT_SERVER                      1 //是否是正式商用环境，否则是欲上线正式环境
 
 #define  SERVER                       KEY_IS_DEV ?( KEY_IS_DEVICE ? @"http://192.168.30.17:18080" : @"http://localhost:18080")   :          (KEY_IS_PRODUCT_SERVER ? @"http://autorepairhelper.duapp.com" :@"http://autoreview.duapp.com")
@@ -35,9 +35,14 @@
 #define  MAIN_WIDTH                   [UIScreen mainScreen].bounds.size.width
 #define  MAIN_FRAME                   [UIScreen mainScreen].bounds
 
-#define   PUBLIC_BACKGROUND_COLOR          UIColorFromRGB([ConverUtil getCurrentSkin])
+#define   PUBLIC_BACKGROUND_COLOR         KEY_COMMON_BLUE_CORLOR //  UIColorFromRGB([ConverUtil getCurrentSkin])
 #define  KEY_COMMON_CORLOR                   PUBLIC_BACKGROUND_COLOR
 #define  KEY_DELETE_CORLOR                  UIColorFromRGB(0xFA8072)
+#define  KEY_COMMON_BLUE_CORLOR                   UIColorFromRGB(0x03A9F4)
+#define  KEY_COMMON_LIGHT_BLUE_CORLOR                   UIColorFromRGB(0xb2e3f9)
+#define  KEY_COMMON_RED_CORLOR                   UIColorFromRGB(0XF44336)
+#define  KEY_COMMON_GREEN_CORLOR                   UIColorFromRGB(0X4CAF50)
+#define  KEY_COMMON_GRAY_CORLOR             UIColorFromRGB(0x787878)
 
 #define  PUBLIC_RELEASE(id) \
 {\
@@ -83,6 +88,13 @@ static inline CGSize CGSizeOfString(NSString * text, CGSize maxSize, UIFont * fo
         fitSize = [text sizeWithFont:font constrainedToSize:maxSize];
     }
     return fitSize;
+}
+
+static inline NSString *safeStringWith(id obj) {
+    if (obj == nil) {
+        return @"";
+    }
+    return [NSString stringWithFormat:@"%@", obj];
 }
 
 static inline NSString *StrFromObj(id obj) {
@@ -480,6 +492,8 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 #define KEY_AUTO_UDID_MODIFYED      @"KEY_AUTO_UDID_MODIFYED"
 #define KEY_AUTO_HEAD               @"KEY_AUTO_HEAD"
 #define KEY_AUTO_SHOP_NAME          @"KEY_AUTO_SHOP_NAME"
+#define KEY_AUTO_ADDRESS            @"KEY_AUTO_ADDRESS"
+#define KEY_AUTO_LOGIN              @"KEY_AUTO_LOGIN"
 #define KEY_UDID                     [[UIDevice currentDevice]identifierForVendor].UUIDString.length == 0 ? @"0" :  [[UIDevice currentDevice]identifierForVendor].UUIDString
 
 
@@ -492,6 +506,7 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 #define KEY_LOGINED_PWD             @"KEY_LOGINED_PWD"
 
 #define KEY_REPAIRS_SYNCED          @"KEY_REPAIRS_SYNCED"
+#define KEY_REPAIRS_UPDATED         @"KEY_REPAIRS_UPDATED"
 #pragma mark - EasyPR
 
 #define  KEY_AUTO_ADD_CONTACT        @"KEY_AUTO_ADD_CONTACT"

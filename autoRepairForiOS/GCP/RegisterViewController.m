@@ -88,6 +88,9 @@
                 [HTTP_MANAGER startRegisterWithName:self.accountInput.text
                                             withTel:self.telInput.text
                                             withPwd:self.pwdInput.text
+                                       withShopName:self.shopaNameInput.text
+                                        withAddress:self.addressInput.text
+                                        withChannel:self.channelInput.text
                                      successedBlock:^(NSDictionary *succeedResult) {
                                          [self removeWaitingView];
                                          if([succeedResult[@"code"]integerValue] == 1)
@@ -127,10 +130,6 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    if(textField == self.confirmPwdInput)
-    {
-        [self registerBtnClicked:nil];
-    }
     return YES;
 }
 

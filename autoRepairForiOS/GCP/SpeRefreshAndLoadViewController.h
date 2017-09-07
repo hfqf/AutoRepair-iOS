@@ -18,12 +18,23 @@
 
 @property (nonatomic,retain) SpeCommonTableView *tableView;
 @property (nonatomic,retain) EmptyTipView *m_emptyView;
+@property (nonatomic,assign) BOOL  m_isNeedNoneView;
+@property (nonatomic,assign) BOOL  m_isRequesting;
 @property (nonatomic,copy) NSArray *m_arrData;
+@property (nonatomic,copy) NSDictionary *m_parentInfo;
+
+
 
 - (id)initWithStyle:(UITableViewStyle)style
  withIsNeedPullDown:(BOOL)isNeedPullDownRefresh
 withIsNeedPullUpLoadMore:(BOOL)isNeesLoadMore
 withIsNeedBottobBar:(BOOL)isNeedBottom;
+
+- (id)initWithStyle:(UITableViewStyle)style
+ withIsNeedPullDown:(BOOL)isNeedPullDownRefresh
+withIsNeedPullUpLoadMore:(BOOL)isNeesLoadMore
+withIsNeedBottobBar:(BOOL)isNeedBottom
+withIsNeedNoneView:(BOOL)isNeedNoneView;
 
 - (id)initWithStyle:(UITableViewStyle)style
  withIsNeedPullDown:(BOOL)isNeedPullDownRefresh

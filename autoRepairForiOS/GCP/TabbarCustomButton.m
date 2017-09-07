@@ -9,6 +9,7 @@
 #import "TabbarCustomButton.h"
 #import "EGOImageView.h"
 
+#define WIDTH_IMAGE 25
 @implementation TabbarCustomButton
 
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *)title withUnselectedImg:(NSString *)unSelectedImg withSelectedImg:(NSString *)selecredImg withUnreadType:(ENUM_UNREAD_MESSAGE_TYPE)type
@@ -16,11 +17,14 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0,0, self.frame.size.width, HEIGHT_MAIN_BOTTOM)];
+        [self setImage:[UIImage imageNamed:unSelectedImg] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:selecredImg] forState:UIControlStateNormal];
+        [self setImageEdgeInsets:UIEdgeInsetsMake(2, (frame.size.width-WIDTH_IMAGE)/2,frame.size.height-WIDTH_IMAGE-2, (frame.size.width-WIDTH_IMAGE)/2)];
+        titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0,WIDTH_IMAGE, self.frame.size.width, HEIGHT_MAIN_BOTTOM-WIDTH_IMAGE)];
         [titleLab setBackgroundColor:[UIColor clearColor]];
         [titleLab setText:title];
         [titleLab setTextAlignment:NSTextAlignmentCenter];
-        [titleLab setFont:[UIFont boldSystemFontOfSize:20]];
+        [titleLab setFont:[UIFont systemFontOfSize:16]];
         [self addSubview:titleLab];
     }
     return self;
@@ -29,7 +33,7 @@
 - (void)setButton:(BOOL)isSelected
 {
     [self setBackgroundColor:[UIColor clearColor]];
-    [titleLab setTextColor: isSelected ? KEY_COMMON_CORLOR :UIColorFromRGB(0x787878)];
+    [titleLab setTextColor: isSelected ? KEY_COMMON_BLUE_CORLOR :UIColorFromRGB(0x787878)];
 }
 
 @end

@@ -10,11 +10,20 @@
 
 @interface RepairHistotyTableViewCell : UITableViewCell
 {
-    UILabel *m_lab1;
-    UILabel *m_labTime;
-    UILabel *m_lab2;
-    UILabel *m_lab3;
-    UILabel *m_lab4;
+    EGOImageView *m_head;
+    
+    UILabel *m_nameLab;
+    UILabel *m_isInShopLab;
+    UILabel *m_carInfoLab;
+    UILabel *m_statelab;
+    
+    UILabel *m_typelab;
+    UILabel *m_pricelab;
+    UIView *m_sep;
+    UILabel *m_enterTimelab;
+    UILabel *m_wantCompletedTimelab;
+    
+    UILabel *m_indeLab;
 }
 @property(nonatomic,strong)ADTRepairInfo *info;
 

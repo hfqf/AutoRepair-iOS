@@ -12,6 +12,8 @@
 
 + (BOOL)isTodayWith:(NSString *)dayTime;
 
++ (NSString *)getCurrentYear;
+
 + (NSString *)getCurrentTime;
 
 + (NSString *)getCurrentTime2;

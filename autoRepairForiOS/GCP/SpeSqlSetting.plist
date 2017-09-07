@@ -5,7 +5,7 @@
 	<key>dbName</key>
 	<string>local.db</string>
 	<key>dbVersion</key>
-	<integer>5</integer>
+	<integer>6</integer>
 	<key>dbTables</key>
 	<array>
 		<dict>
@@ -35,90 +35,28 @@
 					<key>idFromNode</key>
 					<string>TEXT</string>
 				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>repairHistoryTable</key>
-			<array>
 				<dict>
-					<key>ID</key>
-					<string>INTEGER PRIMARY KEY AUTOINCREMENT</string>
-				</dict>
-				<dict>
-					<key>carCode</key>
+					<key>inserttime</key>
 					<string>TEXT</string>
 				</dict>
 				<dict>
-					<key>totalKm</key>
+					<key>isbindweixin</key>
 					<string>TEXT</string>
 				</dict>
 				<dict>
-					<key>repairTime</key>
+					<key>weixinopenid</key>
 					<string>TEXT</string>
 				</dict>
 				<dict>
-					<key>repairType</key>
+					<key>vin</key>
 					<string>TEXT</string>
 				</dict>
 				<dict>
-					<key>addition</key>
+					<key>carregistertime</key>
 					<string>TEXT</string>
 				</dict>
 				<dict>
-					<key>tipCircle</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>isCloseTip</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>circle</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>isreaded</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>owner</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>idFromNode</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>insertTime</key>
-					<string>TEXT</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>repairchargetable</key>
-			<array>
-				<dict>
-					<key>repid</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>contactid</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>price</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>num</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>type</key>
-					<string>TEXT</string>
-				</dict>
-				<dict>
-					<key>id</key>
+					<key>headurl</key>
 					<string>TEXT</string>
 				</dict>
 			</array>

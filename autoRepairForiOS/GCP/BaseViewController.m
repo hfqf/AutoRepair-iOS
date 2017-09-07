@@ -7,10 +7,13 @@
 //
 
 #import "BaseViewController.h"
+#import "JHUD.h"
 @interface BaseViewController ()
 {
     UIImageView *_arrowDownImageView;   ///< 下拉菜单箭头
     NSArray *_pullDownMenuItems;    ///< 下拉菜单选项
+    
+    JHUD   *hudView;
 }
 
 @property (nonatomic, assign) BOOL showNavigationArrowFlag; ///< 是否显示下拉箭头，默认隐藏
@@ -65,7 +68,7 @@
     
     navigationBG = [[UIImageView alloc]initWithFrame:CGRectMake(0,0, MAIN_WIDTH, HEIGHT_NAVIGATION+DISTANCE_TOP)];
     navigationBG.userInteractionEnabled = YES;
-    [navigationBG setBackgroundColor:KEY_COMMON_CORLOR];
+    [navigationBG setBackgroundColor:UIColorFromRGB(0Xf6f6f6)];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:navigationBG];
     
@@ -73,25 +76,25 @@
     [backBtn setFrame:CGRectMake(0,DISTANCE_TOP,61,44)];
     [backBtn setBackgroundColor:[UIColor clearColor]];
     [backBtn setTitle:@"返回" forState:UIControlStateNormal];
-    [backBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backBtn setTitleColor:UIColorFromRGB(0x787878) forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [navigationBG addSubview:backBtn];
     
     title= [[UILabel alloc]initWithFrame:CGRectMake(100, DISTANCE_TOP+5, 120, 34)];
     [title setFrame:CGRectMake(20,5,MAIN_WIDTH-40, title.frame.size.height)];
     title.center = CGPointMake(MAIN_WIDTH/2.0, OS_ABOVE_IOS7?(HEIGHT_STATUSBAR+HEIGHT_NAVIGATION/2.0):HEIGHT_NAVIGATION/2.0);
-    [title setFont:[UIFont boldSystemFontOfSize:19]];
+    [title setFont:[UIFont systemFontOfSize:19]];
     [title setBackgroundColor:[UIColor clearColor]];
     title.hidden = NO;
     [title setText:self.title];
     [title setTextAlignment:NSTextAlignmentCenter];
-    [title setTextColor:[UIColor whiteColor]];
+    [title setTextColor:UIColorFromRGB(0x787878)];
     [self.view addSubview:title];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 
@@ -134,35 +137,25 @@
 
 - (void)showWaitingView
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.minSize  = CGSizeMake(80, 80);
-    UIImageView *waitView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,80, 80)];
-    [waitView setImage:[UIImage imageNamed:@"Icon@2x"]];
-    hud.customView = waitView;
-    hud.margin = 10.f;
-    hud.yOffset = 0;
-    hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:100];
+    hudView = [[JHUD alloc]initWithFrame:self.view.bounds];
+    [hudView setBackgroundColor:[UIColor clearColor]];
+    hudView.messageLabel.text = @"加载中...";
+    
+    [hudView showAtView:self.view hudType:JHUDLoadingTypeCircle];
 }
 
 - (void)showWaitingViewWith:(int)delay
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.minSize  = CGSizeMake(80, 80);
-    UIImageView *waitView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,80, 80)];
-    [waitView setImage:[UIImage imageNamed:@"Icon@2x"]];
-    hud.customView = waitView;
-    hud.margin = 10.f;
-    hud.yOffset = 0;
-    hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:delay];
+    hudView = [[JHUD alloc]initWithFrame:self.view.bounds];
+    
+    hudView.messageLabel.text = @"加载中...";
+    
+    [hudView showAtView:self.view hudType:JHUDLoadingTypeCircle];
 }
 
 - (void)removeWaitingView
 {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [hudView hide];
 }
 
 -(void)handleError:(NSString*)error

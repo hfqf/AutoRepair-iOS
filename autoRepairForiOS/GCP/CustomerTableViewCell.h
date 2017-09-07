@@ -10,6 +10,7 @@
 
 @interface CustomerTableViewCell : UITableViewCell
 {
+    EGOImageView *m_head;
     UILabel *m_carCodeLab;
     UILabel *m_nameLab;
     UILabel *m_telLab;

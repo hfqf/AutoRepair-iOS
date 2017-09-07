@@ -29,44 +29,21 @@ SINGLETON_FOR_HEADER(SqliteDataManager)
 ///同时还要修改所有 所有维修记录里的carcode
 - (BOOL)updateCustom:(NSDictionary *)info;
 
+- (BOOL)updateCustomer:(ADTContacterInfo *)info;
+
+- (BOOL)updateCustomHeadUrl:(NSString *)url;
+
 - (NSArray *)queryHistoryWithKey:(NSString *)key;
 
 - (BOOL)deleteCustomAndRepairHisotry:(NSString *)_id with:(NSString *)carCode;
 
-- (ADTContacterInfo *)contactWithCarCode:(NSString *)carCode;
+- (ADTContacterInfo *)contactWithCarCode:(NSString  *)carcode withContactId:(NSString *)contactId;
+
+- (ADTContacterInfo *)contactWithOpenId:(NSString  *)openId;
 
 - (NSArray *)quertAllCustoms:(NSString *)key;
 
 - (BOOL)deleteContacts;
 #pragma mark - end
 
-//#pragma mark - 维修记录
-//
-//- (BOOL)insertRepair:(ADTRepairInfo *)info;
-//
-//- (BOOL)makeOneHistory:(ADTRepairInfo *)info isClosed:(BOOL)isClosed;
-//
-//- (BOOL)updateOneHistory2Readed:(ADTRepairInfo *)info;
-//
-//- (BOOL)updateRepair:(ADTRepairInfo *)info;
-//
-//- (BOOL)deleteOneRepair:(ADTRepairInfo *)info;
-//
-//- (BOOL)deleteAllRepairWith:(NSString *)carCode;
-//
-//- (BOOL)deleteAllRepair;
-//
-//- (NSArray *)queryRepairs:(ADTContacterInfo *)custom;
-//
-//- (NSArray *)queryAllRepairs;
-//
-//- (NSArray *)queryTipRepair;
-//
-//#pragma mark - 维修记录收费详情
-//
-//- (BOOL)insertRepairItem:(ADTRepairItemInfo *)item;
-//
-//- (NSArray *)quertRrpairItemsWithRepId:(NSString *)repId;
-//
-//- (NSArray *)quertRrpairItemsWithContactId:(NSString *)contactId;
 @end

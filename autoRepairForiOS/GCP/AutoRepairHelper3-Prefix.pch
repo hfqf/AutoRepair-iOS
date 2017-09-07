@@ -36,5 +36,6 @@
     #import "ShareSdkUtil.h"
     #import "ConverUtil.h"
     #import "EGOCache.h"
-
+    #import "WareHouseGoods.h"
+    #import "NSDictionary+ValueCheck.h"
 #endif

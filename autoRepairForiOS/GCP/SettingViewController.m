@@ -10,7 +10,8 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "SpeSqliteUpdateManager.h"
 #import "EditUserViewController.h"
-@interface SettingViewController()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#import "SpeWebviewViewController.h"
+@interface SettingViewController()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 {
     UIWebView *web;
 }
@@ -47,6 +48,15 @@
     [super viewDidLoad];
     backBtn.hidden = YES;
     [title setText:@"我的"];
+    
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+    [addBtn setTitle:@"编辑" forState:UIControlStateNormal];
+    [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
+
+    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+    [navigationBG addSubview:addBtn];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -55,45 +65,55 @@
     [self requestData:YES];
 }
 
-#define INFO_HIGH 300
+- (void)addBtnClicked
+{
+    EditUserViewController *vc= [[EditUserViewController alloc]init];
+    vc.m_delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#define INFO_HIGH 230
 
 - (UIView *)createHeadView
 {
     UIView *bg = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, INFO_HIGH)];
     [bg setBackgroundColor:[UIColor clearColor]];
-    ClassIconImageView *head = [[ClassIconImageView alloc]initWithFrame:CGRectMake((MAIN_WIDTH-100)/2, 30, 100,100)];
+    EGOImageView *head = [[EGOImageView alloc]initWithFrame:CGRectMake((MAIN_WIDTH-100)/2, 30, 100,100)];
     head.userInteractionEnabled = YES;
     head.clipsToBounds = YES;
-    [head  setNewImage:[NSURL URLWithString:[LoginUserUtil headUrl]] WithSpeWith:1 withDefaultImg:@"ic_tabbar_compose_icon_add_highlighted"];
+    head.contentMode = UIViewContentModeScaleAspectFill;
+    [head setImageForAllSDK:[NSURL URLWithString:[LoginUserUtil headUrl]] withDefaultImage:[UIImage imageNamed:@"app_icon"]];
+
     [bg addSubview:head];
     
     UITapGestureRecognizer *updateHeadGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(updateHead)];
     [head addGestureRecognizer:updateHeadGest];
     
-    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(head.frame)+30, MAIN_WIDTH, 30)];
+    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(head.frame)+10, MAIN_WIDTH, 20)];
     [name setTextAlignment:NSTextAlignmentCenter];
-    [name setTextColor:PUBLIC_BACKGROUND_COLOR];
-    [name setFont:[UIFont boldSystemFontOfSize:30]];
+    [name setTextColor:KEY_COMMON_GRAY_CORLOR];
+    [name setFont:[UIFont systemFontOfSize:16]];
     [name setBackgroundColor:[UIColor clearColor]];
-    [name setText:[LoginUserUtil userName]];
+    [name setText:[NSString stringWithFormat:@"用户名:%@",[LoginUserUtil userName]]];
     [bg addSubview:name];
     
+    UILabel *shopName = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(name.frame), MAIN_WIDTH, 20)];
+    [shopName setTextAlignment:NSTextAlignmentCenter];
+    [shopName setTextColor:KEY_COMMON_GRAY_CORLOR];
+    [shopName setFont:[UIFont systemFontOfSize:14]];
+    [shopName setBackgroundColor:[UIColor clearColor]];
+    [shopName setText:[NSString stringWithFormat:@"门店名:%@",[LoginUserUtil shopName]]];
+    [bg addSubview:shopName];
     
-    UILabel *price = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(name.frame)+20, MAIN_WIDTH, 20)];
-    [price setTextAlignment:NSTextAlignmentCenter];
-    [price setTextColor:PUBLIC_BACKGROUND_COLOR];
-    [price setFont:[UIFont boldSystemFontOfSize:20]];
-    [price setBackgroundColor:[UIColor clearColor]];
-    [price setText:[NSString stringWithFormat:@"今天收入: %ld元",(long)self.m_totalPrice]];
-    [bg addSubview:price];
-    
-    UILabel *count = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(price.frame)+20, MAIN_WIDTH, 20)];
-    [count setTextAlignment:NSTextAlignmentCenter];
-    [count setTextColor:PUBLIC_BACKGROUND_COLOR];
-    [count setFont:[UIFont boldSystemFontOfSize:20]];
-    [count setBackgroundColor:[UIColor clearColor]];
-    [count setText:[NSString stringWithFormat:@"今天维修: %ld次",(long)self.m_totalCount]];
-    [bg addSubview:count];
+    UILabel *address = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(shopName.frame), MAIN_WIDTH, 35)];
+    address.numberOfLines = 0;
+    [address setTextAlignment:NSTextAlignmentCenter];
+    address.lineBreakMode = NSLineBreakByCharWrapping;
+    [address setTextColor:KEY_COMMON_GRAY_CORLOR];
+    [address setFont:[UIFont systemFontOfSize:14]];
+    [address setBackgroundColor:[UIColor clearColor]];
+    [address setText:[NSString stringWithFormat:@"门店地址:%@",[LoginUserUtil address]]];
+    [bg addSubview:address];
     return bg;
     
 }
@@ -110,12 +130,14 @@
 {
     self.m_arrData = @[
                        @"个人资料",
+                       @"今日入账",
                        @"最新公告",
-                       @"换肤",
-                       @"分享app给好友",
-                       @"去AppStore评论",
+                       @"微信公众号使用指南",
+                       @"将小助手分享给好友",
+                       @"去苹果商店写评论",
                        @"修改密码",
-                       @"退出"
+                       @"退出",
+                       @"仓库管理"
                        ];
     [self reloadDeals];
     
@@ -144,8 +166,11 @@
     {
         return INFO_HIGH;
     }
-
     if(indexPath.section == 1)
+    {
+        return 110;
+    }
+    if(indexPath.section == 2)
     {
         return 200;
     }
@@ -180,17 +205,13 @@
     {
         
         [cell addSubview:[self createHeadView]];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 220, 20)];
         [_tit setTextColor:UIColorFromRGB(0x4D4D4D)];
         [_tit setFont:[UIFont systemFontOfSize:16]];
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.section]];
         [cell addSubview:_tit];
-        
-        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, INFO_HIGH-0.5, MAIN_WIDTH, 0.5)];
-        [sep setBackgroundColor:UIColorFromRGB(0xdcdcdc)];
-        [cell addSubview:sep];
+    
     }
     else if(indexPath.section == 1)
     {
@@ -200,11 +221,33 @@
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.section]];
         [cell addSubview:_tit];
         
+        
+        UILabel *price = [[UILabel alloc]initWithFrame:CGRectMake(0,40, MAIN_WIDTH, 20)];
+        [price setTextAlignment:NSTextAlignmentCenter];
+        [price setTextColor:KEY_COMMON_GRAY_CORLOR];
+        [price setFont:[UIFont boldSystemFontOfSize:20]];
+        [price setBackgroundColor:[UIColor clearColor]];
+        [price setText:[NSString stringWithFormat:@"今天收入: ¥%ld",(long)self.m_totalPrice]];
+        [cell addSubview:price];
+        
+        UILabel *count = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(price.frame)+20, MAIN_WIDTH, 20)];
+        [count setTextAlignment:NSTextAlignmentCenter];
+        [count setTextColor:KEY_COMMON_GRAY_CORLOR];
+        [count setFont:[UIFont boldSystemFontOfSize:20]];
+        [count setBackgroundColor:[UIColor clearColor]];
+        [count setText:[NSString stringWithFormat:@"今天维修: %ld",(long)self.m_totalCount]];
+        [cell addSubview:count];
      
+    }
+    else if(indexPath.section == 2)
+    {
+        UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 200, 20)];
+        [_tit setTextColor:UIColorFromRGB(0x4D4D4D)];
+        [_tit setFont:[UIFont systemFontOfSize:16]];
+        [_tit setText:[self.m_arrData objectAtIndex:indexPath.section]];
+        [cell addSubview:_tit];
+        
         [cell addSubview:web];
-        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, 199.5, MAIN_WIDTH, 0.5)];
-        [sep setBackgroundColor:UIColorFromRGB(0xdcdcdc)];
-        [cell addSubview:sep];
     }
     else
     {
@@ -214,10 +257,7 @@
         [_tit setFont:[UIFont systemFontOfSize:16]];
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.section]];
         [cell addSubview:_tit];
-        
-        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(00, 79.5, MAIN_WIDTH, 0.5)];
-        [sep setBackgroundColor:UIColorFromRGB(0xdcdcdc)];
-        [cell addSubview:sep];
+    
     }
     return cell;
 }
@@ -226,33 +266,54 @@
 {
     if(indexPath.section == 0)
     {
-        EditUserViewController *vc= [[EditUserViewController alloc]init];
-        vc.m_delegate = self;
-        [self.navigationController pushViewController:vc animated:YES];
+      
     }
     else if(indexPath.section == 1)
     {
         
-    }
-    else if (indexPath.section == 2)
+    }else if(indexPath.section == 2)
     {
-        [self.navigationController pushViewController:[[NSClassFromString(@"ChangeSkinViewController") alloc]init] animated:YES];
+        
     }
     else if (indexPath.section == 3)
     {
-        [ShareSdkUtil startShare:@"汽修小助手是为个人和中小型汽车修理厂商提供一个管理客户及修理记录的工具。" url:@"https://itunes.apple.com/cn/app/%E6%B1%BD%E4%BF%AE%E5%B0%8F%E5%8A%A9%E6%89%8B/id1106728499?mt=8" title:@"分享汽修小助手"];
+        SpeWebviewViewController *webVC = [[SpeWebviewViewController alloc]initWithUrl:@"http://mp.weixin.qq.com/s?__biz=MzIyMzg5Njc4Mg==&mid=2247483662&idx=1&sn=f0a9af0bacfca75b9b04b4d4aee3f8b2&chksm=e81674afdf61fdb9b7160d2fd72354e44e927360105cebd478f31c1198761dac501abb16b7e8&mpshare=1&scene=23&srcid=0807PP6HLwRGmnp5Kx2QnFTc#rd" withTitle:@"微信公众号使用指南"];
+        [self.navigationController pushViewController:webVC animated:YES];
     }
     else if (indexPath.section == 4)
     {
-        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/%E6%B1%BD%E4%BF%AE%E5%B0%8F%E5%8A%A9%E6%89%8B/id1106728499?mt=8"]];
+        [ShareSdkUtil startShare:@"汽修小助手是为个人和中小型汽车修理厂商提供一个管理客户及修理记录的工具。" url:@"https://itunes.apple.com/cn/app/%E6%B1%BD%E4%BF%AE%E5%B0%8F%E5%8A%A9%E6%89%8B/id1106728499?mt=8" title:@"分享汽修小助手"];
     }
     else if (indexPath.section == 5)
     {
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/%E6%B1%BD%E4%BF%AE%E5%B0%8F%E5%8A%A9%E6%89%8B/id1106728499?mt=8"]];
+    }
+    else if (indexPath.section == 6)
+    {
         [self.navigationController pushViewController:[[NSClassFromString(@"ResetPwdViewController") alloc]init] animated:YES];
+    }
+    else if (indexPath.section == 7)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确定退出?" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 1;
+        [alert show];
     }
     else
     {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+
+         [self.navigationController pushViewController:[[NSClassFromString(@"WareHouseManagerViewController") alloc]init] animated:YES];
+     
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.tag == 1){
+        if(buttonIndex == 1){
+            [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:KEY_AUTO_LOGIN];
+            [[EGOCache globalCache]clearCache];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     }
 }
 
@@ -348,11 +409,11 @@
  didFinishPickingMediaWithInfo: (NSDictionary *) info
 {
     [self showWaitingView];
-    UIImage *image = [info objectForKey: UIImagePickerControllerOriginalImage];
+    UIImage *image = [info objectForKey: UIImagePickerControllerEditedImage];
     [self dismissViewControllerAnimated:NO completion:NULL];
     NSString *path = [LocalImageHelper saveImage:image];
     
-    NSString *fileName = [LocalTimeUtil getCurrentTime2];
+    NSString *fileName = [NSString stringWithFormat:@"%@",[LocalTimeUtil getCurrentTime2]];
     [HTTP_MANAGER uploadBOSFile:path
                    withFileName: fileName
                  successedBlock:^(NSDictionary *succeedResult) {

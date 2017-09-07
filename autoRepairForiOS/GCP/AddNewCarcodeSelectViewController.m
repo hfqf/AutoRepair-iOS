@@ -22,13 +22,20 @@
 
 @implementation AddNewCarcodeSelectViewController
 
-- (id)init
+- (id)initWith:(NSString *)carcode
 {
+    self.m_carcodeInfo = [NSMutableDictionary dictionary];
+
+    if(carcode.length == 7){
+        for(NSInteger i=0;i<NUM_CARCODE;i++){
+            [self.m_carcodeInfo setObject:[carcode substringWithRange:NSMakeRange(i, 1)] forKey:@(i)];
+        }
+    }
+    
     
     self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO];
     if (self)
     {
-        self.m_carcodeInfo = [NSMutableDictionary dictionary];
         self.m_inputIndex = 0;
         self.m_arrProvice = @[@"京",@"津",@"沪",@"渝",@"冀",
                               @"豫",@"云",@"辽",@"黑",@"湘",
@@ -38,8 +45,8 @@
                               @"粤",@"青",@"藏",@"川",@"宁",
                               @"琼"];
         self.m_arrCharacter = @[@"A",@"B",@"C",@"D",@"E",
-                                @"F",@"G",@"H",@"I",@"J",
-                                @"K",@"L",@"M",@"N",@"O",
+                                @"F",@"G",@"H",@"J",
+                                @"K",@"L",@"M",@"N",
                                 @"P",@"Q",@"R",@"S",@"T",
                                 @"U",@"V",@"W",@"X",@"Y",
                                 @"Z",];
@@ -94,9 +101,9 @@
     [title setText:@"填写车牌号"];
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(confirmBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-60, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
     [addBtn setTitle:@"确认" forState:UIControlStateNormal];
-    [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
 }
 
@@ -272,7 +279,6 @@
 
 - (void)proviceInputBtnClicked:(UIButton *)btn
 {
-    [PubllicMaskViewHelper showTipViewWith:self.m_arrProvice[btn.tag] inSuperView:self.view  withDuration:0.5];
     [self.m_carcodeInfo setObject:self.m_arrProvice[btn.tag] forKey:@(self.m_inputIndex)];
     self.m_inputIndex++;
     [self requestData:YES];
@@ -285,7 +291,6 @@
         [PubllicMaskViewHelper showTipViewWith:@"车牌号位数已填满" inSuperView:self.view  withDuration:1];
         return;
     }
-    [PubllicMaskViewHelper showTipViewWith:self.m_arrCharacter[btn.tag] inSuperView:self.view  withDuration:0.5];
     [self.m_carcodeInfo setObject:self.m_arrCharacter[btn.tag] forKey:@(self.m_inputIndex)];
     self.m_inputIndex++;
     [self requestData:YES];
@@ -298,7 +303,6 @@
         [PubllicMaskViewHelper showTipViewWith:@"车牌号位数已填满" inSuperView:self.view  withDuration:1];
         return;
     }
-    [PubllicMaskViewHelper showTipViewWith:self.m_arrNum[btn.tag] inSuperView:self.view  withDuration:0.5];
     [self.m_carcodeInfo setObject:self.m_arrNum[btn.tag] forKey:@(self.m_inputIndex)];
     self.m_inputIndex++;
     [self requestData:YES];

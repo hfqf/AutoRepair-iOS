@@ -87,7 +87,13 @@
 
 + (NSString *)shopName;
 
++ (BOOL)isAutoLogined;
+
++ (NSString *)address;
+
 + (NSString *)headUrl;
+
++ (NSString *)contactHeadUrl:(NSString *)url;
 
 + (NSString *)totalMoneyOfToday;
 

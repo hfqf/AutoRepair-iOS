@@ -6,61 +6,120 @@
 //  Copyright (c) 2015年 Poitns. All rights reserved.
 //
 
+#define STATE_WIDTH  100
+#define HEAD_WIDTH   60
 #import "RepairHistotyTableViewCell.h"
-
+#import "EGOImageView+SetImage.h"
 @implementation RepairHistotyTableViewCell
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
-        m_lab1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 5,MAIN_WIDTH/2-10, 20)];
-        m_lab1.font = [UIFont systemFontOfSize:14];
-        m_lab1.textColor = UIColorFromRGB(0x1A1A1A);
+        m_head = [[EGOImageView alloc]initWithFrame:CGRectMake(10, 10, HEAD_WIDTH, HEAD_WIDTH)];
+        m_head.layer.cornerRadius = 2;
+        m_head.userInteractionEnabled = YES;
+        [self addSubview:m_head];
         
-        m_labTime = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2, 5,MAIN_WIDTH/2, 20)];
-        m_labTime.font = [UIFont systemFontOfSize:12];
-        [m_labTime setTextAlignment:NSTextAlignmentLeft];
-        [m_labTime  setTextColor:UIColorFromRGB(0x878787)];
+        m_nameLab = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(m_head.frame)+10,HEAD_WIDTH+20,15)];
+        m_nameLab.font = [UIFont systemFontOfSize:12];
+        [m_nameLab setTextAlignment:NSTextAlignmentCenter];
+        m_nameLab.textColor = UIColorFromRGB(0x444444);
+        [self addSubview:m_nameLab];
         
-        m_lab2 = [[UILabel alloc]initWithFrame:CGRectMake(10, 30,MAIN_WIDTH-20, 20)];
-        m_lab2.font = [UIFont systemFontOfSize:13];
-        [m_lab2  setTextColor:UIColorFromRGB(0x878787)];
+        m_isInShopLab = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(m_nameLab.frame)+5,HEAD_WIDTH+20,15)];
+        m_isInShopLab.font = [UIFont systemFontOfSize:12];
+        [m_isInShopLab setTextAlignment:NSTextAlignmentCenter];
+        m_isInShopLab.textColor = UIColorFromRGB(0x444444);
+        [self addSubview:m_isInShopLab];
+        
+        m_carInfoLab = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(m_head.frame)+10,10,MAIN_WIDTH-(HEAD_WIDTH+20)-50,20)];
+        m_carInfoLab.font = [UIFont systemFontOfSize:15];
+        [m_carInfoLab setTextAlignment:NSTextAlignmentLeft];
+        m_carInfoLab.textColor = UIColorFromRGB(0X0A0A0A);
+        [self addSubview:m_carInfoLab];
+        
+        m_typelab = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(m_head.frame)+10,CGRectGetMaxY(m_carInfoLab.frame),MAIN_WIDTH-(HEAD_WIDTH)-80,34)];
+        m_typelab.font = [UIFont systemFontOfSize:13];
+        [m_typelab setBackgroundColor:[UIColor clearColor]];
+        m_typelab.numberOfLines = 0;
+        m_typelab.lineBreakMode = NSLineBreakByTruncatingTail;
+        [m_typelab setTextAlignment:NSTextAlignmentLeft];
+        m_typelab.textColor = UIColorFromRGB(0x404040);
+        [self addSubview:m_typelab];
+        
+        
+        m_pricelab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH-80,35,70, 20)];
+        m_pricelab.font = [UIFont systemFontOfSize:12];
+        [m_pricelab setTextAlignment:NSTextAlignmentRight];
+        m_pricelab.textColor = UIColorFromRGB(0x404040);
+        [self addSubview:m_pricelab];
+        
+        m_sep = [[UIView alloc]initWithFrame:CGRectMake((HEAD_WIDTH+20),CGRectGetMaxY(m_typelab.frame)+5, MAIN_WIDTH-(HEAD_WIDTH+20), 0.5)];
+        m_sep.backgroundColor = UIColorFromRGB(0xDBDBDB);
+        [self addSubview:m_sep];
+        
 
-        m_lab3 = [[UILabel alloc]initWithFrame:CGRectMake(10, 55,MAIN_WIDTH-20, 20)];
-        m_lab3.font = [UIFont systemFontOfSize:12];
-        [m_lab3  setTextColor:UIColorFromRGB(0x707070)];
-
-        m_lab4 = [[UILabel alloc]initWithFrame:CGRectMake(10, 80,MAIN_WIDTH-20, 20)];
-        [m_lab4 setTextColor:UIColorFromRGB(0x707070)];
-        m_lab4.font = [UIFont systemFontOfSize:12];
+        m_statelab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH-60, 10,50, 25)];
+        m_statelab.font = [UIFont systemFontOfSize:14];
+        m_statelab.layer.cornerRadius = 2;
+        [m_statelab setTextAlignment:NSTextAlignmentCenter];
+        m_statelab.textColor =[UIColor whiteColor];
+        [self addSubview:m_statelab];
         
-        [self addSubview:m_lab2];
-        [self addSubview:m_lab1];
-        [self addSubview:m_lab3];
-        [self addSubview:m_lab4];
-        [self addSubview:m_labTime];
+        m_enterTimelab = [[UILabel alloc]initWithFrame:CGRectMake((HEAD_WIDTH+20),CGRectGetMaxY(m_sep.frame)+8, MAIN_WIDTH-(HEAD_WIDTH+20)-50, 18)];
+        m_enterTimelab.font = [UIFont systemFontOfSize:12];
+        [m_enterTimelab setTextAlignment:NSTextAlignmentLeft];
+        m_enterTimelab.textColor = UIColorFromRGB(0x404040);
+        [self addSubview:m_enterTimelab];
         
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        m_wantCompletedTimelab = [[UILabel alloc]initWithFrame:CGRectMake((HEAD_WIDTH+20),CGRectGetMaxY(m_enterTimelab.frame)+3, MAIN_WIDTH-(HEAD_WIDTH+20)-50, 18)];
+        m_wantCompletedTimelab.font = [UIFont systemFontOfSize:12];
+        [m_wantCompletedTimelab setTextAlignment:NSTextAlignmentLeft];
+        m_wantCompletedTimelab.textColor = UIColorFromRGB(0x404040);
+        [self addSubview:m_wantCompletedTimelab];
+        
+        m_indeLab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH-40,CGRectGetMaxY(m_enterTimelab.frame), 30, 20)];
+        m_indeLab.font = [UIFont systemFontOfSize:14];
+        [m_indeLab setTextAlignment:NSTextAlignmentRight];
+        m_indeLab.textColor = KEY_COMMON_BLUE_CORLOR;
+        [self addSubview:m_indeLab];
+        
+        self.accessoryType = UITableViewCellAccessoryNone;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0,99.5,MAIN_WIDTH,0.5)];
-        line.alpha = 0.3;
-        [line setBackgroundColor:KEY_COMMON_CORLOR];
-        [self addSubview:line];
     }
     return self;
 }
 
 - (void)setInfo:(ADTRepairInfo *)info
 {
-    ADTContacterInfo *contact = [DB_Shared contactWithCarCode:info.m_carCode];
+    ADTContacterInfo *contact = [DB_Shared contactWithCarCode:info.m_carCode withContactId:info.m_idFromNode];
     _info = info;
-    [m_lab1 setText:[NSString stringWithFormat:@"客户 : %@",contact.m_userName]];
-    [m_lab2 setText:[NSString stringWithFormat:@"保养项目: %@",info.m_repairType]];
-    [m_lab3 setText:[NSString stringWithFormat:@"备注 : %@",info.m_more]];
-    [m_labTime setText:[NSString stringWithFormat:@"登记时间:%@",info.m_insertTime]];
-    [m_lab4 setText:[NSString stringWithFormat:@"总收费 : %ld",(long)info.m_totalPrice]];
+    [m_head setImageForAllSDK:[NSURL URLWithString:[LoginUserUtil contactHeadUrl:contact.m_strHeadUrl]] withDefaultImage:[UIImage imageNamed:@"app_icon"]];
+    [m_nameLab setText:contact.m_userName];
+    [m_isInShopLab setText:[info.m_iswatiinginshop integerValue] == 1 ? @"在店等":@"不在店等"];
+    [m_carInfoLab setText:[NSString stringWithFormat:@"%@ %@",contact.m_carCode,contact.m_carType]];
+    if([info.m_state integerValue] == 0){
+        [m_statelab setBackgroundColor:KEY_COMMON_LIGHT_BLUE_CORLOR];
+        [m_statelab setText:@"维修中"];
+    }else if ([info.m_state integerValue] == 1){
+        [m_statelab setBackgroundColor:KEY_COMMON_BLUE_CORLOR];
+        [m_statelab setText:@"已修完"];
+    }else if ([info.m_state integerValue] == 2){
+        [m_statelab setBackgroundColor:KEY_COMMON_GREEN_CORLOR];
+        [m_statelab setText:@"已提车"];
+    }else if ([info.m_state integerValue] == 3){
+        [m_statelab setBackgroundColor:KEY_COMMON_GRAY_CORLOR];
+        [m_statelab setText:@"已取消"];
+    }
+    
+    [m_typelab setText:[NSString stringWithFormat:@"服务项目:%@",info.m_repairType]];
+    
+    [m_pricelab setText:[NSString stringWithFormat:@"¥ %ld",(long)info.m_totalPrice]];
+    
+    [m_enterTimelab setText:[NSString stringWithFormat:@"进入门店时间:  %@",info.m_entershoptime]];
+    [m_wantCompletedTimelab setText:[NSString stringWithFormat:@"%@:  %@",[info.m_state isEqualToString:@"2"] ? @"实际提车时间":@"预计提车时间",info.m_wantedcompletedtime]];
+    [m_indeLab setText:info.m_index];
 }
 
 @end

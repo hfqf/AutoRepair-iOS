@@ -18,7 +18,7 @@
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
     //通用参数设置
     [shareParams SSDKSetupShareParamsByText:content
-                                    images:@[[UIImage imageNamed:@"icon"]]
+                                    images:@[[UIImage imageNamed:@"app_icon"]]
                                        url:[NSURL URLWithString:url]
                                      title:title
                                       type:SSDKContentTypeAuto];

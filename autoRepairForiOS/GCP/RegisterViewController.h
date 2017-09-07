@@ -14,5 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwdInput;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPwdInput;
 @property (weak, nonatomic) IBOutlet UIButton *commitBtn;
+@property (weak, nonatomic) IBOutlet UITextField *addressInput;
+@property (weak, nonatomic) IBOutlet UITextField *shopaNameInput;
+@property (weak, nonatomic) IBOutlet UITextField *channelInput;
 
 @end

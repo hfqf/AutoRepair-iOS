@@ -10,6 +10,7 @@
 #import "AddRepairHistoryViewController.h"
 #import "CustomerViewController.h"
 #import "RepairHistotyTableViewCell.h"
+#import "WorkroomAddOrEditViewController.h"
 @interface NewTipViewController()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -18,7 +19,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:YES];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:YES withIsNeedNoneView:YES];
     if (self)
     {
         self.tableView.delegate = self;
@@ -33,6 +34,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self requestData:YES];
 }
 
 
@@ -43,17 +45,16 @@
 {
     [super viewDidLoad];
     backBtn.hidden = YES;
-    [title setText:@"到期记录"];
-    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-90, DISTANCE_TOP,80, HEIGHT_NAVIGATION)];
-    [addBtn setTitle:@"添加纪录" forState:UIControlStateNormal];
-    [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [navigationBG addSubview:addBtn];
+    [title setText:@"到期提醒"];
+//    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+//    [addBtn setFrame:CGRectMake(MAIN_WIDTH-90, DISTANCE_TOP,80, HEIGHT_NAVIGATION)];
+//    [addBtn setTitle:@"添加纪录" forState:UIControlStateNormal];
+//    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+//    [navigationBG addSubview:addBtn];
     
     
     //登录完后的数据回来后再次刷新
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(forceRefresh) name:KEY_REPAIRS_SYNCED object:nil];
 }
 
 - (void)forceRefresh
@@ -71,7 +72,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 120;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -94,11 +95,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ADTRepairInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
-    info.m_isAddNewRepair = NO;
-    AddRepairHistoryViewController *vc = [[AddRepairHistoryViewController alloc]initWithInfo:info];
-    vc.m_delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+//    ADTRepairInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
+//    info.m_isAddNewRepair = NO;
+//    AddRepairHistoryViewController *vc = [[AddRepairHistoryViewController alloc]initWithInfo:info];
+//    vc.m_delegate = self;
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    ADTRepairInfo *rep = [self.m_arrData objectAtIndex:indexPath.row];
+    WorkroomAddOrEditViewController *add = [[WorkroomAddOrEditViewController alloc]initWith:rep];
+    [self.navigationController pushViewController:add animated:YES];
 }
 
 - (void)requestData:(BOOL)isRefresh
@@ -114,8 +119,12 @@
                                NSMutableArray *_arrInsert = [NSMutableArray array];
                                for(NSDictionary *info in arr)
                                {
-                                   ADTRepairInfo *rep = [ADTRepairInfo from:info];
-                                   [_arrInsert addObject:rep];
+                                   ADTRepairInfo *_rep = [ADTRepairInfo from:info];
+                                   _rep.m_index = [NSString stringWithFormat:@"%ld", (long)[arr indexOfObject:info]+1];
+                                   ADTContacterInfo *con = [DB_Shared contactWithCarCode:_rep.m_carCode withContactId:_rep.m_contactid];
+                                   if(con){
+                                       [_arrInsert addObject:_rep];
+                                   }
                                }
                                self.m_arrData = _arrInsert;
                            }

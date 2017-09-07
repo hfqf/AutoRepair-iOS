@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ADTContacterInfo.h"
 
 @interface ADTRepairInfo : NSObject
-@property (nonatomic,strong)NSString *m_Id;
 @property (nonatomic,strong)NSString *m_carCode;
 @property (nonatomic,strong)NSString *m_km;
 @property (nonatomic,strong)NSString *m_time;
@@ -26,5 +26,16 @@
 @property (nonatomic,assign)BOOL   m_isAddNewRepair;
 @property (nonatomic,strong)NSMutableArray  *m_arrRepairItem;///维续内容，个数，价格
 
+@property (nonatomic,strong)NSString*   m_entershoptime;
+@property (nonatomic,strong)NSString *m_state;
+@property (nonatomic,strong)NSString *m_wantedcompletedtime;
+@property (nonatomic,strong)NSString *m_customremark;
+@property (nonatomic,strong)NSString *m_iswatiinginshop;
+@property (nonatomic,strong)NSString *m_contactid;
+@property (nonatomic,strong)NSString *m_index;
 + (ADTRepairInfo *)from:(NSDictionary *)info;
+
++ (ADTRepairInfo *)initWith:(ADTContacterInfo *)contact;
+
+- (void)updateTotalPrice;
 @end

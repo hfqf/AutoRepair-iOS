@@ -8,16 +8,18 @@
 
 #import "RepairPrintViewController.h"
 #import "CustomerViewController.h"
-@interface RepairPrintViewController ()<UIWebViewDelegate,UITableViewDataSource,UITableViewDelegate,CustomerViewControllerDelegate>
+@interface RepairPrintViewController ()<UIWebViewDelegate,UITableViewDataSource,UITableViewDelegate,CustomerViewControllerDelegate,UIActionSheetDelegate>
 {
     UIWebView *m_web;
     UITextField *m_input1;
     UITextField *m_input2;
+    UIButton *typeBtn;
     UITextField *m_input3;
 }
 @property(nonatomic,strong) NSString *m_startTime;
 @property(nonatomic,strong) NSString *m_endTime;
 @property(nonatomic,strong) ADTContacterInfo *m_selectContact;
+@property(assign)NSInteger  m_type;
 @end
 
 @implementation RepairPrintViewController
@@ -26,43 +28,69 @@
     self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:YES];
     if (self)
     {
+        self.m_type = 0;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
-        UIView *bg = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame), MAIN_WIDTH, 210)];
+        UIView *bg = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame), MAIN_WIDTH, 150)];
 
         self.tableView.tableHeaderView = bg;
         
-        m_input1 = [[UITextField alloc]initWithFrame:CGRectMake(20, 10, MAIN_WIDTH-40, 40)];
+        m_input1 = [[UITextField alloc]initWithFrame:CGRectMake(5,5, (MAIN_WIDTH-20)/2, 30)];
         m_input1.delegate = self;
         [m_input1 setPlaceholder:@"输入查询的开始时间"];
+        [m_input1 setText:[NSString stringWithFormat:@"%@-01-01 00:00:00",[LocalTimeUtil getCurrentYear]]];
+        self.m_startTime = m_input1.text;
         [m_input1 setTextAlignment:NSTextAlignmentCenter];
         m_input1.layer.cornerRadius = 2;
         m_input1.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
         m_input1.layer.borderWidth = 0.5;
         [m_input1 setTextColor:[UIColor blackColor]];
-        [m_input1 setFont:[UIFont systemFontOfSize:20]];
+        [m_input1 setFont:[UIFont systemFontOfSize:14]];
         [m_input1 setBackgroundColor:[UIColor clearColor]];
         [bg addSubview:m_input1];
         [m_input1 setInputView:[self getSelectTimePicker:0]];
         
-        m_input2 = [[UITextField alloc]initWithFrame:CGRectMake(20, 60, MAIN_WIDTH-40, 40)];
+        m_input2 = [[UITextField alloc]initWithFrame:CGRectMake((MAIN_WIDTH-20)/2+15,5, (MAIN_WIDTH-20)/2, 30)];
         m_input2.delegate = self;
         m_input2.layer.cornerRadius = 2;
         m_input2.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
         m_input2.layer.borderWidth = 0.5;
         [m_input2 setPlaceholder:@"输入查询的结束时间"];
+        [m_input2 setText:[NSString stringWithFormat:@"%@ 23:59:59",[LocalTimeUtil getLocalTimeWith:[NSDate date]]]];
+        self.m_endTime = m_input2.text;
         [m_input2 setTextAlignment:NSTextAlignmentCenter];
         [m_input2 setTextColor:[UIColor blackColor]];
-        [m_input2 setFont:[UIFont systemFontOfSize:20]];
+        [m_input2 setFont:[UIFont systemFontOfSize:14]];
         [m_input2 setBackgroundColor:[UIColor clearColor]];
         [bg addSubview:m_input2];
         [m_input2 setInputView:[self getSelectTimePicker:1]];
         
-        m_input3 = [[UITextField alloc]initWithFrame:CGRectMake(20, 110, MAIN_WIDTH-40, 40)];
+         typeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [typeBtn setFrame:CGRectMake(5, 75, MAIN_WIDTH-10, 30)];
+        if(self.m_type == 0){
+            [typeBtn setTitle:@"选择查询维修类型" forState:UIControlStateNormal];
+        }else if(self.m_type == 1){
+            [typeBtn setTitle:@"维修中" forState:UIControlStateNormal];
+        }else if(self.m_type == 2){
+            [typeBtn setTitle:@"已修完" forState:UIControlStateNormal];
+        }else if(self.m_type == 3){
+            [typeBtn setTitle:@"已提车" forState:UIControlStateNormal];
+        }else if(self.m_type == 4){
+            [typeBtn setTitle:@"已取消" forState:UIControlStateNormal];
+        }
+        
+        typeBtn.layer.cornerRadius =2;
+        [typeBtn addTarget:self action:@selector(typeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [typeBtn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
+        [typeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [typeBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
+        [bg addSubview:typeBtn];
+        
+        m_input3 = [[UITextField alloc]initWithFrame:CGRectMake(5,40, MAIN_WIDTH-10, 30)];
         m_input3.layer.cornerRadius = 2;
         m_input3.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
         m_input3.delegate = self;
@@ -76,10 +104,10 @@
         [bg addSubview:m_input3];
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setFrame:CGRectMake(20, 160, MAIN_WIDTH-40, 40)];
+        [btn setFrame:CGRectMake(5,110, MAIN_WIDTH-10, 30)];
         btn.layer.cornerRadius =2;
         [btn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
-        [btn setTitle:@"开始搜索维修记录" forState:UIControlStateNormal];
+        [btn setTitle:@"开始查询维修记录" forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
         [bg addSubview:btn];
@@ -92,6 +120,15 @@
     }
     return self;
 }
+
+- (void)typeBtnClicked
+{
+    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择查询类型" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"所有",@"维修中",@"已修完",@"已提车",@"已取消", nil];
+    act.tag = 0;
+    [act showInView:self.view];
+    
+}
+
 
 - (void)selectContactClicked
 {
@@ -136,12 +173,25 @@
 - (void)requestData:(BOOL)isRefresh
 {
     [self refreshWebView];
+    self.m_arrData = @[@""];
     [self reloadDeals];
+    if(self.m_type == 0){
+        [typeBtn setTitle:@"选择查询维修类型,默认所有类型" forState:UIControlStateNormal];
+    }else if(self.m_type == 1){
+        [typeBtn setTitle:@"维修中" forState:UIControlStateNormal];
+    }else if(self.m_type == 2){
+        [typeBtn setTitle:@"已修完" forState:UIControlStateNormal];
+    }else if(self.m_type == 3){
+        [typeBtn setTitle:@"已提车" forState:UIControlStateNormal];
+    }else if(self.m_type == 4){
+        [typeBtn setTitle:@"已取消" forState:UIControlStateNormal];
+    }
 }
 
 - (void)refreshWebView
 {
-    NSString *urlString= [NSString stringWithFormat:@"%@/repair/print?owner=%@&carcode=%@&start=%@&end=%@",SERVER,[LoginUserUtil userTel],self.m_selectContact ? self.m_selectContact.m_carCode : @"",self.m_startTime,self.m_endTime];
+    NSString *urlString=self.m_type == 0 ? [NSString stringWithFormat:@"%@/repair/print?owner=%@&carcode=%@&start=%@&end=%@",SERVER,[LoginUserUtil userTel],self.m_selectContact ? self.m_selectContact.m_carCode : @"",self.m_startTime,self.m_endTime] :
+        [NSString stringWithFormat:@"%@/repair/print?owner=%@&carcode=%@&start=%@&end=%@&type=%ld",SERVER,[LoginUserUtil userTel],self.m_selectContact ? self.m_selectContact.m_carCode : @"",self.m_startTime,self.m_endTime,self.m_type];
     // 将地址编码
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     // 实例化NSMutableURLRequest，并进行参数配置
@@ -231,15 +281,19 @@
     
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-60, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
-    [addBtn setTitle:@"分享" forState:UIControlStateNormal];
-    [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-HEIGHT_NAVIGATION, DISTANCE_TOP, HEIGHT_NAVIGATION, HEIGHT_NAVIGATION)];
+   // [addBtn setTitle:@"分享" forState:UIControlStateNormal];
+    [addBtn setImage:[UIImage imageNamed:@"moresetting"] forState:UIControlStateNormal];
+    [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
+    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
 }
 
 - (void)addBtnClicked
 {
-    [ShareSdkUtil startShare:@"统计" url:m_web.request.URL.absoluteString title:@"统计数据"];
+    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"复制分享当前统计数据的网址,可通过电脑打印",@"直接打印", nil];
+    act.tag = 1000;
+    [act showInView:self.view];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -270,7 +324,6 @@
 {
     if(textField == m_input3)
     {
-
 //        [self selectContactClicked];
         return YES;
     }
@@ -311,5 +364,50 @@
 {
     self.m_selectContact = contact;
     [m_input3 setText:contact.m_userName];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(actionSheet.tag == 0){
+        if(buttonIndex == 0){
+            self.m_type = 0;
+        }else if(buttonIndex == 1){
+            self.m_type = 1;
+        }else if(buttonIndex == 2){
+            self.m_type = 2;
+        }else if(buttonIndex == 3){
+            self.m_type = 3;
+        }else if(buttonIndex == 4){
+            self.m_type = 4;
+        }else if(buttonIndex == 5){
+            
+        }
+        
+        if(self.m_type == 0){
+            [typeBtn setTitle:@"选择查询维修类型,默认所有类型" forState:UIControlStateNormal];
+        }else if(self.m_type == 1){
+            [typeBtn setTitle:@"维修中" forState:UIControlStateNormal];
+        }else if(self.m_type == 2){
+            [typeBtn setTitle:@"已修完" forState:UIControlStateNormal];
+        }else if(self.m_type == 3){
+            [typeBtn setTitle:@"已提车" forState:UIControlStateNormal];
+        }else if(self.m_type == 4){
+            [typeBtn setTitle:@"已取消" forState:UIControlStateNormal];
+        }
+    }else{
+        if(buttonIndex == 0){
+            [ShareSdkUtil startShare:@"统计" url:m_web.request.URL.absoluteString title:@"统计数据"];
+
+        }else if (buttonIndex == 1){
+            [PubllicMaskViewHelper showTipViewWith:@"敬请期待" inSuperView:self.view withDuration:1];
+        }else
+        {
+            
+        }
+
+    }
+  
 }
 @end

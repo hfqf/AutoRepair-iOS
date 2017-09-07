@@ -268,6 +268,18 @@
     return ret == nil ?@"一流4s店" :ret;
 }
 
++ (BOOL)isAutoLogined
+{
+    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_LOGIN];
+    return ret == nil ?NO :[ret isEqualToString:@"1"];
+}
+
++ (NSString *)address
+{
+    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_ADDRESS];
+    return ret == nil ?@"一流4s店" :ret;
+}
+
 + (NSString *)totalMoneyOfToday;
 {
     NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_SHOP_NAME];
@@ -285,5 +297,21 @@
 {
     NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_HEAD];
     return ret == nil ?@"" :[NSString stringWithFormat:@"%@/%@",BOS_SERVER,ret];
+}
+
++ (NSString *)contactHeadUrl:(NSString *)url
+{
+    return url == nil ?@"" :[NSString stringWithFormat:@"%@/%@",BOS_SERVER,url];
+}
+
+#define IOS8 ([[[UIDevice currentDevice] systemVersion] doubleValue] >=8.0 ? YES : NO)
+
++ (BOOL)isApnsOpened
+{
+    if (IOS8) { //iOS8以上包含iOS8
+        return  [[UIApplication sharedApplication] currentUserNotificationSettings].types  == UIRemoteNotificationTypeNone;
+    }else{ // ios7 一下
+        return [[UIApplication sharedApplication] enabledRemoteNotificationTypes]  == UIRemoteNotificationTypeNone;
+    }
 }
 @end

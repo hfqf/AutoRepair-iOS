@@ -11,11 +11,15 @@
 #import "CustomerTableViewCell.h"
 #import "AddRepairHistoryViewController.h"
 #import "NSArray+SortByFisrtChar.h"
-@interface CustomerViewController()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+#import "CustomerOrdersViewController.h"
+@interface CustomerViewController()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UIActionSheetDelegate>
 {
     UISearchBar *m_searchBar;
+    UILabel *m_num;
 }
 @property (nonatomic,strong) NSArray *m_arrIndexTitle;
+@property (nonatomic,strong) NSArray *m_arrQueryContacts;
+@property (assign)BOOL m_isShowOrderBtn;
 
 @end
 @implementation CustomerViewController
@@ -23,7 +27,7 @@
 - (id)initForSelectContact:(NSString *)key
 {
     self.m_isAdd = YES;
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
     if (self)
     {
         self.tableView.delegate = self;
@@ -78,8 +82,7 @@
         [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        //登录完后的数据回来后再次刷新
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(forceRefresh) name:KEY_REPAIRS_SYNCED object:nil];
+        
         
         m_searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, HEIGHT_NAVIGATION)];
         [m_searchBar setPlaceholder:@"可输入手机号码,车牌号,客户名搜索用户"];
@@ -134,15 +137,40 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(addNewContactForEasyPR:) name:KEY_AUTO_ADD_CONTACT object:nil];
+
+
+    if(!self.m_isAdd){
+        UIButton *orderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [orderBtn addTarget:self action:@selector(orderBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [orderBtn setFrame:CGRectMake(0, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+        [orderBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
+        [orderBtn setTitle:@"预约" forState:UIControlStateNormal];
+        [orderBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+        [navigationBG addSubview:orderBtn];
+    }
+
+    [title setText:@"客户"];
+    
+    m_num = [[UILabel alloc]initWithFrame:CGRectMake(40,-5+DISTANCE_TOP, 20, 20)];
+    m_num.clipsToBounds = YES;
+    m_num.textAlignment = NSTextAlignmentCenter;
+    m_num.layer.cornerRadius = 10;
+    m_num.textColor = [UIColor whiteColor];
+    m_num.backgroundColor = [UIColor redColor];
+    m_num.font = [UIFont systemFontOfSize:10];
+    m_num.hidden = YES;
+    [navigationBG addSubview:m_num];
+    
     
     if(!self.m_isAdd)
     {
         backBtn.hidden = YES;
         UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        [addBtn setFrame:CGRectMake(MAIN_WIDTH-60, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+        [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+        [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
         [addBtn setTitle:@"添加" forState:UIControlStateNormal];
-        [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
         [navigationBG addSubview:addBtn];
         [title setText:@"客户"];
     }
@@ -153,10 +181,44 @@
 
 }
 
+- (void)orderBtnClicked
+{
+    CustomerOrdersViewController *vc = [[CustomerOrdersViewController  alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)addNewContactForEasyPR:(NSNotification *)noti
 {
-    AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithCarcode:noti.object];
-    vc.m_delegate = self.m_delegate;
+    NSString *carcode = noti.object;
+    NSArray *arr = [DB_Shared quertAllCustoms:carcode];
+    self.m_arrQueryContacts = arr;
+    if(arr.count == 0){
+        AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithCarcode:noti.object];
+        vc.m_delegate = self.m_delegate;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if(arr.count == 1){
+        ADTContacterInfo *con = [arr firstObject];
+        con.m_isAddNew = NO;
+        AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithContacer:con];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        UIActionSheet *act = [[UIActionSheet alloc]init];
+        act.delegate = self;
+        act.title = @"此车牌号有多客户,请选择客户";
+        for(ADTContacterInfo *_info in arr){
+            [act addButtonWithTitle:_info.m_tel];
+        }
+        [act showInView:self.view];
+    }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    ADTContacterInfo *con = [self.m_arrQueryContacts objectAtIndex:buttonIndex];
+    con.m_isAddNew = NO;
+    AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithContacer:con];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -224,13 +286,22 @@
 {
     NSArray *arr = [self.m_arrData objectAtIndex:indexPath.section];
     ADTContacterInfo *info = [arr objectAtIndex:indexPath.row];
-    
+    info.m_isAddNew = NO;
     if(self.m_isAdd)
     {
         if(self.m_selectDelegate)
         {
+            [self.navigationController popViewControllerAnimated:NO];
             [self.m_selectDelegate onSelectContact:info];
-            [self.navigationController popViewControllerAnimated:YES];
+        }else if(self.m_queryDelegate){
+            
+            NSArray *arrVcs = self.navigationController.viewControllers;
+            for(UIViewController *vi in arrVcs){
+                if([vi isKindOfClass:NSClassFromString(@"MainTabBarViewController")]){
+                    [self.navigationController popToViewController:vi animated:YES];
+                }
+            }
+            [self.m_queryDelegate onSelectContact1:info];
         }
         else
         {
@@ -304,6 +375,27 @@
     self.m_arrData = [NSMutableArray arrayWithArray:[arrLast sortedFriendArrayByKey:SORT_FRIEND_NICKNAME_KEY]];
 
     [self reloadDeals];
+    
+    
+    
+    
+    
+    [HTTP_MANAGER queryCustomerOrders:^(NSDictionary *succeedResult) {
+        NSInteger count = 0;
+        if([succeedResult[@"code"]integerValue] == 1){
+            for(NSDictionary *_info in succeedResult[@"ret"]){
+                if([_info[@"state"]integerValue] == 0){
+                    count++;
+                }
+            }
+            m_num.hidden = count==0;
+            [m_num setText:[NSString stringWithFormat:@"%ld",count]];
+        }
+        
+        
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+        m_num.hidden = YES;
+    }];
     
 }
 

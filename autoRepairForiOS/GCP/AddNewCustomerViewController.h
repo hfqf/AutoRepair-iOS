@@ -9,7 +9,7 @@
 #import "SpeRefreshAndLoadViewController.h"
 #import "AddNewCarcodeSelectViewController.h"
 
-@interface AddNewCustomerViewController : SpeRefreshAndLoadViewController<UITextFieldDelegate,UITextViewDelegate,UIAlertViewDelegate,AddNewCarcodeSelectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface AddNewCustomerViewController : SpeRefreshAndLoadViewController<UITextFieldDelegate,UITextViewDelegate,UIAlertViewDelegate,AddNewCarcodeSelectViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UIScrollView *m_bg;
     
@@ -17,6 +17,11 @@
     UITextField *m_userNameInput;
     UITextField *m_telInput;
     UITextField *m_carTypeInput;
+    UITextField *m_vinTypeInput;
+    UITextField *m_registerTimeTypeInput;
+    
+    
+    EGOImageView *head;
 }
 @property(nonatomic,strong)ADTContacterInfo *m_currentData;
 @property(nonatomic,strong)NSString *m_carcode;

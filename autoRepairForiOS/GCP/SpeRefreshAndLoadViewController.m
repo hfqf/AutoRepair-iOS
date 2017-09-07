@@ -39,6 +39,32 @@
  withIsNeedPullDown:(BOOL)isNeedPullDownRefresh
 withIsNeedPullUpLoadMore:(BOOL)isNeesLoadMore
 withIsNeedBottobBar:(BOOL)isNeedBottom
+withIsNeedNoneView:(BOOL)isNeedNoneView
+{
+    self = [super init];
+    if(self)
+    {
+        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, DISTANCE_TOP+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-DISTANCE_TOP-HEIGHT_NAVIGATION-(isNeedBottom?(OS_ABOVE_IOS7?HEIGHT_MAIN_BOTTOM:HEIGHT_MAIN_BOTTOM+20):OS_ABOVE_IOS7 ? 0:20)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
+        
+        
+        UIView *bg = [[UIView alloc]initWithFrame:table.bounds];
+        [bg setBackgroundColor:[UIColor whiteColor]];
+        [table setBackgroundView:bg];
+        [bg release];
+        
+        self.tableView = table;
+        self.m_isNeedNoneView = YES;
+        
+        [table release];
+        [self.view addSubview:self.tableView];
+    }
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewStyle)style
+ withIsNeedPullDown:(BOOL)isNeedPullDownRefresh
+withIsNeedPullUpLoadMore:(BOOL)isNeesLoadMore
+withIsNeedBottobBar:(BOOL)isNeedBottom
 {
     self = [super init];
     if(self)
@@ -99,6 +125,26 @@ withIsCustomNavigatiionHeight:(int)customNavHeight
       EmptyTipView *empty = [[EmptyTipView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(navigationBG.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(navigationBG.frame))];
     self.m_emptyView = empty;
     [empty release];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:)name:UIKeyboardDidShowNotification object:nil];
+    //注册键盘消失通知；
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidHide:)name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)keyboardDidShow:(NSNotification *)aNotification
+{
+    NSDictionary *userInfo =[aNotification userInfo];
+    NSValue*aValue =[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect=[aValue CGRectValue];
+    int height =keyboardRect.size.height;
+    //    int width =keyboardRect.size.width;
+    [self.tableView setFrame:CGRectMake(0,self.tableView.frame.origin.y, self.tableView.frame.size.width, MAIN_HEIGHT-height-self.tableView.frame.origin.y)];
+}
+
+- (void)keyboardDidHide:(NSNotification*)aNotification
+
+{
+    [self.tableView setFrame:CGRectMake(0,self.tableView.frame.origin.y, self.tableView.frame.size.width, MAIN_HEIGHT-self.tableView.frame.origin.y)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -159,6 +205,16 @@ withIsCustomNavigatiionHeight:(int)customNavHeight
     [self.tableView._header endRefreshing];
     [self.tableView._footer endRefreshing];
     [self.tableView reloadData];
+    
+    if(self.m_isNeedNoneView){
+        if(self.m_arrData.count == 0){
+            [self showEmptyWith:@"暂无数据"];
+        }else{
+            [self removeEmptyView];
+        } 
+    }
+
+    
 }
 
 - (void)endRefreshing;

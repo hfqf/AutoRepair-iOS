@@ -27,5 +27,5 @@
 }
 
 @property(nonatomic,weak)id<AddNewCarcodeSelectViewControllerDelegate>m_selectDelegate;
-
+- (id)initWith:(NSString *)carcode;
 @end

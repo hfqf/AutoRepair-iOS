@@ -9,6 +9,7 @@
 #import "SearchViewController.h"
 #import "RepairHistotyTableViewCell.h"
 #import "AddRepairHistoryViewController.h"
+#import "WorkroomAddOrEditViewController.h"
 @interface SearchViewController()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
     UISearchBar *m_searchBar;
@@ -21,7 +22,7 @@
 - (id)initWith:(ADTContacterInfo *)contact
 {
     self.m_contact = contact;
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
     if (self)
     {
         self.tableView.delegate = self;
@@ -101,6 +102,7 @@
     [self showWaitingView];
 
     [HTTP_MANAGER queryOneAllRepair:self.m_contact.m_carCode
+                      withContactId:self.m_contact.m_idFromServer
                   successedBlock:^(NSDictionary *succeedResult) {
         [self removeWaitingView];
         if([succeedResult[@"code"]integerValue] == 1)
@@ -130,7 +132,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 120;
 }
 
 
@@ -156,10 +158,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ADTRepairInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
-    info.m_isAddNewRepair = NO;
-    AddRepairHistoryViewController *vc = [[AddRepairHistoryViewController alloc]initWithInfo:info];
-    [self.navigationController pushViewController:vc animated:YES];
+    ADTRepairInfo *rep = [self.m_arrData objectAtIndex:indexPath.row];
+    WorkroomAddOrEditViewController *add = [[WorkroomAddOrEditViewController alloc]initWith:rep];
+    [self.navigationController pushViewController:add animated:YES];
     
 }
 @end

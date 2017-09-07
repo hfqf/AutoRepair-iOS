@@ -15,6 +15,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "AFHTTPSessionManager.h"
 #import "AFURLRequestSerialization.h"
+#import "WareHouseGoods.h"
 
 
 @interface HttpConnctionManager : AFHTTPRequestOperationManager
@@ -83,9 +84,12 @@ typedef void (^FailBlock)(NSError *error);
 ///注册
 - (void)startRegisterWithName:(NSString *)name
                       withTel:(NSString *)tel
-                    withPwd:(NSString *)pwd
-             successedBlock:(SuccessedBlock)success
-                failedBolck:(FailedBlock)failed;
+                      withPwd:(NSString *)pwd
+                 withShopName:(NSString *)shopName
+                  withAddress:(NSString *)address
+                  withChannel:(NSString *)channel
+               successedBlock:(SuccessedBlock)success
+                  failedBolck:(FailedBlock)failed;
 
 ///重置密码
 - (void)regetPwd:(NSString *)tel
@@ -100,7 +104,9 @@ typedef void (^FailBlock)(NSError *error);
 
 ///更新姓名
 - (void)updateUserName:(NSString *)userName
-    successedBlock:(SuccessedBlock)success
+              shopName:(NSString *)shopName
+               address:(NSString *)address
+        successedBlock:(SuccessedBlock)success
            failedBolck:(FailedBlock)failed;
 
 ///检查更新
@@ -123,6 +129,11 @@ typedef void (^FailBlock)(NSError *error);
 - (void)updateContact:(ADTContacterInfo *)contact
        successedBlock:(SuccessedBlock)success
           failedBolck:(FailedBlock)failed;
+
+///更新客户
+- (void)updateCustomUrl:(ADTContacterInfo *)newContact
+         successedBlock:(SuccessedBlock)success
+            failedBolck:(FailedBlock)failed;
 
 ///获取所有联系人
 - (void)queryAllContacts:(NSString *)owner
@@ -158,6 +169,7 @@ typedef void (^FailBlock)(NSError *error);
 
 ///获取某个客户的所有记录
 - (void)queryOneAllRepair:(NSString *)carcode
+            withContactId:(NSString *)contactId
            successedBlock:(SuccessedBlock)success
               failedBolck:(FailedBlock)failed;
 
@@ -196,4 +208,225 @@ typedef void (^FailBlock)(NSError *error);
 - (void)queryAllRepairItem:(NSString *)repId
         successedBlock:(SuccessedBlock)success
            failedBolck:(FailedBlock)failed;
+
+
+#pragma mark - 3.2
+- (void)getAllRepairsWithState:(NSString *)state
+                      withPage:(NSInteger )page
+                      withSize:(NSInteger )size
+                     contactid:(NSString *)contactid
+                       carCode:(NSString *)carCode
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed;
+///增加
+- (void)addNewRepair4:(ADTRepairInfo *)newRep
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed;
+
+///更新
+- (void)updateOneRepair4:(ADTRepairInfo *)newRep
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed;
+
+- (void)cancelRepair3:(NSString *)_id
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed;
+
+- (void)revertRepair3:(NSString *)_id
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed;
+
+- (void)updateRepairState3:(NSString *)state
+                    withId:(NSString *)_id
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed;
+
+
+- (void)deleteOnesRepairs3:(NSString *)carcode
+             withContactId:(NSString *)contactid
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed;
+
+- (void)queryOnesRepairs3:(NSString *)carcode
+            withContactId:(NSString *)contactid
+           successedBlock:(SuccessedBlock)success
+              failedBolck:(FailedBlock)failed;
+
+
+- (void)queryAllTipedRepairs3:(SuccessedBlock)success
+                  failedBolck:(FailedBlock)failed;
+
+
+- (void)queryCustomerOrders:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed;
+
+- (void)updateCustomerOrderWith:(NSString *)shopName
+                     withOpenId:(NSString *)openId
+                         withId:(NSString *)_id
+                withConfirmTime:(NSString *)confirmTime
+                  withOrderTime:(NSString *)orderTime
+                  withOrderInfo:(NSString *)info
+                      withState:(NSString *)state
+                 successedBlock:(SuccessedBlock)success
+                    failedBolck:(FailedBlock)failed;
+
+- (void)delCustomerOrder:(NSString *)_id
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed;
+
+#pragma mark - 3.5
+#pragma mark - 库房管理
+
+- (void)getAllWareHouseList:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed;
+
+- (void)addNewWarehouseWith:(NSString *)name
+                 withRemark:(NSString *)remark
+             successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed;
+
+- (void)delOneWarehouseWith:(NSString *)_id
+             successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed;
+
+- (void)updateOneWarehouseWith:(NSString *)name
+                    withRemark:(NSString *)remark
+                        withId:(NSString *)_id
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed;
+#pragma mark - 库位管理
+- (void)getAllWareHousePositionList:(NSString *)warehouseId
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
+
+- (void)addNewWarehousePositionWith:(NSString *)name
+                         withRemark:(NSString *)remark
+                    withWarehouseId:(NSString *)warehouseId
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
+
+- (void)delOneWarehousePositionWith:(NSString *)_id
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
+
+- (void)updateOneWarehousePositionWith:(NSString *)name
+                            withRemark:(NSString *)remark
+                                withId:(NSString *)_id
+                        successedBlock:(SuccessedBlock)success
+                           failedBolck:(FailedBlock)failed;
+
+#pragma mark - 供应商管理
+
+- (void)getAllSupplierList:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed;
+
+
+- (void)addNewWarehouseSupplierWith:(NSString *)company
+                           withName:(NSString *)name
+                            withTel:(NSString *)tel
+                        withAddress:(NSString *)address
+                         withRemark:(NSString *)remark
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
+
+- (void)delOneWarehouseSupplierWith:(NSString *)_id
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
+
+- (void)updateOneWarehouseSupplierWith:(NSString *)company
+                              withName:(NSString *)name
+                               withTel:(NSString *)tel
+                           withAddress:(NSString *)address
+                            withRemark:(NSString *)remark
+                                withId:(NSString *)_id
+                        successedBlock:(SuccessedBlock)success
+                           failedBolck:(FailedBlock)failed;
+
+
+#pragma mark - 商品分类(一级分类)
+- (void)getAllGoodsTypePreviewList:(SuccessedBlock)success
+                       failedBolck:(FailedBlock)failed;
+
+- (void)getAllGoodsTopTypeList:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed;
+
+- (void)addNewGoodsTopTypeWith:(NSString *)name
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed;
+
+- (void)delOneGoodsTopTypeWith:(NSString *)_id
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed;
+
+- (void)updateOneGoodsTopTypeWith:(NSString *)name
+                           withId:(NSString *)_id
+                   successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed;
+
+#pragma mark - 商品分类(二级分类)
+
+- (void)getAllGoodsSubTypeList:(NSString *)toptypeid
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed;
+
+- (void)addNewGoodsSubTypeWith:(NSString *)name
+                     withTopId:(NSString *)topId
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed;
+
+- (void)addNewGoodsTopTypeRefWith:(NSArray *)subId
+                        withTopId:(NSString *)topId
+                   successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed;
+
+- (void)delOneGoodsSubTypeWith:(NSString *)_id
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed;
+
+- (void)updateOneGoodsSubTypeWith:(NSString *)name
+                           withId:(NSString *)_id
+                   successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed;
+
+#pragma mark - 商品
+
+- (void)getAllGoodsList:(SuccessedBlock)success
+            failedBolck:(FailedBlock)failed;
+
+- (void)getAllGoodsListWithType:(NSString *)subtype
+                 successedBlock:(SuccessedBlock)success
+                    failedBolck:(FailedBlock)failed;
+
+- (void)getGoodsInfo:(NSString *)goodsId
+      successedBlock:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed;
+
+- (void)addNewGoodsWith:(WareHouseGoods *)newGoods
+         successedBlock:(SuccessedBlock)success
+            failedBolck:(FailedBlock)failed;
+
+- (void)updateOneGoodsWith:(WareHouseGoods *)newGoods
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed;
+
+- (void)delOneGoodsWith:(NSString *)_id
+         successedBlock:(SuccessedBlock)success
+            failedBolck:(FailedBlock)failed;
+
+#pragma mark - 库存总览
+
+- (void)getAllGoodsStoreList:(SuccessedBlock)success
+                 failedBolck:(FailedBlock)failed;
+
+- (void)addNewGoodsStoreWith:(WareHouseGoods *)goods
+                    supplier:(NSString *)supplier
+                         num:(NSString *)num
+           warehouseposition:(NSString *)warehouseposition
+              successedBlock:(SuccessedBlock)success
+                 failedBolck:(FailedBlock)failed;
+
+- (void)delOneGoodsStoreWith:(WareHouseGoods *)goods
+              successedBlock:(SuccessedBlock)success
+                 failedBolck:(FailedBlock)failed;
+
 @end

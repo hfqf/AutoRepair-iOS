@@ -15,9 +15,11 @@
 #import "SettingViewController.h"
 #import "BHBItem.h"
 #import "BHBPopView.h"
-#import "UIViewController+MVSPhotoPickerManager.h"
-#import "XYPlateRecognizeUtil.h"
-@interface MainTabBarViewController ()
+
+#import <objc/runtime.h>
+#import <AipOcrSdk/AipOcrSdk.h>
+#import "WorkroomListViewController.h"
+@interface MainTabBarViewController ()<AipOcrDelegate,UIActionSheetDelegate>
 {
     
 }
@@ -74,7 +76,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#define NUM_TAB 4
+#define NUM_TAB 5
 #pragma mark -  BaseViewControllerDelegate
 
 - (void)initData
@@ -95,29 +97,33 @@
         NSString *title =  nil;
         NSString *unSelectedImg = nil;
         NSString *selectedImg = nil;
-        //todo 背景图
         if(i==0)
         {
-            title = @"记录";
-            unSelectedImg = @"tabbar_bottom1_un@2x";
-            selectedImg = @"tabbar_bottom1_on@2x";
-        }else if (i==1)
+            title = @"工单";
+            unSelectedImg = @"wrench_un";
+            selectedImg = @"wrench_un";
+        }else if(i==1)
+        {
+            title = @"提醒";
+            unSelectedImg = @"clock_un";
+            selectedImg = @"clock_un";
+        }else if (i==2)
         {
             title = @"客户";
-            unSelectedImg = @"tabbar_bottom2_un@2x";
-            selectedImg = @"tabbar_bottom2_on@2x";
+            unSelectedImg = @"people_un";
+            selectedImg = @"people_un";
         }
-        else if (i==2)
+        else if (i==3)
         {
             title = @"统计";
-            unSelectedImg =  @"tabbar_bottom3_un@2x";
-            selectedImg = @"tabbar_bottom3_on@2x";
+            unSelectedImg =  @"tongji_on";
+            selectedImg = @"tongji_on";
         }
         else
         {
             title = @"我的";
-            unSelectedImg = @"tabbar_bottom4_un@2x";
-            selectedImg = @"tabbar_bottom4_on@2x";
+            unSelectedImg = @"setup";
+            selectedImg = @"setup";
         }
         [arrTitle addObject:title];
         [arrUnSelectedImg addObject:unSelectedImg];
@@ -133,14 +139,14 @@
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn setFrame:CGRectMake((MAIN_WIDTH-50)/2, MAIN_HEIGHT-HEIGHT_MAIN_BOTTOM-60, 50, 50)];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setImage:[UIImage imageNamed:@"ic_add_note_normal"] forState:UIControlStateNormal];
+    [addBtn setImage:[UIImage imageNamed:@"ic_tabbar_compose_icon_add_highlighted"] forState:UIControlStateNormal];
     [self.view addSubview:addBtn];
 }
 
 
 - (void)addBtnClicked
 {
-    BHBItem * item0 = [[BHBItem alloc]initWithTitle:@"扫描车牌添加客户" Icon:@"ic_tabbar_compose_camera"];
+    BHBItem * item0 = [[BHBItem alloc]initWithTitle:@"扫描车牌识别客户(新用户到新增页面,老客户到详情页)" Icon:@"ic_tabbar_compose_camera"];
     BHBItem * item1 = [[BHBItem alloc]initWithTitle:@"手动添加客户" Icon:@"ic_tabbar_compose_weibo"];
     BHBItem * item2 = [[BHBItem alloc]initWithTitle:@"添加维修记录" Icon:@"ic_tabbar_compose_icon_add_highlighted"];
     
@@ -152,43 +158,32 @@
                     NSLog(@"选中%@分组",item.title);
                 }else{
                     NSLog(@"选中%@项",item.title);
-                    if([item.title isEqualToString:@"扫描车牌添加客户"])
+                    if([item.title isEqualToString:@"扫描车牌识别客户(新用户到新增页面,老客户到详情页)"])
                     {
-                        [self showPhotoPickerSheetTitle:@"尽量拉近距离,调正角度,可提高识别率" message:nil needOpenFrontCamera:NO cameraActionTitle:@"拍照" photoLibraryActionTitle:@"从相册中选取" canOpenLibrary:YES complete:^(NSArray *assetsImageArray) {
-                            
-                            if (!assetsImageArray || assetsImageArray.count == 0) {
-                                [PubllicMaskViewHelper showTipViewWith:@"未选择车牌" inSuperView:self.view  withDuration:1];
-                                return;
-                                
-                            }
-                            UIImage *assetImage = assetsImageArray.firstObject;
-                            
-                            [self  showWaitingView];
-                            [[XYPlateRecognizeUtil new] recognizePateWithImage:assetImage
-                                                                      complete:^(NSArray *plateStringArray,int code){
-                                                                          [self removeWaitingView];
-                                  if(code == 0){
-                                    [PubllicMaskViewHelper showTipViewWith:@"未识别到车牌,请调整距离和角度" inSuperView:self.view  withDuration:1];
-                                  }else{
-                                      NSArray *arr = [[plateStringArray firstObject]componentsSeparatedByString:@":"];
-                                      [[NSNotificationCenter defaultCenter]postNotificationName:KEY_AUTO_ADD_CONTACT object:[arr lastObject]];
-                                      [self selectWithIndex:1];
-                                  }
-                                NSLog(@"%@",plateStringArray);
-                            }];
-                        }];
+                        UIViewController * vc = [AipGeneralVC ViewControllerWithDelegate:self];
+                        [self presentViewController:vc animated:YES completion:nil];
                         
                     }else if([item.title isEqualToString:@"手动添加客户"])
                     {
-                        [self selectWithIndex:1];
-                        CustomerViewController *vc2 = (CustomerViewController *)self.viewControllers[1];
-                        [vc2 addBtnClicked];
+                        [self selectWithIndex:2];
+                        NSArray *arr = self.viewControllers;
+                        for(UIViewController *vc in arr){
+                            if([vc isKindOfClass:NSClassFromString(@"CustomerViewController")]){
+                                CustomerViewController *target = (CustomerViewController *)vc;
+                                [target addBtnClicked];
+                            }
+                        }
                         
                     }else
                     {
                         [self selectWithIndex:0];
-                        NewTipViewController *vc2 = (NewTipViewController *)self.viewControllers[0];
-                        [vc2 addBtnClicked];
+                        NSArray *arr = self.viewControllers;
+                        for(UIViewController *vc in arr){
+                            if([vc isKindOfClass:NSClassFromString(@"WorkroomListViewController")]){
+                                WorkroomListViewController *target = (WorkroomListViewController *)vc;
+                                [target addBtnClicked];
+                            }
+                        }
                     }
 
 
@@ -200,6 +195,9 @@
 //生成tabbar子ViewController
 - (void)initViewControllers
 {
+    WorkroomListViewController *vc0 = [[WorkroomListViewController alloc]init];
+    vc0.m_delegate = self;
+    
     NewTipViewController *vc1 = [[NewTipViewController alloc]init];
     vc1.m_delegate = self;
     
@@ -211,7 +209,7 @@
     
     SettingViewController *vc4 = [[SettingViewController alloc]init];
     vc4.m_delegate = self;
-    self.viewControllers = @[vc1,vc2,vc3,vc4];
+    self.viewControllers = @[vc0,vc1,vc2,vc3,vc4];
 }
 
 //选择了第几个一级界面
@@ -250,4 +248,52 @@
 }
 
 
+
+#pragma mark AipOcrResultDelegate
+
+- (void)ocrOnGeneralSuccessful:(id)result {
+    
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSMutableString *message = [NSMutableString string];
+        if(result[@"words_result"]){
+            for(NSDictionary *obj in result[@"words_result"]){
+                [message appendFormat:@"%@", obj[@"words"]];
+            }
+        }else{
+            [message appendFormat:@"%@", result];
+        }
+        
+        NSArray *arr = result[@"words_result"];
+        if(arr.count == 0){
+            [[[UIAlertView alloc] initWithTitle:@"无识别结果,请尝试更换角度和距离" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+            return ;
+        }
+        UIActionSheet *act = [[UIActionSheet alloc]init];
+        act.delegate = self;
+        act.title = @"请选择识别结果";
+        for(NSDictionary *info in arr){
+            [act addButtonWithTitle:info[@"words"]];
+        }
+        [act showInView:self.view];
+    }];
+    
+}
+
+- (void)ocrOnFail:(NSError *)error {
+    NSLog(@"%@", error);
+    NSString *msg = [NSString stringWithFormat:@"%li:%@", (long)[error code], [error localizedDescription]];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [[[UIAlertView alloc] initWithTitle:@"识别失败,请尝试更换角度和距离" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+    }];
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSString *ret = [actionSheet buttonTitleAtIndex:buttonIndex];
+    [[NSNotificationCenter defaultCenter]postNotificationName:KEY_AUTO_ADD_CONTACT object:ret];
+    [self selectWithIndex:1];
+}
 @end

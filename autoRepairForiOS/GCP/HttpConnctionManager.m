@@ -254,7 +254,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                failedBolck:(FailedBlock)failed
 {
     NSString *isFirstLogin = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_IS_FIRST_LOGIN];
-    [self startNormalPostWith:@"/users/login2" paragram:@{
+    [self startNormalPostWith:@"/users/login3" paragram:@{
                                                           @"username"  : name,
                                                           @"pwd":pwd,
                                                           @"udid":KEY_UDID,
@@ -271,12 +271,15 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 - (void)startRegisterWithName:(NSString *)name
                       withTel:(NSString *)tel
                       withPwd:(NSString *)pwd
+                 withShopName:(NSString *)shopName
+                  withAddress:(NSString *)address
+                  withChannel:(NSString *)channel
                successedBlock:(SuccessedBlock)success
                   failedBolck:(FailedBlock)failed
 {
     
     
-    [self startNormalPostWith:@"/register/addNewUser2"
+    [self startNormalPostWith:@"/register/addNewUser3"
                      paragram:@{
                                  @"username":name,
                                  @"pwd":pwd,
@@ -284,7 +287,11 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                  @"viplevel":@"0",//暂时没有vip
                                  @"udid":KEY_UDID,
                                  @"ostype":OS_TYPE,
-                                 @"version":VERSION
+                                 @"version":VERSION,
+                                 @"city":@"",
+                                 @"downchannel":channel == nil ? @"" : channel,
+                                 @"address":address==nil?@"":address,
+                                 @"shopname":shopName==nil?@"":shopName,
                                  }
                successedBlock:success
                   failedBolck:failed];
@@ -321,11 +328,15 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 
 ///更新姓名
 - (void)updateUserName:(NSString *)userName
+              shopName:(NSString *)shopName
+               address:(NSString *)address
         successedBlock:(SuccessedBlock)success
            failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/users/updateName"
+    [self startNormalPostWith:@"/users/updateUserInfo"
                      paragram:@{
+                                @"address":address,
+                                @"shopname":shopName,
                                 @"username":userName,
                                 @"tel":[LoginUserUtil userTel]
                                 }
@@ -347,12 +358,16 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
     successedBlock:(SuccessedBlock)success
        failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/contact/add" paragram:@{
+    [self startNormalPostWith:@"/contact/add3" paragram:@{
                                                         @"carcode":newContact.m_carCode,
                                                         @"name":newContact.m_userName,
                                                         @"tel":newContact.m_tel,
                                                         @"cartype":newContact.m_carType,
                                                         @"owner":[LoginUserUtil userTel],
+                                                        @"headurl":newContact.m_strHeadUrl == nil ? @"":newContact.m_strHeadUrl,
+                                                        @"vin":newContact.m_strVin == nil ? @"": newContact.m_strVin,
+                                                        @"carregistertime":newContact.m_strCarRegistertTime == nil ? @"" : newContact.m_strCarRegistertTime,
+                                                        
                                                         } successedBlock:success failedBolck:failed];
 }
 
@@ -361,12 +376,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/contact/del2" paragram:@{
-                                                        @"carcode":newContact.m_carCode,
-                                                        @"name":newContact.m_userName,
-                                                        @"tel":newContact.m_tel,
-                                                        @"cartype":newContact.m_carType,
-                                                        @"owner":[LoginUserUtil userTel],
+    [self startNormalPostWith:@"/contact/del3" paragram:@{
                                                         @"id":newContact.m_idFromServer
                                                         } successedBlock:success failedBolck:failed];
 
@@ -402,6 +412,31 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
     
 }
+
+
+///更新客户头像
+- (void)updateCustomUrl:(ADTContacterInfo *)newContact
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/contact/update3"
+                     paragram:@{
+                                @"carcode":newContact.m_carCode.length == 0 ? @"" :newContact.m_carCode,
+                                @"name":newContact.m_userName.length == 0 ? @"" : newContact.m_userName,
+                                @"tel":newContact.m_tel.length == 0 ? @"" :newContact.m_tel,
+                             @"cartype":newContact.m_carType.length == 0 ? @"" : newContact.m_carType,
+                             @"owner":[LoginUserUtil userTel],
+                             @"id":newContact.m_idFromServer.length == 0 ? @"" :newContact.m_idFromServer,
+                             @"isbindweixin":newContact.m_strIsBindWeixin.length == 0 ? @"" :newContact.m_strIsBindWeixin,
+                             @"weixinopenid":newContact.m_strWeixinOPneid.length == 0 ? @"":newContact.m_strWeixinOPneid,
+                             @"vin":newContact.m_strVin.length==0?@"":newContact.m_strVin,
+                             @"carregistertime":newContact.m_strCarRegistertTime.length == 0 ? @"":newContact.m_strCarRegistertTime,
+                             @"headurl":newContact.m_strHeadUrl.length==0?@"":newContact.m_strHeadUrl,
+                             }
+               successedBlock:success failedBolck:failed];
+    
+}
+
 
 #pragma mark - 维修记录
 
@@ -451,6 +486,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 {
     [self startNormalPostWith:@"/repair/delAll" paragram:@{
                                                         @"carcode":newRep.m_carCode,
+                                                        @"contactid":newRep.m_contactid,
                                                         @"owner":[LoginUserUtil userTel]
 
                                                         } successedBlock:success failedBolck:failed];
@@ -499,11 +535,13 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 }
 ///获取某个客户的所有记录
 - (void)queryOneAllRepair:(NSString *)carcode
+            withContactId:(NSString *)contactId
         successedBlock:(SuccessedBlock)success
            failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/repair/queryOneAll"
+    [self startNormalPostWith:@"/repair/queryOneAll3"
                      paragram:@{
+                                @"contactid":contactId,
                                 @"carcode":carcode,
                                 @"owner":[LoginUserUtil userTel]
                                 }
@@ -538,7 +576,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
         successedBlock:(SuccessedBlock)success
            failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/repair/queryAllTiped"
+    [self startNormalPostWith:@"/repair/queryAllTiped1"
                      paragram:@{
                                 @"owner":owner
                                 }
@@ -656,4 +694,715 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                successedBlock:success
                   failedBolck:failed];
 }
+
+#pragma mark - 3.2
+- (void)getAllRepairsWithState:(NSString *)state
+                      withPage:(NSInteger )page
+                      withSize:(NSInteger )size
+                     contactid:(NSString *)contactid
+                       carCode:(NSString *)carCode
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/queryAllWithState"
+                     paragram:
+                            (contactid == nil && carCode == nil) ?
+                            @{
+                              @"state":state,
+                              @"pagesize":[NSString stringWithFormat:@"%ld",(long)size],
+                              @"page":[NSString stringWithFormat:@"%ld",(long)page],
+                              @"owner":[LoginUserUtil userTel],
+                              }:
+                             @{
+                               @"state":state,
+                               @"pagesize":[NSString stringWithFormat:@"%ld",(long)size],
+                               @"page":[NSString stringWithFormat:@"%ld",(long)page],
+                               @"owner":[LoginUserUtil userTel],
+                               @"carcode":carCode,
+                               @"contactid":contactid
+                               }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+///增加
+- (void)addNewRepair4:(ADTRepairInfo *)newRep
+      successedBlock:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed
+{
+    NSMutableArray *arrItems = [NSMutableArray array];
+    for(ADTRepairItemInfo *info in newRep.m_arrRepairItem)
+    {
+        [arrItems addObject:info.m_id];
+    }
+    [self startNormalPostWith:@"/repair/add4" paragram:@{
+                                                         @"id":@"",
+                                                         @"carcode":newRep.m_carCode,
+                                                         @"totalkm":newRep.m_km,
+                                                         @"repairetime":newRep.m_time,
+                                                         @"addition":newRep.m_more,
+                                                         @"tipcircle":newRep.m_targetDate,
+                                                         @"isclose":newRep.m_isClose ? @"1" : @"0",
+                                                         @"circle":newRep.m_repairCircle,
+                                                         @"repairtype":newRep.m_repairType,
+                                                         @"isreaded":newRep.m_isClose ? @"1" : @"0",
+                                                         @"owner":[LoginUserUtil userTel],
+                                                         @"inserttime":newRep.m_insertTime,
+                                                         @"items":arrItems,
+                                                         @"contactid":newRep.m_contactid,
+                                                         @"wantedcompletedtime":newRep.m_wantedcompletedtime,
+                                                         @"customremark":newRep.m_customremark,
+                                                         @"iswatiinginshop":newRep.m_iswatiinginshop,
+                                                         @"entershoptime":newRep.m_entershoptime,
+                                                         
+                                                         } successedBlock:success failedBolck:failed];
+}
+
+
+///更新
+- (void)updateOneRepair4:(ADTRepairInfo *)newRep
+         successedBlock:(SuccessedBlock)success
+            failedBolck:(FailedBlock)failed
+{
+    NSMutableArray *arrItems = [NSMutableArray array];
+    for(ADTRepairItemInfo *info in newRep.m_arrRepairItem)
+    {
+        [arrItems addObject:info.m_id];
+    }
+    [self startNormalPostWith:@"/repair/update4" paragram:@{
+                                                            @"id":newRep.m_idFromNode,
+                                                            @"carcode":newRep.m_carCode,
+                                                            @"totalkm":newRep.m_km,
+                                                            @"repairetime":newRep.m_time,
+                                                            @"addition":newRep.m_more,
+                                                            @"tipcircle":newRep.m_targetDate,
+                                                            @"isclose":newRep.m_isClose ? @"1" : @"0",
+                                                            @"isreaded":newRep.m_isClose ? @"1" : @"0",
+                                                            
+                                                            @"circle":newRep.m_repairCircle,
+                                                            @"repairtype":newRep.m_repairType,
+                                                            @"owner":[LoginUserUtil userTel],
+                                                            @"inserttime":newRep.m_insertTime,
+                                                            @"items":arrItems,
+                                                            @"contactid":newRep.m_contactid,
+                                                            @"wantedcompletedtime":newRep.m_wantedcompletedtime,
+                                                            @"customremark":newRep.m_customremark,
+                                                            @"iswatiinginshop":newRep.m_iswatiinginshop,
+                                                            @"entershoptime":newRep.m_entershoptime,
+                                                            @"state":newRep.m_state
+                                                            } successedBlock:success failedBolck:failed];
+}
+
+
+- (void)cancelRepair3:(NSString *)_id
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/cancel"
+                     paragram:@{
+                               @"id":_id,
+                               @"owner":[LoginUserUtil userTel],
+                               }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)revertRepair3:(NSString *)_id
+      successedBlock:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/revert"
+                     paragram:@{
+                                @"id":_id,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateRepairState3:(NSString *)state
+                   withId:(NSString *)_id
+      successedBlock:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/updateState"
+                     paragram:@{
+                                @"state":state,
+                                @"id":_id,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)deleteOnesRepairs3:(NSString *)carcode
+            withContactId:(NSString *)contactid
+      successedBlock:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/delAll3"
+                     paragram:@{
+                                @"contactid":contactid,
+                                @"carcode":carcode,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)queryOnesRepairs3:(NSString *)carcode
+             withContactId:(NSString *)contactid
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/queryOneAll3"
+                     paragram:@{
+                                @"contactid":contactid,
+                                @"carcode":carcode,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)queryAllTipedRepairs3:(SuccessedBlock)success
+              failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/queryAllTiped1"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)queryCustomerOrders:(SuccessedBlock)success
+                  failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/contact/getOrderRepairList"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateCustomerOrderWith:(NSString *)shopName
+                     withOpenId:(NSString *)openId
+                         withId:(NSString *)_id
+                withConfirmTime:(NSString *)confirmTime
+                  withOrderTime:(NSString *)orderTime
+                  withOrderInfo:(NSString *)info
+                      withState:(NSString *)state
+                 successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/contact/updateOrderRepair"
+                     paragram:@{
+                                @"shopname":shopName,
+                                @"openid":openId,
+                                @"id":_id,
+                                @"confirmtime":[LocalTimeUtil getCurrentTime],
+                                @"ordertime":orderTime,
+                                @"orderinfo":info,
+                                @"state":state,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)delCustomerOrder:(NSString *)_id
+          successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/contact/delOrderRepair"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 3.5
+
+#pragma mark - 库房管理
+
+- (void)getAllWareHouseList:(SuccessedBlock)success
+            failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehouse/query"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)addNewWarehouseWith:(NSString *)name
+                 withRemark:(NSString *)remark
+             successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehouse/add"
+                     paragram:@{
+                                @"name":name,
+                                @"desc":remark,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)delOneWarehouseWith:(NSString *)_id
+             successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehouse/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOneWarehouseWith:(NSString *)name
+                 withRemark:(NSString *)remark
+                        withId:(NSString *)_id
+             successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehouse/update"
+                     paragram:@{
+                                @"name":name,
+                                @"desc":remark,
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 库位管理
+- (void)getAllWareHousePositionList:(NSString *)warehouseId
+                     successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehouseposition/query"
+                     paragram:@{
+                                @"warehouseid":warehouseId,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)addNewWarehousePositionWith:(NSString *)name
+                         withRemark:(NSString *)remark
+                    withWarehouseId:(NSString *)warehouseId
+             successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehouseposition/add"
+                     paragram:@{
+                                @"name":name,
+                                @"desc":remark,
+                                @"warehouseid":warehouseId,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)delOneWarehousePositionWith:(NSString *)_id
+             successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehouseposition/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOneWarehousePositionWith:(NSString *)name
+                    withRemark:(NSString *)remark
+                        withId:(NSString *)_id
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehouseposition/update"
+                     paragram:@{
+                                @"name":name,
+                                @"desc":remark,
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 供应商管理
+
+- (void)getAllSupplierList:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousesupplier/query"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)addNewWarehouseSupplierWith:(NSString *)company
+                           withName:(NSString *)name
+                            withTel:(NSString *)tel
+                        withAddress:(NSString *)address
+                    withRemark:(NSString *)remark
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousesupplier/add"
+                     paragram:@{
+                                @"suppliercompanyname":company,
+                                @"managername":name,
+                                @"tel":tel,
+                                @"address":address,
+                                @"remark":remark,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)delOneWarehouseSupplierWith:(NSString *)_id
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousesupplier/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOneWarehouseSupplierWith:(NSString *)company
+                              withName:(NSString *)name
+                               withTel:(NSString *)tel
+                           withAddress:(NSString *)address
+                            withRemark:(NSString *)remark
+                                withId:(NSString *)_id
+                        successedBlock:(SuccessedBlock)success
+                           failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousesupplier/update"
+                     paragram:@{
+                                @"suppliercompanyname":company,
+                                @"managername":name,
+                                @"tel":tel,
+                                @"address":address,
+                                @"remark":remark,
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 商品分类(一级分类)
+
+- (void)getAllGoodsTypePreviewList:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodstoptype/preview"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)getAllGoodsTopTypeList:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodstoptype/query"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)addNewGoodsTopTypeWith:(NSString *)name
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodstoptype/add"
+                     paragram:@{
+                                @"name":name,
+                                @"owner":[LoginUserUtil userTel],
+
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)addNewGoodsTopTypeRefWith:(NSArray *)subId
+                        withTopId:(NSString *)topId
+                   successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodstoptype/addRef"
+                     paragram:@{
+                                @"toptypeid":topId,
+                                @"subids":subId,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+
+- (void)delOneGoodsTopTypeWith:(NSString *)_id
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodstoptype/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOneGoodsTopTypeWith:(NSString *)name
+                                withId:(NSString *)_id
+                        successedBlock:(SuccessedBlock)success
+                           failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodstoptype/update"
+                     paragram:@{
+                                @"name":name,
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 商品分类(二级分类)
+
+- (void)getAllGoodsSubTypeList:(NSString *)toptypeid
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodssubtype/query"
+                     paragram:@{
+                                @"toptypeid":toptypeid,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)addNewGoodsSubTypeWith:(NSString *)name
+                     withTopId:(NSString *)topId
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodssubtype/add"
+                     paragram:@{
+                                @"name":name,
+                                @"owner":[LoginUserUtil userTel],
+                                @"toptypeid":topId
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+
+- (void)delOneGoodsSubTypeWith:(NSString *)_id
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodssubtype/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOneGoodsSubTypeWith:(NSString *)name
+                           withId:(NSString *)_id
+                   successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodssubtype/update"
+                     paragram:@{
+                                @"name":name,
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 商品
+
+- (void)getAllGoodsList:(SuccessedBlock)success
+            failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/query"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)getAllGoodsListWithType:(NSString *)subtype
+         successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/query"
+                     paragram:@{
+                                @"subtype":subtype,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)getGoodsInfo:(NSString *)goodsId
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/getGoodsInfo"
+                     paragram:@{
+                                @"goodsId":goodsId,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)addNewGoodsWith:(WareHouseGoods *)newGoods
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/add"
+                     paragram:@{
+                                @"picurl":safeStringWith(newGoods.m_picurl),
+                                @"name":safeStringWith(newGoods.m_name),
+                                @"goodsencode":safeStringWith(newGoods.m_goodsencode),
+                                @"subtype":newGoods.m_category[@"_id"],
+                                @"category":@[newGoods.m_category[@"_id"]],
+                                @"saleprice":safeStringWith(newGoods.m_saleprice),
+                                @"costprice":safeStringWith(newGoods.m_costprice),
+                                @"productertype":safeStringWith(newGoods.m_productertype),
+                                @"producteraddress":safeStringWith(newGoods.m_producteraddress),
+                                @"barcode":safeStringWith(newGoods.m_barcode),
+                                @"brand":safeStringWith(newGoods.m_brand),
+                                @"unit":safeStringWith(newGoods.m_unit),
+                                @"minnum":safeStringWith(newGoods.m_minnum),
+                                @"applycartype":safeStringWith(newGoods.m_applycartype),
+                                @"remark":safeStringWith(newGoods.m_remark),
+                                @"isactive":safeStringWith(newGoods.m_isactive),
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOneGoodsWith:(WareHouseGoods *)newGoods
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/update"
+                     paragram:@{
+                                @"picurl":safeStringWith(newGoods.m_picurl),
+                                @"name":safeStringWith(newGoods.m_name),
+                                @"goodsencode":safeStringWith(newGoods.m_goodsencode),
+                                @"subtype":newGoods.m_category[@"_id"],
+                                @"category":@[newGoods.m_category[@"_id"]],
+                                @"saleprice":safeStringWith(newGoods.m_saleprice),
+                                @"costprice":safeStringWith(newGoods.m_costprice),
+                                @"productertype":safeStringWith(newGoods.m_productertype),
+                                @"producteraddress":safeStringWith(newGoods.m_producteraddress),
+                                @"barcode":safeStringWith(newGoods.m_barcode),
+                                @"brand":safeStringWith(newGoods.m_brand),
+                                @"unit":safeStringWith(newGoods.m_unit),
+                                @"minnum":safeStringWith(newGoods.m_minnum),
+                                @"applycartype":safeStringWith(newGoods.m_applycartype),
+                                @"remark":safeStringWith(newGoods.m_remark),
+                                @"isactive":safeStringWith(newGoods.m_isactive),
+                                @"owner":[LoginUserUtil userTel],
+                                @"id":newGoods.m_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)delOneGoodsWith:(NSString *)_id
+         successedBlock:(SuccessedBlock)success
+            failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 库存总览
+
+- (void)getAllGoodsStoreList:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodsstore/query"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)addNewGoodsStoreWith:(WareHouseGoods *)goods
+                    supplier:(NSString *)supplier
+                         num:(NSString *)num
+            warehouseposition:(NSString *)warehouseposition
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodsstore/add"
+                     paragram:@{
+                                @"goodsid":goods.m_id,
+                                @"supplier":supplier,
+                                @"num":num,
+                                @"warehouseposition":warehouseposition,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)delOneGoodsStoreWith:(WareHouseGoods *)goods
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodsstore/del"
+                     paragram:@{
+                                @"id":goods.m_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
 @end

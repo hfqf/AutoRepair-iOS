@@ -36,6 +36,8 @@
 #import "WeiboSDK.h"
 //新浪微博SDK需要在项目Build Settings中的Other Linker Flags添加"-ObjC"
 
+#import <AipOcrSdk/AipOcrSdk.h>
+
 //SMSSDK官网公共key
 #define appkey              @"1939c002a7458"
 #define app_secrect         @"67311c3428656d74799b850de68cf771"
@@ -51,6 +53,17 @@
 @end
 
 @implementation AppDelegate
+
+- (void)addBaiduOCR{
+    
+    NSString *licenseFile = [[NSBundle mainBundle] pathForResource:@"aip" ofType:@"license"];
+    NSData *licenseFileData = [NSData dataWithContentsOfFile:licenseFile];
+    if(!licenseFileData) {
+        [[[UIAlertView alloc] initWithTitle:@"授权失败" message:@"授权文件不存在" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+    }
+    [[AipOcrService shardService] authWithLicenseFileData:licenseFileData];
+
+}
 
 - (void)addSharePlatforms
 {
@@ -153,7 +166,7 @@
     {
         [[NSUserDefaults standardUserDefaults]setObject:@"0xFF4080" forKey:KEY_CURRENT_SKIN];
     }
-    
+    [self addBaiduOCR];
     [self addSharePlatforms];
     [LocalImageHelper createUploadFileInDocument];
     [self umengTrack];

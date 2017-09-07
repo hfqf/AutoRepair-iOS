@@ -78,12 +78,9 @@
         BHBCustomBtn * btn = [BHBCustomBtn buttonWithType:UIButtonTypeCustom];
         [btn bhb_setImage:[NSString stringWithFormat:@"%@",item.icon]];
         [btn.imageView setContentMode:UIViewContentModeCenter];
-        [btn setTitle:item.title forState:UIControlStateNormal];
-        btn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(10, 0, 0, 0)];
         CGFloat x = (i % 3) * self.frame.size.width / 3.0;
-        CGFloat y = (i / 3) * self.frame.size.height / 2.0;
+        CGFloat y = (i / 3) * self.frame.size.width / 3.0;
         if (isMore) {
             x += [UIScreen mainScreen].bounds.size.width;
             [self.moreBtns addObject:btn];
@@ -92,12 +89,19 @@
             [self.homeBtns addObject:btn];
         }
         CGFloat width = self.frame.size.width / 3.0;
-        CGFloat height = self.frame.size.height / 2;
+        CGFloat height = self.frame.size.width / 3.0;
         [btn addTarget:self action:@selector(didClickBtn:) forControlEvents:UIControlEventTouchUpInside];
         [btn addTarget:self action:@selector(didTouchBtn:) forControlEvents:UIControlEventTouchDown];
         [btn addTarget:self action:@selector(didCancelBtn:) forControlEvents:UIControlEventTouchDragInside];
         [self addSubview:btn];
         btn.frame = CGRectMake(x, y, width, height);
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, height-30, width, 50)];
+        [lab setText:item.title];
+        lab.textAlignment = NSTextAlignmentCenter;
+        lab.numberOfLines = 0;
+        [lab setTextColor:[UIColor darkGrayColor]];
+        lab.font = [UIFont systemFontOfSize:12];
+        [btn addSubview:lab];
     }
 }
 

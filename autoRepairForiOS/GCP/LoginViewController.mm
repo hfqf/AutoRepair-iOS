@@ -14,6 +14,8 @@
 @interface LoginViewController ()<UIAlertViewDelegate>
 {
     NSInteger  m_asyncCount;
+    UIButton  *m_checkBtn;
+    UILabel *m_tip;
 }
 @end
 
@@ -23,17 +25,13 @@
     [super viewDidLoad];
     backBtn.hidden = YES;
     navigationBG.hidden = YES;
-    [title setText:@"登录"];
     m_asyncCount = 0;
     
-    [self.m_head setPlaceholderImage:[UIImage imageNamed:@"icon"]];
+    [self.m_head setPlaceholderImage:[UIImage imageNamed:@"app_icon"]];
     self.m_head.clipsToBounds = YES;
     self.m_head.contentMode = UIViewContentModeScaleAspectFill;
-    self.m_head.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
-    self.m_head.layer.borderWidth = 0.5;
-    self.m_head.layer.cornerRadius = 2;
-    
-    
+
+        
     self.registerBtn.clipsToBounds = YES;
     self.registerBtn.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
     self.registerBtn.layer.borderWidth = 0.5;
@@ -51,6 +49,9 @@
 //    self.forgetPwdBtn.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
 //    self.forgetPwdBtn.layer.borderWidth = 0.5;
     
+    
+   
+
 
 }
 
@@ -131,18 +132,65 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    m_checkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    if(m_checkBtn && [m_checkBtn isDescendantOfView:self.view]){
+        [m_checkBtn removeFromSuperview];
+        m_checkBtn = nil;
+    }
+    m_checkBtn.selected = [LoginUserUtil isAutoLogined];
+    [m_checkBtn addTarget:self action:@selector(checkBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [m_checkBtn setFrame:CGRectMake(20, CGRectGetMinY(self.loginBtn.frame)-35, 30, 30)];
+    [m_checkBtn setImage:[UIImage imageNamed:@"check_un"] forState:UIControlStateNormal];
+    [m_checkBtn setImage:[UIImage imageNamed:@"check_on"] forState:UIControlStateSelected];
+    [self.view addSubview:m_checkBtn];
+    
+    if(m_tip && [m_tip isDescendantOfView:self.view]){
+        [m_tip removeFromSuperview];
+        m_tip = nil;
+    }
+    
+    m_tip = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(m_checkBtn.frame)+5, CGRectGetMinY(m_checkBtn.frame)+5, 100, 20)];
+    [m_tip setText:@"是否记住密码"];
+    [m_tip setTextAlignment:NSTextAlignmentLeft];
+    [m_tip setFont:[UIFont systemFontOfSize:14]];
+    [m_tip setTextColor:KEY_COMMON_GRAY_CORLOR];
+    [self.view addSubview:m_tip];
+    
+}
+
+- (void)checkBtnClicked:(UIButton *)btn
+{
+    m_checkBtn.selected = !btn.selected;
+    [[NSUserDefaults standardUserDefaults]setObject:m_checkBtn.selected?@"1":@"0" forKey:KEY_AUTO_LOGIN];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.loginBtn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
-    [self.registerBtn setTitleColor:PUBLIC_BACKGROUND_COLOR forState:UIControlStateNormal];
-    self.registerBtn.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
+    [self.registerBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+    self.registerBtn.layer.borderColor =  UIColorFromRGB(0xf5f5f5).CGColor;
+    self.registerBtn.layer.cornerRadius = 3;
+    
     [self.m_head setImageURL:[NSURL URLWithString:[LoginUserUtil headUrl]]];
     self.m_head.layer.borderColor =  PUBLIC_BACKGROUND_COLOR.CGColor;
-    [self.versionLab setTextColor:PUBLIC_BACKGROUND_COLOR];
+    [self.versionLab setTextColor:KEY_COMMON_GRAY_CORLOR];
+    [self.versionLab setText:[NSString stringWithFormat:@"汽修小助手: %@",VERSION]];
     self.nameInput.text = [LoginUserUtil loginedName];
-    self.pwdInput.text = [LoginUserUtil loginedPwd];
+    self.pwdInput.text = nil;
+    if([LoginUserUtil isAutoLogined]){
+        self.pwdInput.text = [LoginUserUtil loginedPwd];
+        [self loginBtnClicked:nil];
+    }
     
+    
+#if KEY_IS_DEV
+ 
+#else
+
     [HTTP_MANAGER checkUpdateVersion:^(NSDictionary *succeedResult) {
         
         if([succeedResult[@"code"]integerValue] == 1){
@@ -152,6 +200,9 @@
     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
         
     }];
+    
+    
+#endif
 }
 
 
@@ -217,6 +268,9 @@ return jsonString;
                                [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"devicemodifyed"] forKey:KEY_AUTO_UDID_MODIFYED];
                                [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"shopname"] forKey:KEY_AUTO_SHOP_NAME];
                               [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
+                              
+
+                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"address"] forKey:KEY_AUTO_ADDRESS];
 
                               [self queryContacts];
                               
@@ -256,11 +310,16 @@ return jsonString;
                                     ADTContacterInfo *newCon = [[ADTContacterInfo alloc]init];
                                     newCon.m_owner = info[@"owner"];
                                     newCon.m_carType = info[@"cartype"];
-                                    newCon.m_carCode = info[@"carcode"];
-                                    newCon.m_carCode = [newCon.m_carCode stringByReplacingOccurrencesOfString:@" " withString:@""];
+                                    newCon.m_carCode = [info stringWithFilted:@"carcode"];
                                     newCon.m_userName = info[@"name"];
                                     newCon.m_tel = info[@"tel"];
                                     newCon.m_idFromServer = info[@"_id"];
+                                    newCon.m_strInsertTime = [info stringWithFilted:@"inserttime"];
+                                    newCon.m_strIsBindWeixin = info[@"isbindweixin"];
+                                    newCon.m_strWeixinOPneid = info[@"weixinopenid"];
+                                    newCon.m_strVin = info[@"vin"];
+                                    newCon.m_strCarRegistertTime = info[@"carregistertime"];
+                                    newCon.m_strHeadUrl = info[@"headurl"];
                                     [[SqliteDataManager sharedInstance]insertNewCustom:newCon];
                                 }
                             }
