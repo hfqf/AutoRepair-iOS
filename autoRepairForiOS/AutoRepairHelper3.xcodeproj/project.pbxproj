@@ -431,6 +431,8 @@
 		7D6F0B151F27343200507356 /* WorkroomAddOrEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F0B131F27343200507356 /* WorkroomAddOrEditViewController.m */; };
 		7D72B45F1F2362CE00383D3D /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 7D72B45D1F2362CE00383D3D /* aip.license */; };
 		7D72B47A1F243D5E00383D3D /* WorkroomListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D72B4781F243D5E00383D3D /* WorkroomListViewController.m */; };
+		7DC27EEE1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */; };
+		7DC27EEF1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -823,6 +825,8 @@
 		7DB338C81E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ValueCheck.m"; sourceTree = "<group>"; };
 		7DB510F41EA121180007D5D0 /* ResetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPwdViewController.h; sourceTree = "<group>"; };
 		7DB510F51EA121180007D5D0 /* ResetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdViewController.m; sourceTree = "<group>"; };
+		7DC27EEC1F6123150069F560 /* WarehouseGoodPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodPurchaseViewController.h; sourceTree = "<group>"; };
+		7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodPurchaseViewController.m; sourceTree = "<group>"; };
 		7DCBC9771DC2EF09006BA2C8 /* ContactDeverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDeverViewController.h; sourceTree = "<group>"; };
 		7DCBC9781DC2EF09006BA2C8 /* ContactDeverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDeverViewController.m; sourceTree = "<group>"; };
 		7DCBC97C1DC2F264006BA2C8 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
@@ -1857,6 +1861,8 @@
 		7DC27EEB1F610EB80069F560 /* 采购 */ = {
 			isa = PBXGroup;
 			children = (
+				7DC27EEC1F6123150069F560 /* WarehouseGoodPurchaseViewController.h */,
+				7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */,
 			);
 			name = "采购";
 			sourceTree = "<group>";
@@ -2027,6 +2033,7 @@
 				7D4173581F2E26E900233B9B /* ADTRepairInfo.m in Sources */,
 				7D005E401F541B2B00846ADE /* WarehouseSupplierInfoViewController.m in Sources */,
 				7D4173591F2E26E900233B9B /* HttpConnctionManager.m in Sources */,
+				7DC27EEF1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */,
 				7D1BAA631F5C457500B03719 /* WarehouseGoodsSettingTopTypeListViewController.m in Sources */,
 				7D1BAA7B1F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m in Sources */,
 				7D41735A1F2E26E900233B9B /* AddNewCustomerViewController.m in Sources */,
@@ -2177,6 +2184,7 @@
 				7D4CD8EB1F235D37003619EB /* ADTRepairInfo.m in Sources */,
 				7D005E3F1F541B2B00846ADE /* WarehouseSupplierInfoViewController.m in Sources */,
 				7D4CD8EC1F235D37003619EB /* HttpConnctionManager.m in Sources */,
+				7DC27EEE1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */,
 				7D1BAA621F5C457500B03719 /* WarehouseGoodsSettingTopTypeListViewController.m in Sources */,
 				7D1BAA7A1F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m in Sources */,
 				7D4CD8ED1F235D37003619EB /* AddNewCustomerViewController.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "WarehouseGoodsInfoViewController.h"
 #import "WarehouseGoodsSettingViewController.h"
+#import "WarehouseGoodsAddNewViewController.h"
 @interface WarehouseGoodsInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,WarehouseGoodsSettingViewControllerDelegate>
 @property(nonatomic,strong)WareHouseGoods *m_goodsInfo;
 @property(nonatomic,strong)UITextField *m_currentTexfField;
@@ -303,6 +304,13 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-
+    if(buttonIndex == 0){
+        WarehouseGoodsAddNewViewController *purchase = [[WarehouseGoodsAddNewViewController alloc]initWith:self.m_goodsInfo];
+        [self.navigationController pushViewController:purchase animated:YES];
+    }else if (buttonIndex == 1){
+        [self update];
+    }else{
+        [self delete];
+    }
 }
 @end
