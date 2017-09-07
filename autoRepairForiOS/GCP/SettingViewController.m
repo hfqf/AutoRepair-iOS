@@ -33,7 +33,7 @@
         [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        
+        [self.tableView setFrame:CGRectMake(0,64, MAIN_WIDTH, MAIN_HEIGHT-64-HEIGHT_MAIN_BOTTOM)];
         web= [[UIWebView alloc]initWithFrame:CGRectMake(0,40, MAIN_WIDTH,150)];
         [web setBackgroundColor:[UIColor clearColor]];
         [web.scrollView setBackgroundColor:[UIColor clearColor]];

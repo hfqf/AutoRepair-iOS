@@ -51,6 +51,14 @@
     return self;
 }
 
+- (void)backBtnClicked
+{
+    if(self.m_selectDelegate){
+        [self.m_selectDelegate onSelectGoodsType:nil];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

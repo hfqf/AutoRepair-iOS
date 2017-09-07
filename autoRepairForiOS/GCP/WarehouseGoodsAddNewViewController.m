@@ -205,6 +205,7 @@
     {
     
     }else if (textField.tag == 2){
+        [self.m_currentTexfField resignFirstResponder];
         WarehouseGoodsSettingViewController *add = [[WarehouseGoodsSettingViewController alloc]initForSelectType];
         add.m_selectDelegate = self;
         [self.navigationController pushViewController:add animated:YES];

@@ -1051,6 +1051,7 @@
 				7D1BAA791F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m */,
 				7D1BAA6C1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.h */,
 				7D1BAA6D1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m */,
+				7DC27EEB1F610EB80069F560 /* 采购 */,
 			);
 			name = "商品设置";
 			sourceTree = "<group>";
@@ -1851,6 +1852,13 @@
 			);
 			name = SDWebImage;
 			path = Library/SDWebImage;
+			sourceTree = "<group>";
+		};
+		7DC27EEB1F610EB80069F560 /* 采购 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "采购";
 			sourceTree = "<group>";
 		};
 		7DF80D391E11FACB0067FD49 /* jpush */ = {
