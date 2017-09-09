@@ -31,6 +31,7 @@
     ret.m_saleprice = info[@"saleprice"];
     ret.m_subtype = info[@"subtype"];
     ret.m_unit = info[@"unit"];
+    ret.m_num = @"0";
     return ret;
 }
 @end

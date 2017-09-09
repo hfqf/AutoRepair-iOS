@@ -1271,8 +1271,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                    failedBolck:(FailedBlock)failed
 {
     [self startNormalPostWith:@"/warehousegoods/query"
-                     paragram:@{
-                                @"subtype":subtype,
+                     paragram: @{
+                                 @"subtype":subtype == nil ? @"" : subtype,
                                 @"owner":[LoginUserUtil userTel],
                                 }
                successedBlock:success

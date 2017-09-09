@@ -12,7 +12,11 @@
 {
     EGOImageView *m_head;
     UILabel *m_nameLab;
-    UILabel *m_priceLab;}
+    UILabel *m_priceLab;
+
+    UIImageView *m_selectIcon;
+
+}
 
 @property (nonatomic,strong)WareHouseGoods *infoData;
 @end

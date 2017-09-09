@@ -27,5 +27,8 @@
 @property(nonatomic,strong) NSString *m_isactive;
 @property(nonatomic,strong) NSString *m_owner;
 @property(nonatomic,strong) NSString *m_id;
+@property(nonatomic,strong) NSString *m_num;
+@property(assign)BOOL  m_isSelectStyle;
+@property(assign)BOOL  m_isSelected;
 +(WareHouseGoods *)from:(NSDictionary *)info;
 @end

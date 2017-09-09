@@ -11,9 +11,23 @@
 #import "WarehouseGoodsInfoViewController.h"
 #import "WarehouseGoodsTableViewCell.h"
 @interface WarehouseGoodsInSubTypeListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)NSMutableArray *m_arrSelect;
 @end
 
 @implementation WarehouseGoodsInSubTypeListViewController
+
+- (id)initWithSelectDelegate:(id<WarehouseGoodsInSubTypeListViewControllerDelegate>)delegate
+{
+    self.m_selecteDelegate = delegate;
+    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
+    {
+        self.m_arrSelect = [NSMutableArray array];
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    }
+    return self;
+}
 
 -(id)initWith:(NSDictionary *)info
 {
@@ -30,11 +44,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [title setText:self.m_parentInfo[@"name"]];
+    [title setText:self.m_selecteDelegate == nil ? self.m_parentInfo[@"name"] : @"添加商品"];
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-90, DISTANCE_TOP,80, HEIGHT_NAVIGATION)];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
     [addBtn setTitle:@"添加" forState:UIControlStateNormal];
     [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
@@ -48,8 +62,21 @@
 
 - (void)addBtnClicked
 {
-    WarehouseGoodsAddNewViewController *add = [[WarehouseGoodsAddNewViewController alloc]initWith:self.m_parentInfo];
-    [self.navigationController pushViewController:add animated:YES];
+
+    if(self.m_selecteDelegate){
+
+        NSMutableArray *arr = [NSMutableArray array];
+        for(WareHouseGoods *good in self.m_arrData){
+            if(good.m_isSelected){
+                [arr addObject:good];
+            }
+        }
+        [self.m_selecteDelegate onSelectGoodsArray:arr];
+    }else{
+        WarehouseGoodsAddNewViewController *add = [[WarehouseGoodsAddNewViewController alloc]initWith:self.m_parentInfo];
+        [self.navigationController pushViewController:add animated:YES];
+    }
+
 }
 
 - (void)requestData:(BOOL)isRefresh
@@ -65,6 +92,7 @@
             NSMutableArray *arrRet = [NSMutableArray array];
             for(NSDictionary *_info in arr){
                 WareHouseGoods *goods = [WareHouseGoods from:_info];
+                goods.m_isSelectStyle = self.m_selecteDelegate != nil;
                 [arrRet addObject:goods];
             }
             self.m_arrData = arrRet;
@@ -110,9 +138,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WareHouseGoods *info = [self.m_arrData objectAtIndex:indexPath.row];
-    WarehouseGoodsInfoViewController *sub = [[WarehouseGoodsInfoViewController alloc]initWith:info];
-    [self.navigationController pushViewController:sub animated:YES];
+    if(self.m_selecteDelegate){
+        WareHouseGoods *info = [self.m_arrData objectAtIndex:indexPath.row];
+        info.m_isSelected = !info.m_isSelected;
+        [self reloadDeals];
+    }else{
+
+        WareHouseGoods *info = [self.m_arrData objectAtIndex:indexPath.row];
+        WarehouseGoodsInfoViewController *sub = [[WarehouseGoodsInfoViewController alloc]initWith:info];
+        [self.navigationController pushViewController:sub animated:YES];
+    }
+
 }
 
 @end

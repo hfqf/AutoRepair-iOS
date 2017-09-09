@@ -420,6 +420,12 @@
 		7D5BFB411F2CB6DB00FD239D /* JHUDAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BFB391F2CB6DB00FD239D /* JHUDAnimationView.m */; };
 		7D5BFB431F2CB6DB00FD239D /* UIImage+JHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BFB3B1F2CB6DB00FD239D /* UIImage+JHUD.m */; };
 		7D5BFB451F2CB6DB00FD239D /* UIView+JHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BFB3D1F2CB6DB00FD239D /* UIView+JHUD.m */; };
+		7D5C32F71F62694700C2E69C /* WarehousePurchaseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32F61F62694700C2E69C /* WarehousePurchaseInfo.m */; };
+		7D5C32F81F62694700C2E69C /* WarehousePurchaseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32F61F62694700C2E69C /* WarehousePurchaseInfo.m */; };
+		7D5C32FB1F6269BF00C2E69C /* WarehouseGoodsAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FA1F6269BF00C2E69C /* WarehouseGoodsAction.m */; };
+		7D5C32FC1F6269BF00C2E69C /* WarehouseGoodsAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FA1F6269BF00C2E69C /* WarehouseGoodsAction.m */; };
+		7D5C32FF1F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */; };
+		7D5C33001F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */; };
 		7D5CAE921F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
 		7D5CAE931F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
 		7D5CAE941F4FAECE00805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
@@ -760,6 +766,12 @@
 		7D5BFB3B1F2CB6DB00FD239D /* UIImage+JHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JHUD.m"; sourceTree = "<group>"; };
 		7D5BFB3C1F2CB6DB00FD239D /* UIView+JHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JHUD.h"; sourceTree = "<group>"; };
 		7D5BFB3D1F2CB6DB00FD239D /* UIView+JHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JHUD.m"; sourceTree = "<group>"; };
+		7D5C32F51F62694700C2E69C /* WarehousePurchaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehousePurchaseInfo.h; sourceTree = "<group>"; };
+		7D5C32F61F62694700C2E69C /* WarehousePurchaseInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehousePurchaseInfo.m; sourceTree = "<group>"; };
+		7D5C32F91F6269BF00C2E69C /* WarehouseGoodsAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodsAction.h; sourceTree = "<group>"; };
+		7D5C32FA1F6269BF00C2E69C /* WarehouseGoodsAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsAction.m; sourceTree = "<group>"; };
+		7D5C32FD1F62F78700C2E69C /* WarehousePurchaseEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehousePurchaseEditView.h; sourceTree = "<group>"; };
+		7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehousePurchaseEditView.m; sourceTree = "<group>"; };
 		7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		7D5DDD981E30B9380065FAED /* NSArray+SortByFisrtChar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SortByFisrtChar.h"; sourceTree = "<group>"; };
 		7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SortByFisrtChar.m"; sourceTree = "<group>"; };
@@ -994,6 +1006,10 @@
 				7D005E0B1F513DFC00846ADE /* WarehouseItem.m */,
 				7D005E121F53C37700846ADE /* WareHouseGoods.h */,
 				7D005E131F53C37700846ADE /* WareHouseGoods.m */,
+				7D5C32F51F62694700C2E69C /* WarehousePurchaseInfo.h */,
+				7D5C32F61F62694700C2E69C /* WarehousePurchaseInfo.m */,
+				7D5C32F91F6269BF00C2E69C /* WarehouseGoodsAction.h */,
+				7D5C32FA1F6269BF00C2E69C /* WarehouseGoodsAction.m */,
 			);
 			name = WarehouseManager;
 			sourceTree = "<group>";
@@ -1863,6 +1879,8 @@
 			children = (
 				7DC27EEC1F6123150069F560 /* WarehouseGoodPurchaseViewController.h */,
 				7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */,
+				7D5C32FD1F62F78700C2E69C /* WarehousePurchaseEditView.h */,
+				7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */,
 			);
 			name = "采购";
 			sourceTree = "<group>";
@@ -2043,6 +2061,7 @@
 				7D41735E1F2E26E900233B9B /* ConverUtil.m in Sources */,
 				7D41735F1F2E26E900233B9B /* SpeSqliteUpdateManager.m in Sources */,
 				7D4173601F2E26E900233B9B /* BHBPopView.m in Sources */,
+				7D5C32FC1F6269BF00C2E69C /* WarehouseGoodsAction.m in Sources */,
 				7D4173611F2E26E900233B9B /* LoginUserUtil.m in Sources */,
 				7D46394B1F3C96BA00783F38 /* CustomerOrdersViewController.m in Sources */,
 				7D4173621F2E26E900233B9B /* NSDictionary+ValueCheck.m in Sources */,
@@ -2070,6 +2089,7 @@
 				7D4173771F2E26E900233B9B /* TabbarButtonsBGView.m in Sources */,
 				7D4173781F2E26E900233B9B /* AFHTTPSessionManager.m in Sources */,
 				7D4173791F2E26E900233B9B /* SDWebImageCompat.m in Sources */,
+				7D5C32F81F62694700C2E69C /* WarehousePurchaseInfo.m in Sources */,
 				7D41737A1F2E26E900233B9B /* MJRefreshBaseView.m in Sources */,
 				7D41737B1F2E26E900233B9B /* EGOImageLoadConnection.m in Sources */,
 				7D41737C1F2E26E900233B9B /* AFNetworkReachabilityManager.m in Sources */,
@@ -2095,6 +2115,7 @@
 				7D41738C1F2E26E900233B9B /* SMSUIVerificationCodeViewController.m in Sources */,
 				7D41738D1F2E26E900233B9B /* XTNavigationController.m in Sources */,
 				7D41738E1F2E26E900233B9B /* VerifyViewController.m in Sources */,
+				7D5C33001F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */,
 				7D1BAA571F5C2CBB00B03719 /* WarehouseGoodsSettingViewController.m in Sources */,
 				7D41738F1F2E26E900233B9B /* SpeCommonTableView.m in Sources */,
 				7D46394F1F3CADFD00783F38 /* ADTOrderInfo.m in Sources */,
@@ -2194,6 +2215,7 @@
 				7D4CD8F41F235D37003619EB /* ConverUtil.m in Sources */,
 				7D4CD8F51F235D37003619EB /* SpeSqliteUpdateManager.m in Sources */,
 				7D4CD8F61F235D37003619EB /* BHBPopView.m in Sources */,
+				7D5C32FB1F6269BF00C2E69C /* WarehouseGoodsAction.m in Sources */,
 				7D4CD8F71F235D37003619EB /* LoginUserUtil.m in Sources */,
 				7D46394A1F3C96BA00783F38 /* CustomerOrdersViewController.m in Sources */,
 				7D4CD8F91F235D37003619EB /* NSDictionary+ValueCheck.m in Sources */,
@@ -2221,6 +2243,7 @@
 				7D4CD91C1F235D37003619EB /* TabbarButtonsBGView.m in Sources */,
 				7D4CD91F1F235D37003619EB /* AFHTTPSessionManager.m in Sources */,
 				7D4CD9201F235D37003619EB /* SDWebImageCompat.m in Sources */,
+				7D5C32F71F62694700C2E69C /* WarehousePurchaseInfo.m in Sources */,
 				7D4CD9221F235D37003619EB /* MJRefreshBaseView.m in Sources */,
 				7D4CD9231F235D37003619EB /* EGOImageLoadConnection.m in Sources */,
 				7D4CD9241F235D37003619EB /* AFNetworkReachabilityManager.m in Sources */,
@@ -2246,6 +2269,7 @@
 				7D4CD9381F235D37003619EB /* SMSUIVerificationCodeViewController.m in Sources */,
 				7D4CD9391F235D37003619EB /* XTNavigationController.m in Sources */,
 				7D4CD93A1F235D37003619EB /* VerifyViewController.m in Sources */,
+				7D5C32FF1F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */,
 				7D1BAA561F5C2CBB00B03719 /* WarehouseGoodsSettingViewController.m in Sources */,
 				7D4CD93B1F235D37003619EB /* SpeCommonTableView.m in Sources */,
 				7D46394E1F3CADFD00783F38 /* ADTOrderInfo.m in Sources */,

@@ -53,7 +53,7 @@ withIsNeedNoneView:(BOOL)isNeedNoneView
         [bg release];
         
         self.tableView = table;
-        self.m_isNeedNoneView = YES;
+        self.m_isNeedNoneView = isNeedNoneView;
         
         [table release];
         [self.view addSubview:self.tableView];
