@@ -7,8 +7,9 @@
 //
 
 #import "WarehouseWillSaveToStoreGoodsViewController.h"
-
-@interface WarehouseWillSaveToStoreGoodsViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
+#import "WarehouseWillSaveToStoreGoodsTableViewCell.h"
+#import "WarehouseGoodPurchaseInfoViewController.h"
+@interface WarehouseWillSaveToStoreGoodsViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,WarehouseWillSaveToStoreGoodsTableViewCellDelegate>
 @end
 
 @implementation WarehouseWillSaveToStoreGoodsViewController
@@ -28,15 +29,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [title setText:@"待入库"];
-
-    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-40, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
-    //    [addBtn setTitle:@"添加" forState:UIControlStateNormal];
-    [addBtn setImage:[UIImage imageNamed:@"moresetting"] forState:UIControlStateNormal];
-    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
-    [navigationBG addSubview:addBtn];
-
 
 }
 
@@ -83,44 +75,45 @@
 }
 
 
-#define HIGH_CELL  40
+#define HIGH_CELL  170
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+   return self.m_arrData.count;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return HIGH_CELL;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.m_arrData.count;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return HIGH_CELL;
+    return 0.01;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.5;
+    return 5;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * identify = @"spe";
-    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identify];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.backgroundColor = navigationBG.backgroundColor;
+    WarehouseWillSaveToStoreGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    if(cell == nil){
+        cell = [[WarehouseWillSaveToStoreGoodsTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+    }
+    cell.m_delegate  = self;
     WarehousePurchaseInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
-
-
-    UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, HIGH_CELL-0.5, MAIN_WIDTH, 0.5)];
-    [sep setBackgroundColor:navigationBG.backgroundColor];
-    [cell addSubview:sep];
-
+    [cell setInfo:info];
     return cell;
 }
 
@@ -143,6 +136,27 @@
         
     }
 }
+
+#pragma mark - WarehouseWillSaveToStoreGoodsTableViewCellDelegate
+
+- (void)onWarehouseWillSaveToStoreGoodsTableViewCellReject:(WarehousePurchaseInfo *)purchase
+{
+
+}
+
+- (void)onWarehouseWillSaveToStoreGoodsTableViewCellCheckInfo:(WarehousePurchaseInfo *)purchase
+{
+    WarehouseGoodPurchaseInfoViewController *infoVc = [[WarehouseGoodPurchaseInfoViewController alloc]initWith:purchase];
+    [self.navigationController pushViewController:infoVc animated:YES];
+}
+
+- (void)onWarehouseWillSaveToStoreGoodsTableViewCellSave:(WarehousePurchaseInfo *)purchase
+{
+
+
+}
+
+
 
 @end
 

@@ -39,4 +39,5 @@
     #import "WareHouseGoods.h"
     #import "NSDictionary+ValueCheck.h"
     #import "WarehousePurchaseInfo.h"
+    #import "WarehouseSupplierInfo.h"
 #endif

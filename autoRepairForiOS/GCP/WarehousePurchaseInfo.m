@@ -30,7 +30,11 @@
     ret.m_state = [info stringWithFilted:@"state"];
     ret.m_expressCompany = [info stringWithFilted:@"expresscompany"];
     ret.m_supplier = info[@"supplier"];
+    ret.m_supplierInfo = [WarehouseSupplierInfo from:info[@"supplier"]];
     ret.m_time = [info stringWithFilted:@"timestamp"];
+    ret.m_buyer = info[@"buyer"];
+    ret.m_rejecter = info[@"rejecter"];
+    ret.m_rejectReason = [info stringWithFilted:@"rejectreason"];
     return ret;
 }
 @end

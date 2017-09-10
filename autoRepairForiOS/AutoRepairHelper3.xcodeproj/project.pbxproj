@@ -428,6 +428,14 @@
 		7D5C33001F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */; };
 		7D5C33031F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33021F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m */; };
 		7D5C33041F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33021F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m */; };
+		7D5C33071F650E0400C2E69C /* WarehouseSupplierInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33061F650E0400C2E69C /* WarehouseSupplierInfo.m */; };
+		7D5C33081F650E0400C2E69C /* WarehouseSupplierInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33061F650E0400C2E69C /* WarehouseSupplierInfo.m */; };
+		7D5C330B1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C330A1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m */; };
+		7D5C330C1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C330A1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m */; };
+		7D5C330F1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C330E1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m */; };
+		7D5C33101F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C330E1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m */; };
+		7D5C33131F65864100C2E69C /* WarehouseSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33121F65864100C2E69C /* WarehouseSaveToStoreViewController.m */; };
+		7D5C33141F65864100C2E69C /* WarehouseSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33121F65864100C2E69C /* WarehouseSaveToStoreViewController.m */; };
 		7D5CAE921F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
 		7D5CAE931F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
 		7D5CAE941F4FAECE00805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
@@ -776,6 +784,14 @@
 		7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehousePurchaseEditView.m; sourceTree = "<group>"; };
 		7D5C33011F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseWillSaveToStoreGoodsViewController.h; sourceTree = "<group>"; };
 		7D5C33021F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseWillSaveToStoreGoodsViewController.m; sourceTree = "<group>"; };
+		7D5C33051F650E0400C2E69C /* WarehouseSupplierInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseSupplierInfo.h; sourceTree = "<group>"; };
+		7D5C33061F650E0400C2E69C /* WarehouseSupplierInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseSupplierInfo.m; sourceTree = "<group>"; };
+		7D5C33091F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseWillSaveToStoreGoodsTableViewCell.h; sourceTree = "<group>"; };
+		7D5C330A1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseWillSaveToStoreGoodsTableViewCell.m; sourceTree = "<group>"; };
+		7D5C330D1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodPurchaseInfoViewController.h; sourceTree = "<group>"; };
+		7D5C330E1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodPurchaseInfoViewController.m; sourceTree = "<group>"; };
+		7D5C33111F65864100C2E69C /* WarehouseSaveToStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseSaveToStoreViewController.h; sourceTree = "<group>"; };
+		7D5C33121F65864100C2E69C /* WarehouseSaveToStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseSaveToStoreViewController.m; sourceTree = "<group>"; };
 		7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		7D5DDD981E30B9380065FAED /* NSArray+SortByFisrtChar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SortByFisrtChar.h"; sourceTree = "<group>"; };
 		7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SortByFisrtChar.m"; sourceTree = "<group>"; };
@@ -1014,6 +1030,8 @@
 				7D5C32F61F62694700C2E69C /* WarehousePurchaseInfo.m */,
 				7D5C32F91F6269BF00C2E69C /* WarehouseGoodsAction.h */,
 				7D5C32FA1F6269BF00C2E69C /* WarehouseGoodsAction.m */,
+				7D5C33051F650E0400C2E69C /* WarehouseSupplierInfo.h */,
+				7D5C33061F650E0400C2E69C /* WarehouseSupplierInfo.m */,
 			);
 			name = WarehouseManager;
 			sourceTree = "<group>";
@@ -1092,6 +1110,10 @@
 			children = (
 				7D5C33011F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.h */,
 				7D5C33021F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m */,
+				7D5C33091F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.h */,
+				7D5C330A1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m */,
+				7D5C33111F65864100C2E69C /* WarehouseSaveToStoreViewController.h */,
+				7D5C33121F65864100C2E69C /* WarehouseSaveToStoreViewController.m */,
 			);
 			name = "待入库";
 			sourceTree = "<group>";
@@ -1885,6 +1907,8 @@
 			children = (
 				7DC27EEC1F6123150069F560 /* WarehouseGoodPurchaseViewController.h */,
 				7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */,
+				7D5C330D1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.h */,
+				7D5C330E1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m */,
 				7D5C32FD1F62F78700C2E69C /* WarehousePurchaseEditView.h */,
 				7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */,
 			);
@@ -2091,6 +2115,7 @@
 				7D4173731F2E26E900233B9B /* MJRefreshHeaderView.m in Sources */,
 				7D1BAA671F5C458700B03719 /* WarehouseGoodsSettingSubTypeListViewController.m in Sources */,
 				7D4173741F2E26E900233B9B /* LoginViewController.mm in Sources */,
+				7D5C33101F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m in Sources */,
 				7D4173751F2E26E900233B9B /* UIButton+WebCache.m in Sources */,
 				7D4173761F2E26E900233B9B /* NSArray+SortByFisrtChar.m in Sources */,
 				7D4173771F2E26E900233B9B /* TabbarButtonsBGView.m in Sources */,
@@ -2125,6 +2150,7 @@
 				7D5C33001F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */,
 				7D1BAA571F5C2CBB00B03719 /* WarehouseGoodsSettingViewController.m in Sources */,
 				7D41738F1F2E26E900233B9B /* SpeCommonTableView.m in Sources */,
+				7D5C330C1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m in Sources */,
 				7D46394F1F3CADFD00783F38 /* ADTOrderInfo.m in Sources */,
 				7D4173901F2E26E900233B9B /* ContactDeverViewController.m in Sources */,
 				7D4173911F2E26E900233B9B /* JHUDAnimationView.m in Sources */,
@@ -2144,6 +2170,7 @@
 				7D41739E1F2E26E900233B9B /* BHBGroup.m in Sources */,
 				7D41739F1F2E26E900233B9B /* DES3Util.m in Sources */,
 				7D4173A01F2E26E900233B9B /* EGOCache.m in Sources */,
+				7D5C33081F650E0400C2E69C /* WarehouseSupplierInfo.m in Sources */,
 				7D4173A11F2E26E900233B9B /* UIImageView+WebCache.m in Sources */,
 				7D4173A21F2E26E900233B9B /* UIButton+AFNetworking.m in Sources */,
 				7D4173A31F2E26E900233B9B /* LocalTimeUtil.m in Sources */,
@@ -2160,6 +2187,7 @@
 				7D4173AC1F2E26E900233B9B /* DesUtil.m in Sources */,
 				7D4173AD1F2E26E900233B9B /* ReachabilityObserver.m in Sources */,
 				7D4173AE1F2E26E900233B9B /* SDImageCache.m in Sources */,
+				7D5C33141F65864100C2E69C /* WarehouseSaveToStoreViewController.m in Sources */,
 				7D4173AF1F2E26E900233B9B /* WorkroomAddOrEditViewController.m in Sources */,
 				7D005E111F52AA9700846ADE /* WarehouseSettingViewController.m in Sources */,
 				7D4173B01F2E26E900233B9B /* RegisterViewController.m in Sources */,
@@ -2246,6 +2274,7 @@
 				7D4CD9171F235D37003619EB /* MJRefreshHeaderView.m in Sources */,
 				7D1BAA661F5C458700B03719 /* WarehouseGoodsSettingSubTypeListViewController.m in Sources */,
 				7D4CD9181F235D37003619EB /* LoginViewController.mm in Sources */,
+				7D5C330F1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m in Sources */,
 				7D4CD91A1F235D37003619EB /* UIButton+WebCache.m in Sources */,
 				7D4CD91B1F235D37003619EB /* NSArray+SortByFisrtChar.m in Sources */,
 				7D4CD91C1F235D37003619EB /* TabbarButtonsBGView.m in Sources */,
@@ -2280,6 +2309,7 @@
 				7D5C32FF1F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */,
 				7D1BAA561F5C2CBB00B03719 /* WarehouseGoodsSettingViewController.m in Sources */,
 				7D4CD93B1F235D37003619EB /* SpeCommonTableView.m in Sources */,
+				7D5C330B1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m in Sources */,
 				7D46394E1F3CADFD00783F38 /* ADTOrderInfo.m in Sources */,
 				7D4CD93C1F235D37003619EB /* ContactDeverViewController.m in Sources */,
 				7D5BFB411F2CB6DB00FD239D /* JHUDAnimationView.m in Sources */,
@@ -2299,6 +2329,7 @@
 				7D4CD94D1F235D37003619EB /* BHBGroup.m in Sources */,
 				7D4CD94E1F235D37003619EB /* DES3Util.m in Sources */,
 				7D4CD94F1F235D37003619EB /* EGOCache.m in Sources */,
+				7D5C33071F650E0400C2E69C /* WarehouseSupplierInfo.m in Sources */,
 				7D4CD9501F235D37003619EB /* UIImageView+WebCache.m in Sources */,
 				7D4CD9521F235D37003619EB /* UIButton+AFNetworking.m in Sources */,
 				7D4CD9571F235D37003619EB /* LocalTimeUtil.m in Sources */,
@@ -2315,6 +2346,7 @@
 				7D4CD9691F235D37003619EB /* DesUtil.m in Sources */,
 				7D4CD96A1F235D37003619EB /* ReachabilityObserver.m in Sources */,
 				7D4CD96C1F235D37003619EB /* SDImageCache.m in Sources */,
+				7D5C33131F65864100C2E69C /* WarehouseSaveToStoreViewController.m in Sources */,
 				7D6F0B151F27343200507356 /* WorkroomAddOrEditViewController.m in Sources */,
 				7D005E101F52AA9700846ADE /* WarehouseSettingViewController.m in Sources */,
 				7D4CD96E1F235D37003619EB /* RegisterViewController.m in Sources */,
