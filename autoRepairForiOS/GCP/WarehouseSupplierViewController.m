@@ -10,10 +10,21 @@
 #import "WarehouseSupplierAddNewViewController.h"
 #import "WarehouseSupplierInfoViewController.h"
 @interface WarehouseSupplierViewController ()<UITableViewDelegate,UITableViewDataSource>
-
+@property(nonatomic,weak)id<WarehouseSupplierViewControllerDelegate>m_selectDelegate;
 @end
 
 @implementation WarehouseSupplierViewController
+- (id)initWith:(id<WarehouseSupplierViewControllerDelegate>)delegate
+{
+    self.m_selectDelegate = delegate;
+    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
+    {
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    }
+    return self;
+}
 
 -(id)init
 {
@@ -130,8 +141,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *info = [self.m_arrData objectAtIndex:indexPath.row];
-    WarehouseSupplierInfoViewController *vc = [[WarehouseSupplierInfoViewController alloc]initWith:info];
-    [self.navigationController pushViewController:vc animated:YES];
+    if(self.m_selectDelegate){
+        [self.m_selectDelegate onSupplierSelected:info];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        WarehouseSupplierInfoViewController *vc = [[WarehouseSupplierInfoViewController alloc]initWith:info];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 @end

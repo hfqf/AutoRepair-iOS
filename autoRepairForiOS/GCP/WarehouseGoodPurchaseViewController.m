@@ -10,10 +10,11 @@
 #import "WarehousePurchaseInfo.h"
 #import "WarehousePurchaseEditView.h"
 #import "WarehouseGoodsInSubTypeListViewController.h"
-@interface WarehouseGoodPurchaseViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,WarehousePurchaseEditViewDelegate,WarehouseGoodsInSubTypeListViewControllerDelegate>
+#import "WarehouseSupplierViewController.h"
+@interface WarehouseGoodPurchaseViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,WarehousePurchaseEditViewDelegate,WarehouseGoodsInSubTypeListViewControllerDelegate,WarehouseSupplierViewControllerDelegate>
 @property(nonatomic,strong)WareHouseGoods *m_goodsInfo;
 @property(nonatomic,strong)WarehousePurchaseInfo *m_purchaseInfo;
-
+@property(nonatomic,strong)UITextField *m_currentTexfField;
 @end
 
 @implementation WarehouseGoodPurchaseViewController
@@ -187,17 +188,17 @@
         if(indexPath.row == 0){
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [_tit setText:@"供应商"];
-            [edit setText:self.m_purchaseInfo.m_supplier[@"name"]];
+            [edit setText:self.m_purchaseInfo.m_supplier[@"suppliercompanyname"]];
             [edit setPlaceholder:@"必填"];
         }else if (indexPath.row == 1){
             [_tit setText:@"物流公司"];
-            [edit setText:self.m_goodsInfo.m_goodsencode];
+            [edit setText:self.m_purchaseInfo.m_expressCompany];
         }else if (indexPath.row == 2){
             [_tit setText:@"物流单号"];
-            [edit setText:self.m_goodsInfo.m_category[@"name"]];
+            [edit setText:self.m_purchaseInfo.m_expressSerialId];
         }else if (indexPath.row == 3){
             [_tit setText:@"备注"];
-            [edit setText:self.m_goodsInfo.m_costprice];
+            [edit setText:self.m_goodsInfo.m_remark];
         }
 
         edit.delegate = self;
@@ -240,10 +241,14 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 0){//添加商品
-        WarehouseGoodsInSubTypeListViewController *add = [[WarehouseGoodsInSubTypeListViewController alloc]initWithSelectDelegate:self ];
+        NSMutableArray *arr = [NSMutableArray array];
+        for(WareHouseGoods *good in self.m_purchaseInfo.m_arrGoods){
+            [arr addObject:good];
+        }
+        WarehouseGoodsInSubTypeListViewController *add = [[WarehouseGoodsInSubTypeListViewController alloc]initWithSelectDelegate:self  withSelectedGoods:arr];
         [self.navigationController pushViewController:add animated:YES];
     }else if (buttonIndex == 1){//采购
-
+        [self commit];
     }else{
 
     }
@@ -253,6 +258,96 @@
 
 - (void)onSelectGoodsArray:(NSArray *)arrSelected
 {
+    self.m_purchaseInfo.m_arrGoods = arrSelected;
+    [self reloadDeals];
+}
+
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    self.m_currentTexfField = textField;
+
+    if(textField.tag == 0)
+    {
+        [self.m_currentTexfField resignFirstResponder];
+        WarehouseSupplierViewController *add = [[WarehouseSupplierViewController alloc]initWith:self];
+        [self.navigationController pushViewController:add animated:YES];
+
+    }else if (textField.tag == 2){
+
+
+    }else{
+
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+
+    if(textField.tag ==0){
+
+    }else if (textField.tag == 1){
+        self.m_purchaseInfo.m_expressCompany = textField.text;
+    }else if (textField.tag == 2){
+        self.m_purchaseInfo.m_expressSerialId = textField.text;
+    }else if (textField.tag == 3){
+        self.m_purchaseInfo.m_remark = textField.text;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+
+    if(textField.tag ==0){
+
+    }else if (textField.tag == 1){
+        self.m_purchaseInfo.m_expressCompany = textField.text;
+    }else if (textField.tag == 2){
+        self.m_purchaseInfo.m_expressSerialId = textField.text;
+    }else if (textField.tag == 3){
+        self.m_purchaseInfo.m_remark = textField.text;
+    }
+    return YES;
+}
+
+#pragma mark - WarehouseGoodsSettingViewControllerDelegate
+- (void)onSelectGoodsType:(NSDictionary *)goodsInfo
+{
+    self.m_goodsInfo.m_category = goodsInfo;
+    [self reloadDeals];
+}
+
+#pragma mark - WarehouseSupplierViewControllerDelegate
+- (void)onSupplierSelected:(NSDictionary *)supplier
+{
+    self.m_purchaseInfo.m_supplier = supplier;
+    [self reloadDeals];
+}
+
+- (void)commit
+{
+    [self.m_currentTexfField resignFirstResponder];
+    if(self.m_purchaseInfo.m_supplier == nil){
+        [PubllicMaskViewHelper showTipViewWith:@"供应商不能为空" inSuperView:self.view  withDuration:1];
+        return;
+    }
+    self.m_purchaseInfo.m_state = @"1";
+       [HTTP_MANAGER addNewPurchaseWith:self.m_purchaseInfo
+                         successedBlock:^(NSDictionary *succeedResult) {
+
+
+
+
+       } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+           
+
+
+       }];
 
 }
 @end

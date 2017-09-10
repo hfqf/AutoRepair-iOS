@@ -16,6 +16,7 @@
 #import "AFHTTPSessionManager.h"
 #import "AFURLRequestSerialization.h"
 #import "WareHouseGoods.h"
+#import "WarehousePurchaseInfo.h"
 
 
 @interface HttpConnctionManager : AFHTTPRequestOperationManager
@@ -428,5 +429,14 @@ typedef void (^FailBlock)(NSError *error);
 - (void)delOneGoodsStoreWith:(WareHouseGoods *)goods
               successedBlock:(SuccessedBlock)success
                  failedBolck:(FailedBlock)failed;
+
+#pragma mark - 采购
+- (void)addNewPurchaseWith:(WarehousePurchaseInfo *)purchase
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed;
+
+- (void)queryPurchaseGoods:(NSString *)state
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed;
 
 @end

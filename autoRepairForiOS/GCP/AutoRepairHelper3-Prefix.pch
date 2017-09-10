@@ -38,4 +38,5 @@
     #import "EGOCache.h"
     #import "WareHouseGoods.h"
     #import "NSDictionary+ValueCheck.h"
+    #import "WarehousePurchaseInfo.h"
 #endif

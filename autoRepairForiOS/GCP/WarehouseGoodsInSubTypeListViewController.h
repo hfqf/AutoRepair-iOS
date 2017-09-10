@@ -18,5 +18,5 @@
 @property(nonatomic,weak)id<WarehouseGoodsInSubTypeListViewControllerDelegate>m_selecteDelegate;
 - (id)initWith:(NSDictionary *)info;
 
-- (id)initWithSelectDelegate:(id<WarehouseGoodsInSubTypeListViewControllerDelegate>)delegate;
+- (id)initWithSelectDelegate:(id<WarehouseGoodsInSubTypeListViewControllerDelegate>)delegate withSelectedGoods:(NSArray *)arrSelected;
 @end

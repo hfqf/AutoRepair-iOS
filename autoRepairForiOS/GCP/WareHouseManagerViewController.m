@@ -124,6 +124,8 @@
 
                 case 2:
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillSaveToStoreGoodsViewController") alloc]init] animated:YES];
+
                     break;
                 }
 

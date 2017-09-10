@@ -1405,4 +1405,44 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+
+#pragma mark - 采购
+- (void)addNewPurchaseWith:(WarehousePurchaseInfo *)purchase
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed
+{
+    NSMutableArray *arrGoods = [NSMutableArray array];
+    for(WareHouseGoods *good in purchase.m_arrGoods){
+        [arrGoods addObject:good.m_id];
+    }
+    [self startNormalPostWith:@"/warehousegoodspurchase/add"
+                     paragram:@{
+                                @"state":safeStringWith(purchase.m_state),
+                                @"paytype":safeStringWith(purchase.m_payType),
+                                @"expresscostpaytype":safeStringWith(purchase.m_expressPayType),
+                                @"expresscompany":safeStringWith(purchase.m_expressCompany),
+                                @"expressserialid":safeStringWith(purchase.m_expressSerialId),
+                                @"expresscost":safeStringWith(purchase.m_expressCost),
+                                @"supplier":purchase.m_supplier[@"_id"],
+                                @"goods":arrGoods,
+                                @"remark":safeStringWith(purchase.m_remark),
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)queryPurchaseGoods:(NSString *)state
+            successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodspurchase/query"
+                     paragram:@{
+                                @"state":state,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
 @end

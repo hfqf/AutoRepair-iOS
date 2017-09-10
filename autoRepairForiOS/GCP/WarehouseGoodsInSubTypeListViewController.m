@@ -16,12 +16,12 @@
 
 @implementation WarehouseGoodsInSubTypeListViewController
 
-- (id)initWithSelectDelegate:(id<WarehouseGoodsInSubTypeListViewControllerDelegate>)delegate
+- (id)initWithSelectDelegate:(id<WarehouseGoodsInSubTypeListViewControllerDelegate>)delegate withSelectedGoods:(NSArray *)arrSelected
 {
+    self.m_arrSelect = [NSMutableArray arrayWithArray:arrSelected];
     self.m_selecteDelegate = delegate;
     if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
     {
-        self.m_arrSelect = [NSMutableArray array];
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -72,6 +72,7 @@
             }
         }
         [self.m_selecteDelegate onSelectGoodsArray:arr];
+        [self.navigationController popViewControllerAnimated:YES];
     }else{
         WarehouseGoodsAddNewViewController *add = [[WarehouseGoodsAddNewViewController alloc]initWith:self.m_parentInfo];
         [self.navigationController pushViewController:add animated:YES];
@@ -93,6 +94,15 @@
             for(NSDictionary *_info in arr){
                 WareHouseGoods *goods = [WareHouseGoods from:_info];
                 goods.m_isSelectStyle = self.m_selecteDelegate != nil;
+
+                for(WareHouseGoods *_good in self.m_arrSelect){
+                    if([_good.m_id isEqualToString:goods.m_id]){
+                        goods.m_isSelected = YES;
+                    }else{
+                        goods.m_isSelected = NO;
+                    }
+                }
+
                 [arrRet addObject:goods];
             }
             self.m_arrData = arrRet;

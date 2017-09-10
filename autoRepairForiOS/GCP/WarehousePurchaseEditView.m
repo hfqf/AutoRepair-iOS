@@ -23,10 +23,10 @@
         bg.layer.cornerRadius = 4;
         [self addSubview:bg];
 
-        UILabel *tip1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 50, 20)];
+        UILabel *tip1 = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 80, 20)];
         [tip1 setTextAlignment:NSTextAlignmentLeft];
         [tip1 setTextColor:[UIColor whiteColor]];
-        [tip1 setText:@"价格"];
+        [tip1 setText:@"采购价格"];
         [tip1 setFont:[UIFont systemFontOfSize:15]];
         [bg addSubview:tip1];
 
@@ -42,10 +42,10 @@
         [bg addSubview:m_priceTextField];
 
 
-        UILabel *tip2 = [[UILabel alloc]initWithFrame:CGRectMake(10, 65, 50, 20)];
+        UILabel *tip2 = [[UILabel alloc]initWithFrame:CGRectMake(10, 65, 80, 20)];
         [tip2 setTextAlignment:NSTextAlignmentLeft];
         [tip2 setTextColor:[UIColor whiteColor]];
-        [tip2 setText:@"数量"];
+        [tip2 setText:@"采购数量"];
         [tip2 setFont:[UIFont systemFontOfSize:15]];
         [bg addSubview:tip2];
 

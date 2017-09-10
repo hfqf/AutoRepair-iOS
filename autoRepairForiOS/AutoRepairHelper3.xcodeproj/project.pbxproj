@@ -426,6 +426,8 @@
 		7D5C32FC1F6269BF00C2E69C /* WarehouseGoodsAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FA1F6269BF00C2E69C /* WarehouseGoodsAction.m */; };
 		7D5C32FF1F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */; };
 		7D5C33001F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */; };
+		7D5C33031F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33021F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m */; };
+		7D5C33041F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33021F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m */; };
 		7D5CAE921F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
 		7D5CAE931F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
 		7D5CAE941F4FAECE00805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
@@ -772,6 +774,8 @@
 		7D5C32FA1F6269BF00C2E69C /* WarehouseGoodsAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsAction.m; sourceTree = "<group>"; };
 		7D5C32FD1F62F78700C2E69C /* WarehousePurchaseEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehousePurchaseEditView.h; sourceTree = "<group>"; };
 		7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehousePurchaseEditView.m; sourceTree = "<group>"; };
+		7D5C33011F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseWillSaveToStoreGoodsViewController.h; sourceTree = "<group>"; };
+		7D5C33021F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseWillSaveToStoreGoodsViewController.m; sourceTree = "<group>"; };
 		7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		7D5DDD981E30B9380065FAED /* NSArray+SortByFisrtChar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SortByFisrtChar.h"; sourceTree = "<group>"; };
 		7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SortByFisrtChar.m"; sourceTree = "<group>"; };
@@ -1086,6 +1090,8 @@
 		7D005E211F53EB7200846ADE /* 待入库 */ = {
 			isa = PBXGroup;
 			children = (
+				7D5C33011F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.h */,
+				7D5C33021F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m */,
 			);
 			name = "待入库";
 			sourceTree = "<group>";
@@ -2046,6 +2052,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D4173551F2E26E900233B9B /* UIImageView+HighlightedWebCache.m in Sources */,
+				7D5C33041F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */,
 				7D4173561F2E26E900233B9B /* UIImage+MultiFormat.m in Sources */,
 				7D4173571F2E26E900233B9B /* WorkroomListViewController.m in Sources */,
 				7D4173581F2E26E900233B9B /* ADTRepairInfo.m in Sources */,
@@ -2200,6 +2207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D4CD8E41F235D37003619EB /* UIImageView+HighlightedWebCache.m in Sources */,
+				7D5C33031F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */,
 				7D4CD8E91F235D37003619EB /* UIImage+MultiFormat.m in Sources */,
 				7D72B47A1F243D5E00383D3D /* WorkroomListViewController.m in Sources */,
 				7D4CD8EB1F235D37003619EB /* ADTRepairInfo.m in Sources */,
