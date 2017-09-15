@@ -34,6 +34,7 @@
     ret.m_time = [info stringWithFilted:@"timestamp"];
     ret.m_buyer = info[@"buyer"];
     ret.m_rejecter = info[@"rejecter"];
+    ret.m_saver = info[@"saver"];
     ret.m_rejectReason = [info stringWithFilted:@"rejectreason"];
     return ret;
 }

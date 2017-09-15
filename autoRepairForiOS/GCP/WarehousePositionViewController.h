@@ -7,7 +7,9 @@
 //
 
 #import "SpeRefreshAndLoadViewController.h"
-
+#import "WarehouseSettingViewController.h"
 @interface WarehousePositionViewController : SpeRefreshAndLoadViewController
+-(id)initWith:(NSDictionary *)info withDelegate:(id)delegate;
+
 -(id)initWith:(NSDictionary *)info;
 @end

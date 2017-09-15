@@ -10,9 +10,23 @@
 #import "WarehousePositionAddNewViewController.h"
 @interface WarehousePositionViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSDictionary *m_warehouseInfo;
+@property(nonatomic,weak)id<WarehousePostionDelegate> m_selectDelegate;
 @end
 
 @implementation WarehousePositionViewController
+
+-(id)initWith:(NSDictionary *)info withDelegate:(id)delegate
+{
+    self.m_warehouseInfo = info;
+    self.m_selectDelegate = delegate;
+    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
+    {
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    }
+    return self;
+}
 
 -(id)initWith:(NSDictionary *)info
 {
@@ -29,7 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [title setText:self.m_warehouseInfo[@"name"]];
+    [title setText:self.m_selectDelegate ? @"选择库位" : [NSString stringWithFormat:@"库位(%@)", self.m_warehouseInfo[@"name"]]];
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -108,6 +122,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+    NSDictionary *info = [self.m_arrData objectAtIndex:indexPath.row];
+
+    if(self.m_selectDelegate){
+
+        if(self.m_selectDelegate && [self.m_selectDelegate respondsToSelector:@selector(onWarehousePositionSelected:)]){
+            [self.m_selectDelegate onWarehousePositionSelected:info];
+        }
+    }else{
+
+    }
     
 }
 

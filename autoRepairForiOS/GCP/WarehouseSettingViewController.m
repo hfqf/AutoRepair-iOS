@@ -14,6 +14,18 @@
 
 @implementation WarehouseSettingViewController
 
+- (id)initWith:(id<WarehousePostionDelegate>)delegate
+{
+    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
+    {
+        self.m_selectDelegate = delegate;
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    }
+    return self;
+}
+
 -(id)init
 {
     if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
@@ -28,7 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [title setText:@"库房设置"];
+    [title setText:self.m_selectDelegate ? @"选择库房" : @"库房设置"];
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -107,8 +119,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *info = [self.m_arrData objectAtIndex:indexPath.row];
-    WarehousePositionViewController *vc = [[WarehousePositionViewController alloc]initWith:info];
-    [self.navigationController pushViewController:vc animated:YES];
+    if(self.m_selectDelegate){
+        WarehousePositionViewController *vc = [[WarehousePositionViewController alloc]initWith:info withDelegate:self];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        WarehousePositionViewController *vc = [[WarehousePositionViewController alloc]initWith:info];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 @end

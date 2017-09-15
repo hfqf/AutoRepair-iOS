@@ -10,4 +10,5 @@
 
 @interface WarehouseSaveToStoreViewController : SpeRefreshAndLoadViewController
 
+- (id)initWith:(WarehousePurchaseInfo *)purChaseInfo;
 @end

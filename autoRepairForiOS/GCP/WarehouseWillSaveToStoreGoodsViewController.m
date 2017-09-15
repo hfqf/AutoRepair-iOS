@@ -9,6 +9,7 @@
 #import "WarehouseWillSaveToStoreGoodsViewController.h"
 #import "WarehouseWillSaveToStoreGoodsTableViewCell.h"
 #import "WarehouseGoodPurchaseInfoViewController.h"
+#import "WarehouseSaveToStoreViewController.h"
 @interface WarehouseWillSaveToStoreGoodsViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,WarehouseWillSaveToStoreGoodsTableViewCellDelegate>
 @end
 
@@ -152,7 +153,8 @@
 
 - (void)onWarehouseWillSaveToStoreGoodsTableViewCellSave:(WarehousePurchaseInfo *)purchase
 {
-
+    WarehouseSaveToStoreViewController *infoVc = [[WarehouseSaveToStoreViewController alloc]initWith:purchase];
+    [self.navigationController pushViewController:infoVc animated:YES];
 
 }
 

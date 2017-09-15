@@ -28,6 +28,7 @@
 @property(nonatomic,strong) NSString *m_owner;
 @property(nonatomic,strong) NSString *m_id;
 @property(nonatomic,strong) NSString *m_num;
+@property(nonatomic,strong) NSDictionary  *m_storePosition; //保存的库位
 @property(assign)BOOL  m_isSelectStyle;
 @property(assign)BOOL  m_isSelected;
 +(WareHouseGoods *)from:(NSDictionary *)info;
