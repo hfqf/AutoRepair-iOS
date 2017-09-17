@@ -12,6 +12,7 @@
 +(WarehousePurchaseInfo *)from:(NSDictionary *)info
 {
     WarehousePurchaseInfo *ret = [[WarehousePurchaseInfo alloc]init];
+    ret.m_id = [info stringWithFilted:@"_id"];
     ret.m_expressCompany = [info stringWithFilted:@"expresscompany"];
     ret.m_expressCost = [info stringWithFilted:@"expresscost"];
     ret.m_expressPayType = [info stringWithFilted:@"expresscostpaytype"];
@@ -32,6 +33,8 @@
     ret.m_supplier = info[@"supplier"];
     ret.m_supplierInfo = [WarehouseSupplierInfo from:info[@"supplier"]];
     ret.m_time = [info stringWithFilted:@"timestamp"];
+    ret.m_time2 = [info stringWithFilted:@"timestamp2"];
+    ret.m_time3 = [info stringWithFilted:@"timestamp3"];
     ret.m_buyer = info[@"buyer"];
     ret.m_rejecter = info[@"rejecter"];
     ret.m_saver = info[@"saver"];

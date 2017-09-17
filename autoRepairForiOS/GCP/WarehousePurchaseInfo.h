@@ -22,6 +22,8 @@
 @property(nonatomic,strong)NSMutableArray  *m_arrGoods;
 @property(nonatomic,strong)NSString *m_id;
 @property(nonatomic,strong)NSString *m_time;
+@property(nonatomic,strong)NSString *m_time2;
+@property(nonatomic,strong)NSString *m_time3;
 @property(nonatomic,strong)NSString *m_rejectReason;
 @property(nonatomic,strong)NSDictionary *m_rejecter;
 @property(nonatomic,strong)NSDictionary *m_buyer;

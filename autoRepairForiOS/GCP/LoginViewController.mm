@@ -270,7 +270,9 @@ return jsonString;
                               [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
                               
 
-                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"address"] forKey:KEY_AUTO_ADDRESS];
+                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"_id"] forKey:KEY_AUTO_ID];
+
+                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
 
                               [self queryContacts];
                               

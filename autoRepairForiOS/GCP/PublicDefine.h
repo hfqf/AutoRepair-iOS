@@ -489,6 +489,7 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 #define KEY_AUTO_NAME               @"KEY_AUTO_NAME"
 #define KEY_AUTO_TEL                @"KEY_AUTO_TEL"
 #define KEY_AUTO_LEVEL              @"KEY_AUTO_LEVEL"
+#define KEY_AUTO_ID                 @"KEY_AUTO_ID"
 #define KEY_AUTO_UDID_MODIFYED      @"KEY_AUTO_UDID_MODIFYED"
 #define KEY_AUTO_HEAD               @"KEY_AUTO_HEAD"
 #define KEY_AUTO_SHOP_NAME          @"KEY_AUTO_SHOP_NAME"

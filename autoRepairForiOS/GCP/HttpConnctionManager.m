@@ -1071,8 +1071,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                 @"suppliercompanyname":company,
                                 @"managername":name,
                                 @"tel":tel,
-                                @"address":address,
-                                @"remark":remark,
+                                @"address":address == nil ? @"" : address,
+                                @"remark":remark == nil ? @""  :remark,
                                 @"owner":[LoginUserUtil userTel],
                                 }
                successedBlock:success
@@ -1297,11 +1297,11 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 {
     [self startNormalPostWith:@"/warehousegoods/add"
                      paragram:@{
+                                @"subtype":safeStringWith(newGoods.m_category[@"_id"]),
                                 @"picurl":safeStringWith(newGoods.m_picurl),
                                 @"name":safeStringWith(newGoods.m_name),
                                 @"goodsencode":safeStringWith(newGoods.m_goodsencode),
-                                @"subtype":newGoods.m_category[@"_id"],
-                                @"category":@[newGoods.m_category[@"_id"]],
+                                @"category":newGoods.m_category[@"_id"],
                                 @"saleprice":safeStringWith(newGoods.m_saleprice),
                                 @"costprice":safeStringWith(newGoods.m_costprice),
                                 @"productertype":safeStringWith(newGoods.m_productertype),
@@ -1328,7 +1328,6 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                 @"picurl":safeStringWith(newGoods.m_picurl),
                                 @"name":safeStringWith(newGoods.m_name),
                                 @"goodsencode":safeStringWith(newGoods.m_goodsencode),
-                                @"subtype":newGoods.m_category[@"_id"],
                                 @"category":@[newGoods.m_category[@"_id"]],
                                 @"saleprice":safeStringWith(newGoods.m_saleprice),
                                 @"costprice":safeStringWith(newGoods.m_costprice),
@@ -1347,6 +1346,30 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                successedBlock:success
                   failedBolck:failed];
 }
+
+
+/**
+ 商品入库,只需要更新个别字段即可
+
+ @param newGoods
+ @param success
+ @param failed
+ */
+- (void)saveBuyedOneGoodsWith:(WareHouseGoods *)newGoods
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/savebuyed"
+                     paragram:@{
+                                @"position":[newGoods.m_storePosition stringWithFilted:@"_id"],
+                                @"num":newGoods.m_num,
+                                @"id":newGoods.m_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
 
 - (void)delOneGoodsWith:(NSString *)_id
          successedBlock:(SuccessedBlock)success
@@ -1427,6 +1450,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                 @"goods":arrGoods,
                                 @"remark":safeStringWith(purchase.m_remark),
                                 @"owner":[LoginUserUtil userTel],
+                                @"buyer":[LoginUserUtil userId],
                                 }
                successedBlock:success
                   failedBolck:failed];
@@ -1444,5 +1468,41 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                successedBlock:success
                   failedBolck:failed];
 }
+
+- (void)savePurchaseGoodsToStore:(WarehousePurchaseInfo *)purchase
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed
+{
+    NSMutableArray *arrGoods = [NSMutableArray array];
+    for(WareHouseGoods *good in purchase.m_arrGoods){
+        [arrGoods addObject:good.m_id];
+    }
+    [self startNormalPostWith:@"/warehousegoodspurchase/savetostore"
+                     paragram:@{
+                                @"id":purchase.m_id,
+                                @"paytype":purchase.m_payType,
+                                @"expresscost":purchase.m_expressCost,
+                                @"goods":arrGoods,
+                                @"saver":[LoginUserUtil userId]
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)rejectPurchaseGoodsToStore:(WarehousePurchaseInfo *)purchase
+                  successedBlock:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodspurchase/reject"
+                     paragram:@{
+                                @"id":purchase.m_id,
+                                @"rejectreason":purchase.m_rejectReason,
+                                @"rejecter":[LoginUserUtil userId]
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
 
 @end

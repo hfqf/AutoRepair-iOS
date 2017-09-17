@@ -353,18 +353,23 @@
             }
             else
             {
-                char s1 = [NSArray pinyinFirstLetter:[[n_contact.m_userName uppercaseString] characterAtIndex:0]];
-                n_contact.m_strFirstChar = [NSString stringWithFormat:@"%c",s1];
-                char s2 =  [NSArray pinyinFirstLetter:[[m_contact.m_userName uppercaseString] characterAtIndex:0]];
-                m_contact.m_strFirstChar = [NSString stringWithFormat:@"%c",s2];
-                if([n_contact.m_strFirstChar isEqualToString:m_contact.m_strFirstChar])
-                {
-                    if(m_contact != n_contact)
+                if(n_contact.m_userName.length > 0 && m_contact.m_userName.length > 0){
+
+                    char s1 = [NSArray pinyinFirstLetter:[[n_contact.m_userName uppercaseString] characterAtIndex:0]];
+                    n_contact.m_strFirstChar = [NSString stringWithFormat:@"%c",s1];
+                    char s2 =  [NSArray pinyinFirstLetter:[[m_contact.m_userName uppercaseString] characterAtIndex:0]];
+                    m_contact.m_strFirstChar = [NSString stringWithFormat:@"%c",s2];
+                    if([n_contact.m_strFirstChar isEqualToString:m_contact.m_strFirstChar])
                     {
-                        n_contact.m_isSearch = YES;
-                        [arrTemp addObject:n_contact];
+                        if(m_contact != n_contact)
+                        {
+                            n_contact.m_isSearch = YES;
+                            [arrTemp addObject:n_contact];
+                        }
                     }
+
                 }
+
             }
         }
         // arrTemp按拼音排序

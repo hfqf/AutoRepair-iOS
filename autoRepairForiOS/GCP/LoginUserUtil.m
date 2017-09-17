@@ -86,8 +86,8 @@
 
 + (NSString *)userId
 {
-    NSDictionary *dic = [self readDictionartFromPlist];
-    return  [dic objectForKey:@"id"] == nil ? @"" : [NSString stringWithFormat:@"%@", [dic objectForKey:@"id"]];
+    NSString * ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_ID];
+    return safeStringWith(ret);
 }
 
 + (NSString *)loginParentId

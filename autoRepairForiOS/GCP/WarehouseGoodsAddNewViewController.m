@@ -166,7 +166,7 @@
         [edit setText:self.m_goodsInfo.m_category[@"name"]];
         [edit setPlaceholder:@"必填"];
     }else if (indexPath.row == 3){
-        [edit setText:self.m_goodsInfo.m_saleprice];
+        [edit setText:self.m_goodsInfo.m_costprice];
         [edit setPlaceholder:@"必填"];
     }else if (indexPath.row == 4){
         [edit setText:self.m_goodsInfo.m_productertype];
@@ -228,7 +228,7 @@
         add.m_selectDelegate = self;
         [self.navigationController pushViewController:add animated:YES];
     }else if (textField.tag == 3){
-        self.m_goodsInfo.m_saleprice = textField.text;
+        self.m_goodsInfo.m_costprice = textField.text;
     }else if (textField.tag == 4){
         self.m_goodsInfo.m_productertype = textField.text;
     }else if (textField.tag == 5){
@@ -265,7 +265,7 @@
     }else if (textField.tag == 2){
 
     }else if (textField.tag == 3){
-        self.m_goodsInfo.m_saleprice = textField.text;
+        self.m_goodsInfo.m_costprice = textField.text;
     }else if (textField.tag == 4){
         self.m_goodsInfo.m_productertype = textField.text;
     }else if (textField.tag == 5){

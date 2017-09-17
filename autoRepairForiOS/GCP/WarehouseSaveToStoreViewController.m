@@ -9,10 +9,11 @@
 #import "WarehouseSaveToStoreViewController.h"
 #import "WarehousePurchaseEditView.h"
 #import "WarehouseSettingViewController.h"
-@interface WarehouseSaveToStoreViewController ()<UITableViewDelegate,UITableViewDataSource,WarehousePurchaseEditViewDelegate,WarehousePostionDelegate>
+@interface WarehouseSaveToStoreViewController ()<UITableViewDelegate,UITableViewDataSource,WarehousePurchaseEditViewDelegate,WarehousePostionDelegate,UIActionSheetDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)WarehousePurchaseInfo *m_purchaseInfo;
 @property(assign) NSInteger m_delIndex;
 @property(assign) NSInteger m_selectPositionIndex;
+@property(nonatomic,strong)UITextField *m_currentTextField;
 @end
 
 @implementation WarehouseSaveToStoreViewController
@@ -29,6 +30,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [title setText:@"入库"];
+
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-40, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
+    [addBtn setImage:[UIImage imageNamed:@"moresetting"] forState:UIControlStateNormal];
+    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+    [navigationBG addSubview:addBtn];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -41,6 +49,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)addBtnClicked
+{
+    UIActionSheet *act= [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"入库", nil];
+    act.tag = 1;
+    [act showInView:self.view];
+}
+
 #define HIGH_CELL    120
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -207,7 +223,49 @@
         [cell addSubview:tip];
 
         UILabel *value = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH/2-30,15,MAIN_WIDTH/2, 20)];
-        [value setText:self.m_purchaseInfo.m_payType.length == 0? @"选择支付方式" : self.m_purchaseInfo.m_payType];
+
+        NSString *type = nil;
+        switch (self.m_purchaseInfo.m_payType.integerValue) {
+            case 0:
+            {
+                type = @"现金";
+                break;
+            }
+
+            case 1:{
+                type = @"银行卡";
+                break;
+            }
+            case 2:{
+                type = @"挂帐";
+                break;
+            }
+            case 3:{
+                type = @"微信";
+                break;
+            }
+            case 4:{
+                type = @"支付宝";
+                break;
+            }
+            case 5:{
+                type = @"其它";
+                break;
+            }
+            case 6:{
+                type = @"支票";
+                break;
+            }
+            case 7:{
+                type = @"转账";
+                break;
+            }
+
+            default:
+                break;
+        }
+
+        [value setText:self.m_purchaseInfo.m_payType.length == 0? @"选择支付方式" : type];
         [value setTextAlignment:NSTextAlignmentRight];
         [value setTextColor:[UIColor lightGrayColor]];
         [value setFont:[UIFont systemFontOfSize:15]];
@@ -241,11 +299,23 @@
             [input setFont:[UIFont systemFontOfSize:15]];
             [input setReturnKeyType:UIReturnKeyDone];
             [cell addSubview:input];
+            self.m_currentTextField = input;
         }
     }
 
     return cell;
 
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 1){
+        UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择支付方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil
+    otherButtonTitles:@"现金",@"银行卡",@"挂账",@"微信",@"支付宝",@"其它",@"支票",@"转账", nil];
+        act.tag = 0;
+        [act showInView:self.view];
+
+    }
 }
 
 - (void)storePositionBtnClicked:(UIButton *)btn
@@ -294,6 +364,72 @@
 {
     WareHouseGoods *good = [self.m_purchaseInfo.m_arrGoods objectAtIndex:self.m_selectPositionIndex];
     good.m_storePosition = positionInfo;
+    self.m_purchaseInfo.m_storePosition = positionInfo;
     [self reloadDeals];
 }
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(actionSheet.tag == 0){
+        if(buttonIndex == 8){
+
+        }else{
+            self.m_purchaseInfo.m_payType = [NSString stringWithFormat:@"%lu",buttonIndex];
+            [self reloadDeals];
+        }
+    }else{
+        if(buttonIndex == 0){//入库
+
+            [self.m_currentTextField resignFirstResponder];
+            if(self.m_purchaseInfo.m_storePosition == nil){
+                [PubllicMaskViewHelper showTipViewWith:@"入库库位还未填写" inSuperView:self.view withDuration:1];
+                return;
+            }
+
+            if(self.m_purchaseInfo.m_expressCost.length == 0){
+                [PubllicMaskViewHelper showTipViewWith:@"运费还未填写" inSuperView:self.view withDuration:1];
+                return;
+            }
+
+            [HTTP_MANAGER savePurchaseGoodsToStore:self.m_purchaseInfo
+                                    successedBlock:^(NSDictionary *succeedResult) {
+                                        if([succeedResult[@"code"]integerValue] == 1){
+                                            for(WareHouseGoods *good in self.m_purchaseInfo.m_arrGoods){
+                                                [HTTP_MANAGER saveBuyedOneGoodsWith:good
+                                                                     successedBlock:^(NSDictionary *succeedResult) {
+
+                                                } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                                }];
+                                            }
+                                        }
+
+            } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+            }];
+
+        }else{
+
+        }
+
+
+    }
+
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    self.m_purchaseInfo.m_expressCost = textField.text;
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    self.m_purchaseInfo.m_expressCost = textField.text;
+    return YES;
+}
+
 @end

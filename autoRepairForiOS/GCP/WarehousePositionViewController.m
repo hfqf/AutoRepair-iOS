@@ -129,6 +129,13 @@
 
         if(self.m_selectDelegate && [self.m_selectDelegate respondsToSelector:@selector(onWarehousePositionSelected:)]){
             [self.m_selectDelegate onWarehousePositionSelected:info];
+            NSArray *arr = self.navigationController.viewControllers;
+            for(UIViewController *vc in arr){
+                if([vc isKindOfClass:NSClassFromString(@"WarehouseSaveToStoreViewController")]){
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
+            }
+
         }
     }else{
 

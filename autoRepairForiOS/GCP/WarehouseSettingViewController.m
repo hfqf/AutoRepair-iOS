@@ -16,9 +16,10 @@
 
 - (id)initWith:(id<WarehousePostionDelegate>)delegate
 {
+    self.m_selectDelegate = delegate;
+
     if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
     {
-        self.m_selectDelegate = delegate;
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -120,7 +121,7 @@
 {
     NSDictionary *info = [self.m_arrData objectAtIndex:indexPath.row];
     if(self.m_selectDelegate){
-        WarehousePositionViewController *vc = [[WarehousePositionViewController alloc]initWith:info withDelegate:self];
+        WarehousePositionViewController *vc = [[WarehousePositionViewController alloc]initWith:info withDelegate:self.m_selectDelegate];
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         WarehousePositionViewController *vc = [[WarehousePositionViewController alloc]initWith:info];

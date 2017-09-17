@@ -15,10 +15,7 @@
     ret.m_applycartype = info[@"applycartype"];
     ret.m_barcode = info[@"barcode"];
     ret.m_brand = info[@"brand"];
-    NSArray *arr = info[@"category"];
-    if(arr.count > 0){
-        ret.m_category =  [arr firstObject];
-    }
+    ret.m_category = info[@"category"];
     ret.m_costprice = info[@"costprice"];
     ret.m_goodsencode = info[@"goodsencode"];
     ret.m_isactive = info[@"isactive"];

@@ -410,6 +410,19 @@ typedef void (^FailBlock)(NSError *error);
             successedBlock:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed;
 
+
+/**
+ 商品入库,只需要更新个别字段即可
+
+ @param newGoods
+ @param success
+ @param failed
+ */
+- (void)saveBuyedOneGoodsWith:(WareHouseGoods *)newGoods
+               successedBlock:(SuccessedBlock)success
+                  failedBolck:(FailedBlock)failed;
+
+
 - (void)delOneGoodsWith:(NSString *)_id
          successedBlock:(SuccessedBlock)success
             failedBolck:(FailedBlock)failed;
@@ -438,5 +451,13 @@ typedef void (^FailBlock)(NSError *error);
 - (void)queryPurchaseGoods:(NSString *)state
             successedBlock:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed;
+
+- (void)savePurchaseGoodsToStore:(WarehousePurchaseInfo *)purchase
+                  successedBlock:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed;
+
+- (void)rejectPurchaseGoodsToStore:(WarehousePurchaseInfo *)purchase
+                    successedBlock:(SuccessedBlock)success
+                       failedBolck:(FailedBlock)failed;
 
 @end
