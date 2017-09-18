@@ -444,6 +444,26 @@
 		7D5CAE971F4FAF1E00805591 /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D62E6DF1F3E9691005C6155 /* SpeWebviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D62E6DD1F3E9691005C6155 /* SpeWebviewViewController.m */; };
 		7D62E6E01F3E9691005C6155 /* SpeWebviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D62E6DD1F3E9691005C6155 /* SpeWebviewViewController.m */; };
+		7D64B41A1F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4191F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m */; };
+		7D64B41B1F6F653400709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4191F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m */; };
+		7D64B41E1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B41D1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.m */; };
+		7D64B41F1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B41D1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.m */; };
+		7D64B4221F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4211F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m */; };
+		7D64B4231F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4211F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m */; };
+		7D64B4261F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4251F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m */; };
+		7D64B4271F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4251F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m */; };
+		7D64B42A1F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4291F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m */; };
+		7D64B42B1F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4291F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m */; };
+		7D64B42E1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B42D1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.m */; };
+		7D64B42F1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B42D1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.m */; };
+		7D64B4321F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4311F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m */; };
+		7D64B4331F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4311F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m */; };
+		7D64B4361F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4351F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m */; };
+		7D64B4371F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4351F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m */; };
+		7D64B43A1F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4391F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m */; };
+		7D64B43B1F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4391F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m */; };
+		7D64B43E1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B43D1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.m */; };
+		7D64B43F1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B43D1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.m */; };
 		7D6F0B151F27343200507356 /* WorkroomAddOrEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F0B131F27343200507356 /* WorkroomAddOrEditViewController.m */; };
 		7D72B45F1F2362CE00383D3D /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 7D72B45D1F2362CE00383D3D /* aip.license */; };
 		7D72B47A1F243D5E00383D3D /* WorkroomListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D72B4781F243D5E00383D3D /* WorkroomListViewController.m */; };
@@ -797,6 +817,26 @@
 		7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SortByFisrtChar.m"; sourceTree = "<group>"; };
 		7D62E6DC1F3E9691005C6155 /* SpeWebviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeWebviewViewController.h; sourceTree = "<group>"; };
 		7D62E6DD1F3E9691005C6155 /* SpeWebviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeWebviewViewController.m; sourceTree = "<group>"; };
+		7D64B4181F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodsStoreTotalPreviewViewController.h; sourceTree = "<group>"; };
+		7D64B4191F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsStoreTotalPreviewViewController.m; sourceTree = "<group>"; };
+		7D64B41C1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodsStoreWarmingViewController.h; sourceTree = "<group>"; };
+		7D64B41D1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsStoreWarmingViewController.m; sourceTree = "<group>"; };
+		7D64B4201F6F69FA00709A6C /* WarehouseWillPurchaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseWillPurchaseViewController.h; sourceTree = "<group>"; };
+		7D64B4211F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseWillPurchaseViewController.m; sourceTree = "<group>"; };
+		7D64B4241F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseWillTakeGoodsViewController.h; sourceTree = "<group>"; };
+		7D64B4251F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseWillTakeGoodsViewController.m; sourceTree = "<group>"; };
+		7D64B4281F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodInAndOutRecordsViewController.h; sourceTree = "<group>"; };
+		7D64B4291F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodInAndOutRecordsViewController.m; sourceTree = "<group>"; };
+		7D64B42C1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehousePurchaseRecordsViewController.h; sourceTree = "<group>"; };
+		7D64B42D1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehousePurchaseRecordsViewController.m; sourceTree = "<group>"; };
+		7D64B4301F6F718F00709A6C /* WarehousePurchaseRejectedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehousePurchaseRejectedViewController.h; sourceTree = "<group>"; };
+		7D64B4311F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehousePurchaseRejectedViewController.m; sourceTree = "<group>"; };
+		7D64B4341F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseOtherPurchaseViewController.h; sourceTree = "<group>"; };
+		7D64B4351F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseOtherPurchaseViewController.m; sourceTree = "<group>"; };
+		7D64B4381F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseOtherPurchaseSaveToStoreViewController.h; sourceTree = "<group>"; };
+		7D64B4391F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseOtherPurchaseSaveToStoreViewController.m; sourceTree = "<group>"; };
+		7D64B43C1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseOtherPurchaseTakeViewController.h; sourceTree = "<group>"; };
+		7D64B43D1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseOtherPurchaseTakeViewController.m; sourceTree = "<group>"; };
 		7D6C76061E8B8EB3006C48CC /* AddNewCarcodeSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewCarcodeSelectViewController.h; sourceTree = "<group>"; };
 		7D6C76071E8B8EB3006C48CC /* AddNewCarcodeSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewCarcodeSelectViewController.m; sourceTree = "<group>"; };
 		7D6F0B121F27343200507356 /* WorkroomAddOrEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkroomAddOrEditViewController.h; sourceTree = "<group>"; };
@@ -1101,6 +1141,8 @@
 		7D005E201F53EB6400846ADE /* 待采购 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B4201F6F69FA00709A6C /* WarehouseWillPurchaseViewController.h */,
+				7D64B4211F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m */,
 			);
 			name = "待采购";
 			sourceTree = "<group>";
@@ -1121,6 +1163,8 @@
 		7D005E221F53EB7900846ADE /* 待领料 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B4241F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.h */,
+				7D64B4251F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m */,
 			);
 			name = "待领料";
 			sourceTree = "<group>";
@@ -1128,6 +1172,8 @@
 		7D005E231F53EB8100846ADE /* 库存预警 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B41C1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.h */,
+				7D64B41D1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.m */,
 			);
 			name = "库存预警";
 			sourceTree = "<group>";
@@ -1135,6 +1181,8 @@
 		7D005E241F53EB8B00846ADE /* 库存总览 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B4181F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.h */,
+				7D64B4191F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m */,
 			);
 			name = "库存总览";
 			sourceTree = "<group>";
@@ -1149,6 +1197,8 @@
 		7D005E261F53EB9F00846ADE /* 出入库记录 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B4281F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.h */,
+				7D64B4291F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m */,
 			);
 			name = "出入库记录";
 			sourceTree = "<group>";
@@ -1156,6 +1206,8 @@
 		7D005E271F53EBA800846ADE /* 采购记录 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B42C1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.h */,
+				7D64B42D1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.m */,
 			);
 			name = "采购记录";
 			sourceTree = "<group>";
@@ -1163,6 +1215,8 @@
 		7D005E281F53EBAF00846ADE /* 其它采购 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B4341F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.h */,
+				7D64B4351F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m */,
 			);
 			name = "其它采购";
 			sourceTree = "<group>";
@@ -1170,6 +1224,8 @@
 		7D005E291F53EBB800846ADE /* 其它入库 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B4381F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.h */,
+				7D64B4391F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m */,
 			);
 			name = "其它入库";
 			sourceTree = "<group>";
@@ -1177,6 +1233,8 @@
 		7D005E2A1F53EBC000846ADE /* 其它领料 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B43C1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.h */,
+				7D64B43D1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.m */,
 			);
 			name = "其它领料";
 			sourceTree = "<group>";
@@ -1184,6 +1242,8 @@
 		7D005E2B1F53EBC900846ADE /* 采购退货 */ = {
 			isa = PBXGroup;
 			children = (
+				7D64B4301F6F718F00709A6C /* WarehousePurchaseRejectedViewController.h */,
+				7D64B4311F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m */,
 			);
 			name = "采购退货";
 			sourceTree = "<group>";
@@ -2091,6 +2151,8 @@
 				7D41735D1F2E26E900233B9B /* AFURLConnectionOperation.m in Sources */,
 				7D41735E1F2E26E900233B9B /* ConverUtil.m in Sources */,
 				7D41735F1F2E26E900233B9B /* SpeSqliteUpdateManager.m in Sources */,
+				7D64B43B1F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m in Sources */,
+				7D64B4371F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m in Sources */,
 				7D4173601F2E26E900233B9B /* BHBPopView.m in Sources */,
 				7D5C32FC1F6269BF00C2E69C /* WarehouseGoodsAction.m in Sources */,
 				7D4173611F2E26E900233B9B /* LoginUserUtil.m in Sources */,
@@ -2102,6 +2164,7 @@
 				7D4173661F2E26E900233B9B /* MJRefreshConst.m in Sources */,
 				7D4173671F2E26E900233B9B /* UIImage+BHBEffects.m in Sources */,
 				7D4173681F2E26E900233B9B /* SMSSDKUI.m in Sources */,
+				7D64B41F1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.m in Sources */,
 				7D4173691F2E26E900233B9B /* JSONKit.m in Sources */,
 				7D41736A1F2E26E900233B9B /* SDWebImageDownloader.m in Sources */,
 				7D41736B1F2E26E900233B9B /* SMS_HYZBadgeView.m in Sources */,
@@ -2117,6 +2180,7 @@
 				7D4173741F2E26E900233B9B /* LoginViewController.mm in Sources */,
 				7D5C33101F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m in Sources */,
 				7D4173751F2E26E900233B9B /* UIButton+WebCache.m in Sources */,
+				7D64B42B1F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m in Sources */,
 				7D4173761F2E26E900233B9B /* NSArray+SortByFisrtChar.m in Sources */,
 				7D4173771F2E26E900233B9B /* TabbarButtonsBGView.m in Sources */,
 				7D4173781F2E26E900233B9B /* AFHTTPSessionManager.m in Sources */,
@@ -2156,6 +2220,7 @@
 				7D4173911F2E26E900233B9B /* JHUDAnimationView.m in Sources */,
 				7D4173921F2E26E900233B9B /* InvitationViewControllerEx.m in Sources */,
 				7D4173931F2E26E900233B9B /* MBProgressHUD.m in Sources */,
+				7D64B43F1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.m in Sources */,
 				7D4173941F2E26E900233B9B /* AppDelegate.mm in Sources */,
 				7D4173951F2E26E900233B9B /* AFHTTPRequestOperationManager.m in Sources */,
 				7D4173961F2E26E900233B9B /* Reachability.m in Sources */,
@@ -2176,8 +2241,11 @@
 				7D4173A31F2E26E900233B9B /* LocalTimeUtil.m in Sources */,
 				7D4173A41F2E26E900233B9B /* SectionsViewController.m in Sources */,
 				7D4173A51F2E26E900233B9B /* RepairPrintViewController.m in Sources */,
+				7D64B4331F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m in Sources */,
 				7D4173A61F2E26E900233B9B /* AddRepairHistoryViewController.m in Sources */,
+				7D64B41B1F6F653400709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m in Sources */,
 				7D4173A71F2E26E900233B9B /* BHBCustomBtn.m in Sources */,
+				7D64B42F1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.m in Sources */,
 				7D4173A81F2E26E900233B9B /* ShareSdkUtil.m in Sources */,
 				7D005E091F512CEB00846ADE /* WareHouseManagerViewController.m in Sources */,
 				7D1BAA7F1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m in Sources */,
@@ -2209,6 +2277,7 @@
 				7D4173BD1F2E26E900233B9B /* BHBCenterView.m in Sources */,
 				7D4173BE1F2E26E900233B9B /* EmptyTipView.m in Sources */,
 				7D4173BF1F2E26E900233B9B /* SDWebImageManager.m in Sources */,
+				7D64B4271F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */,
 				7D005E341F53FB6C00846ADE /* WarehousePositionAddNewViewController.m in Sources */,
 				7D1BAA5F1F5C44FC00B03719 /* WarehouseGoodsSettingSubTypeAddViewController.m in Sources */,
 				7D4173C01F2E26E900233B9B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -2227,6 +2296,7 @@
 				7D4173CC1F2E26E900233B9B /* BHBBottomBar.m in Sources */,
 				7D4173CD1F2E26E900233B9B /* NewTipViewController.m in Sources */,
 				7D005E301F53FB5100846ADE /* WarehousePositionViewController.m in Sources */,
+				7D64B4231F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2250,6 +2320,8 @@
 				7D4CD8F11F235D37003619EB /* AFURLConnectionOperation.m in Sources */,
 				7D4CD8F41F235D37003619EB /* ConverUtil.m in Sources */,
 				7D4CD8F51F235D37003619EB /* SpeSqliteUpdateManager.m in Sources */,
+				7D64B43A1F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m in Sources */,
+				7D64B4361F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m in Sources */,
 				7D4CD8F61F235D37003619EB /* BHBPopView.m in Sources */,
 				7D5C32FB1F6269BF00C2E69C /* WarehouseGoodsAction.m in Sources */,
 				7D4CD8F71F235D37003619EB /* LoginUserUtil.m in Sources */,
@@ -2261,6 +2333,7 @@
 				7D4CD9001F235D37003619EB /* MJRefreshConst.m in Sources */,
 				7D4CD9021F235D37003619EB /* UIImage+BHBEffects.m in Sources */,
 				7D4CD9051F235D37003619EB /* SMSSDKUI.m in Sources */,
+				7D64B41E1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.m in Sources */,
 				7D4CD9061F235D37003619EB /* JSONKit.m in Sources */,
 				7D4CD9071F235D37003619EB /* SDWebImageDownloader.m in Sources */,
 				7D4CD9081F235D37003619EB /* SMS_HYZBadgeView.m in Sources */,
@@ -2276,6 +2349,7 @@
 				7D4CD9181F235D37003619EB /* LoginViewController.mm in Sources */,
 				7D5C330F1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m in Sources */,
 				7D4CD91A1F235D37003619EB /* UIButton+WebCache.m in Sources */,
+				7D64B42A1F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m in Sources */,
 				7D4CD91B1F235D37003619EB /* NSArray+SortByFisrtChar.m in Sources */,
 				7D4CD91C1F235D37003619EB /* TabbarButtonsBGView.m in Sources */,
 				7D4CD91F1F235D37003619EB /* AFHTTPSessionManager.m in Sources */,
@@ -2315,6 +2389,7 @@
 				7D5BFB411F2CB6DB00FD239D /* JHUDAnimationView.m in Sources */,
 				7D4CD93D1F235D37003619EB /* InvitationViewControllerEx.m in Sources */,
 				7D4CD93E1F235D37003619EB /* MBProgressHUD.m in Sources */,
+				7D64B43E1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.m in Sources */,
 				7D4CD93F1F235D37003619EB /* AppDelegate.mm in Sources */,
 				7D4CD9401F235D37003619EB /* AFHTTPRequestOperationManager.m in Sources */,
 				7D4CD9411F235D37003619EB /* Reachability.m in Sources */,
@@ -2335,8 +2410,11 @@
 				7D4CD9571F235D37003619EB /* LocalTimeUtil.m in Sources */,
 				7D4CD9591F235D37003619EB /* SectionsViewController.m in Sources */,
 				7D4CD95A1F235D37003619EB /* RepairPrintViewController.m in Sources */,
+				7D64B4321F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m in Sources */,
 				7D4CD95C1F235D37003619EB /* AddRepairHistoryViewController.m in Sources */,
+				7D64B41A1F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m in Sources */,
 				7D4CD95F1F235D37003619EB /* BHBCustomBtn.m in Sources */,
+				7D64B42E1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.m in Sources */,
 				7D4CD9601F235D37003619EB /* ShareSdkUtil.m in Sources */,
 				7D005E081F512CEB00846ADE /* WareHouseManagerViewController.m in Sources */,
 				7D1BAA7E1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m in Sources */,
@@ -2368,6 +2446,7 @@
 				7D4CD9801F235D37003619EB /* BHBCenterView.m in Sources */,
 				7D4CD9831F235D37003619EB /* EmptyTipView.m in Sources */,
 				7D4CD9871F235D37003619EB /* SDWebImageManager.m in Sources */,
+				7D64B4261F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */,
 				7D005E331F53FB6C00846ADE /* WarehousePositionAddNewViewController.m in Sources */,
 				7D1BAA5E1F5C44FC00B03719 /* WarehouseGoodsSettingSubTypeAddViewController.m in Sources */,
 				7D4CD9881F235D37003619EB /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -2386,6 +2465,7 @@
 				7D4CD9971F235D37003619EB /* BHBBottomBar.m in Sources */,
 				7D4CD9981F235D37003619EB /* NewTipViewController.m in Sources */,
 				7D005E2F1F53FB5100846ADE /* WarehousePositionViewController.m in Sources */,
+				7D64B4221F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

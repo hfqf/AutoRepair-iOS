@@ -44,7 +44,7 @@
                              @"items":@[
                                      @{@"icon":@"",@"title":@"供应商管理",@"type":@"13"},
                                      @{@"icon":@"",@"title":@"仓库管理",@"type":@"14"},
-                                     @{@"icon":@"",@"title":@"基础设置",@"type":@"15"},
+//                                     @{@"icon":@"",@"title":@"基础设置",@"type":@"15"},
                                      @{@"icon":@"",@"title":@"商品管理",@"type":@"16"},
                                      ]},
                            ];
@@ -117,93 +117,96 @@
 
             switch (selectTag) {
 
-                case 1:
+                case 1://待采购
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillPurchaseViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 2:
+                case 2://待入库
                 {
                     [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillSaveToStoreGoodsViewController") alloc]init] animated:YES];
-
                     break;
                 }
 
-                case 3:
+                case 3://待领料
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillTakeGoodsViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 4:
+                case 4://库存预警
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsStoreWarmingViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 5:
+                case 5://库存总览
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsStoreTotalPreviewViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 6:
+                case 6://库存盘点
                 {
+                    [PubllicMaskViewHelper showTipViewWith:@"敬请期待!" inSuperView:self.view withDuration:1];
                     break;
                 }
 
-                case 7:
+                case 7://出入库记录
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodInAndOutRecordsViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 8:
+                case 8://采购记录
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehousePurchaseRecordsViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 9:
+                case 9://其它采购
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseOtherPurchaseViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 10:
+                case 10://其它入库
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseOtherPurchaseSaveToStoreViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 11:
+                case 11://其它领料
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseOtherPurchaseTakeViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 12:
+                case 12://采购退货
                 {
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehousePurchaseRejectedViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 13:
+                case 13://供应商管理
                 {
                     [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseSupplierViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 14:
+                case 14://仓库管理
 
                 {
                     [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseSettingViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 15:
+                case 15://商品设置
                 {
-                    break;
-                }
-                    
-                case 16:
-                {
-
                     [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingViewController") alloc]init] animated:YES];
                     break;
                 }
-
 
                 default:
                     break;
