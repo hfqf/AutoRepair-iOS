@@ -42,7 +42,7 @@
                            @"库存预警值",
                            @"适用车型",
                            @"商品备注",
-                           @"是否启用商品",
+//                           @"是否启用商品",
                            ];
 
     }
@@ -70,7 +70,7 @@
 - (void)addFooterView
 {
     UIView *footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, 200)];
-    [footer setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+    [footer setBackgroundColor:UIColorFromRGB(0xFAFAFA)];
     self.tableView.tableFooterView = footer;
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, MAIN_WIDTH-20, 15)];
     [lab setText:@"图片"];
@@ -200,9 +200,13 @@
         [edit setPlaceholder:@"必填"];
     }else if (indexPath.row == 3){
         [edit setText:self.m_goodsInfo.m_saleprice];
+        edit.keyboardType = UIKeyboardTypeNumberPad;
+
         [edit setPlaceholder:@"必填"];
     }else if (indexPath.row == 4){
         [edit setText:self.m_goodsInfo.m_costprice];
+        edit.keyboardType = UIKeyboardTypeNumberPad;
+
         [edit setPlaceholder:@"必填"];
     }
     else if (indexPath.row == 5){
@@ -242,11 +246,14 @@
         [edit setText:self.m_goodsInfo.m_unit];
     }else if (indexPath.row == 10){
         [edit setText:self.m_goodsInfo.m_minnum];
+        [edit setPlaceholder:@"不填则没有预警提示"];
+        edit.keyboardType = UIKeyboardTypeNumberPad;
     }else if (indexPath.row == 11){
         [edit setText:self.m_goodsInfo.m_applycartype];
     }else if (indexPath.row == 12){
         [edit setText:self.m_goodsInfo.m_remark];
     }else if (indexPath.row == 13){
+        [edit removeFromSuperview];
         [edit setText:self.m_goodsInfo.m_isactive];
     }
 
@@ -274,6 +281,45 @@
         UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"厂家类型" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"原厂原装",@"国内品牌",@"国外品牌",@"副厂",@"拆车",@"外包加工", nil];
         act.tag = 2;
         [act showInView:self.view];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    if(textField.tag == 0)
+    {
+        self.m_goodsInfo.m_name = textField.text;
+    }else if (textField.tag == 1){
+        self.m_goodsInfo.m_goodsencode = textField.text;
+    }else if (textField.tag == 2){
+        WarehouseGoodsSettingViewController *add = [[WarehouseGoodsSettingViewController alloc]initForSelectType];
+        add.m_selectDelegate = self;
+        [self.navigationController pushViewController:add animated:YES];
+    }else if (textField.tag == 3){
+        self.m_goodsInfo.m_saleprice = textField.text;
+    }else if (textField.tag == 4){
+        self.m_goodsInfo.m_costprice = textField.text;
+    }
+    else if (textField.tag == 5){
+        self.m_goodsInfo.m_productertype = textField.text;
+    }else if (textField.tag == 6){
+        self.m_goodsInfo.m_producteraddress = textField.text;
+    }else if (textField.tag == 7){
+        self.m_goodsInfo.m_barcode = textField.text;
+    }else if (textField.tag == 8){
+        self.m_goodsInfo.m_brand = textField.text;
+    }else if (textField.tag == 9){
+        self.m_goodsInfo.m_unit = textField.text;
+    }else if (textField.tag == 10){
+        self.m_goodsInfo.m_minnum = textField.text;
+    }else if (textField.tag == 11){
+        self.m_goodsInfo.m_applycartype = textField.text;
+    }else if (textField.tag == 12){
+        self.m_goodsInfo.m_remark = textField.text;
+    }else if (textField.tag == 13){
+        self.m_goodsInfo.m_isactive = textField.text;
     }
     return YES;
 }
@@ -337,7 +383,7 @@
         }else{
             [self delete];
         }
-    }else if(buttonIndex == 1){
+    }else if(actionSheet.tag == 1){
         if(buttonIndex == 0)
         {
             [LocalImageHelper selectPhotoFromCamera:self];
@@ -349,7 +395,7 @@
         {
 
         }
-    }else if(buttonIndex == 2){
+    }else if(actionSheet.tag == 2){
         self.m_goodsInfo.m_productertype = [NSString stringWithFormat:@"%lu",buttonIndex];
         [self reloadDeals];
     }
