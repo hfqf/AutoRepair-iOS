@@ -251,7 +251,7 @@
 + (NSString *)getStoredFilePath:(BOOL)isPic
 {
 
-    NSString *imageDir = [NSString stringWithFormat:@"%@/uploadFile%@/%@", [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"],[LoginUserUtil userId],(isPic ?@"picture":@"audio")];
+    NSString *imageDir = [NSString stringWithFormat:@"%@/uploadFile/%@/%@", [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"],[LoginUserUtil userId],(isPic ?@"picture":@"audio")];
     return imageDir;
 }
 

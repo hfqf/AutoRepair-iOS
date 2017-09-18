@@ -1388,7 +1388,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 - (void)getAllGoodsStoreList:(SuccessedBlock)success
                    failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/warehousegoodsstore/query"
+    [self startNormalPostWith:@"/warehousegoods/query"
                      paragram:@{
                                 @"owner":[LoginUserUtil userTel],
                                 }

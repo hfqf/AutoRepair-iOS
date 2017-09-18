@@ -22,7 +22,7 @@
         self.tableView.delegate = self;
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         self.m_arrData = @[
-                           @{@"category":@"待办",
+                           @{@"category":@"开单待办",
                              @"items":@[
                                      @{@"icon":@"",@"title":@"待采购",@"type":@"1"},
                                      @{@"icon":@"",@"title":@"待入库",@"type":@"2"},
@@ -45,7 +45,7 @@
                                      @{@"icon":@"",@"title":@"供应商管理",@"type":@"13"},
                                      @{@"icon":@"",@"title":@"仓库管理",@"type":@"14"},
 //                                     @{@"icon":@"",@"title":@"基础设置",@"type":@"15"},
-                                     @{@"icon":@"",@"title":@"商品管理",@"type":@"16"},
+                                     @{@"icon":@"",@"title":@"商品管理",@"type":@"15"},
                                      ]},
                            ];
     }
@@ -111,7 +111,7 @@
         NSInteger row = index/4;
         NSInteger coulmn = index%4;
         NSInteger width = MAIN_WIDTH/4;
-        WarehouseItem *item = [[WarehouseItem alloc]initWith:CGRectMake(coulmn*width, row*HIGH_CELL+30, width, HIGH_CELL) withRessource:info  withNum:[info[@"type"]integerValue]];
+        WarehouseItem *item = [[WarehouseItem alloc]initWith:CGRectMake(coulmn*width, row*HIGH_CELL+30, width, HIGH_CELL) withRessource:info  withNum:indexPath.section > 0 ? 0 : (rand()%4)];
         [cell addSubview:item];
         item.itemBlock = ^(NSInteger selectTag) {
 
