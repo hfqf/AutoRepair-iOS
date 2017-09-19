@@ -23,6 +23,7 @@
 @end
 
 @interface WarehouseGoodsSettingViewController : SpeRefreshAndLoadViewController
+@property(assign)BOOL m_isSelect;
 @property(nonatomic,weak)id<WarehouseGoodsSettingViewControllerDelegate>m_selectDelegate;
 - (id)initForSelectType;
 @end

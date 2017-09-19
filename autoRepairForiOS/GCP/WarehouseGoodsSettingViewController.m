@@ -22,7 +22,6 @@
 @end
 
 @interface WarehouseGoodsSettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
-@property(assign)BOOL m_isSelect;
 @end
 
 @implementation WarehouseGoodsSettingViewController

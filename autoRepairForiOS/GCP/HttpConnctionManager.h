@@ -460,4 +460,53 @@ typedef void (^FailBlock)(NSError *error);
                     successedBlock:(SuccessedBlock)success
                        failedBolck:(FailedBlock)failed;
 
+
+#pragma mark - 服务管理(一级分类)
+
+- (void)getAllServiceTypePreviewList:(SuccessedBlock)success
+                         failedBolck:(FailedBlock)failed;
+
+- (void)getAllServiceTopTypeList:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed;
+
+- (void)addNewServiceTopTypeWith:(NSString *)name
+                  successedBlock:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed;
+
+- (void)addNewServiceTopTypeRefWith:(NSArray *)subId
+                          withTopId:(NSString *)topId
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
+
+
+- (void)delOneServiceTopTypeWith:(NSString *)_id
+                  successedBlock:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed;
+
+- (void)updateOneServiceTopTypeWith:(NSString *)name
+                             withId:(NSString *)_id
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
+
+#pragma mark - 商品分类(二级分类)
+
+- (void)getAllServiceSubTypeList:(NSString *)toptypeid
+                  successedBlock:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed;
+
+- (void)addNewServiceSubTypeWith:(NSString *)name
+                       withPrice:(NSString *)price
+                       withTopId:(NSString *)topId
+                  successedBlock:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed;
+
+- (void)delOneServiceSubTypeWith:(NSString *)_id
+                  successedBlock:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed;
+
+- (void)updateOneServiceSubTypeWith:(NSString *)name
+                          withPrice:(NSString *)price
+                             withId:(NSString *)_id
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
 @end

@@ -656,7 +656,10 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                             @"contactid":info.m_contactid == nil ? @"" :info.m_contactid,
                                                            @"price":info.m_price,
                                                            @"num":info.m_num,
-                                                           @"type":info.m_type
+                                                           @"type":info.m_type,
+                                                            @"itemtype":info.m_itemType,
+                                                            @"goods":info.m_goodsId,
+                                                            @"service":info.m_serviceId
                                                            }
                successedBlock:success
                   failedBolck:failed];
@@ -1253,6 +1256,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+
+
 #pragma mark - 商品
 
 - (void)getAllGoodsList:(SuccessedBlock)success
@@ -1502,6 +1507,151 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                successedBlock:success
                   failedBolck:failed];
 }
+
+#pragma mark - 服务管理(一级分类)
+
+- (void)getAllServiceTypePreviewList:(SuccessedBlock)success
+                       failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicetoptype/preview"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)getAllServiceTopTypeList:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicetoptype/query"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)addNewServiceTopTypeWith:(NSString *)name
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicetoptype/add"
+                     paragram:@{
+                                @"name":name,
+                                @"owner":[LoginUserUtil userTel],
+
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)addNewServiceTopTypeRefWith:(NSArray *)subId
+                        withTopId:(NSString *)topId
+                   successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicetoptype/addRef"
+                     paragram:@{
+                                @"toptypeid":topId,
+                                @"subids":subId,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+
+- (void)delOneServiceTopTypeWith:(NSString *)_id
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicetoptype/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOneServiceTopTypeWith:(NSString *)name
+                           withId:(NSString *)_id
+                   successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicetoptype/update"
+                     paragram:@{
+                                @"name":name,
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 商品分类(二级分类)
+
+- (void)getAllServiceSubTypeList:(NSString *)toptypeid
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicesubtype/query"
+                     paragram:@{
+                                @"toptypeid":toptypeid,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+- (void)addNewServiceSubTypeWith:(NSString *)name
+                       withPrice:(NSString *)price
+                     withTopId:(NSString *)topId
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicesubtype/add"
+                     paragram:@{
+                                @"name":name,
+                                @"owner":[LoginUserUtil userTel],
+                                @"toptypeid":topId,
+                                @"price":price
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+
+- (void)delOneServiceSubTypeWith:(NSString *)_id
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicesubtype/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOneServiceSubTypeWith:(NSString *)name
+                          withPrice:(NSString *)price
+                           withId:(NSString *)_id
+                   successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/servicesubtype/update"
+                     paragram:@{
+                                @"name":name,
+                                @"id":_id,
+                                @"price":price
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
 
 
 

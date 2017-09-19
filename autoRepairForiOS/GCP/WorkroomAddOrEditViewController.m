@@ -9,7 +9,7 @@
 
 #define INDEX_0_CELL_HIGH  50
 #define INDEX_1_CELL_HIGH  50
-#define INPUT_ITEM_HIGH    170
+#define INPUT_ITEM_HIGH    50
 #define HIGH_BOTTOM        90
 
 #import "WorkroomAddOrEditViewController.h"
@@ -520,47 +520,47 @@
         }else{
             UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, INPUT_ITEM_HIGH)];
             
-            UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake(10,(INPUT_ITEM_HIGH-40)/2, 100, 40)];
-            tip.numberOfLines = 0;
-            [tip setBackgroundColor:[UIColor clearColor]];
-            [tip setTextColor:[UIColor blackColor]];
-            [tip setFont:[UIFont systemFontOfSize:15]];
-            [tip setText:@"增加收费明细:"];
-            [vi addSubview:tip];
-            
-            m_payDesc =[[UITextField alloc]initWithFrame:CGRectMake(120,10, MAIN_WIDTH-130, 30)];
-            m_payDesc.tag = 1000;
-            [m_payDesc setFont:[UIFont systemFontOfSize:14]];
-            m_payDesc.layer.cornerRadius = 3;
-            m_payDesc.layer.borderColor = KEY_COMMON_GRAY_CORLOR.CGColor;
-            m_payDesc.layer.borderWidth = 0.2;
-            m_payDesc.delegate = self;
-            [m_payDesc setPlaceholder:@"请输入收费项目"];
-            [vi addSubview:m_payDesc];
-            m_payPrice =[[UITextField alloc]initWithFrame:CGRectMake(120,50, MAIN_WIDTH-130, 30)];
-            m_payPrice.tag = 1001;
-            [m_payPrice setFont:[UIFont systemFontOfSize:14]];
-            m_payPrice.layer.cornerRadius = 3;
-            m_payPrice.layer.borderColor = KEY_COMMON_GRAY_CORLOR.CGColor;
-            m_payPrice.layer.borderWidth = 0.2;
-            m_payPrice.delegate = self;
-            m_payPrice.keyboardType = UIKeyboardTypeNumberPad;
-            [m_payPrice setPlaceholder:@"请输入收费价格"];
-            [vi addSubview:m_payPrice];
-            m_payNum =[[UITextField alloc]initWithFrame:CGRectMake(120,90, MAIN_WIDTH-130, 30)];
-            m_payNum.tag = 1002;
-            [m_payNum setFont:[UIFont systemFontOfSize:14]];
-            m_payNum.layer.cornerRadius = 3;
-            m_payNum.layer.borderColor = KEY_COMMON_GRAY_CORLOR.CGColor;
-            m_payNum.layer.borderWidth = 0.2;
-            m_payNum.delegate = self;
-            m_payNum.keyboardType = UIKeyboardTypeNumberPad;
-            [m_payNum setPlaceholder:@"此条收费的次数或数量"];
-            [vi addSubview:m_payNum];
-            
+//            UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake(10,(INPUT_ITEM_HIGH-40)/2, 100, 40)];
+//            tip.numberOfLines = 0;
+//            [tip setBackgroundColor:[UIColor clearColor]];
+//            [tip setTextColor:[UIColor blackColor]];
+//            [tip setFont:[UIFont systemFontOfSize:15]];
+//            [tip setText:@"增加收费明细:"];
+//            [vi addSubview:tip];
+//
+//            m_payDesc =[[UITextField alloc]initWithFrame:CGRectMake(120,10, MAIN_WIDTH-130, 30)];
+//            m_payDesc.tag = 1000;
+//            [m_payDesc setFont:[UIFont systemFontOfSize:14]];
+//            m_payDesc.layer.cornerRadius = 3;
+//            m_payDesc.layer.borderColor = KEY_COMMON_GRAY_CORLOR.CGColor;
+//            m_payDesc.layer.borderWidth = 0.2;
+//            m_payDesc.delegate = self;
+//            [m_payDesc setPlaceholder:@"请输入收费项目"];
+//            [vi addSubview:m_payDesc];
+//            m_payPrice =[[UITextField alloc]initWithFrame:CGRectMake(120,50, MAIN_WIDTH-130, 30)];
+//            m_payPrice.tag = 1001;
+//            [m_payPrice setFont:[UIFont systemFontOfSize:14]];
+//            m_payPrice.layer.cornerRadius = 3;
+//            m_payPrice.layer.borderColor = KEY_COMMON_GRAY_CORLOR.CGColor;
+//            m_payPrice.layer.borderWidth = 0.2;
+//            m_payPrice.delegate = self;
+//            m_payPrice.keyboardType = UIKeyboardTypeNumberPad;
+//            [m_payPrice setPlaceholder:@"请输入收费价格"];
+//            [vi addSubview:m_payPrice];
+//            m_payNum =[[UITextField alloc]initWithFrame:CGRectMake(120,90, MAIN_WIDTH-130, 30)];
+//            m_payNum.tag = 1002;
+//            [m_payNum setFont:[UIFont systemFontOfSize:14]];
+//            m_payNum.layer.cornerRadius = 3;
+//            m_payNum.layer.borderColor = KEY_COMMON_GRAY_CORLOR.CGColor;
+//            m_payNum.layer.borderWidth = 0.2;
+//            m_payNum.delegate = self;
+//            m_payNum.keyboardType = UIKeyboardTypeNumberPad;
+//            [m_payNum setPlaceholder:@"此条收费的次数或数量"];
+//            [vi addSubview:m_payNum];
+//
             UIButton *addItemBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [addItemBtn setFrame:CGRectMake(120,130, MAIN_WIDTH-130, 30)];
-            [addItemBtn setTitle:@"添 加" forState:UIControlStateNormal];
+            [addItemBtn setFrame:CGRectMake(10,10, MAIN_WIDTH/2-20, 30)];
+            [addItemBtn setTitle:@"添加商品" forState:UIControlStateNormal];
             [addItemBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [addItemBtn.titleLabel setFont:[UIFont systemFontOfSize:20]];
             addItemBtn.backgroundColor = KEY_COMMON_BLUE_CORLOR;
@@ -569,6 +569,18 @@
             //        addItemBtn.layer.borderWidth = 0.2;
             [vi addSubview:addItemBtn];
             [addItemBtn addTarget:self action:@selector(addItemBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+
+            UIButton *addServiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [addServiceBtn setFrame:CGRectMake(10+MAIN_WIDTH/2,10, MAIN_WIDTH/2-20, 30)];
+            [addServiceBtn setTitle:@"添加服务" forState:UIControlStateNormal];
+            [addServiceBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [addServiceBtn.titleLabel setFont:[UIFont systemFontOfSize:20]];
+            addServiceBtn.backgroundColor = KEY_COMMON_BLUE_CORLOR;
+            addServiceBtn.layer.cornerRadius = 3;
+            //        addItemBtn.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
+            //        addItemBtn.layer.borderWidth = 0.2;
+            [vi addSubview:addServiceBtn];
+            [addServiceBtn addTarget:self action:@selector(addItemBtnClicked) forControlEvents:UIControlEventTouchUpInside];
             
             UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0,INPUT_ITEM_HIGH-0.5, MAIN_WIDTH, 0.5)];
             [sep setBackgroundColor:UIColorFromRGB(0xf5f5f5)];

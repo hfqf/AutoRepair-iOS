@@ -45,6 +45,16 @@
 		7D1BAA7B1F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA791F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m */; };
 		7D1BAA7E1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA7D1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m */; };
 		7D1BAA7F1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA7D1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m */; };
+		7D1D77CA1F70B908001B0A7A /* ServiceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77C91F70B908001B0A7A /* ServiceManagerViewController.m */; };
+		7D1D77CB1F70B909001B0A7A /* ServiceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77C91F70B908001B0A7A /* ServiceManagerViewController.m */; };
+		7D1D77CE1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77CD1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m */; };
+		7D1D77CF1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77CD1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m */; };
+		7D1D77D61F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77D51F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.m */; };
+		7D1D77D71F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77D51F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.m */; };
+		7D1D77DA1F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77D91F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m */; };
+		7D1D77DB1F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77D91F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m */; };
+		7D1D77DE1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77DD1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m */; };
+		7D1D77DF1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77DD1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m */; };
 		7D4173451F2E18BC00233B9B /* AipBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; };
 		7D4173461F2E18BC00233B9B /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D4173471F2E18BC00233B9B /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173441F2E18BC00233B9B /* IdcardQuality.framework */; };
@@ -577,6 +587,16 @@
 		7D1BAA7D1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsTableViewCell.m; sourceTree = "<group>"; };
 		7D1D62141AF311CF00252B07 /* CustomerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerTableViewCell.h; sourceTree = "<group>"; };
 		7D1D62151AF311CF00252B07 /* CustomerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerTableViewCell.m; sourceTree = "<group>"; };
+		7D1D77C81F70B908001B0A7A /* ServiceManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManagerViewController.h; sourceTree = "<group>"; };
+		7D1D77C91F70B908001B0A7A /* ServiceManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManagerViewController.m; sourceTree = "<group>"; };
+		7D1D77CC1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManaagerTopTypeListViewController.h; sourceTree = "<group>"; };
+		7D1D77CD1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManaagerTopTypeListViewController.m; sourceTree = "<group>"; };
+		7D1D77D41F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManaagerTopTypeAddViewController.h; sourceTree = "<group>"; };
+		7D1D77D51F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManaagerTopTypeAddViewController.m; sourceTree = "<group>"; };
+		7D1D77D81F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManaagerSubTypeListViewController.h; sourceTree = "<group>"; };
+		7D1D77D91F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManaagerSubTypeListViewController.m; sourceTree = "<group>"; };
+		7D1D77DC1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManaagerSubTypeAddViewController.h; sourceTree = "<group>"; };
+		7D1D77DD1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManaagerSubTypeAddViewController.m; sourceTree = "<group>"; };
 		7D2904FA1AF134FF00039CEF /* AddRepairHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRepairHistoryViewController.h; sourceTree = "<group>"; };
 		7D2904FB1AF134FF00039CEF /* AddRepairHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRepairHistoryViewController.m; sourceTree = "<group>"; };
 		7D37793F1E87903600560B70 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -1079,7 +1099,16 @@
 		7D005E051F512C9F00846ADE /* ServiceManger */ = {
 			isa = PBXGroup;
 			children = (
-				7D426DE51A62AB440004F3F6 /* MainTabBarViewController.h */,
+				7D1D77C81F70B908001B0A7A /* ServiceManagerViewController.h */,
+				7D1D77C91F70B908001B0A7A /* ServiceManagerViewController.m */,
+				7D1D77CC1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.h */,
+				7D1D77CD1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m */,
+				7D1D77D41F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.h */,
+				7D1D77D51F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.m */,
+				7D1D77D81F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.h */,
+				7D1D77D91F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m */,
+				7D1D77DC1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.h */,
+				7D1D77DD1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m */,
 			);
 			name = ServiceManger;
 			sourceTree = "<group>";
@@ -1465,6 +1494,7 @@
 				7D0DEB0E1DE18A200032FBBC /* RegisterViewController.xib */,
 				7DB510F41EA121180007D5D0 /* ResetPwdViewController.h */,
 				7DB510F51EA121180007D5D0 /* ResetPwdViewController.m */,
+				7D426DE51A62AB440004F3F6 /* MainTabBarViewController.h */,
 				7D426DE61A62AB440004F3F6 /* MainTabBarViewController.mm */,
 				7D005E051F512C9F00846ADE /* ServiceManger */,
 				7D005E041F512C9200846ADE /* WarehouseManager */,
@@ -2138,6 +2168,7 @@
 				7D4173551F2E26E900233B9B /* UIImageView+HighlightedWebCache.m in Sources */,
 				7D5C33041F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */,
 				7D4173561F2E26E900233B9B /* UIImage+MultiFormat.m in Sources */,
+				7D1D77D71F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.m in Sources */,
 				7D4173571F2E26E900233B9B /* WorkroomListViewController.m in Sources */,
 				7D4173581F2E26E900233B9B /* ADTRepairInfo.m in Sources */,
 				7D005E401F541B2B00846ADE /* WarehouseSupplierInfoViewController.m in Sources */,
@@ -2177,6 +2208,7 @@
 				7D4173721F2E26E900233B9B /* SearchViewController.m in Sources */,
 				7D4173731F2E26E900233B9B /* MJRefreshHeaderView.m in Sources */,
 				7D1BAA671F5C458700B03719 /* WarehouseGoodsSettingSubTypeListViewController.m in Sources */,
+				7D1D77CF1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m in Sources */,
 				7D4173741F2E26E900233B9B /* LoginViewController.mm in Sources */,
 				7D5C33101F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m in Sources */,
 				7D4173751F2E26E900233B9B /* UIButton+WebCache.m in Sources */,
@@ -2204,6 +2236,7 @@
 				7D005E1D1F53EB2D00846ADE /* WarehouseAddNewViewController.m in Sources */,
 				7D4173871F2E26E900233B9B /* RegViewController.m in Sources */,
 				7D4173881F2E26E900233B9B /* UIButton+BHBSetImage.m in Sources */,
+				7D1D77DB1F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m in Sources */,
 				7D4173891F2E26E900233B9B /* SDWebImagePrefetcher.m in Sources */,
 				7D41738A1F2E26E900233B9B /* SectionsViewControllerFriends.m in Sources */,
 				7D41738B1F2E26E900233B9B /* EGOImageView.m in Sources */,
@@ -2250,6 +2283,7 @@
 				7D005E091F512CEB00846ADE /* WareHouseManagerViewController.m in Sources */,
 				7D1BAA7F1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m in Sources */,
 				7D4173A91F2E26E900233B9B /* EGOImageButton.m in Sources */,
+				7D1D77CB1F70B909001B0A7A /* ServiceManagerViewController.m in Sources */,
 				7D4173AA1F2E26E900233B9B /* main.m in Sources */,
 				7D4173AB1F2E26E900233B9B /* MJRefreshFooterView.m in Sources */,
 				7D4173AC1F2E26E900233B9B /* DesUtil.m in Sources */,
@@ -2278,6 +2312,7 @@
 				7D4173BE1F2E26E900233B9B /* EmptyTipView.m in Sources */,
 				7D4173BF1F2E26E900233B9B /* SDWebImageManager.m in Sources */,
 				7D64B4271F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */,
+				7D1D77DF1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */,
 				7D005E341F53FB6C00846ADE /* WarehousePositionAddNewViewController.m in Sources */,
 				7D1BAA5F1F5C44FC00B03719 /* WarehouseGoodsSettingSubTypeAddViewController.m in Sources */,
 				7D4173C01F2E26E900233B9B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -2307,6 +2342,7 @@
 				7D4CD8E41F235D37003619EB /* UIImageView+HighlightedWebCache.m in Sources */,
 				7D5C33031F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */,
 				7D4CD8E91F235D37003619EB /* UIImage+MultiFormat.m in Sources */,
+				7D1D77D61F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.m in Sources */,
 				7D72B47A1F243D5E00383D3D /* WorkroomListViewController.m in Sources */,
 				7D4CD8EB1F235D37003619EB /* ADTRepairInfo.m in Sources */,
 				7D005E3F1F541B2B00846ADE /* WarehouseSupplierInfoViewController.m in Sources */,
@@ -2346,6 +2382,7 @@
 				7D4CD9121F235D37003619EB /* SearchViewController.m in Sources */,
 				7D4CD9171F235D37003619EB /* MJRefreshHeaderView.m in Sources */,
 				7D1BAA661F5C458700B03719 /* WarehouseGoodsSettingSubTypeListViewController.m in Sources */,
+				7D1D77CE1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m in Sources */,
 				7D4CD9181F235D37003619EB /* LoginViewController.mm in Sources */,
 				7D5C330F1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m in Sources */,
 				7D4CD91A1F235D37003619EB /* UIButton+WebCache.m in Sources */,
@@ -2373,6 +2410,7 @@
 				7D005E1C1F53EB2D00846ADE /* WarehouseAddNewViewController.m in Sources */,
 				7D4CD9331F235D37003619EB /* RegViewController.m in Sources */,
 				7D4CD9341F235D37003619EB /* UIButton+BHBSetImage.m in Sources */,
+				7D1D77DA1F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m in Sources */,
 				7D4CD9351F235D37003619EB /* SDWebImagePrefetcher.m in Sources */,
 				7D4CD9361F235D37003619EB /* SectionsViewControllerFriends.m in Sources */,
 				7D4CD9371F235D37003619EB /* EGOImageView.m in Sources */,
@@ -2419,6 +2457,7 @@
 				7D005E081F512CEB00846ADE /* WareHouseManagerViewController.m in Sources */,
 				7D1BAA7E1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m in Sources */,
 				7D4CD9621F235D37003619EB /* EGOImageButton.m in Sources */,
+				7D1D77CA1F70B908001B0A7A /* ServiceManagerViewController.m in Sources */,
 				7D4CD9651F235D37003619EB /* main.m in Sources */,
 				7D4CD9661F235D37003619EB /* MJRefreshFooterView.m in Sources */,
 				7D4CD9691F235D37003619EB /* DesUtil.m in Sources */,
@@ -2447,6 +2486,7 @@
 				7D4CD9831F235D37003619EB /* EmptyTipView.m in Sources */,
 				7D4CD9871F235D37003619EB /* SDWebImageManager.m in Sources */,
 				7D64B4261F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */,
+				7D1D77DE1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */,
 				7D005E331F53FB6C00846ADE /* WarehousePositionAddNewViewController.m in Sources */,
 				7D1BAA5E1F5C44FC00B03719 /* WarehouseGoodsSettingSubTypeAddViewController.m in Sources */,
 				7D4CD9881F235D37003619EB /* UIActivityIndicatorView+AFNetworking.m in Sources */,
