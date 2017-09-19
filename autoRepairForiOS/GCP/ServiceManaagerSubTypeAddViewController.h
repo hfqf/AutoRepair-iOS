@@ -10,4 +10,5 @@
 
 @interface ServiceManaagerSubTypeAddViewController : WarehouseGoodsSettingSubTypeAddViewController
 
+- (id)initWithServiceInfo:(NSDictionary *)serviceInfo;
 @end

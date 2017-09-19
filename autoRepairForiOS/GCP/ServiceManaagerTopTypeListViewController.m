@@ -7,7 +7,7 @@
 //
 
 #import "ServiceManaagerTopTypeListViewController.h"
-#import "ServiceManaagerSubTypeListViewController.h"
+#import "ServiceManaagerSubTypeAddViewController.h"
 @interface ServiceManaagerTopTypeListViewController ()
 
 @end
@@ -33,9 +33,7 @@
 
 - (void)requestData:(BOOL)isRefresh
 {
-    [self showWaitingView];
     [HTTP_MANAGER getAllServiceTopTypeList:^(NSDictionary *succeedResult) {
-        [self removeWaitingView];
         if([succeedResult[@"code"]integerValue] == 1)
         {
             self.m_arrData = succeedResult[@"ret"];
@@ -43,7 +41,6 @@
         [self reloadDeals];
 
     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-        [self removeWaitingView];
         [self reloadDeals];
     }];
 }
@@ -57,7 +54,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *info = [self.m_arrData objectAtIndex:indexPath.row];
-    ServiceManaagerSubTypeListViewController *sub = [[ServiceManaagerSubTypeListViewController alloc]initWith:info];
+    ServiceManaagerSubTypeAddViewController *sub = [[ServiceManaagerSubTypeAddViewController alloc]initWith:info];
     [self.navigationController pushViewController:sub animated:YES];
 }
 

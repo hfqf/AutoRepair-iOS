@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Poitns. All rights reserved.
 //
 
-#import "WarehouseGoodsSettingSubTypeAddViewController.h"
+#import "WarehouseGoodsSettingSubTypeListViewController.h"
 
-@interface ServiceManaagerSubTypeListViewController : WarehouseGoodsSettingSubTypeAddViewController
+@interface ServiceManaagerSubTypeListViewController : WarehouseGoodsSettingSubTypeListViewController
 
 @end

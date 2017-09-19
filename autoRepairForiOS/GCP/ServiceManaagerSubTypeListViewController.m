@@ -39,10 +39,8 @@
 
 - (void)requestData:(BOOL)isRefresh
 {
-        [self showWaitingView];
         [HTTP_MANAGER getAllServiceSubTypeList:self.m_parentInfo[@"_id"]
                               successedBlock:^(NSDictionary *succeedResult) {
-                                  [self removeWaitingView];
                                   if([succeedResult[@"code"]integerValue] == 1)
                                   {
                                       self.m_arrData = succeedResult[@"ret"];

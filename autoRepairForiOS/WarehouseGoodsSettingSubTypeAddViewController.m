@@ -129,7 +129,7 @@
     [edit setFont:[UIFont systemFontOfSize:14]];
     if(indexPath.row == 0){
         [edit setText:self.m_value1];
-        [edit setPlaceholder:@"请输入类名"];
+        [edit setPlaceholder:@"请输入服务名称"];
     }
     edit.delegate = self;
     edit.textAlignment = NSTextAlignmentLeft;
@@ -144,6 +144,12 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     self.m_currentTexfField = textField;
+
+    if(textField.tag == 0){
+
+    }else{
+
+    }
     return YES;
 }
 
