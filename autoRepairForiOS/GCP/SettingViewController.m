@@ -137,7 +137,8 @@
                        @"去苹果商店写评论",
                        @"修改密码",
                        @"退出",
-                       @"仓库管理"
+                       @"仓库管理",
+                       @"服务管理"
                        ];
     [self reloadDeals];
     
@@ -298,11 +299,12 @@
         alert.tag = 1;
         [alert show];
     }
+    else if (indexPath.section == 8){
+        [self.navigationController pushViewController:[[NSClassFromString(@"WareHouseManagerViewController") alloc]init] animated:YES];
+    }
     else
     {
-
-         [self.navigationController pushViewController:[[NSClassFromString(@"WareHouseManagerViewController") alloc]init] animated:YES];
-     
+        [self.navigationController pushViewController:[[NSClassFromString(@"ServiceManagerViewController") alloc]init] animated:YES];
     }
 }
 

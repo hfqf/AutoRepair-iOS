@@ -7,7 +7,7 @@
 //
 
 #import "ServiceManaagerTopTypeListViewController.h"
-
+#import "ServiceManaagerSubTypeListViewController.h"
 @interface ServiceManaagerTopTypeListViewController ()
 
 @end
@@ -16,22 +16,50 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [title setText:@"服务管理(设置大类)"];
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self requestData:YES];
+}
+
+- (void)addBtnClicked
+{
+    [self.navigationController pushViewController:[[NSClassFromString(@"ServiceManaagerTopTypeAddViewController") alloc]init] animated:YES];
+
+}
+
+- (void)requestData:(BOOL)isRefresh
+{
+    [self showWaitingView];
+    [HTTP_MANAGER getAllServiceTopTypeList:^(NSDictionary *succeedResult) {
+        [self removeWaitingView];
+        if([succeedResult[@"code"]integerValue] == 1)
+        {
+            self.m_arrData = succeedResult[@"ret"];
+        }
+        [self reloadDeals];
+
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+        [self removeWaitingView];
+        [self reloadDeals];
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *info = [self.m_arrData objectAtIndex:indexPath.row];
+    ServiceManaagerSubTypeListViewController *sub = [[ServiceManaagerSubTypeListViewController alloc]initWith:info];
+    [self.navigationController pushViewController:sub animated:YES];
 }
-*/
+
 
 @end

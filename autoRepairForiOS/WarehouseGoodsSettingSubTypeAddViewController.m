@@ -9,8 +9,7 @@
 #import "WarehouseGoodsSettingSubTypeAddViewController.h"
 
 @interface WarehouseGoodsSettingSubTypeAddViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
-@property(nonatomic,strong)NSString *m_value1;
-@property(nonatomic,strong)UITextField *m_currentTexfField;
+
 @end
 
 @implementation WarehouseGoodsSettingSubTypeAddViewController

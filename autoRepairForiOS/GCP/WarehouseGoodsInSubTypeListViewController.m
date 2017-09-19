@@ -11,7 +11,6 @@
 #import "WarehouseGoodsInfoViewController.h"
 #import "WarehouseGoodsTableViewCell.h"
 @interface WarehouseGoodsInSubTypeListViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)NSMutableArray *m_arrSelect;
 @end
 
 @implementation WarehouseGoodsInSubTypeListViewController

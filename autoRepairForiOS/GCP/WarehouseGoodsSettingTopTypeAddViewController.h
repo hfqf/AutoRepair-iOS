@@ -9,5 +9,6 @@
 #import "SpeRefreshAndLoadViewController.h"
 
 @interface WarehouseGoodsSettingTopTypeAddViewController : SpeRefreshAndLoadViewController
-
+@property(nonatomic,strong)NSString *m_value1;
+@property(nonatomic,strong)UITextField *m_currentTexfField;
 @end

@@ -19,4 +19,7 @@
 - (id)initWith:(NSDictionary *)info;
 
 - (id)initWithSelectDelegate:(id<WarehouseGoodsInSubTypeListViewControllerDelegate>)delegate withSelectedGoods:(NSArray *)arrSelected;
+
+@property(nonatomic,strong)NSMutableArray *m_arrSelect;
+
 @end

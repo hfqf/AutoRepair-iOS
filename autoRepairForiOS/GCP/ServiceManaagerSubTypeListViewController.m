@@ -7,7 +7,7 @@
 //
 
 #import "ServiceManaagerSubTypeListViewController.h"
-
+#import "ServiceManaagerSubTypeAddViewController.h"
 @interface ServiceManaagerSubTypeListViewController ()
 
 @end
@@ -16,7 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [title setText:self.m_parentInfo[@"name"]];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +25,34 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self requestData:YES];
 }
-*/
+
+- (void)addBtnClicked
+{
+    ServiceManaagerSubTypeAddViewController *add = [[ServiceManaagerSubTypeAddViewController alloc]initWith:self.m_parentInfo];
+    [self.navigationController pushViewController:add animated:YES];
+}
+
+- (void)requestData:(BOOL)isRefresh
+{
+        [self showWaitingView];
+        [HTTP_MANAGER getAllServiceSubTypeList:self.m_parentInfo[@"_id"]
+                              successedBlock:^(NSDictionary *succeedResult) {
+                                  [self removeWaitingView];
+                                  if([succeedResult[@"code"]integerValue] == 1)
+                                  {
+                                      self.m_arrData = succeedResult[@"ret"];
+                                  }
+                                  [self reloadDeals];
+
+                              } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                  [self removeWaitingView];
+                                  [self reloadDeals];
+                              }];
+}
 
 @end

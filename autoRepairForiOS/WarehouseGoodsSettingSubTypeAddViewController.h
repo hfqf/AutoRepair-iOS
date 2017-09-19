@@ -10,4 +10,6 @@
 
 @interface WarehouseGoodsSettingSubTypeAddViewController : SpeRefreshAndLoadViewController
 - (id)initWith:(NSDictionary *)info;
+@property(nonatomic,strong)NSString *m_value1;
+@property(nonatomic,strong)UITextField *m_currentTexfField;
 @end
