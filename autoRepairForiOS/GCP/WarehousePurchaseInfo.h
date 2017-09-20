@@ -29,5 +29,7 @@
 @property(nonatomic,strong)NSDictionary *m_buyer;
 @property(nonatomic,strong)NSDictionary *m_saver;
 @property(assign)BOOL m_isSelected;
+@property(nonatomic,strong)NSString *m_num;
+@property(nonatomic,strong)NSString *m_price;
 +(WarehousePurchaseInfo *)from:(NSDictionary *)info;
 @end

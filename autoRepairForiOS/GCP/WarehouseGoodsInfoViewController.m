@@ -439,6 +439,9 @@
         return;
     }
 
+    //先修改此商品在仓库的数量和进价，准备购买，入库
+
+
     [HTTP_MANAGER addNewGoodsWith:self.m_goodsInfo
                    successedBlock:^(NSDictionary *succeedResult) {
 

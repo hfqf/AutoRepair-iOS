@@ -1456,6 +1456,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                 @"remark":safeStringWith(purchase.m_remark),
                                 @"owner":[LoginUserUtil userTel],
                                 @"buyer":[LoginUserUtil userId],
+                                @"num":safeStringWith(purchase.m_num),
+                                @"price":safeStringWith(purchase.m_price),
                                 }
                successedBlock:success
                   failedBolck:failed];

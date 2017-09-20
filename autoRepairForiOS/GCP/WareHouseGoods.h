@@ -28,6 +28,8 @@
 @property(nonatomic,strong) NSString *m_owner;
 @property(nonatomic,strong) NSString *m_id;
 @property(nonatomic,strong) NSString *m_num;
+@property(nonatomic,strong) NSString *m_purchaseNum;
+@property(nonatomic,strong) NSString *m_systemPrice;//系统成本价格，根据往次的总价格除以总数量
 @property(nonatomic,strong) NSDictionary  *m_storePosition; //保存的库位
 @property(assign)BOOL  m_isSelectStyle;
 @property(assign)BOOL  m_isSelected;
