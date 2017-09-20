@@ -31,5 +31,6 @@
 @property(nonatomic,strong) NSDictionary  *m_storePosition; //保存的库位
 @property(assign)BOOL  m_isSelectStyle;
 @property(assign)BOOL  m_isSelected;
+@property(assign)BOOL  m_isAddNew;
 +(WareHouseGoods *)from:(NSDictionary *)info;
 @end

@@ -184,8 +184,11 @@
         [cell addSubview:_tit];
         UITextField *edit = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_tit.frame), 10, MAIN_WIDTH-(CGRectGetMaxX(_tit.frame))-30, 40)];
         edit.tag = indexPath.row;
+        [self.m_currentTexfField setEnabled:YES];
+
         [edit setFont:[UIFont systemFontOfSize:14]];
         if(indexPath.row == 0){
+            [edit resignFirstResponder];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [_tit setText:@"供应商"];
             [edit setText:self.m_purchaseInfo.m_supplier[@"suppliercompanyname"]];
@@ -258,7 +261,7 @@
 
 - (void)onSelectGoodsArray:(NSArray *)arrSelected
 {
-    self.m_purchaseInfo.m_arrGoods = arrSelected;
+    self.m_purchaseInfo.m_arrGoods = [NSMutableArray arrayWithArray:arrSelected];
     [self reloadDeals];
 }
 
@@ -266,8 +269,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     self.m_currentTexfField = textField;
-
-    if(textField.tag == 0)
+    if(textField.tag == 0 && ![textField.text isEqualToString:self.m_goodsInfo.m_category[@"name"]] )
     {
         [self.m_currentTexfField resignFirstResponder];
         WarehouseSupplierViewController *add = [[WarehouseSupplierViewController alloc]initWith:self];
@@ -325,12 +327,19 @@
 - (void)onSupplierSelected:(NSDictionary *)supplier
 {
     self.m_purchaseInfo.m_supplier = supplier;
-    [self reloadDeals];
+    [self.m_currentTexfField setText:supplier[@"name"]];
+    [self.m_currentTexfField setEnabled:NO];
+     [self reloadDeals];
 }
 
 - (void)commit
 {
     [self.m_currentTexfField resignFirstResponder];
+    if(self.m_purchaseInfo.m_supplier == nil){
+        [PubllicMaskViewHelper showTipViewWith:@"供应商不能为空" inSuperView:self.view  withDuration:1];
+        return;
+    }
+
     if(self.m_purchaseInfo.m_supplier == nil){
         [PubllicMaskViewHelper showTipViewWith:@"供应商不能为空" inSuperView:self.view  withDuration:1];
         return;

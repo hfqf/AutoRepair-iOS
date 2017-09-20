@@ -57,7 +57,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [title setText:@"商品详情"];
+    [title setText:self.m_goodsInfo.m_isAddNew ? @"新增商品" : @"商品详情"];
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -96,9 +96,16 @@
 
 - (void)addBtnClicked
 {
-    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"采购",@"保存编辑",@"删除", nil];
-    act.tag = 0;
-    [act showInView:self.view];
+    if(self.m_goodsInfo.m_isAddNew){
+        UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存", nil];
+        act.tag = 3;
+        [act showInView:self.view];
+    }else{
+        UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"采购",@"保存编辑",@"删除", nil];
+        act.tag = 0;
+        [act showInView:self.view];
+    }
+
 }
 
 - (void)delete
@@ -129,6 +136,16 @@
     [self.m_currentTexfField resignFirstResponder];
     if(self.m_goodsInfo.m_name.length == 0){
         [PubllicMaskViewHelper showTipViewWith:@"商品名称不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+
+    if(self.m_goodsInfo.m_saleprice.length == 0){
+        [PubllicMaskViewHelper showTipViewWith:@"商品售价不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+
+    if(self.m_goodsInfo.m_category == nil){
+        [PubllicMaskViewHelper showTipViewWith:@"商品分类不能为空" inSuperView:self.view withDuration:1];
         return;
     }
 
@@ -399,8 +416,47 @@
         self.m_goodsInfo.m_productertype = [NSString stringWithFormat:@"%lu",buttonIndex];
         [self reloadDeals];
     }
+    else if (actionSheet.tag == 3){
+        [self addNew];
+    }
 }
 
+- (void)addNew
+{
+    [self.m_currentTexfField resignFirstResponder];
+    if(self.m_goodsInfo.m_name.length == 0){
+        [PubllicMaskViewHelper showTipViewWith:@"商品名称不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+
+    if(self.m_goodsInfo.m_saleprice.length == 0){
+        [PubllicMaskViewHelper showTipViewWith:@"商品售价不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+
+    if(self.m_goodsInfo.m_category == nil){
+        [PubllicMaskViewHelper showTipViewWith:@"商品分类不能为空" inSuperView:self.view withDuration:1];
+        return;
+    }
+
+    [HTTP_MANAGER addNewGoodsWith:self.m_goodsInfo
+                   successedBlock:^(NSDictionary *succeedResult) {
+
+                       [self removeWaitingView];
+
+                       if([succeedResult[@"code"]integerValue] == 1){
+                           [self.navigationController popViewControllerAnimated:YES];
+                       }else{
+                           [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                       }
+
+                   } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                       [self removeWaitingView];
+                       [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+
+                   }];
+}
 
 #pragma mark - UIImagePickerControllerDelegate
 

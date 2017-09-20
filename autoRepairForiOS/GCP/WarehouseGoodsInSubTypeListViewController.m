@@ -73,7 +73,10 @@
         [self.m_selecteDelegate onSelectGoodsArray:arr];
         [self.navigationController popViewControllerAnimated:YES];
     }else{
-        WarehouseGoodsAddNewViewController *add = [[WarehouseGoodsAddNewViewController alloc]initWith:self.m_parentInfo];
+        WareHouseGoods *good = [[WareHouseGoods alloc]init];
+        good.m_isAddNew = YES;
+        good.m_category = self.m_parentInfo;
+        WarehouseGoodsInfoViewController *add = [[WarehouseGoodsInfoViewController alloc]initWith:good];
         [self.navigationController pushViewController:add animated:YES];
     }
 

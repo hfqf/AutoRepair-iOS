@@ -1309,7 +1309,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                 @"category":newGoods.m_category[@"_id"],
                                 @"saleprice":safeStringWith(newGoods.m_saleprice),
                                 @"costprice":safeStringWith(newGoods.m_costprice),
-                                @"productertype":safeStringWith(newGoods.m_productertype),
+                                @"productertype":safeStringWith(newGoods.m_productertype).length == 0 ? @"0" : safeStringWith(newGoods.m_productertype) ,
                                 @"producteraddress":safeStringWith(newGoods.m_producteraddress),
                                 @"barcode":safeStringWith(newGoods.m_barcode),
                                 @"brand":safeStringWith(newGoods.m_brand),
@@ -1317,7 +1317,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                 @"minnum":safeStringWith(newGoods.m_minnum),
                                 @"applycartype":safeStringWith(newGoods.m_applycartype),
                                 @"remark":safeStringWith(newGoods.m_remark),
-                                @"isactive":safeStringWith(newGoods.m_isactive),
+                                @"isactive":safeStringWith(newGoods.m_isactive).length == 0 ? @"1" : safeStringWith(newGoods.m_isactive) ,
                                 @"owner":[LoginUserUtil userTel],
                                 }
                successedBlock:success
