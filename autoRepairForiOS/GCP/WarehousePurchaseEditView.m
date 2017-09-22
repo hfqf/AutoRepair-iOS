@@ -54,7 +54,7 @@
         m_numTextField.textAlignment = NSTextAlignmentRight;
         m_numTextField.placeholder = @"0";
         m_numTextField.keyboardType = UIKeyboardTypeASCIICapableNumberPad;
-        m_numTextField.text = goods.m_num;
+        m_numTextField.text = goods.m_purchaseNum;
         m_numTextField.textColor = [UIColor whiteColor];
         m_numTextField.returnKeyType = UIReturnKeyDone;
         m_numTextField.font =[UIFont systemFontOfSize:14];
@@ -96,7 +96,7 @@
         [PubllicMaskViewHelper showTipViewWith:@"数量不能为空" inSuperView:self withDuration:1];
         return;
     }
-    self.m_goods.m_num = m_numTextField.text;
+    self.m_goods.m_purchaseNum = m_numTextField.text;
     self.m_goods.m_costprice = m_priceTextField.text;
     if(self.m_delegate && [self.m_delegate respondsToSelector:@selector(onEditCompleted:)])
     {

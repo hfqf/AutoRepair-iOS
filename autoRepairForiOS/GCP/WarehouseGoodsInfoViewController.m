@@ -320,7 +320,7 @@
         self.m_goodsInfo.m_costprice = textField.text;
     }
     else if (textField.tag == 5){
-        self.m_goodsInfo.m_productertype = textField.text;
+        
     }else if (textField.tag == 6){
         self.m_goodsInfo.m_producteraddress = textField.text;
     }else if (textField.tag == 7){
@@ -359,7 +359,7 @@
         self.m_goodsInfo.m_costprice = textField.text;
     }
     else if (textField.tag == 5){
-        self.m_goodsInfo.m_productertype = textField.text;
+
     }else if (textField.tag == 6){
         self.m_goodsInfo.m_producteraddress = textField.text;
     }else if (textField.tag == 7){
@@ -393,8 +393,37 @@
 {
     if(actionSheet.tag == 0){
         if(buttonIndex == 0){
-            WarehouseGoodPurchaseViewController *purchase = [[WarehouseGoodPurchaseViewController alloc]initWith:self.m_goodsInfo];
-            [self.navigationController pushViewController:purchase animated:YES];
+
+            [HTTP_MANAGER queryOnePurchaseGoodsInfo:self.m_goodsInfo.m_id
+                                     successedBlock:^(NSDictionary *succeedResult) {
+
+                                         if([succeedResult[@"code"]integerValue] == 1){
+                                             NSArray *arr = succeedResult[@"ret"];
+                                             if(arr.count > 0){
+                                                 WarehousePurchaseInfo *purchase = [WarehousePurchaseInfo from:[arr firstObject]];
+                                                 purchase.m_isCreated = YES;
+                                                 purchase.m_arrGoods = [NSMutableArray arrayWithObject:self.m_goodsInfo];
+                                                 WarehouseGoodPurchaseViewController *purchaseVc = [[WarehouseGoodPurchaseViewController alloc]initWith:purchase];
+                                                 [self.navigationController pushViewController:purchaseVc animated:YES];
+
+                                             }else{
+                                                 WarehousePurchaseInfo *purchase = [[WarehousePurchaseInfo alloc]init];
+                                                 purchase.m_isCreated = NO;
+                                                 purchase.m_arrGoods = [NSMutableArray arrayWithObject:self.m_goodsInfo];
+                                                 WarehouseGoodPurchaseViewController *purchaseVc = [[WarehouseGoodPurchaseViewController alloc]initWith:purchase];
+                                                 [self.navigationController pushViewController:purchaseVc animated:YES];
+                                             }
+
+                                         }
+
+                                     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+
+                                     }];
+
+
+
+
         }else if (buttonIndex == 1){
             [self update];
         }else{

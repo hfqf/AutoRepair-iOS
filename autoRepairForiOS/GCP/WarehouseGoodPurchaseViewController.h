@@ -10,5 +10,5 @@
 
 @interface WarehouseGoodPurchaseViewController : SpeRefreshAndLoadViewController
 
-- (id)initWith:(WareHouseGoods *)goods;
+- (id)initWith:(WarehousePurchaseInfo *)puchase;
 @end

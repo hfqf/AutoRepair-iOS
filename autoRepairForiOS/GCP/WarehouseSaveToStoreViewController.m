@@ -155,7 +155,7 @@
             [numLab setTextAlignment:NSTextAlignmentRight];
             [numLab setTextColor:UIColorFromRGB(0x878c8b)];
             [numLab setFont:[UIFont systemFontOfSize:14]];
-            [numLab setText:[NSString stringWithFormat:@"x%@",good.m_num]];
+            [numLab setText:[NSString stringWithFormat:@"x%@",good.m_purchaseNum]];
             [cell addSubview:numLab];
 
 
@@ -203,7 +203,7 @@
             [totalLab setTextAlignment:NSTextAlignmentRight];
             [totalLab setTextColor:UIColorFromRGB(0x878c8b)];
             [totalLab setFont:[UIFont systemFontOfSize:14]];
-            [totalLab setText:[NSString stringWithFormat:@"合计 %d",[good.m_costprice intValue]*[good.m_num intValue]]];
+            [totalLab setText:[NSString stringWithFormat:@"合计 %d",[good.m_costprice intValue]*[good.m_purchaseNum intValue]]];
             [cell addSubview:totalLab];
             
             UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, HIGH_CELL-0.5, MAIN_WIDTH, 0.5)];
@@ -426,7 +426,7 @@
     return YES;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     self.m_purchaseInfo.m_expressCost = textField.text;
     return YES;

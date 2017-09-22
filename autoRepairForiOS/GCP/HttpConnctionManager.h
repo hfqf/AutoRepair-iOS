@@ -422,6 +422,9 @@ typedef void (^FailBlock)(NSError *error);
                successedBlock:(SuccessedBlock)success
                   failedBolck:(FailedBlock)failed;
 
+- (void)updateOneGoodsPurchaseInfoWith:(WareHouseGoods *)newGoods
+                        successedBlock:(SuccessedBlock)success
+                           failedBolck:(FailedBlock)failed;
 
 - (void)delOneGoodsWith:(NSString *)_id
          successedBlock:(SuccessedBlock)success
@@ -448,9 +451,17 @@ typedef void (^FailBlock)(NSError *error);
             successedBlock:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed;
 
+- (void)updateOnePurchaseWith:(WarehousePurchaseInfo *)purchase
+               successedBlock:(SuccessedBlock)success
+                  failedBolck:(FailedBlock)failed;
+
 - (void)queryPurchaseGoods:(NSString *)state
             successedBlock:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed;
+
+- (void)queryOnePurchaseGoodsInfo:(NSString *)goodsId
+                   successedBlock:(SuccessedBlock)success
+                      failedBolck:(FailedBlock)failed;
 
 - (void)savePurchaseGoodsToStore:(WarehousePurchaseInfo *)purchase
                   successedBlock:(SuccessedBlock)success

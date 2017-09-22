@@ -39,7 +39,7 @@
         [m_supplierLab setFont:[UIFont boldSystemFontOfSize:16]];
         [self addSubview:m_supplierLab];
 
-        m_priceLab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH-100, 5, 90, 16)];
+        m_priceLab = [[UILabel alloc]initWithFrame:CGRectMake(150, 5,MAIN_WIDTH-160, 16)];
         [m_priceLab setBackgroundColor:[UIColor clearColor]];
         [m_priceLab setTextAlignment:NSTextAlignmentRight];
         [m_priceLab setTextColor:KEY_COMMON_BLUE_CORLOR];
@@ -150,7 +150,7 @@
     WareHouseGoods *good = [info.m_arrGoods firstObject];
     [m_supplierLab setText:info.m_supplierInfo.m_companyName];
     [m_expressIdLab setText:[NSString stringWithFormat:@"物流单号:%@",info.m_expressSerialId]];
-    [m_priceLab setText:[NSString stringWithFormat:@"%lu",good.m_num.integerValue *good.m_saleprice.integerValue]];
+    [m_priceLab setText:[NSString stringWithFormat:@"合计: %lu",good.m_purchaseNum.integerValue *good.m_costprice.integerValue]];
 
     [m_expressCompanyLab setText:[NSString stringWithFormat:@"物流公司:%@",info.m_expressCompany]];
     [m_timeLab setText:info.m_time.length > 10 ? [info.m_time substringToIndex:10] :info.m_time];
@@ -158,7 +158,7 @@
     [m_icon setImageForAllSDK:[NSURL URLWithString:[LoginUserUtil contactHeadUrl:good.m_picurl] ]withDefaultImage:[UIImage imageNamed:@"app_icon"]];
     [m_goodNameLab setText:good.m_name];
     [m_sencodeLab setText:[NSString stringWithFormat:@"编码:%@",good.m_goodsencode]];
-    [m_numLab setText:[NSString stringWithFormat:@"x%@",good.m_num]];
+    [m_numLab setText:[NSString stringWithFormat:@"x%@",good.m_purchaseNum]];
 
 }
 

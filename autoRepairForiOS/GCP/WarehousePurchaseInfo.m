@@ -39,6 +39,8 @@
     ret.m_rejecter = info[@"rejecter"];
     ret.m_saver = info[@"saver"];
     ret.m_rejectReason = [info stringWithFilted:@"rejectreason"];
+    ret.m_price = [info stringWithFilted:@"price"];
+    ret.m_num = [info stringWithFilted:@"num"];
     return ret;
 }
 @end

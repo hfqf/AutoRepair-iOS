@@ -31,5 +31,7 @@
 @property(assign)BOOL m_isSelected;
 @property(nonatomic,strong)NSString *m_num;
 @property(nonatomic,strong)NSString *m_price;
+
+@property(assign)BOOL m_isCreated;
 +(WarehousePurchaseInfo *)from:(NSDictionary *)info;
 @end

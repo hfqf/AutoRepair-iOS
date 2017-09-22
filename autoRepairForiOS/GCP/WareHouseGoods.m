@@ -20,7 +20,7 @@
     ret.m_goodsencode = info[@"goodsencode"];
     ret.m_isactive = info[@"isactive"];
     ret.m_minnum = info[@"minnum"];
-    ret.m_name = info[@"name"];
+    ret.m_name = [info stringWithFilted:@"name"];
     ret.m_picurl = info[@"picurl"];
     ret.m_productertype = info[@"productertype"];
     ret.m_producteraddress = info[@"producteraddress"];
@@ -28,7 +28,8 @@
     ret.m_saleprice = info[@"saleprice"];
     ret.m_subtype = info[@"subtype"];
     ret.m_unit = info[@"unit"];
-    ret.m_num = info[@"num"];
+    ret.m_num = [info stringWithFilted:@"num"];
+    ret.m_purchaseNum = info[@"purchasenum"];
     ret.m_storePosition = info[@"position"];
     return ret;
 }

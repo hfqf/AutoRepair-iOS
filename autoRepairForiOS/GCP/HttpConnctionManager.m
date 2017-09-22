@@ -1364,15 +1364,33 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
             successedBlock:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed
 {
+    NSInteger systemPrice = (newGoods.m_num.floatValue*newGoods.m_systemPrice.floatValue+newGoods.m_purchaseNum.floatValue*newGoods.m_costprice.floatValue) /(newGoods.m_num.floatValue+newGoods.m_purchaseNum.floatValue);//系统价格，历次购买的平均价
     [self startNormalPostWith:@"/warehousegoods/savebuyed"
                      paragram:@{
                                 @"position":[newGoods.m_storePosition stringWithFilted:@"_id"],
-                                @"num":newGoods.m_num,
+                                @"num":[NSString stringWithFormat:@"%lu", newGoods.m_purchaseNum.integerValue+newGoods.m_num.integerValue],//最新的存库数量
+                                @"id":newGoods.m_id,
+                                @"purchasenum":@"0",
+                                @"systemprice":[NSString stringWithFormat:@"%lu",systemPrice]
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOneGoodsPurchaseInfoWith:(WareHouseGoods *)newGoods
+               successedBlock:(SuccessedBlock)success
+                  failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/updatepurchase"
+                     paragram:@{
+                                @"costprice":newGoods.m_costprice,
+                                @"purchasenum":newGoods.m_purchaseNum,
                                 @"id":newGoods.m_id,
                                 }
                successedBlock:success
                   failedBolck:failed];
 }
+
 
 
 
@@ -1440,8 +1458,10 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                failedBolck:(FailedBlock)failed
 {
     NSMutableArray *arrGoods = [NSMutableArray array];
+    NSString *goodsid = nil;
     for(WareHouseGoods *good in purchase.m_arrGoods){
         [arrGoods addObject:good.m_id];
+        goodsid = good.m_id;
     }
     [self startNormalPostWith:@"/warehousegoodspurchase/add"
                      paragram:@{
@@ -1453,11 +1473,44 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                 @"expresscost":safeStringWith(purchase.m_expressCost),
                                 @"supplier":purchase.m_supplier[@"_id"],
                                 @"goods":arrGoods,
+                                @"goodsid":goodsid,
                                 @"remark":safeStringWith(purchase.m_remark),
                                 @"owner":[LoginUserUtil userTel],
                                 @"buyer":[LoginUserUtil userId],
                                 @"num":safeStringWith(purchase.m_num),
                                 @"price":safeStringWith(purchase.m_price),
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateOnePurchaseWith:(WarehousePurchaseInfo *)purchase
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed
+{
+    NSMutableArray *arrGoods = [NSMutableArray array];
+    NSString *goodsid = nil;
+    for(WareHouseGoods *good in purchase.m_arrGoods){
+        [arrGoods addObject:good.m_id];
+        goodsid = good.m_id;
+    }
+    [self startNormalPostWith:@"/warehousegoodspurchase/update"
+                     paragram:@{
+                                @"state":safeStringWith(purchase.m_state),
+                                @"paytype":safeStringWith(purchase.m_payType),
+                                @"expresscostpaytype":safeStringWith(purchase.m_expressPayType),
+                                @"expresscompany":safeStringWith(purchase.m_expressCompany),
+                                @"expressserialid":safeStringWith(purchase.m_expressSerialId),
+                                @"expresscost":safeStringWith(purchase.m_expressCost),
+                                @"supplier":purchase.m_supplier[@"_id"],
+                                @"goods":arrGoods,
+                                @"goodsid":goodsid,
+                                @"remark":safeStringWith(purchase.m_remark),
+                                @"owner":[LoginUserUtil userTel],
+                                @"buyer":[LoginUserUtil userId],
+                                @"num":safeStringWith(purchase.m_num),
+                                @"price":safeStringWith(purchase.m_price),
+                                @"id":safeStringWith(purchase.m_id),
                                 }
                successedBlock:success
                   failedBolck:failed];
@@ -1470,6 +1523,19 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
     [self startNormalPostWith:@"/warehousegoodspurchase/query"
                      paragram:@{
                                 @"state":state,
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)queryOnePurchaseGoodsInfo:(NSString *)goodsId
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodspurchase/queryone"
+                     paragram:@{
+                                @"goodsid":goodsId,
                                 @"owner":[LoginUserUtil userTel],
                                 }
                successedBlock:success

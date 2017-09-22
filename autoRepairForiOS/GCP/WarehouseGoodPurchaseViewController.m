@@ -18,13 +18,9 @@
 @end
 
 @implementation WarehouseGoodPurchaseViewController
-- (id)initWith:(WareHouseGoods *)goods
+- (id)initWith:(WarehousePurchaseInfo *)puchase
 {
-    NSMutableArray *arr = [NSMutableArray array];
-    [arr addObject:goods];
-
-    self.m_purchaseInfo = [[WarehousePurchaseInfo alloc]init];
-    self.m_purchaseInfo.m_arrGoods = arr;
+    self.m_purchaseInfo = puchase;
 
     self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:NO];
     if (self)
@@ -40,7 +36,9 @@
 
 - (void)requestData:(BOOL)isRefresh
 {
+
     [self reloadDeals];
+
 }
 
 - (void)viewDidLoad {
@@ -57,7 +55,7 @@
 
 - (void)addBtnClicked
 {
-    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"添加商品",@"确认采购", nil];
+    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"确认采购", nil];
     [act showInView:self.view];
 }
 
@@ -143,7 +141,7 @@
         [numLab setTextAlignment:NSTextAlignmentRight];
         [numLab setTextColor:UIColorFromRGB(0x878c8b)];
         [numLab setFont:[UIFont systemFontOfSize:14]];
-        [numLab setText:[NSString stringWithFormat:@"x%@",good.m_num]];
+        [numLab setText:[NSString stringWithFormat:@"x%@",good.m_purchaseNum.length == 0 ? @"0" : good.m_purchaseNum ]];
         [cell addSubview:numLab];
 
 
@@ -167,7 +165,7 @@
         [totalLab setTextAlignment:NSTextAlignmentRight];
         [totalLab setTextColor:UIColorFromRGB(0x878c8b)];
         [totalLab setFont:[UIFont systemFontOfSize:14]];
-        [totalLab setText:[NSString stringWithFormat:@"合计 %d",[good.m_costprice intValue]*[good.m_num intValue]]];
+        [totalLab setText:[NSString stringWithFormat:@"合计 %d",[good.m_costprice intValue]*[good.m_purchaseNum intValue]]];
         [cell addSubview:totalLab];
 
         UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, HIGH_CELL-0.5, MAIN_WIDTH, 0.5)];
@@ -201,7 +199,7 @@
             [edit setText:self.m_purchaseInfo.m_expressSerialId];
         }else if (indexPath.row == 3){
             [_tit setText:@"备注"];
-            [edit setText:self.m_goodsInfo.m_remark];
+            [edit setText:self.m_purchaseInfo.m_remark];
         }
 
         edit.delegate = self;
@@ -236,25 +234,32 @@
 #pragma mark - WarehousePurchaseEditViewDelegate
 - (void)onEditCompleted:(WareHouseGoods *)newGoods
 {
+    self.m_purchaseInfo.m_num = newGoods.m_purchaseNum;
+    self.m_purchaseInfo.m_price = newGoods.m_costprice;
     [self reloadDeals];
+
 }
 
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == 0){//添加商品
-        NSMutableArray *arr = [NSMutableArray array];
-        for(WareHouseGoods *good in self.m_purchaseInfo.m_arrGoods){
-            [arr addObject:good];
-        }
-        WarehouseGoodsInSubTypeListViewController *add = [[WarehouseGoodsInSubTypeListViewController alloc]initWithSelectDelegate:self  withSelectedGoods:arr];
-        [self.navigationController pushViewController:add animated:YES];
-    }else if (buttonIndex == 1){//采购
-        [self commit];
-    }else{
 
+    if(buttonIndex == 0){
+        [self commit];
     }
+//    if(buttonIndex == 0){//添加商品
+//        NSMutableArray *arr = [NSMutableArray array];
+//        for(WareHouseGoods *good in self.m_purchaseInfo.m_arrGoods){
+//            [arr addObject:good];
+//        }
+//        WarehouseGoodsInSubTypeListViewController *add = [[WarehouseGoodsInSubTypeListViewController alloc]initWithSelectDelegate:self  withSelectedGoods:arr];
+//        [self.navigationController pushViewController:add animated:YES];
+//    }else if (buttonIndex == 1){//采购
+//        [self commit];
+//    }else{
+//
+//    }
 }
 
 #pragma mark - WarehouseGoodsInSubTypeListViewControllerDelegate
@@ -344,19 +349,62 @@
         [PubllicMaskViewHelper showTipViewWith:@"供应商不能为空" inSuperView:self.view  withDuration:1];
         return;
     }
+    [self showWaitingView];
     self.m_purchaseInfo.m_state = @"1";
-       [HTTP_MANAGER addNewPurchaseWith:self.m_purchaseInfo
-                         successedBlock:^(NSDictionary *succeedResult) {
+    if(self.m_purchaseInfo.m_isCreated){
+        [HTTP_MANAGER updateOnePurchaseWith:self.m_purchaseInfo
+                          successedBlock:^(NSDictionary *succeedResult) {
+                              [self removeWaitingView];
+                              if([succeedResult[@"code"]integerValue] == 1){
+                                  [self updateGoodsInfo];
+                              }else{
+                                  [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                              }
+                          } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                              [self removeWaitingView];
+                              [PubllicMaskViewHelper showTipViewWith:error.localizedFailureReason inSuperView:self.view withDuration:1];
+                          }];
+    }else{
+        [HTTP_MANAGER addNewPurchaseWith:self.m_purchaseInfo
+                          successedBlock:^(NSDictionary *succeedResult) {
+                              [self removeWaitingView];
+                              if([succeedResult[@"code"]integerValue] == 1){
+                                  [self updateGoodsInfo];
+                              }else{
+                                  [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                              }
+                          } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                              [self removeWaitingView];
+                              [PubllicMaskViewHelper showTipViewWith:error.localizedFailureReason inSuperView:self.view withDuration:1];
+                          }];
+    }
 
 
+}
 
+- (void)updateGoodsInfo
+{
+    [HTTP_MANAGER updateOneGoodsPurchaseInfoWith:[self.m_purchaseInfo.m_arrGoods firstObject] successedBlock:^(NSDictionary *succeedResult) {
 
-       } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+        NSArray *arr = self.navigationController.viewControllers;
+        for(UIViewController *vc in arr){
+            if([vc isKindOfClass:NSClassFromString(@"WarehouseGoodsInSubTypeListViewController")]){
+                [self.navigationController popToViewController:vc animated:YES];
+                return ;
+            }
+        }
 
-           
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
 
+        NSArray *arr = self.navigationController.viewControllers;
+        for(UIViewController *vc in arr){
+            if([vc isKindOfClass:NSClassFromString(@"WarehouseGoodsInSubTypeListViewController")]){
+                [self.navigationController popToViewController:vc animated:YES];
+                return ;
+            }
+        }
 
-       }];
+    }];
 
 }
 @end

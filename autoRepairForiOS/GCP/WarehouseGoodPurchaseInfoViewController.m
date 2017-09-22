@@ -128,14 +128,14 @@
         [buyerLab setTextAlignment:NSTextAlignmentLeft];
         [buyerLab setTextColor:KEY_COMMON_GRAY_CORLOR];
         [buyerLab setFont:[UIFont systemFontOfSize:14]];
-        [buyerLab setText:[NSString stringWithFormat:@"采购员:%@",self.m_purchaseInfo.m_buyer[@"name"]]];
+        [buyerLab setText:[NSString stringWithFormat:@"采购员:%@",self.m_purchaseInfo.m_buyer[@"username"]]];
         [cell addSubview:buyerLab];
 
-        UILabel *timeLab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH-200,48, 190, 18)];
+        UILabel *timeLab = [[UILabel alloc]initWithFrame:CGRectMake(150,48,MAIN_WIDTH-160, 18)];
         [timeLab setTextAlignment:NSTextAlignmentRight];
         [timeLab setTextColor:KEY_COMMON_GRAY_CORLOR];
         [timeLab setFont:[UIFont systemFontOfSize:14]];
-        [timeLab setText:[NSString stringWithFormat:@"采购时间:%@",[self.m_purchaseInfo.m_time substringToIndex:10]]];
+        [timeLab setText:[NSString stringWithFormat:@"采购时间:%@",self.m_purchaseInfo.m_time]];
         [cell addSubview:timeLab];
 
     }else if(indexPath.section == 1){
@@ -173,7 +173,7 @@
         [numLab setTextAlignment:NSTextAlignmentRight];
         [numLab setTextColor:UIColorFromRGB(0x878c8b)];
         [numLab setFont:[UIFont systemFontOfSize:14]];
-        [numLab setText:[NSString stringWithFormat:@"x%@",good.m_num]];
+        [numLab setText:[NSString stringWithFormat:@"x%@",good.m_purchaseNum]];
         [cell addSubview:numLab];
 
 //
@@ -197,7 +197,7 @@
         [totalLab setTextAlignment:NSTextAlignmentRight];
         [totalLab setTextColor:UIColorFromRGB(0x878c8b)];
         [totalLab setFont:[UIFont systemFontOfSize:14]];
-        [totalLab setText:[NSString stringWithFormat:@"合计 %d",[good.m_costprice intValue]*[good.m_num intValue]]];
+        [totalLab setText:[NSString stringWithFormat:@"合计 %d",[good.m_costprice intValue]*[good.m_purchaseNum intValue]]];
         [cell addSubview:totalLab];
 
         UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, HIGH_CELL-0.5, MAIN_WIDTH, 0.5)];
