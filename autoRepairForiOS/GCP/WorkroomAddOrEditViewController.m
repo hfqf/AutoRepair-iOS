@@ -13,8 +13,10 @@
 #define HIGH_BOTTOM        90
 
 #import "WorkroomAddOrEditViewController.h"
-
-@interface WorkroomAddOrEditViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate,UITextViewDelegate,UIScrollViewDelegate>
+#import "WarehouseSelectGoodsToRepairViewController.h"
+#import "ServiceManagerViewController.h"
+#import "SBJson4.h"
+@interface WorkroomAddOrEditViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate,UITextViewDelegate,UIScrollViewDelegate,WarehouseSelectGoodsToRepairViewControllerDelegate,WarehouseGoodsSettingViewControllerDelegate>
 {
     UIView *m_tipView;
     
@@ -279,13 +281,68 @@
         [PubllicMaskViewHelper showTipViewWith:@"提醒周期必须大于0" inSuperView:self.view withDuration:1];
         return;
     }
-    
-    
-    [self updateRepair];
+
+    [self addNewItesms];
 }
 
+
+- (void)addNewItesms
+{
+
+    [self showWaitingView];
+    [HTTP_MANAGER deleteRepairItems:self.m_rep.m_contactid
+                     successedBlock:^(NSDictionary *succeedResult) {
+
+                         NSMutableArray *arr = [NSMutableArray array];
+                         for(ADTRepairItemInfo *itemInfo in self.m_rep.m_arrRepairItem){
+                             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                             [dic setObject:itemInfo.m_repid == nil ? @"" : itemInfo.m_repid forKey:@"repid"];
+                             [dic setObject:itemInfo.m_contactid == nil ? @"" :itemInfo.m_contactid forKey:@"contactid"];
+                             [dic setObject:itemInfo.m_type forKey:@"name"];
+                             [dic setObject:itemInfo.m_price forKey:@"price"];
+                             [dic setObject:itemInfo.m_num forKey:@"num"];
+                             [dic setObject:itemInfo.m_type forKey:@"type"];
+                             [dic setObject:itemInfo.m_itemType == nil ? @"0" : itemInfo.m_itemType forKey:@"itemtype"];
+                             [dic setObject:itemInfo.m_goodsId == nil ? @"" :itemInfo.m_goodsId forKey:@"goods"];
+                             [dic setObject:itemInfo.m_serviceId == nil ? @"" :itemInfo.m_serviceId forKey:@"service"];
+                             [arr addObject:dic];
+                         }
+
+                         [HTTP_MANAGER addRepairItems:arr
+                                       successedBlock:^(NSDictionary *succeedResult) {
+                                           [self removeWaitingView];
+                                           if([succeedResult[@"code"]integerValue] == 1){
+
+                                               NSArray *arrRet =succeedResult[@"ret"];
+                                               for(NSDictionary *cell in arrRet){
+                                                   for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+                                                       if([item.m_goodsId isEqualToString:cell[@"goods"]] || [item.m_serviceId isEqualToString:cell[@"service"]]){
+                                                           item.m_id = cell[@"_id"];
+                                                       }
+                                                   }
+                                               }
+
+                                               [self updateRepair];
+
+                                           }else{
+                                               [PubllicMaskViewHelper showTipViewWith:@"保存编辑失败" inSuperView:self.view withDuration:1];
+                                           }
+
+                                       } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                           [self removeWaitingView];
+                                           [PubllicMaskViewHelper showTipViewWith:@"保存编辑失败" inSuperView:self.view withDuration:1];
+                                       }];
+
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+    }];
+
+
+
+}
 - (void)updateRepair
 {
+
     NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
     [df1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
@@ -568,7 +625,7 @@
             //        addItemBtn.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
             //        addItemBtn.layer.borderWidth = 0.2;
             [vi addSubview:addItemBtn];
-            [addItemBtn addTarget:self action:@selector(addItemBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+            [addItemBtn addTarget:self action:@selector(addGoodsItemBtnClicked) forControlEvents:UIControlEventTouchUpInside];
 
             UIButton *addServiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [addServiceBtn setFrame:CGRectMake(10+MAIN_WIDTH/2,10, MAIN_WIDTH/2-20, 30)];
@@ -580,7 +637,7 @@
             //        addItemBtn.layer.borderColor = PUBLIC_BACKGROUND_COLOR.CGColor;
             //        addItemBtn.layer.borderWidth = 0.2;
             [vi addSubview:addServiceBtn];
-            [addServiceBtn addTarget:self action:@selector(addItemBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+            [addServiceBtn addTarget:self action:@selector(addServicesItemBtnClicked) forControlEvents:UIControlEventTouchUpInside];
             
             UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0,INPUT_ITEM_HIGH-0.5, MAIN_WIDTH, 0.5)];
             [sep setBackgroundColor:UIColorFromRGB(0xf5f5f5)];
@@ -745,7 +802,7 @@
         
         UILabel *repairType = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, MAIN_WIDTH-35, 20)];
         [repairType setTextAlignment:NSTextAlignmentLeft];
-        [repairType setText:[NSString stringWithFormat:@"%@",item.m_type]];
+        [repairType setText:[NSString stringWithFormat:@"%@(%@)",item.m_type,item.m_itemType.integerValue == 0 ? @"维修" : @"保养"]];
         [repairType setTextColor:KEY_COMMON_GRAY_CORLOR];
         [cell addSubview:repairType];
         
@@ -842,6 +899,7 @@
     
 }
 
+
 - (void)addItemBtnClicked
 {
     if(m_payDesc.text.length == 0)
@@ -867,6 +925,7 @@
     item.m_price = m_payPrice.text;
     item.m_num = m_payNum.text;
     item.m_type = m_payDesc.text;
+    item.m_itemType = @"0";
     item.m_currentPrice =  [item.m_price integerValue]* [item.m_num integerValue];
     [m_payNum resignFirstResponder];
     
@@ -1028,25 +1087,31 @@
 
 - (void)delItem
 {
-    [self showWaitingView];
-    [HTTP_MANAGER deleteRepairItem:self.m_delItem
-                    successedBlock:^(NSDictionary *succeedResult) {
-                        [self removeWaitingView];
-                        if([succeedResult[@"code"]integerValue] == 1){
-                            [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
-                            [PubllicMaskViewHelper showTipViewWith:@"删除成功" inSuperView:self.view withDuration:1];
-                            [self.m_rep.m_arrRepairItem removeObject:self.m_delItem];
-                            [self requestData:YES];
-                        }else{
+
+    if(self.m_delItem.m_id == nil){
+        [self.m_rep.m_arrRepairItem removeObject:self.m_delItem];
+        [self requestData:YES];
+    }else{
+        [HTTP_MANAGER deleteRepairItem:self.m_delItem
+                        successedBlock:^(NSDictionary *succeedResult) {
+                            [self removeWaitingView];
+                            if([succeedResult[@"code"]integerValue] == 1){
+                                [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
+                                [PubllicMaskViewHelper showTipViewWith:@"删除成功" inSuperView:self.view withDuration:1];
+                                [self.m_rep.m_arrRepairItem removeObject:self.m_delItem];
+                                [self requestData:YES];
+                            }else{
+                                [self removeWaitingView];
+                                [PubllicMaskViewHelper showTipViewWith:@"删除失败" inSuperView:self.view withDuration:1];
+                            }
+
+                        } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                             [self removeWaitingView];
                             [PubllicMaskViewHelper showTipViewWith:@"删除失败" inSuperView:self.view withDuration:1];
-                        }
-                        
-                    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                        [self removeWaitingView];
-                        [PubllicMaskViewHelper showTipViewWith:@"删除失败" inSuperView:self.view withDuration:1];
-                    }];
-    
+                        }];
+    }
+
+
 }
 
 #pragma mark - UITextFieldDelegate
@@ -1176,5 +1241,95 @@
     [m_currentTextView resignFirstResponder];
     [m_currentTextFiled resignFirstResponder];
 }
+
+#pragma mark - 添加服务或维修项目
+
+- (void)addGoodsItemBtnClicked
+{
+    NSMutableDictionary *selectedNum = [NSMutableDictionary dictionary];
+    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+        if(item.m_itemType.integerValue == 0 && item.m_num.integerValue >0){
+            [selectedNum setObject:item.m_num forKey:[NSString stringWithFormat:@"0_%@",item.m_type]];
+        }
+    }
+    WarehouseSelectGoodsToRepairViewController * select = [[WarehouseSelectGoodsToRepairViewController alloc]initWithSelected:selectedNum];
+    select.m_selectDelegate = self;
+    [self.navigationController pushViewController:select animated:YES];
+}
+
+- (void)addServicesItemBtnClicked
+{
+    NSMutableDictionary *selectedNum = [NSMutableDictionary dictionary];
+    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+        if(item.m_itemType.integerValue == 1 && item.m_num.integerValue >0){
+            [selectedNum setObject:item.m_num forKey:[NSString stringWithFormat:@"1_%@",item.m_type]];
+        }
+    }
+    ServiceManagerViewController *select = [[ServiceManagerViewController alloc]initForSelectType:selectedNum];
+    select.m_selectDelegate = self;
+    [self.navigationController pushViewController:select animated:YES];
+}
+
+#pragma mark - WarehouseSelectGoodsToRepairViewControllerDelegate
+- (void)onWarehouseSelectGoodsToRepairViewControllerSelected:(NSArray *)arrGoods
+{
+    NSMutableArray *arr= [NSMutableArray array];
+    for(WareHouseGoods *good in arrGoods){
+        if(good.m_selectedNum.integerValue > 0){
+            ADTRepairItemInfo *item = [[ADTRepairItemInfo alloc]init];
+            item.m_repid = self.m_rep.m_idFromNode;
+            item.m_contactid = self.m_rep.m_contactid;
+            item.m_price = good.m_costprice;
+            item.m_num = good.m_selectedNum;
+            item.m_type = good.m_name;
+            item.m_itemType = @"0";
+            item.m_goodsId = good.m_id;
+            item.m_currentPrice =  [item.m_price integerValue]* [item.m_num integerValue];
+            [arr addObject:item];
+        }
+    }
+
+    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+        if(item.m_itemType.integerValue == 1){
+            [arr addObject:item];
+        }
+    }
+
+    self.m_rep.m_arrRepairItem = arr;
+    [self  requestData:YES];
+}
+
+#pragma mark - WarehouseGoodsSettingViewControllerDelegate
+- (void)onSelectedServices:(NSArray *)arrServices
+{
+    NSMutableArray *arr= [NSMutableArray array];
+    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+        if(item.m_itemType.integerValue == 0){
+            [arr addObject:item];
+        }
+    }
+
+    for(WarehouseTopTypeInfo *top in arrServices){
+        for(WarehouseSubTypeInfo *sub in top.m_arrTypes){
+            if(sub.m_selectedNum.integerValue > 0){
+                ADTRepairItemInfo *item = [[ADTRepairItemInfo alloc]init];
+                item.m_repid = self.m_rep.m_idFromNode;
+                item.m_contactid = self.m_rep.m_contactid;
+                item.m_price = sub.m_price;
+                item.m_num = sub.m_selectedNum;
+                item.m_type = sub.m_name;
+                item.m_itemType = @"1";
+                item.m_serviceId = sub.m_id;
+                item.m_currentPrice =  [item.m_price integerValue]* [item.m_num integerValue];
+                [arr addObject:item];
+            }
+        }
+    }
+
+    self.m_rep.m_arrRepairItem = arr;
+    [self  requestData:YES];
+
+}
+
 
 @end

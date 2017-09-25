@@ -7,7 +7,8 @@
 //
 
 #import "SpeRefreshAndLoadViewController.h"
-
+#import "WarehouseGoodsSettingViewController.h"
 @interface WarehouseWillPurchaseViewController : SpeRefreshAndLoadViewController
+@property(assign)BOOL m_isSelect;
 
 @end

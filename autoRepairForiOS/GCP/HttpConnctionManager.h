@@ -210,7 +210,9 @@ typedef void (^FailBlock)(NSError *error);
         successedBlock:(SuccessedBlock)success
            failedBolck:(FailedBlock)failed;
 
-
+- (void)addRepairItems:(NSArray *)arrItems
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed;
 #pragma mark - 3.2
 - (void)getAllRepairsWithState:(NSString *)state
                       withPage:(NSInteger )page
@@ -426,11 +428,18 @@ typedef void (^FailBlock)(NSError *error);
                         successedBlock:(SuccessedBlock)success
                            failedBolck:(FailedBlock)failed;
 
+- (void)updateOneGoodsForRejectWith:(WareHouseGoods *)newGoods
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
+
 - (void)delOneGoodsWith:(NSString *)_id
          successedBlock:(SuccessedBlock)success
             failedBolck:(FailedBlock)failed;
 
 #pragma mark - 库存总览
+
+- (void)getAllWarmingGoodsStoreList:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
 
 - (void)getAllGoodsStoreList:(SuccessedBlock)success
                  failedBolck:(FailedBlock)failed;
@@ -458,6 +467,9 @@ typedef void (^FailBlock)(NSError *error);
 - (void)queryPurchaseGoods:(NSString *)state
             successedBlock:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed;
+
+- (void)queryAllPurchaseGoods:(SuccessedBlock)success
+                  failedBolck:(FailedBlock)failed;
 
 - (void)queryOnePurchaseGoodsInfo:(NSString *)goodsId
                    successedBlock:(SuccessedBlock)success

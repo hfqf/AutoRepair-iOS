@@ -43,7 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [title setText:@"其它采购"];
+    [title setText:@"采购"];
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -388,21 +388,23 @@
 
         NSArray *arr = self.navigationController.viewControllers;
         for(UIViewController *vc in arr){
-            if([vc isKindOfClass:NSClassFromString(@"WarehouseGoodsInSubTypeListViewController")]){
+            if([vc isKindOfClass:NSClassFromString(@"WarehouseGoodsStoreTotalPreviewViewController")]){
                 [self.navigationController popToViewController:vc animated:YES];
                 return ;
             }
         }
+        [self backBtnClicked];
 
     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
 
         NSArray *arr = self.navigationController.viewControllers;
         for(UIViewController *vc in arr){
-            if([vc isKindOfClass:NSClassFromString(@"WarehouseGoodsInSubTypeListViewController")]){
+            if([vc isKindOfClass:NSClassFromString(@"WarehouseGoodsStoreTotalPreviewViewController")]){
                 [self.navigationController popToViewController:vc animated:YES];
                 return ;
             }
         }
+        [self backBtnClicked];
 
     }];
 

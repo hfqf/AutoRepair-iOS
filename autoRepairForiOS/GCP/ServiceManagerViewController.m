@@ -9,22 +9,43 @@
 #import "ServiceManagerViewController.h"
 #import "ServiceManaagerSubTypeListViewController.h"
 #import "ServiceManaagerSubTypeAddViewController.h"
-@interface ServiceManagerViewController ()<UIActionSheetDelegate>
-
+#import "ServiceManagerTableViewCell.h"
+@interface ServiceManagerViewController ()<UIActionSheetDelegate,ServiceManagerTableViewCellDelegate>
+@property(nonatomic,copy)NSMutableDictionary *m_selectedDic;
 @end
 
 @implementation ServiceManagerViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [title setText:@"服务管理"];
+- (id)initForSelectType:(NSMutableDictionary *)selectedDic
+{
+    self.m_selectedDic = selectedDic;
+    self.m_isSelect = YES;
+    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
+    {
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    }
+    return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [title setText:self.m_isSelect ? @"选择服务" : @"服务管理"];
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-40, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
+    [addBtn setTitle:@"确认" forState:UIControlStateNormal];
+    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+    [navigationBG addSubview:addBtn];
+}
 
 - (void)addBtnClicked
 {
-    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增分类", nil];
-    [act showInView:self.view];
+    if(self.m_selectDelegate && [self.m_selectDelegate respondsToSelector:@selector(onSelectedServices:)]){
+        [self.m_selectDelegate onSelectedServices:self.m_arrData];
+    }
+    [self backBtnClicked];
 }
 
 
@@ -47,6 +68,25 @@
                 WarehouseTopTypeInfo *info = [[WarehouseTopTypeInfo alloc]init];
                 info.m_info = _info;
                 info.m_isOpen = YES;
+                NSArray *arrSub = _info[@"subtype"];
+
+                NSMutableArray *arrTypes = [NSMutableArray array];
+                for(NSDictionary *_sub in arrSub){
+                    WarehouseSubTypeInfo *subInfo = [[WarehouseSubTypeInfo alloc]init];
+                    subInfo.m_isForSelect = self.m_selectDelegate != nil;
+                    subInfo.m_price = _sub[@"price"];
+                    subInfo.m_id = _sub[@"_id"];
+                    subInfo.m_name = _sub[@"name"];
+                    subInfo.m_topicId = _sub[@"toptypeid"];
+                    NSString *num =self.m_selectedDic[[NSString stringWithFormat:@"1_%@",subInfo.m_name]];
+                    if(num.integerValue > 0){
+                        subInfo.m_selectedNum = num;
+                    }else{
+                        subInfo.m_selectedNum = @"0";
+                    }
+                    [arrTypes addObject:subInfo];
+                }
+                info.m_arrTypes = arrTypes;
                 [arrRet addObject:info];
             }
             self.m_arrData = arrRet;
@@ -88,18 +128,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WarehouseTopTypeInfo *info = [self.m_arrData objectAtIndex:indexPath.section];
-    NSArray *arr = info.m_info[@"subtype"];
-
-    NSDictionary *_info = [arr objectAtIndex:indexPath.row];
-    if(self.m_isSelect){
-        [self.m_selectDelegate onSelectGoodsType:_info];
-        [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        ServiceManaagerSubTypeAddViewController *list = [[ServiceManaagerSubTypeAddViewController alloc]initWithServiceInfo:_info];
-        [self.navigationController pushViewController:list animated:YES];
-    }
+//    WarehouseTopTypeInfo *info = [self.m_arrData objectAtIndex:indexPath.section];
+//    NSArray *arr = info.m_info[@"subtype"];
+//
+//    NSDictionary *_info = [arr objectAtIndex:indexPath.row];
+//    if(self.m_isSelect){
+//        [self.m_selectDelegate onSelectGoodsType:_info];
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }else{
+//        ServiceManaagerSubTypeAddViewController *list = [[ServiceManaagerSubTypeAddViewController alloc]initWithServiceInfo:_info];
+//        [self.navigationController pushViewController:list animated:YES];
+//    }
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * identify = @"spe";
+    ServiceManagerTableViewCell *cell = [[ServiceManagerTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identify];
+    cell.m_delegate = self;
+    WarehouseTopTypeInfo *info = [self.m_arrData objectAtIndex:indexPath.section];
+    WarehouseSubTypeInfo *sub = info.m_arrTypes[indexPath.row];
+    cell.subType = sub;
+    return cell;
+}
+
 
 - (void)sectionHeaderBtn:(UIButton *)btn
 {
@@ -124,4 +176,8 @@
     }
 }
 
+- (void)onReload
+{
+    [self reloadDeals];
+}
 @end

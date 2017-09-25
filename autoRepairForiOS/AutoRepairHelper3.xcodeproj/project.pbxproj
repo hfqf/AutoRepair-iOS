@@ -55,6 +55,32 @@
 		7D1D77DB1F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77D91F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m */; };
 		7D1D77DE1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77DD1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m */; };
 		7D1D77DF1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77DD1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m */; };
+		7D2044B41F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044B31F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.m */; };
+		7D2044B51F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044B31F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.m */; };
+		7D2044B81F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044B71F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.m */; };
+		7D2044B91F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044B71F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.m */; };
+		7D2044BC1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044BB1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.m */; };
+		7D2044BD1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044BB1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.m */; };
+		7D2044C01F77FF500061D6AD /* ServiceManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044BF1F77FF500061D6AD /* ServiceManagerTableViewCell.m */; };
+		7D2044C11F77FF500061D6AD /* ServiceManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044BF1F77FF500061D6AD /* ServiceManagerTableViewCell.m */; };
+		7D2044D21F789D0D0061D6AD /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044C81F789C6B0061D6AD /* SBJson4Parser.m */; };
+		7D2044D31F789D0E0061D6AD /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044C81F789C6B0061D6AD /* SBJson4Parser.m */; };
+		7D2044D41F789D110061D6AD /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044C41F789C690061D6AD /* SBJson4StreamParser.m */; };
+		7D2044D51F789D110061D6AD /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044C41F789C690061D6AD /* SBJson4StreamParser.m */; };
+		7D2044D61F789D150061D6AD /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044D01F789C6D0061D6AD /* SBJson4StreamParserState.m */; };
+		7D2044D71F789D150061D6AD /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044D01F789C6D0061D6AD /* SBJson4StreamParserState.m */; };
+		7D2044D81F789D170061D6AD /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044CA1F789C6B0061D6AD /* SBJson4StreamTokeniser.m */; };
+		7D2044D91F789D180061D6AD /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044CA1F789C6B0061D6AD /* SBJson4StreamTokeniser.m */; };
+		7D2044DA1F789D1A0061D6AD /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044CF1F789C6D0061D6AD /* SBJson4StreamWriter.m */; };
+		7D2044DB1F789D1A0061D6AD /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044CF1F789C6D0061D6AD /* SBJson4StreamWriter.m */; };
+		7D2044DC1F789D1D0061D6AD /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044C51F789C690061D6AD /* SBJson4StreamWriterState.m */; };
+		7D2044DD1F789D1D0061D6AD /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044C51F789C690061D6AD /* SBJson4StreamWriterState.m */; };
+		7D2044DE1F789D210061D6AD /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044CC1F789C6B0061D6AD /* SBJson4Writer.m */; };
+		7D2044DF1F789D210061D6AD /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044CC1F789C6B0061D6AD /* SBJson4Writer.m */; };
+		7D2045F41F78C6C90061D6AD /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2045F31F78C6C10061D6AD /* AipOcrSdk.framework */; };
+		7D2045F51F78C6C90061D6AD /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2045F31F78C6C10061D6AD /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7D2045F61F78C6F90061D6AD /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2045F31F78C6C10061D6AD /* AipOcrSdk.framework */; };
+		7D2045F71F78C6F90061D6AD /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2045F31F78C6C10061D6AD /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D4173451F2E18BC00233B9B /* AipBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; };
 		7D4173461F2E18BC00233B9B /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D4173471F2E18BC00233B9B /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173441F2E18BC00233B9B /* IdcardQuality.framework */; };
@@ -446,12 +472,6 @@
 		7D5C33101F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C330E1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m */; };
 		7D5C33131F65864100C2E69C /* WarehouseSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33121F65864100C2E69C /* WarehouseSaveToStoreViewController.m */; };
 		7D5C33141F65864100C2E69C /* WarehouseSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33121F65864100C2E69C /* WarehouseSaveToStoreViewController.m */; };
-		7D5CAE921F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
-		7D5CAE931F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
-		7D5CAE941F4FAECE00805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
-		7D5CAE951F4FAECE00805591 /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7D5CAE961F4FAF1E00805591 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; };
-		7D5CAE971F4FAF1E00805591 /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D62E6DF1F3E9691005C6155 /* SpeWebviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D62E6DD1F3E9691005C6155 /* SpeWebviewViewController.m */; };
 		7D62E6E01F3E9691005C6155 /* SpeWebviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D62E6DD1F3E9691005C6155 /* SpeWebviewViewController.m */; };
 		7D64B41A1F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4191F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m */; };
@@ -490,7 +510,7 @@
 			files = (
 				7D4173461F2E18BC00233B9B /* AipBase.framework in Embed Frameworks */,
 				7D4173481F2E18BC00233B9B /* IdcardQuality.framework in Embed Frameworks */,
-				7D5CAE951F4FAECE00805591 /* AipOcrSdk.framework in Embed Frameworks */,
+				7D2045F71F78C6F90061D6AD /* AipOcrSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,7 +523,7 @@
 			files = (
 				7D4174131F2E26E900233B9B /* AipBase.framework in Embed Frameworks */,
 				7D4174141F2E26E900233B9B /* IdcardQuality.framework in Embed Frameworks */,
-				7D5CAE971F4FAF1E00805591 /* AipOcrSdk.framework in Embed Frameworks */,
+				7D2045F51F78C6C90061D6AD /* AipOcrSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,6 +617,31 @@
 		7D1D77D91F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManaagerSubTypeListViewController.m; sourceTree = "<group>"; };
 		7D1D77DC1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManaagerSubTypeAddViewController.h; sourceTree = "<group>"; };
 		7D1D77DD1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManaagerSubTypeAddViewController.m; sourceTree = "<group>"; };
+		7D2044B21F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseSelectGoodsToRepairViewController.h; sourceTree = "<group>"; };
+		7D2044B31F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseSelectGoodsToRepairViewController.m; sourceTree = "<group>"; };
+		7D2044B61F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseRejectSaveToStoreViewController.h; sourceTree = "<group>"; };
+		7D2044B71F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseRejectSaveToStoreViewController.m; sourceTree = "<group>"; };
+		7D2044BA1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodsRejectViewController.h; sourceTree = "<group>"; };
+		7D2044BB1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsRejectViewController.m; sourceTree = "<group>"; };
+		7D2044BE1F77FF500061D6AD /* ServiceManagerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceManagerTableViewCell.h; sourceTree = "<group>"; };
+		7D2044BF1F77FF500061D6AD /* ServiceManagerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ServiceManagerTableViewCell.m; sourceTree = "<group>"; };
+		7D2044C31F789C690061D6AD /* SBJson4Parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson4Parser.h; sourceTree = "<group>"; };
+		7D2044C41F789C690061D6AD /* SBJson4StreamParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParser.m; sourceTree = "<group>"; };
+		7D2044C51F789C690061D6AD /* SBJson4StreamWriterState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriterState.m; sourceTree = "<group>"; };
+		7D2044C61F789C6A0061D6AD /* SBJson4StreamWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriter.h; sourceTree = "<group>"; };
+		7D2044C71F789C6A0061D6AD /* SBJson4StreamWriterState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriterState.h; sourceTree = "<group>"; };
+		7D2044C81F789C6B0061D6AD /* SBJson4Parser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBJson4Parser.m; sourceTree = "<group>"; };
+		7D2044C91F789C6B0061D6AD /* SBJson4Writer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
+		7D2044CA1F789C6B0061D6AD /* SBJson4StreamTokeniser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamTokeniser.m; sourceTree = "<group>"; };
+		7D2044CB1F789C6B0061D6AD /* SBJson4StreamTokeniser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamTokeniser.h; sourceTree = "<group>"; };
+		7D2044CC1F789C6B0061D6AD /* SBJson4Writer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBJson4Writer.m; sourceTree = "<group>"; };
+		7D2044CD1F789C6C0061D6AD /* SBJson4StreamParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParser.h; sourceTree = "<group>"; };
+		7D2044CE1F789C6C0061D6AD /* SBJson4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson4.h; sourceTree = "<group>"; };
+		7D2044CF1F789C6D0061D6AD /* SBJson4StreamWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriter.m; sourceTree = "<group>"; };
+		7D2044D01F789C6D0061D6AD /* SBJson4StreamParserState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParserState.m; sourceTree = "<group>"; };
+		7D2044D11F789C6E0061D6AD /* SBJson4StreamParserState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParserState.h; sourceTree = "<group>"; };
+		7D2045E11F78C2B80061D6AD /* AutoRepairHelper3_os copy 2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AutoRepairHelper3_os copy 2-Info.plist"; path = "/Users/points/Documents/GitHub/AutoRepair-iOS/autoRepairForiOS/AutoRepairHelper3_os copy 2-Info.plist"; sourceTree = "<absolute>"; };
+		7D2045F31F78C6C10061D6AD /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		7D2904FA1AF134FF00039CEF /* AddRepairHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRepairHistoryViewController.h; sourceTree = "<group>"; };
 		7D2904FB1AF134FF00039CEF /* AddRepairHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRepairHistoryViewController.m; sourceTree = "<group>"; };
 		7D37793F1E87903600560B70 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -832,7 +877,6 @@
 		7D5C330E1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodPurchaseInfoViewController.m; sourceTree = "<group>"; };
 		7D5C33111F65864100C2E69C /* WarehouseSaveToStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseSaveToStoreViewController.h; sourceTree = "<group>"; };
 		7D5C33121F65864100C2E69C /* WarehouseSaveToStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseSaveToStoreViewController.m; sourceTree = "<group>"; };
-		7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		7D5DDD981E30B9380065FAED /* NSArray+SortByFisrtChar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SortByFisrtChar.h"; sourceTree = "<group>"; };
 		7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SortByFisrtChar.m"; sourceTree = "<group>"; };
 		7D62E6DC1F3E9691005C6155 /* SpeWebviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeWebviewViewController.h; sourceTree = "<group>"; };
@@ -961,7 +1005,6 @@
 				7D4173D71F2E26E900233B9B /* MessageUI.framework in Frameworks */,
 				7D4173D81F2E26E900233B9B /* ShareSDKConnector.framework in Frameworks */,
 				7D4173D91F2E26E900233B9B /* QQConnector.framework in Frameworks */,
-				7D5CAE961F4FAF1E00805591 /* AipOcrSdk.framework in Frameworks */,
 				7D4173DA1F2E26E900233B9B /* SMS_SDK.framework in Frameworks */,
 				7D4173DB1F2E26E900233B9B /* CoreTelephony.framework in Frameworks */,
 				7D4173DC1F2E26E900233B9B /* CoreFoundation.framework in Frameworks */,
@@ -998,7 +1041,7 @@
 				7D4173FB1F2E26E900233B9B /* MOBFoundation.framework in Frameworks */,
 				7D4173FC1F2E26E900233B9B /* Foundation.framework in Frameworks */,
 				7D4173FD1F2E26E900233B9B /* MOBFoundationEx.framework in Frameworks */,
-				7D5CAE931F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */,
+				7D2045F41F78C6C90061D6AD /* AipOcrSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,7 +1060,6 @@
 				7D4CD9A21F235D37003619EB /* MessageUI.framework in Frameworks */,
 				7D4CD9A31F235D37003619EB /* ShareSDKConnector.framework in Frameworks */,
 				7D4CD9A41F235D37003619EB /* QQConnector.framework in Frameworks */,
-				7D5CAE941F4FAECE00805591 /* AipOcrSdk.framework in Frameworks */,
 				7D4CD9A51F235D37003619EB /* SMS_SDK.framework in Frameworks */,
 				7D4CD9A61F235D37003619EB /* CoreTelephony.framework in Frameworks */,
 				7D4CD9A81F235D37003619EB /* CoreFoundation.framework in Frameworks */,
@@ -1054,7 +1096,7 @@
 				7D4CD9C71F235D37003619EB /* MOBFoundation.framework in Frameworks */,
 				7D4CD9C81F235D37003619EB /* Foundation.framework in Frameworks */,
 				7D4CD9C91F235D37003619EB /* MOBFoundationEx.framework in Frameworks */,
-				7D5CAE921F4FAEB000805591 /* AipOcrSdk.framework in Frameworks */,
+				7D2045F61F78C6F90061D6AD /* AipOcrSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1101,6 +1143,8 @@
 			children = (
 				7D1D77C81F70B908001B0A7A /* ServiceManagerViewController.h */,
 				7D1D77C91F70B908001B0A7A /* ServiceManagerViewController.m */,
+				7D2044BE1F77FF500061D6AD /* ServiceManagerTableViewCell.h */,
+				7D2044BF1F77FF500061D6AD /* ServiceManagerTableViewCell.m */,
 				7D1D77CC1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.h */,
 				7D1D77CD1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m */,
 				7D1D77D41F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.h */,
@@ -1185,6 +1229,8 @@
 				7D5C330A1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m */,
 				7D5C33111F65864100C2E69C /* WarehouseSaveToStoreViewController.h */,
 				7D5C33121F65864100C2E69C /* WarehouseSaveToStoreViewController.m */,
+				7D2044B61F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.h */,
+				7D2044B71F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.m */,
 			);
 			name = "待入库";
 			sourceTree = "<group>";
@@ -1212,6 +1258,8 @@
 			children = (
 				7D64B4181F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.h */,
 				7D64B4191F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m */,
+				7D2044B21F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.h */,
+				7D2044B31F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.m */,
 			);
 			name = "库存总览";
 			sourceTree = "<group>";
@@ -1273,6 +1321,8 @@
 			children = (
 				7D64B4301F6F718F00709A6C /* WarehousePurchaseRejectedViewController.h */,
 				7D64B4311F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m */,
+				7D2044BA1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.h */,
+				7D2044BB1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.m */,
 			);
 			name = "采购退货";
 			sourceTree = "<group>";
@@ -1360,6 +1410,28 @@
 			path = Rigister;
 			sourceTree = "<group>";
 		};
+		7D2044C21F789C600061D6AD /* sbjson */ = {
+			isa = PBXGroup;
+			children = (
+				7D2044CE1F789C6C0061D6AD /* SBJson4.h */,
+				7D2044C31F789C690061D6AD /* SBJson4Parser.h */,
+				7D2044C81F789C6B0061D6AD /* SBJson4Parser.m */,
+				7D2044CD1F789C6C0061D6AD /* SBJson4StreamParser.h */,
+				7D2044C41F789C690061D6AD /* SBJson4StreamParser.m */,
+				7D2044D11F789C6E0061D6AD /* SBJson4StreamParserState.h */,
+				7D2044D01F789C6D0061D6AD /* SBJson4StreamParserState.m */,
+				7D2044CB1F789C6B0061D6AD /* SBJson4StreamTokeniser.h */,
+				7D2044CA1F789C6B0061D6AD /* SBJson4StreamTokeniser.m */,
+				7D2044C61F789C6A0061D6AD /* SBJson4StreamWriter.h */,
+				7D2044CF1F789C6D0061D6AD /* SBJson4StreamWriter.m */,
+				7D2044C71F789C6A0061D6AD /* SBJson4StreamWriterState.h */,
+				7D2044C51F789C690061D6AD /* SBJson4StreamWriterState.m */,
+				7D2044C91F789C6B0061D6AD /* SBJson4Writer.h */,
+				7D2044CC1F789C6B0061D6AD /* SBJson4Writer.m */,
+			);
+			path = sbjson;
+			sourceTree = "<group>";
+		};
 		7D3779441E87945600560B70 /* BHBPopView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1404,7 +1476,7 @@
 		7D426DA01A62AA120004F3F6 = {
 			isa = PBXGroup;
 			children = (
-				7D5CAE911F4FAEB000805591 /* AipOcrSdk.framework */,
+				7D2045F31F78C6C10061D6AD /* AipOcrSdk.framework */,
 				7D4173431F2E18BC00233B9B /* AipBase.framework */,
 				7D4173441F2E18BC00233B9B /* IdcardQuality.framework */,
 				7D72B45D1F2362CE00383D3D /* aip.license */,
@@ -1415,6 +1487,7 @@
 				7D448F591E247D54001536F4 /* Frameworks */,
 				7D4CD9F01F235D38003619EB /* AutoRepairHelper3 copy-Info.plist */,
 				7D41741A1F2E26EA00233B9B /* AutoRepairHelper3_os copy-Info.plist */,
+				7D2045E11F78C2B80061D6AD /* AutoRepairHelper3_os copy 2-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1562,6 +1635,7 @@
 		7D426E051A62ACCD0004F3F6 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				7D2044C21F789C600061D6AD /* sbjson */,
 				7D5BFB351F2CB6DB00FD239D /* JHUD */,
 				7D45F0011EA513EB00B92895 /* ShareSDK */,
 				7DF80D391E11FACB0067FD49 /* jpush */,
@@ -2069,7 +2143,7 @@
 						DevelopmentTeam = BJW9F34F29;
 					};
 					7D4CD8E21F235D37003619EB = {
-						DevelopmentTeam = BJW9F34F29;
+						DevelopmentTeam = 2U3JYNZ5R2;
 					};
 				};
 			};
@@ -2173,6 +2247,7 @@
 				7D4173581F2E26E900233B9B /* ADTRepairInfo.m in Sources */,
 				7D005E401F541B2B00846ADE /* WarehouseSupplierInfoViewController.m in Sources */,
 				7D4173591F2E26E900233B9B /* HttpConnctionManager.m in Sources */,
+				7D2044BD1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.m in Sources */,
 				7DC27EEF1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */,
 				7D1BAA631F5C457500B03719 /* WarehouseGoodsSettingTopTypeListViewController.m in Sources */,
 				7D1BAA7B1F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m in Sources */,
@@ -2184,6 +2259,7 @@
 				7D41735F1F2E26E900233B9B /* SpeSqliteUpdateManager.m in Sources */,
 				7D64B43B1F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m in Sources */,
 				7D64B4371F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m in Sources */,
+				7D2044D51F789D110061D6AD /* SBJson4StreamParser.m in Sources */,
 				7D4173601F2E26E900233B9B /* BHBPopView.m in Sources */,
 				7D5C32FC1F6269BF00C2E69C /* WarehouseGoodsAction.m in Sources */,
 				7D4173611F2E26E900233B9B /* LoginUserUtil.m in Sources */,
@@ -2200,6 +2276,7 @@
 				7D41736A1F2E26E900233B9B /* SDWebImageDownloader.m in Sources */,
 				7D41736B1F2E26E900233B9B /* SMS_HYZBadgeView.m in Sources */,
 				7D41736C1F2E26E900233B9B /* ADTRepairItemInfo.m in Sources */,
+				7D2044DD1F789D1D0061D6AD /* SBJson4StreamWriterState.m in Sources */,
 				7D41736D1F2E26E900233B9B /* SpeRefreshAndLoadViewController.m in Sources */,
 				7D41736E1F2E26E900233B9B /* SDWebImageDownloaderOperation.m in Sources */,
 				7D41736F1F2E26E900233B9B /* SMS_MBProgressHUD.m in Sources */,
@@ -2214,6 +2291,7 @@
 				7D4173751F2E26E900233B9B /* UIButton+WebCache.m in Sources */,
 				7D64B42B1F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m in Sources */,
 				7D4173761F2E26E900233B9B /* NSArray+SortByFisrtChar.m in Sources */,
+				7D2044D91F789D180061D6AD /* SBJson4StreamTokeniser.m in Sources */,
 				7D4173771F2E26E900233B9B /* TabbarButtonsBGView.m in Sources */,
 				7D4173781F2E26E900233B9B /* AFHTTPSessionManager.m in Sources */,
 				7D4173791F2E26E900233B9B /* SDWebImageCompat.m in Sources */,
@@ -2224,6 +2302,7 @@
 				7D62E6E01F3E9691005C6155 /* SpeWebviewViewController.m in Sources */,
 				7D41737D1F2E26E900233B9B /* MainTabBarViewController.mm in Sources */,
 				7D41737E1F2E26E900233B9B /* PubllicMaskViewHelper.m in Sources */,
+				7D2044B91F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.m in Sources */,
 				7D41737F1F2E26E900233B9B /* UIView+JHUD.m in Sources */,
 				7D4173801F2E26E900233B9B /* FontSizeUtil.m in Sources */,
 				7D4173811F2E26E900233B9B /* BHBItem.m in Sources */,
@@ -2245,6 +2324,7 @@
 				7D41738D1F2E26E900233B9B /* XTNavigationController.m in Sources */,
 				7D41738E1F2E26E900233B9B /* VerifyViewController.m in Sources */,
 				7D5C33001F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */,
+				7D2044D31F789D0E0061D6AD /* SBJson4Parser.m in Sources */,
 				7D1BAA571F5C2CBB00B03719 /* WarehouseGoodsSettingViewController.m in Sources */,
 				7D41738F1F2E26E900233B9B /* SpeCommonTableView.m in Sources */,
 				7D5C330C1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m in Sources */,
@@ -2311,7 +2391,9 @@
 				7D4173BD1F2E26E900233B9B /* BHBCenterView.m in Sources */,
 				7D4173BE1F2E26E900233B9B /* EmptyTipView.m in Sources */,
 				7D4173BF1F2E26E900233B9B /* SDWebImageManager.m in Sources */,
+				7D2044DF1F789D210061D6AD /* SBJson4Writer.m in Sources */,
 				7D64B4271F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */,
+				7D2044C11F77FF500061D6AD /* ServiceManagerTableViewCell.m in Sources */,
 				7D1D77DF1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */,
 				7D005E341F53FB6C00846ADE /* WarehousePositionAddNewViewController.m in Sources */,
 				7D1BAA5F1F5C44FC00B03719 /* WarehouseGoodsSettingSubTypeAddViewController.m in Sources */,
@@ -2324,11 +2406,14 @@
 				7D4173C61F2E26E900233B9B /* UIImage+JHUD.m in Sources */,
 				7D4173C71F2E26E900233B9B /* UIWebView+AFNetworking.m in Sources */,
 				7D1BAA6F1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m in Sources */,
+				7D2044D71F789D150061D6AD /* SBJson4StreamParserState.m in Sources */,
 				7D4173C81F2E26E900233B9B /* AddNewCarcodeSelectViewController.m in Sources */,
 				7D4173C91F2E26E900233B9B /* AFURLResponseSerialization.m in Sources */,
 				7D4173CA1F2E26E900233B9B /* EditUserViewController.m in Sources */,
 				7D4173CB1F2E26E900233B9B /* LocalImageHelper.m in Sources */,
+				7D2044B51F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.m in Sources */,
 				7D4173CC1F2E26E900233B9B /* BHBBottomBar.m in Sources */,
+				7D2044DB1F789D1A0061D6AD /* SBJson4StreamWriter.m in Sources */,
 				7D4173CD1F2E26E900233B9B /* NewTipViewController.m in Sources */,
 				7D005E301F53FB5100846ADE /* WarehousePositionViewController.m in Sources */,
 				7D64B4231F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m in Sources */,
@@ -2347,6 +2432,7 @@
 				7D4CD8EB1F235D37003619EB /* ADTRepairInfo.m in Sources */,
 				7D005E3F1F541B2B00846ADE /* WarehouseSupplierInfoViewController.m in Sources */,
 				7D4CD8EC1F235D37003619EB /* HttpConnctionManager.m in Sources */,
+				7D2044BC1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.m in Sources */,
 				7DC27EEE1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */,
 				7D1BAA621F5C457500B03719 /* WarehouseGoodsSettingTopTypeListViewController.m in Sources */,
 				7D1BAA7A1F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m in Sources */,
@@ -2358,6 +2444,7 @@
 				7D4CD8F51F235D37003619EB /* SpeSqliteUpdateManager.m in Sources */,
 				7D64B43A1F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m in Sources */,
 				7D64B4361F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m in Sources */,
+				7D2044D41F789D110061D6AD /* SBJson4StreamParser.m in Sources */,
 				7D4CD8F61F235D37003619EB /* BHBPopView.m in Sources */,
 				7D5C32FB1F6269BF00C2E69C /* WarehouseGoodsAction.m in Sources */,
 				7D4CD8F71F235D37003619EB /* LoginUserUtil.m in Sources */,
@@ -2374,6 +2461,7 @@
 				7D4CD9071F235D37003619EB /* SDWebImageDownloader.m in Sources */,
 				7D4CD9081F235D37003619EB /* SMS_HYZBadgeView.m in Sources */,
 				7D4CD9091F235D37003619EB /* ADTRepairItemInfo.m in Sources */,
+				7D2044DC1F789D1D0061D6AD /* SBJson4StreamWriterState.m in Sources */,
 				7D4CD90A1F235D37003619EB /* SpeRefreshAndLoadViewController.m in Sources */,
 				7D4CD90C1F235D37003619EB /* SDWebImageDownloaderOperation.m in Sources */,
 				7D4CD90D1F235D37003619EB /* SMS_MBProgressHUD.m in Sources */,
@@ -2388,6 +2476,7 @@
 				7D4CD91A1F235D37003619EB /* UIButton+WebCache.m in Sources */,
 				7D64B42A1F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m in Sources */,
 				7D4CD91B1F235D37003619EB /* NSArray+SortByFisrtChar.m in Sources */,
+				7D2044D81F789D170061D6AD /* SBJson4StreamTokeniser.m in Sources */,
 				7D4CD91C1F235D37003619EB /* TabbarButtonsBGView.m in Sources */,
 				7D4CD91F1F235D37003619EB /* AFHTTPSessionManager.m in Sources */,
 				7D4CD9201F235D37003619EB /* SDWebImageCompat.m in Sources */,
@@ -2398,6 +2487,7 @@
 				7D62E6DF1F3E9691005C6155 /* SpeWebviewViewController.m in Sources */,
 				7D4CD9251F235D37003619EB /* MainTabBarViewController.mm in Sources */,
 				7D4CD9261F235D37003619EB /* PubllicMaskViewHelper.m in Sources */,
+				7D2044B81F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.m in Sources */,
 				7D5BFB451F2CB6DB00FD239D /* UIView+JHUD.m in Sources */,
 				7D4CD9271F235D37003619EB /* FontSizeUtil.m in Sources */,
 				7D4CD9281F235D37003619EB /* BHBItem.m in Sources */,
@@ -2419,6 +2509,7 @@
 				7D4CD9391F235D37003619EB /* XTNavigationController.m in Sources */,
 				7D4CD93A1F235D37003619EB /* VerifyViewController.m in Sources */,
 				7D5C32FF1F62F78700C2E69C /* WarehousePurchaseEditView.m in Sources */,
+				7D2044D21F789D0D0061D6AD /* SBJson4Parser.m in Sources */,
 				7D1BAA561F5C2CBB00B03719 /* WarehouseGoodsSettingViewController.m in Sources */,
 				7D4CD93B1F235D37003619EB /* SpeCommonTableView.m in Sources */,
 				7D5C330B1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m in Sources */,
@@ -2485,7 +2576,9 @@
 				7D4CD9801F235D37003619EB /* BHBCenterView.m in Sources */,
 				7D4CD9831F235D37003619EB /* EmptyTipView.m in Sources */,
 				7D4CD9871F235D37003619EB /* SDWebImageManager.m in Sources */,
+				7D2044DE1F789D210061D6AD /* SBJson4Writer.m in Sources */,
 				7D64B4261F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */,
+				7D2044C01F77FF500061D6AD /* ServiceManagerTableViewCell.m in Sources */,
 				7D1D77DE1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */,
 				7D005E331F53FB6C00846ADE /* WarehousePositionAddNewViewController.m in Sources */,
 				7D1BAA5E1F5C44FC00B03719 /* WarehouseGoodsSettingSubTypeAddViewController.m in Sources */,
@@ -2498,11 +2591,14 @@
 				7D5BFB431F2CB6DB00FD239D /* UIImage+JHUD.m in Sources */,
 				7D4CD9901F235D37003619EB /* UIWebView+AFNetworking.m in Sources */,
 				7D1BAA6E1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m in Sources */,
+				7D2044D61F789D150061D6AD /* SBJson4StreamParserState.m in Sources */,
 				7D4CD9911F235D37003619EB /* AddNewCarcodeSelectViewController.m in Sources */,
 				7D4CD9921F235D37003619EB /* AFURLResponseSerialization.m in Sources */,
 				7D4CD9931F235D37003619EB /* EditUserViewController.m in Sources */,
 				7D4CD9951F235D37003619EB /* LocalImageHelper.m in Sources */,
+				7D2044B41F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.m in Sources */,
 				7D4CD9971F235D37003619EB /* BHBBottomBar.m in Sources */,
+				7D2044DA1F789D1A0061D6AD /* SBJson4StreamWriter.m in Sources */,
 				7D4CD9981F235D37003619EB /* NewTipViewController.m in Sources */,
 				7D005E2F1F53FB5100846ADE /* WarehousePositionViewController.m in Sources */,
 				7D64B4221F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m in Sources */,
@@ -2720,8 +2816,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: qifei huangfu (LMDV42LR62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BJW9F34F29;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 2U3JYNZ5R2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2753,10 +2849,10 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kj.xzs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4af8daba-2bee-4d40-961a-cfd0877d28d9";
-				PROVISIONING_PROFILE_SPECIFIER = "汽修dev";
+				PROVISIONING_PROFILE = "9993c620-43d2-4ccd-bc74-dded1e654ada";
+				PROVISIONING_PROFILE_SPECIFIER = xis;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -2770,7 +2866,7 @@
 				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: qifei huangfu (BJW9F34F29)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = BJW9F34F29;
+				DEVELOPMENT_TEAM = 2U3JYNZ5R2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2802,10 +2898,10 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kj.xzs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e41bcd99-9862-411c-948e-fac582b372b2";
-				PROVISIONING_PROFILE_SPECIFIER = "汽车修理小助手";
+				PROVISIONING_PROFILE = "9993c620-43d2-4ccd-bc74-dded1e654ada";
+				PROVISIONING_PROFILE_SPECIFIER = xis;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};

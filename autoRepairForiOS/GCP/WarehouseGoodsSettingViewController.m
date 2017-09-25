@@ -21,6 +21,11 @@
 
 @end
 
+
+@implementation WarehouseSubTypeInfo
+
+@end
+
 @interface WarehouseGoodsSettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
 @end
 
@@ -52,7 +57,7 @@
 
 - (void)backBtnClicked
 {
-    if(self.m_selectDelegate){
+    if(self.m_selectDelegate && [self.m_selectDelegate respondsToSelector:@selector(onSelectGoodsType:) ]){
         [self.m_selectDelegate onSelectGoodsType:nil];
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -85,7 +90,9 @@
 - (void)addBtnClicked
 {
 
-    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增商品",@"商品分类设置",@"查看未启用商品", nil];
+    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"商品分类设置", nil];
+//
+//    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增商品",@"商品分类设置",@"查看未启用商品", nil];
     [act showInView:self.view];
 }
 
@@ -236,15 +243,16 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == 0)
-    {
-        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsAddNewViewController") alloc]init] animated:YES];
-
-    }else if (buttonIndex == 1){
-            [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];
-    }else{
-
-    }
+     [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];
+//    if(buttonIndex == 0)
+//    {
+//        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsAddNewViewController") alloc]init] animated:YES];
+//
+//    }else if (buttonIndex == 1){
+//            [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];
+//    }else{
+//
+//    }
 }
 
 @end

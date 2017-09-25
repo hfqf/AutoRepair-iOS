@@ -156,7 +156,7 @@
         [priceLab setTextAlignment:NSTextAlignmentLeft];
         [priceLab setTextColor:UIColorFromRGB(0x878c8b)];
         [priceLab setFont:[UIFont systemFontOfSize:14]];
-        [priceLab setText:[NSString stringWithFormat:@"¥ %@(系统价格)",good.m_systemPrice]];
+        [priceLab setText:[NSString stringWithFormat:@"¥ %@(系统价格)",good.m_systemPrice.length == 0 ? good.m_costprice : good.m_systemPrice]];
         [cell addSubview:priceLab];
 
 //        UILabel *totalLab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH-130,CGRectGetMaxY(numLab.frame)+10,120, 18)];

@@ -10,6 +10,7 @@
 #import "WarehouseWillSaveToStoreGoodsTableViewCell.h"
 #import "WarehouseGoodPurchaseInfoViewController.h"
 #import "WarehouseSaveToStoreViewController.h"
+#import "WarehouseRejectSaveToStoreViewController.h"
 @interface WarehouseWillSaveToStoreGoodsViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,WarehouseWillSaveToStoreGoodsTableViewCellDelegate>
 @end
 
@@ -17,7 +18,7 @@
 
 - (id)init
 {
-    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
+    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
     {
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
@@ -36,6 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self requestData:YES];
 }
 
 - (void)addBtnClicked
@@ -142,7 +144,8 @@
 
 - (void)onWarehouseWillSaveToStoreGoodsTableViewCellReject:(WarehousePurchaseInfo *)purchase
 {
-
+    WarehouseRejectSaveToStoreViewController *infoVc = [[WarehouseRejectSaveToStoreViewController alloc]initWith:purchase];
+    [self.navigationController pushViewController:infoVc animated:YES];
 }
 
 - (void)onWarehouseWillSaveToStoreGoodsTableViewCellCheckInfo:(WarehousePurchaseInfo *)purchase

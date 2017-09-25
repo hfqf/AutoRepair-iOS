@@ -698,6 +698,18 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+- (void)addRepairItems:(NSArray *)arrItems
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repairitem/additems"
+                     paragram:@{
+                                  @"items":arrItems,
+                              }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
 #pragma mark - 3.2
 - (void)getAllRepairsWithState:(NSString *)state
                       withPage:(NSInteger )page
@@ -1347,6 +1359,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                 @"isactive":safeStringWith(newGoods.m_isactive),
                                 @"owner":[LoginUserUtil userTel],
                                 @"id":newGoods.m_id,
+                                @"subtype":safeStringWith(newGoods.m_category[@"_id"]),
                                 }
                successedBlock:success
                   failedBolck:failed];
@@ -1392,6 +1405,21 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 }
 
 
+- (void)updateOneGoodsForRejectWith:(WareHouseGoods *)newGoods
+                        successedBlock:(SuccessedBlock)success
+                           failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/reject"
+                     paragram:@{
+                                @"num":newGoods.m_num,
+                                @"id":newGoods.m_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
+
 
 
 - (void)delOneGoodsWith:(NSString *)_id
@@ -1407,6 +1435,17 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 }
 
 #pragma mark - 库存总览
+
+- (void)getAllWarmingGoodsStoreList:(SuccessedBlock)success
+                 failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/querywaring"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
 
 - (void)getAllGoodsStoreList:(SuccessedBlock)success
                    failedBolck:(FailedBlock)failed
@@ -1529,6 +1568,18 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+- (void)queryAllPurchaseGoods:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodspurchase/queryall"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+
 - (void)queryOnePurchaseGoodsInfo:(NSString *)goodsId
             successedBlock:(SuccessedBlock)success
                failedBolck:(FailedBlock)failed
@@ -1537,6 +1588,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                      paragram:@{
                                 @"goodsid":goodsId,
                                 @"owner":[LoginUserUtil userTel],
+                                @"state":@"1"
                                 }
                successedBlock:success
                   failedBolck:failed];

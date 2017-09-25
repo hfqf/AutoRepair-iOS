@@ -463,7 +463,7 @@
     }
     
     
-    if(self.m_currentData.m_carType.length == 0)
+    if(m_carTypeInput.text.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"车型不能为为空" inSuperView:self.view withDuration:1];
         return;

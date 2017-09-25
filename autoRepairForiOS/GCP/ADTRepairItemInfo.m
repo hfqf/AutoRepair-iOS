@@ -19,6 +19,10 @@
     item.m_type = info[@"type"];
     item.m_id = info[@"_id"];
     item.m_currentPrice = [item.m_price integerValue]* [item.m_num integerValue];
+    item.m_goodsId = [info stringWithFilted:@"goods"];
+    item.m_serviceId = [info stringWithFilted:@"service"];
+    item.m_itemType = [info stringWithFilted:@"itemtype"];
+
     return item;
 }
 @end

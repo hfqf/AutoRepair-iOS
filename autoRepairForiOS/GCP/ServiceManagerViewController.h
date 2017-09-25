@@ -10,4 +10,5 @@
 
 @interface ServiceManagerViewController : WarehouseGoodsSettingViewController
 
+- (id)initForSelectType:(NSMutableDictionary *)selectedDic;
 @end

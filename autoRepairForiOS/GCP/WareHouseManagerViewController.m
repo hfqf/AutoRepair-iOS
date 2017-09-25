@@ -22,23 +22,17 @@
         self.tableView.delegate = self;
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         self.m_arrData = @[
-                           @{@"category":@"开单待办",
-                             @"items":@[
-                                     @{@"icon":@"",@"title":@"待采购",@"type":@"1"},
-                                     @{@"icon":@"",@"title":@"待入库",@"type":@"2"},
-                                     @{@"icon":@"",@"title":@"待领料",@"type":@"3"},
-                                     @{@"icon":@"",@"title":@"库存预警",@"type":@"4"},
-                                     ]},
                            @{@"category":@"库存管理",
                              @"items":@[
                                      @{@"icon":@"",@"title":@"库存总览",@"type":@"5"},
-                                     @{@"icon":@"",@"title":@"库存盘点",@"type":@"6"},
-                                     @{@"icon":@"",@"title":@"出入库记录",@"type":@"7"},
+//                                     @{@"icon":@"",@"title":@"库存盘点",@"type":@"6"},
+                                     @{@"icon":@"",@"title":@"物品采购",@"type":@"9"},
+                                     @{@"icon":@"",@"title":@"物品入库",@"type":@"10"},
+//                                     @{@"icon":@"",@"title":@"物品领料",@"type":@"11"},
                                      @{@"icon":@"",@"title":@"采购记录",@"type":@"8"},
-                                     @{@"icon":@"",@"title":@"其它采购",@"type":@"9"},
-                                     @{@"icon":@"",@"title":@"其它入库",@"type":@"10"},
-                                     @{@"icon":@"",@"title":@"其它领料",@"type":@"11"},
-                                     @{@"icon":@"",@"title":@"采购退货",@"type":@"12"},
+//                                     @{@"icon":@"",@"title":@"出入库记录",@"type":@"7"},
+                                     @{@"icon":@"",@"title": @"库存退货",@"type":@"12"},
+                                     @{@"icon":@"",@"title":@"库存预警",@"type":@"4"},
                                      ]},
                            @{@"category":@"库房设置",
                              @"items":@[
@@ -46,6 +40,7 @@
                                      @{@"icon":@"",@"title":@"仓库管理",@"type":@"14"},
 //                                     @{@"icon":@"",@"title":@"基础设置",@"type":@"15"},
                                      @{@"icon":@"",@"title":@"商品管理",@"type":@"15"},
+
                                      ]},
                            ];
     }
@@ -111,29 +106,29 @@
         NSInteger row = index/4;
         NSInteger coulmn = index%4;
         NSInteger width = MAIN_WIDTH/4;
-        WarehouseItem *item = [[WarehouseItem alloc]initWith:CGRectMake(coulmn*width, row*HIGH_CELL+30, width, HIGH_CELL) withRessource:info  withNum:indexPath.section > 0 ? 0 : (rand()%4)];
+        WarehouseItem *item = [[WarehouseItem alloc]initWith:CGRectMake(coulmn*width, row*HIGH_CELL+30, width, HIGH_CELL) withRessource:info  withNum:0];
         [cell addSubview:item];
         item.itemBlock = ^(NSInteger selectTag) {
 
             switch (selectTag) {
 
-                case 1://待采购
-                {
-                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillPurchaseViewController") alloc]init] animated:YES];
-                    break;
-                }
-
-                case 2://待入库
-                {
-                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillSaveToStoreGoodsViewController") alloc]init] animated:YES];
-                    break;
-                }
-
-                case 3://待领料
-                {
-                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillTakeGoodsViewController") alloc]init] animated:YES];
-                    break;
-                }
+//                case 1://待采购
+//                {
+//                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillPurchaseViewController") alloc]init] animated:YES];
+//                    break;
+//                }
+//
+//                case 2://待入库
+//                {
+//                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillSaveToStoreGoodsViewController") alloc]init] animated:YES];
+//                    break;
+//                }
+//
+//                case 3://待领料
+//                {
+//                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillTakeGoodsViewController") alloc]init] animated:YES];
+//                    break;
+//                }
 
                 case 4://库存预警
                 {
@@ -165,21 +160,21 @@
                     break;
                 }
 
-                case 9://其它采购
+                case 9://采购
                 {
-                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseOtherPurchaseViewController") alloc]init] animated:YES];
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillPurchaseViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 10://其它入库
+                case 10://入库
                 {
-                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseOtherPurchaseSaveToStoreViewController") alloc]init] animated:YES];
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillSaveToStoreGoodsViewController") alloc]init] animated:YES];
                     break;
                 }
 
-                case 11://其它领料
+                case 11://领料
                 {
-                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseOtherPurchaseTakeViewController") alloc]init] animated:YES];
+                    [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseWillTakeGoodsViewController") alloc]init] animated:YES];
                     break;
                 }
 

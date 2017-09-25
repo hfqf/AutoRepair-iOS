@@ -311,9 +311,7 @@
     }else if (textField.tag == 1){
         self.m_goodsInfo.m_goodsencode = textField.text;
     }else if (textField.tag == 2){
-        WarehouseGoodsSettingViewController *add = [[WarehouseGoodsSettingViewController alloc]initForSelectType];
-        add.m_selectDelegate = self;
-        [self.navigationController pushViewController:add animated:YES];
+
     }else if (textField.tag == 3){
         self.m_goodsInfo.m_saleprice = textField.text;
     }else if (textField.tag == 4){
@@ -394,6 +392,7 @@
     if(actionSheet.tag == 0){
         if(buttonIndex == 0){
 
+            //查询是否有正在待采购此商品
             [HTTP_MANAGER queryOnePurchaseGoodsInfo:self.m_goodsInfo.m_id
                                      successedBlock:^(NSDictionary *succeedResult) {
 

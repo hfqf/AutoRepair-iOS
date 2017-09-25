@@ -34,5 +34,10 @@
 @property(assign)BOOL  m_isSelectStyle;
 @property(assign)BOOL  m_isSelected;
 @property(assign)BOOL  m_isAddNew;
+@property(nonatomic,strong) NSString *m_rejectNum;
+@property(nonatomic,strong) NSString *m_rejectReason;
+
+
+@property(nonatomic,strong) NSString *m_selectedNum;
 +(WareHouseGoods *)from:(NSDictionary *)info;
 @end

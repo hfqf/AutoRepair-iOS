@@ -398,15 +398,21 @@
                                             for(WareHouseGoods *good in self.m_purchaseInfo.m_arrGoods){
                                                 [HTTP_MANAGER saveBuyedOneGoodsWith:good
                                                                      successedBlock:^(NSDictionary *succeedResult) {
+                                                                         if([succeedResult[@"code"]integerValue] == 1){
+                                                                             [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                                                                             [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
+                                                                         }else{
+                                                                             [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                                                                         }
 
                                                 } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-
+                                                    [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
                                                 }];
                                             }
                                         }
 
             } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-
+                [PubllicMaskViewHelper showTipViewWith:@"操作失败" inSuperView:self.view withDuration:1];
             }];
 
         }else{
