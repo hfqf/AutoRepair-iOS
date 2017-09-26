@@ -22,6 +22,7 @@
 @property (nonatomic,assign) BOOL  m_isRequesting;
 @property (nonatomic,copy) NSArray *m_arrData;
 @property (nonatomic,copy) NSDictionary *m_parentInfo;
+@property (nonatomic,copy) NSMutableDictionary *m_currentInfo;
 
 
 

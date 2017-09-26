@@ -30,8 +30,14 @@
     ret.m_remark = [info stringWithFilted:@"remark"];
     ret.m_state = [info stringWithFilted:@"state"];
     ret.m_expressCompany = [info stringWithFilted:@"expresscompany"];
-    ret.m_supplier = info[@"supplier"];
-    ret.m_supplierInfo = [WarehouseSupplierInfo from:info[@"supplier"]];
+    NSDictionary *supplier = info[@"supplier"];
+    if([supplier isKindOfClass:[NSNull class]]){
+
+    }else{
+        ret.m_supplier = info[@"supplier"];
+        ret.m_supplierInfo = [WarehouseSupplierInfo from:info[@"supplier"]];
+    }
+
     ret.m_time = [info stringWithFilted:@"timestamp"];
     ret.m_time2 = [info stringWithFilted:@"timestamp2"];
     ret.m_time3 = [info stringWithFilted:@"timestamp3"];

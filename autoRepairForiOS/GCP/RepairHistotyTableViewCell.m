@@ -105,6 +105,7 @@
     [m_nameLab setText:contact.m_userName];
     [m_isInShopLab setText:[info.m_iswatiinginshop integerValue] == 1 ? @"在店等":@"不在店等"];
     [m_carInfoLab setText:[NSString stringWithFormat:@"%@ %@",contact.m_carCode,contact.m_carType]];
+    m_ownlab.hidden = YES;
     if([info.m_state integerValue] == 0){
         [m_statelab setBackgroundColor:KEY_COMMON_LIGHT_BLUE_CORLOR];
         [m_statelab setText:@"维修中"];
@@ -116,6 +117,7 @@
             [m_statelab setBackgroundColor:KEY_COMMON_GREEN_CORLOR];
             [m_statelab setText:@"已提车"];
         }else{
+            m_ownlab.hidden = NO;
             [m_statelab setBackgroundColor:KEY_COMMON_RED_CORLOR];
             [m_statelab setText:@"挂帐中"];
             [m_ownlab setText:[NSString stringWithFormat:@"欠¥ %@",info.m_ownMoney]];

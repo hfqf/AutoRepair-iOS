@@ -9,8 +9,9 @@
 #import "WarehouseSupplierViewController.h"
 #import "WarehouseSupplierAddNewViewController.h"
 #import "WarehouseSupplierInfoViewController.h"
-@interface WarehouseSupplierViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WarehouseSupplierViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 @property(nonatomic,weak)id<WarehouseSupplierViewControllerDelegate>m_selectDelegate;
+@property(assign)NSInteger m_selectIndex;
 @end
 
 @implementation WarehouseSupplierViewController
@@ -145,10 +146,34 @@
         [self.m_selectDelegate onSupplierSelected:info];
         [self.navigationController popViewControllerAnimated:YES];
     }else{
-        WarehouseSupplierInfoViewController *vc = [[WarehouseSupplierInfoViewController alloc]initWith:info];
-        [self.navigationController pushViewController:vc animated:YES];
+        self.m_selectIndex = indexPath.row;
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"选择操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"查看详情",@"删除", nil];
+        [alert show];
+
     }
 
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+
+    }else if (buttonIndex == 1){
+        NSDictionary *info = [self.m_arrData objectAtIndex:self.m_selectIndex];
+
+        WarehouseSupplierInfoViewController *vc = [[WarehouseSupplierInfoViewController alloc]initWith:info];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        NSDictionary *info = [self.m_arrData objectAtIndex:self.m_selectIndex];
+
+        [HTTP_MANAGER delOneWarehouseSupplierWith:info[@"_id"]
+                                   successedBlock:^(NSDictionary *succeedResult) {
+
+                                       [self requestData:YES];
+
+        } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+        }];
+    }
+}
 @end

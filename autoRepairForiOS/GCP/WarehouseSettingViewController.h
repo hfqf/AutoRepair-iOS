@@ -16,6 +16,8 @@
 
 @interface WarehouseSettingViewController : SpeRefreshAndLoadViewController
 @property(nonatomic,weak)id<WarehousePostionDelegate> m_selectDelegate;
+@property(assign)NSInteger m_selectIndex;
+
 - (id)initWith:(id<WarehousePostionDelegate>)delegate;
 
 @end

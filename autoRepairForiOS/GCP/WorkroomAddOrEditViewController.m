@@ -322,7 +322,11 @@
 
 - (void)addNewItesms:(BOOL)isBackAction
 {
-
+    if(self.m_rep.m_arrRepairItem.count == 0){
+        self.m_rep.m_state = @"0";
+        [PubllicMaskViewHelper showTipViewWith:@"还未选择收费项目" inSuperView:self.view withDuration:1];
+        return;
+    }
     [self showWaitingView];
     [HTTP_MANAGER deleteRepairItems:self.m_rep.m_contactid
                      successedBlock:^(NSDictionary *succeedResult) {
@@ -564,7 +568,7 @@
     if(self.m_currentIndex == 0){
         return INDEX_0_CELL_HIGH;
     }else{
-        return [self.m_rep.m_state isEqualToString:@"2"] ? 0 : INPUT_ITEM_HIGH;
+        return ![self.m_rep.m_state isEqualToString:@"0"] ? 0 : INPUT_ITEM_HIGH;
     }
     return 10;
 }
@@ -604,7 +608,7 @@
         [vi addSubview:sep];
         return vi;
     }else{
-        if([self.m_rep.m_state isEqualToString:@"2"] ){
+        if(![self.m_rep.m_state isEqualToString:@"0"] ){
             UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, 0)];
             return vi;
         }else{

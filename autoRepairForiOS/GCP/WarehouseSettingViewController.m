@@ -8,7 +8,8 @@
 
 #import "WarehouseSettingViewController.h"
 #import "WarehousePositionViewController.h"
-@interface WarehouseSettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "WarehouseAddNewViewController.h"
+@interface WarehouseSettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 
 @end
 
@@ -124,10 +125,38 @@
         WarehousePositionViewController *vc = [[WarehousePositionViewController alloc]initWith:info withDelegate:self.m_selectDelegate];
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        WarehousePositionViewController *vc = [[WarehousePositionViewController alloc]initWith:info];
-        [self.navigationController pushViewController:vc animated:YES];
+        self.m_selectIndex = indexPath.row;
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"选择操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"查看详情",@"查看库位",@"删除", nil];
+        [alert show];
+
     }
 
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+
+    }else if (buttonIndex == 1){
+        NSDictionary *info = [self.m_arrData objectAtIndex:self.m_selectIndex];
+        WarehouseAddNewViewController *edit =[[WarehouseAddNewViewController alloc]initWith:info];
+        [self.navigationController pushViewController:edit animated:YES];
+
+    }else if (buttonIndex == 2){
+        NSDictionary *info = [self.m_arrData objectAtIndex:self.m_selectIndex];
+        WarehousePositionViewController *vc = [[WarehousePositionViewController alloc]initWith:info];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else{
+        NSDictionary *info = [self.m_arrData objectAtIndex:self.m_selectIndex];
+        [HTTP_MANAGER delOneWarehouseWith:info[@"_id"]
+                                   successedBlock:^(NSDictionary *succeedResult) {
+
+                                       [self requestData:YES];
+
+                                   } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                   }];
+    }
+}
 @end

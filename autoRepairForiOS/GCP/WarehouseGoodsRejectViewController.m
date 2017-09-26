@@ -164,7 +164,6 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [_tit setText:@"退货数量"];
             edit.returnKeyType = UIReturnKeyDone;
-            edit.keyboardType = UIKeyboardTypeNumberPad;
             [edit setText:self.m_goodsInfo.m_rejectNum];
             [edit setPlaceholder:@"必填"];
         }else if (indexPath.row == 1){
@@ -268,7 +267,7 @@
 - (void)updateGoodsInfo
 {
     [self showWaitingView];
-    self.m_goodsInfo.m_rejectNum = [NSString stringWithFormat:@"%lu",self.m_goodsInfo.m_num.integerValue- self.m_goodsInfo.m_rejectNum.integerValue];
+    self.m_goodsInfo.m_num = [NSString stringWithFormat:@"%lu",self.m_goodsInfo.m_num.integerValue- self.m_goodsInfo.m_rejectNum.integerValue];
     [HTTP_MANAGER updateOneGoodsForRejectWith:self.m_goodsInfo
                                   successedBlock:^(NSDictionary *succeedResult) {
                                       [self removeWaitingView];

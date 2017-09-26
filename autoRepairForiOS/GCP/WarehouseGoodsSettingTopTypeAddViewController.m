@@ -13,7 +13,25 @@
 @end
 
 @implementation WarehouseGoodsSettingTopTypeAddViewController
+- (id)initWith:(NSDictionary *)info
+{
+    self.m_value1 = info[@"name"];
+    self.m_currentInfo = [NSMutableDictionary dictionaryWithDictionary:info];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
+    if (self)
+    {
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        self.m_arrData = @[
+                           @"大类",
+                           ];
 
+    }
+    return self;
+}
 
 - (id)init
 {
@@ -40,7 +58,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [title setText:@"新增大类"];
+    [title setText:self.m_currentInfo ?@"编辑" : @"新增大类"];
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -62,21 +80,41 @@
 
 
     [self showWaitingView];
-    [HTTP_MANAGER addNewGoodsTopTypeWith:self.m_value1
-                               successedBlock:^(NSDictionary *succeedResult) {
-                                   [self removeWaitingView];
-                                   if([succeedResult[@"code"]integerValue] == 1){
-                                       [self.navigationController popViewControllerAnimated:YES];
-                                   }else{
-                                       [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
-                                   }
+    if(self.m_currentInfo){
+        [HTTP_MANAGER updateOneGoodsTopTypeWith:self.m_value1
+                                         withId:self.m_currentInfo[@"_id"]
+                              successedBlock:^(NSDictionary *succeedResult) {
+                                  [self removeWaitingView];
+                                  if([succeedResult[@"code"]integerValue] == 1){
+                                      [self.navigationController popViewControllerAnimated:YES];
+                                  }else{
+                                      [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                                  }
 
-                               } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                              } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
 
-                                   [self removeWaitingView];
-                                   [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+                                  [self removeWaitingView];
+                                  [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
 
-                               }];
+                              }];
+    }else{
+        [HTTP_MANAGER addNewGoodsTopTypeWith:self.m_value1
+                              successedBlock:^(NSDictionary *succeedResult) {
+                                  [self removeWaitingView];
+                                  if([succeedResult[@"code"]integerValue] == 1){
+                                      [self.navigationController popViewControllerAnimated:YES];
+                                  }else{
+                                      [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                                  }
+
+                              } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                  [self removeWaitingView];
+                                  [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+
+                              }];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

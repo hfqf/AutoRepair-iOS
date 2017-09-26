@@ -15,10 +15,29 @@
 @end
 
 @implementation WarehouseAddNewViewController
-
-
 - (id)init
 {
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
+    if (self)
+    {
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        self.m_arrData = @[
+                           @"仓库",@"备注",
+                           ];
+
+    }
+    return self;
+}
+
+- (id)initWith:(NSDictionary *)info
+{
+    self.m_currentInfo = [NSMutableDictionary dictionaryWithDictionary:info];
+    self.m_value1 = info[@"name"];
+    self.m_value2 = info[@"desc"];
     self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
     if (self)
     {
@@ -42,7 +61,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [title setText:@"新增仓库"];
+    [title setText: self.m_currentInfo ? @"编辑仓库" : @"新增仓库"];
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -63,22 +82,42 @@
 
 
     [self showWaitingView];
-    [HTTP_MANAGER addNewWarehouseWith:self.m_value1
-                           withRemark:self.m_value2 == nil ? @"" : self.m_value2
-                       successedBlock:^(NSDictionary *succeedResult) {
-                       [self removeWaitingView];
-                           if([succeedResult[@"code"]integerValue] == 1){
-                               [self.navigationController popViewControllerAnimated:YES];
-                           }else{
-                               [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
-                           }
+    if(self.m_currentInfo){
+        [HTTP_MANAGER updateOneWarehouseWith:self.m_value1
+                                  withRemark:self.m_value2 == nil ? @"" : self.m_value2 withId:self.m_currentInfo[@"_id"]
+                           successedBlock:^(NSDictionary *succeedResult) {
+                               [self removeWaitingView];
+                               if([succeedResult[@"code"]integerValue] == 1){
+                                   [self.navigationController popViewControllerAnimated:YES];
+                               }else{
+                                   [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                               }
 
-    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                           } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
 
-        [self removeWaitingView];
-        [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+                               [self removeWaitingView];
+                               [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
 
-    }];
+                           }];
+    }else{
+        [HTTP_MANAGER addNewWarehouseWith:self.m_value1
+                               withRemark:self.m_value2 == nil ? @"" : self.m_value2
+                           successedBlock:^(NSDictionary *succeedResult) {
+                               [self removeWaitingView];
+                               if([succeedResult[@"code"]integerValue] == 1){
+                                   [self.navigationController popViewControllerAnimated:YES];
+                               }else{
+                                   [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                               }
+
+                           } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                               [self removeWaitingView];
+                               [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+
+                           }];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

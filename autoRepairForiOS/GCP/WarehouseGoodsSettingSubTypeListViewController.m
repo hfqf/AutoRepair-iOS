@@ -8,7 +8,8 @@
 
 #import "WarehouseGoodsSettingSubTypeListViewController.h"
 #import "WarehouseGoodsSettingSubTypeAddViewController.h"
-@interface WarehouseGoodsSettingSubTypeListViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
+@interface WarehouseGoodsSettingSubTypeListViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIAlertViewDelegate>
+@property(assign)NSInteger m_selectIndex;
 @end
 
 @implementation WarehouseGoodsSettingSubTypeListViewController
@@ -108,8 +109,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    self.m_selectIndex = indexPath.row;
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"选择操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"编辑",@"删除", nil];
+    [alert show];
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSDictionary *info = [self.m_arrData objectAtIndex:self.m_selectIndex];
+    if(buttonIndex == 0){
+
+    }else if (buttonIndex == 1){
+        WarehouseGoodsSettingSubTypeAddViewController *sub = [[WarehouseGoodsSettingSubTypeAddViewController alloc]initWithForEdit:info];
+        [self.navigationController pushViewController:sub animated:YES];
+    }else if (buttonIndex == 2){
+        [HTTP_MANAGER delOneGoodsSubTypeWith:info[@"_id"]
+                              successedBlock:^(NSDictionary *succeedResult) {
+                                  [self requestData:YES];
+                              } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                              }];
+    }
+}
+
 
 
 @end

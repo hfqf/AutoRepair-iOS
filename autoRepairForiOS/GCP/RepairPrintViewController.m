@@ -191,7 +191,7 @@
 - (void)refreshWebView
 {
     NSString *urlString=self.m_type == 0 ? [NSString stringWithFormat:@"%@/repair/print?owner=%@&carcode=%@&start=%@&end=%@",SERVER,[LoginUserUtil userTel],self.m_selectContact ? self.m_selectContact.m_carCode : @"",self.m_startTime,self.m_endTime] :
-        [NSString stringWithFormat:@"%@/repair/print?owner=%@&carcode=%@&start=%@&end=%@&type=%ld",SERVER,[LoginUserUtil userTel],self.m_selectContact ? self.m_selectContact.m_carCode : @"",self.m_startTime,self.m_endTime,self.m_type];
+        [NSString stringWithFormat:@"%@/repair/print?owner=%@&carcode=%@&start=%@&end=%@&state=%ld",SERVER,[LoginUserUtil userTel],self.m_selectContact ? self.m_selectContact.m_carCode : @"",self.m_startTime,self.m_endTime,self.m_type];
     // 将地址编码
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     // 实例化NSMutableURLRequest，并进行参数配置

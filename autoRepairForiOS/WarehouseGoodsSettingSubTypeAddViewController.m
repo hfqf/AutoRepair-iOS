@@ -14,6 +14,25 @@
 
 @implementation WarehouseGoodsSettingSubTypeAddViewController
 
+- (id)initWithForEdit:(NSDictionary *)info
+{
+    self.m_currentInfo = [NSMutableDictionary dictionaryWithDictionary:info];
+    self.m_value1 = info[@"name"];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
+    if (self)
+    {
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        [self.tableView.backgroundView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setBackgroundColor:UIColorFromRGB(0XEBEBEB)];
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        self.m_arrData = @[
+                           @"细类",
+                           ];
+
+    }
+    return self;
+}
 
 - (id)initWith:(NSDictionary *)info
 {
@@ -41,7 +60,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [title setText:@"新增细类"];
+    [title setText:self.m_currentInfo ? @"编辑": @"新增细类"];
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -62,42 +81,65 @@
     }
 
 
+
     [self showWaitingView];
-    [HTTP_MANAGER addNewGoodsSubTypeWith:self.m_value1
-                               withTopId:self.m_parentInfo[@"_id"]
-                          successedBlock:^(NSDictionary *succeedResult) {
+    if(self.m_currentInfo){
+        [HTTP_MANAGER updateOneGoodsSubTypeWith:self.m_value1
+                                         withId:self.m_currentInfo[@"_id"]
+                                 successedBlock:^(NSDictionary *succeedResult) {
+
+                                     [self removeWaitingView];
+                                     if([succeedResult[@"code"]integerValue] == 1){
+                                         [self.navigationController popViewControllerAnimated:YES];
+                                     }else{
+                                         [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                                     }
+
+        } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                [self removeWaitingView];
+            [PubllicMaskViewHelper showTipViewWith:@"编辑失败" inSuperView:self.view withDuration:1];
 
 
-                              NSMutableArray *arrSub  = [NSMutableArray array];
-                              for(NSString *_id in self.m_parentInfo[@"subtype"]){
-                                  [arrSub addObject:_id];
-                              }
-                              [arrSub addObject:succeedResult[@"ret"][@"_id"]];
-
-                              [HTTP_MANAGER addNewGoodsTopTypeRefWith:arrSub
-                                                            withTopId:self.m_parentInfo[@"_id"]
-                                                       successedBlock:^(NSDictionary *succeedResult) {
-
-                                                                [self removeWaitingView];
-                                                                if([succeedResult[@"code"]integerValue] == 1){
-                                                                    [self.navigationController popViewControllerAnimated:YES];
-                                                                }else{
-                                                                    [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
-                                                                }
-
-                                                            } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                                                                [self removeWaitingView];
-                                                                [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
-                                                            }];
+        }];
+    }else{
+        [HTTP_MANAGER addNewGoodsSubTypeWith:self.m_value1
+                                   withTopId:self.m_parentInfo[@"_id"]
+                              successedBlock:^(NSDictionary *succeedResult) {
 
 
+                                  NSMutableArray *arrSub  = [NSMutableArray array];
+                                  for(NSString *_id in self.m_parentInfo[@"subtype"]){
+                                      [arrSub addObject:_id];
+                                  }
+                                  [arrSub addObject:succeedResult[@"ret"][@"_id"]];
 
-                          } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                  [HTTP_MANAGER addNewGoodsTopTypeRefWith:arrSub
+                                                                withTopId:self.m_parentInfo[@"_id"]
+                                                           successedBlock:^(NSDictionary *succeedResult) {
 
-                              [self removeWaitingView];
-                              [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+                                                               [self removeWaitingView];
+                                                               if([succeedResult[@"code"]integerValue] == 1){
+                                                                   [self.navigationController popViewControllerAnimated:YES];
+                                                               }else{
+                                                                   [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                                                               }
 
-                          }];
+                                                           } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                                               [self removeWaitingView];
+                                                               [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+                                                           }];
+
+
+
+                              } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                  [self removeWaitingView];
+                                  [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+
+                              }];
+    }
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,7 +176,7 @@
     [edit setFont:[UIFont systemFontOfSize:14]];
     if(indexPath.row == 0){
         [edit setText:self.m_value1];
-        [edit setPlaceholder:@"请输入服务名称"];
+        [edit setPlaceholder:@"请输入名称"];
     }
     edit.delegate = self;
     edit.textAlignment = NSTextAlignmentLeft;

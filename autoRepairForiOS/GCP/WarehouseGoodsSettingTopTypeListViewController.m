@@ -8,8 +8,9 @@
 
 #import "WarehouseGoodsSettingTopTypeListViewController.h"
 #import "WarehouseGoodsSettingSubTypeListViewController.h"
-@interface WarehouseGoodsSettingTopTypeListViewController ()<UITableViewDelegate,UITableViewDataSource>
-
+#import "WarehouseGoodsSettingTopTypeAddViewController.h"
+@interface WarehouseGoodsSettingTopTypeListViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
+@property(assign)NSInteger m_selectIndex;
 @end
 
 @implementation WarehouseGoodsSettingTopTypeListViewController
@@ -107,9 +108,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *info = [self.m_arrData objectAtIndex:indexPath.row];
-    WarehouseGoodsSettingSubTypeListViewController *sub = [[WarehouseGoodsSettingSubTypeListViewController alloc]initWith:info];
-    [self.navigationController pushViewController:sub animated:YES];
+    self.m_selectIndex = indexPath.row;
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"选择操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"编辑",@"查看或增加子类",@"删除", nil];
+    [alert show];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSDictionary *info = [self.m_arrData objectAtIndex:self.m_selectIndex];
+    if(buttonIndex == 0){
+
+    }else if (buttonIndex == 1){
+        WarehouseGoodsSettingTopTypeAddViewController *edit = [[WarehouseGoodsSettingTopTypeAddViewController alloc]initWith:info];
+        [self.navigationController pushViewController:edit animated:YES];
+    }else if (buttonIndex == 2){
+        WarehouseGoodsSettingSubTypeListViewController *sub = [[WarehouseGoodsSettingSubTypeListViewController alloc]initWith:info];
+        [self.navigationController pushViewController:sub animated:YES];
+    }else{
+        [HTTP_MANAGER delOneGoodsTopTypeWith:info[@"_id"]
+                              successedBlock:^(NSDictionary *succeedResult) {
+                                  [self requestData:YES];
+        } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+        }];
+    }
 }
 
 @end

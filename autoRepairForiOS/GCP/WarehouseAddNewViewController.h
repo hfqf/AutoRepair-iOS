@@ -9,5 +9,5 @@
 #import "SpeRefreshAndLoadViewController.h"
 
 @interface WarehouseAddNewViewController : SpeRefreshAndLoadViewController
-
+- (id)initWith:(NSDictionary *)info;
 @end

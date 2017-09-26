@@ -44,7 +44,7 @@ withIsNeedNoneView:(BOOL)isNeedNoneView
     self = [super init];
     if(self)
     {
-        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, DISTANCE_TOP+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-DISTANCE_TOP-HEIGHT_NAVIGATION-(isNeedBottom?HEIGHT_MAIN_BOTTOM:0)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
+        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, 20+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-20-HEIGHT_NAVIGATION-(isNeedBottom?HEIGHT_MAIN_BOTTOM:0))  Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
         
         
         UIView *bg = [[UIView alloc]initWithFrame:table.bounds];
@@ -75,7 +75,7 @@ withIsNeedBottobBar:(BOOL)isNeedBottom
     self = [super init];
     if(self)
     {
-        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, DISTANCE_TOP+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-DISTANCE_TOP-HEIGHT_NAVIGATION-(isNeedBottom?HEIGHT_MAIN_BOTTOM:0)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
+        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, 20+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-20-HEIGHT_NAVIGATION-(isNeedBottom?HEIGHT_MAIN_BOTTOM:0)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
         
         
         UIView *bg = [[UIView alloc]initWithFrame:table.bounds];
