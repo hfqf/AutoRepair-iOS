@@ -1081,6 +1081,7 @@
                      [self removeWaitingView];
                      if([succeedResult[@"code"] integerValue] == 1)
                      {
+                         [self updateAllGoodsStoredNum:NO];
                          [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
                          [PubllicMaskViewHelper showTipViewWith:@"取消成功" inSuperView:self.view withDuration:1];
                          [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
@@ -1105,6 +1106,7 @@
                     [self removeWaitingView];
                     if([succeedResult[@"code"] integerValue] == 1)
                     {
+                        [self updateAllGoodsStoredNum:NO];
                         [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
                         [PubllicMaskViewHelper showTipViewWith:@"取消成功" inSuperView:self.view withDuration:1];
                         [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
@@ -1129,6 +1131,8 @@
                     [self removeWaitingView];
                     if([succeedResult[@"code"] integerValue] == 1)
                     {
+                        [self updateAllGoodsStoredNum:NO];
+
                         [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
                         [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
 

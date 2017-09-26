@@ -50,10 +50,16 @@
         
         
         m_pricelab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH-80,35,70, 20)];
-        m_pricelab.font = [UIFont systemFontOfSize:12];
+        m_pricelab.font = [UIFont systemFontOfSize:11];
         [m_pricelab setTextAlignment:NSTextAlignmentRight];
         m_pricelab.textColor = UIColorFromRGB(0x404040);
         [self addSubview:m_pricelab];
+
+        m_ownlab = [[UILabel alloc]initWithFrame:CGRectMake(MAIN_WIDTH-80,55,70, 14)];
+        m_ownlab.font = [UIFont systemFontOfSize:11];
+        [m_ownlab setTextAlignment:NSTextAlignmentRight];
+        m_ownlab.textColor = KEY_COMMON_RED_CORLOR;
+        [self addSubview:m_ownlab];
         
         m_sep = [[UIView alloc]initWithFrame:CGRectMake((HEAD_WIDTH+20),CGRectGetMaxY(m_typelab.frame)+5, MAIN_WIDTH-(HEAD_WIDTH+20), 0.5)];
         m_sep.backgroundColor = UIColorFromRGB(0xDBDBDB);
@@ -112,6 +118,7 @@
         }else{
             [m_statelab setBackgroundColor:KEY_COMMON_RED_CORLOR];
             [m_statelab setText:@"挂帐中"];
+            [m_ownlab setText:[NSString stringWithFormat:@"欠¥ %@",info.m_ownMoney]];
         }
 
     }else if ([info.m_state integerValue] == 3){
@@ -121,7 +128,7 @@
     
     [m_typelab setText:[NSString stringWithFormat:@"服务项目:%@",info.m_repairType]];
     
-    [m_pricelab setText:[NSString stringWithFormat:@"¥ %ld",(long)info.m_totalPrice]];
+    [m_pricelab setText:[NSString stringWithFormat:@"总¥ %ld",(long)info.m_totalPrice]];
     
     [m_enterTimelab setText:[NSString stringWithFormat:@"进入门店时间:  %@",info.m_entershoptime]];
     [m_wantCompletedTimelab setText:[NSString stringWithFormat:@"%@:  %@",[info.m_state isEqualToString:@"2"] ? @"实际提车时间":@"预计提车时间",info.m_wantedcompletedtime]];

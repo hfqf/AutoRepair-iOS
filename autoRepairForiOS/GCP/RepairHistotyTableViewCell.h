@@ -19,6 +19,7 @@
     
     UILabel *m_typelab;
     UILabel *m_pricelab;
+    UILabel *m_ownlab;
     UIView *m_sep;
     UILabel *m_enterTimelab;
     UILabel *m_wantCompletedTimelab;
