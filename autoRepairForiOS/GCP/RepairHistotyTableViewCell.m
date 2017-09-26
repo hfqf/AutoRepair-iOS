@@ -106,8 +106,14 @@
         [m_statelab setBackgroundColor:KEY_COMMON_BLUE_CORLOR];
         [m_statelab setText:@"已修完"];
     }else if ([info.m_state integerValue] == 2){
-        [m_statelab setBackgroundColor:KEY_COMMON_GREEN_CORLOR];
-        [m_statelab setText:@"已提车"];
+        if(info.m_ownMoney.integerValue == 0){
+            [m_statelab setBackgroundColor:KEY_COMMON_GREEN_CORLOR];
+            [m_statelab setText:@"已提车"];
+        }else{
+            [m_statelab setBackgroundColor:KEY_COMMON_RED_CORLOR];
+            [m_statelab setText:@"挂帐中"];
+        }
+
     }else if ([info.m_state integerValue] == 3){
         [m_statelab setBackgroundColor:KEY_COMMON_GRAY_CORLOR];
         [m_statelab setText:@"已取消"];

@@ -585,6 +585,19 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
     
 }
 
+- (void)clearOwnMoney:(NSString *)_id
+             successedBlock:(SuccessedBlock)success
+                failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/repair/clearownemoney"
+                     paragram:@{
+                                @"id":_id
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+
+}
+
 - (void)uploadBOSFile:(NSString *)path
          withFileName:(NSString *)fileName
        successedBlock:(SuccessedBlock)success
@@ -719,7 +732,14 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                 successedBlock:(SuccessedBlock)success
                    failedBolck:(FailedBlock)failed
 {
-    [self startNormalPostWith:@"/repair/queryAllWithState"
+    NSString *path = nil;
+    if(state.integerValue == 4){
+        path = @"/repair/queryAllWithStateAndOwned";
+        state = @"2";
+    }else{
+        path = @"/repair/queryAllWithState";
+    }
+    [self startNormalPostWith:path
                      paragram:
                             (contactid == nil && carCode == nil) ?
                             @{
@@ -785,7 +805,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
     {
         [arrItems addObject:info.m_id];
     }
-    [self startNormalPostWith:@"/repair/update4" paragram:@{
+    [self startNormalPostWith:@"/repair/update5" paragram:@{
                                                             @"id":newRep.m_idFromNode,
                                                             @"carcode":newRep.m_carCode,
                                                             @"totalkm":newRep.m_km,
@@ -805,7 +825,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                             @"customremark":newRep.m_customremark,
                                                             @"iswatiinginshop":newRep.m_iswatiinginshop,
                                                             @"entershoptime":newRep.m_entershoptime,
-                                                            @"state":newRep.m_state
+                                                            @"state":newRep.m_state,
+                                                            @"ownnum":newRep.m_ownMoney == nil ? @"0" :  newRep.m_ownMoney
                                                             } successedBlock:success failedBolck:failed];
 }
 
@@ -1417,6 +1438,22 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                successedBlock:success
                   failedBolck:failed];
 }
+
+- (void)updateOneGoodsStoreNumWith:(ADTRepairItemInfo *)item
+                         withIsOut:(BOOL)isOut
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoods/updatestorenum"
+                     paragram:@{
+                                @"num":item.m_num,
+                                @"id":item.m_goodsId,
+                                @"isout":isOut ? @"1" : @"0"
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
 
 
 

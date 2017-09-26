@@ -33,6 +33,7 @@
 @property (nonatomic,strong)NSString *m_iswatiinginshop;
 @property (nonatomic,strong)NSString *m_contactid;
 @property (nonatomic,strong)NSString *m_index;
+@property (nonatomic,strong)NSString *m_ownMoney;
 + (ADTRepairInfo *)from:(NSDictionary *)info;
 
 + (ADTRepairInfo *)initWith:(ADTContacterInfo *)contact;

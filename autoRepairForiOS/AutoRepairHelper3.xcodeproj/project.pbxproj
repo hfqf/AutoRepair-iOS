@@ -327,6 +327,9 @@
 		7D20470A1F79423B0061D6AD /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D20470B1F79423B0061D6AD /* IdcardQuality.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173441F2E18BC00233B9B /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D20470C1F79423B0061D6AD /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2046001F78E7D90061D6AD /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7D20471D1F79E71A0061D6AD /* OwnValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20471C1F79E71A0061D6AD /* OwnValueViewController.m */; };
+		7D20471E1F79E71B0061D6AD /* OwnValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20471C1F79E71A0061D6AD /* OwnValueViewController.m */; };
+		7D20471F1F79E71B0061D6AD /* OwnValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20471C1F79E71A0061D6AD /* OwnValueViewController.m */; };
 		7D4173451F2E18BC00233B9B /* AipBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; };
 		7D4173461F2E18BC00233B9B /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D4173471F2E18BC00233B9B /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173441F2E18BC00233B9B /* IdcardQuality.framework */; };
@@ -902,6 +905,8 @@
 		7D2046021F78E7D90061D6AD /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		7D2047111F79423B0061D6AD /* AutoRepairHelper3_os_inshoue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoRepairHelper3_os_inshoue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D2047121F79423C0061D6AD /* AutoRepairHelper3_os copy 22-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AutoRepairHelper3_os copy 22-Info.plist"; path = "/Users/points/Documents/GitHub/AutoRepair-iOS/autoRepairForiOS/AutoRepairHelper3_os copy 22-Info.plist"; sourceTree = "<absolute>"; };
+		7D20471B1F79E71A0061D6AD /* OwnValueViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OwnValueViewController.h; sourceTree = "<group>"; };
+		7D20471C1F79E71A0061D6AD /* OwnValueViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OwnValueViewController.m; sourceTree = "<group>"; };
 		7D2904FA1AF134FF00039CEF /* AddRepairHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRepairHistoryViewController.h; sourceTree = "<group>"; };
 		7D2904FB1AF134FF00039CEF /* AddRepairHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRepairHistoryViewController.m; sourceTree = "<group>"; };
 		7D37793F1E87903600560B70 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -2318,6 +2323,8 @@
 				7D72B4781F243D5E00383D3D /* WorkroomListViewController.m */,
 				7D6F0B121F27343200507356 /* WorkroomAddOrEditViewController.h */,
 				7D6F0B131F27343200507356 /* WorkroomAddOrEditViewController.m */,
+				7D20471B1F79E71A0061D6AD /* OwnValueViewController.h */,
+				7D20471C1F79E71A0061D6AD /* OwnValueViewController.m */,
 			);
 			name = Tab0;
 			sourceTree = "<group>";
@@ -2713,6 +2720,7 @@
 				7D2046561F79423B0061D6AD /* BHBItem.m in Sources */,
 				7D2046571F79423B0061D6AD /* UIImage+GIF.m in Sources */,
 				7D2046581F79423B0061D6AD /* TabbarBaseViewController.m in Sources */,
+				7D20471F1F79E71B0061D6AD /* OwnValueViewController.m in Sources */,
 				7D2046591F79423B0061D6AD /* AFSecurityPolicy.m in Sources */,
 				7D20465A1F79423B0061D6AD /* SqliteDataManager.m in Sources */,
 				7D20465B1F79423B0061D6AD /* EGOImageView+SetImage.m in Sources */,
@@ -2897,6 +2905,7 @@
 				7D4173811F2E26E900233B9B /* BHBItem.m in Sources */,
 				7D4173821F2E26E900233B9B /* UIImage+GIF.m in Sources */,
 				7D4173831F2E26E900233B9B /* TabbarBaseViewController.m in Sources */,
+				7D20471E1F79E71B0061D6AD /* OwnValueViewController.m in Sources */,
 				7D4173841F2E26E900233B9B /* AFSecurityPolicy.m in Sources */,
 				7D4173851F2E26E900233B9B /* SqliteDataManager.m in Sources */,
 				7D4173861F2E26E900233B9B /* EGOImageView+SetImage.m in Sources */,
@@ -3081,6 +3090,7 @@
 				7D4CD9281F235D37003619EB /* BHBItem.m in Sources */,
 				7D4CD9291F235D37003619EB /* UIImage+GIF.m in Sources */,
 				7D4CD92A1F235D37003619EB /* TabbarBaseViewController.m in Sources */,
+				7D20471D1F79E71A0061D6AD /* OwnValueViewController.m in Sources */,
 				7D4CD92B1F235D37003619EB /* AFSecurityPolicy.m in Sources */,
 				7D4CD92E1F235D37003619EB /* SqliteDataManager.m in Sources */,
 				7D4CD9301F235D37003619EB /* EGOImageView+SetImage.m in Sources */,

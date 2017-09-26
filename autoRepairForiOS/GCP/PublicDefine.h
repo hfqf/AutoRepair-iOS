@@ -38,7 +38,7 @@
 #define   PUBLIC_BACKGROUND_COLOR         KEY_COMMON_BLUE_CORLOR //  UIColorFromRGB([ConverUtil getCurrentSkin])
 #define  KEY_COMMON_CORLOR                   PUBLIC_BACKGROUND_COLOR
 #define  KEY_DELETE_CORLOR                  UIColorFromRGB(0xFA8072)
-#define  KEY_COMMON_BLUE_CORLOR                   UIColorFromRGB(0x03A9F4)
+#define  KEY_COMMON_BLUE_CORLOR                   UIColorFromRGB(0x4da8f1)
 #define  KEY_COMMON_LIGHT_BLUE_CORLOR                   UIColorFromRGB(0xb2e3f9)
 #define  KEY_COMMON_RED_CORLOR                   UIColorFromRGB(0XF44336)
 #define  KEY_COMMON_GREEN_CORLOR                   UIColorFromRGB(0X4CAF50)

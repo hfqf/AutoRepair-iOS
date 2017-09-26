@@ -86,7 +86,7 @@
 - (void)createButtons
 {
     self.m_currentIndex = 0;
-    self.m_arrCategory = @[@"维修中",@"已修完",@"已提车",@"已取消"];
+    self.m_arrCategory = @[@"维修中",@"已修完",@"已提车",@"已取消",@"挂帐中"];
     
     NSMutableArray *arr = [NSMutableArray array];
     for(int i =0 ;i<self.m_arrCategory.count;i++)

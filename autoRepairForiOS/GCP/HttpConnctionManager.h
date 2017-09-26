@@ -187,6 +187,10 @@ typedef void (^FailBlock)(NSError *error);
         successedBlock:(SuccessedBlock)success
            failedBolck:(FailedBlock)failed;
 
+- (void)clearOwnMoney:(NSString *)_id
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed;
+
 - (void)uploadBOSFile:(NSString *)path
          withFileName:(NSString *)fileName
     successedBlock:(SuccessedBlock)success
@@ -431,6 +435,11 @@ typedef void (^FailBlock)(NSError *error);
 - (void)updateOneGoodsForRejectWith:(WareHouseGoods *)newGoods
                      successedBlock:(SuccessedBlock)success
                         failedBolck:(FailedBlock)failed;
+
+- (void)updateOneGoodsStoreNumWith:(ADTRepairItemInfo *)item
+                         withIsOut:(BOOL)isOut
+                    successedBlock:(SuccessedBlock)success
+                       failedBolck:(FailedBlock)failed;
 
 - (void)delOneGoodsWith:(NSString *)_id
          successedBlock:(SuccessedBlock)success

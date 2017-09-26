@@ -16,7 +16,8 @@
 #import "WarehouseSelectGoodsToRepairViewController.h"
 #import "ServiceManagerViewController.h"
 #import "SBJson4.h"
-@interface WorkroomAddOrEditViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate,UITextViewDelegate,UIScrollViewDelegate,WarehouseSelectGoodsToRepairViewControllerDelegate,WarehouseGoodsSettingViewControllerDelegate>
+#import "OwnValueViewController.h"
+@interface WorkroomAddOrEditViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate,UITextViewDelegate,UIScrollViewDelegate,WarehouseSelectGoodsToRepairViewControllerDelegate,WarehouseGoodsSettingViewControllerDelegate,OwnValueViewControllerDelegate>
 {
     UIView *m_tipView;
     
@@ -153,7 +154,7 @@
         [m_bottomLeftBtn setTitle:@"提交结账" forState:UIControlStateNormal];
         [m_bottomLeftBtn setBackgroundColor:KEY_COMMON_LIGHT_BLUE_CORLOR];
     }else if ([self.m_rep.m_state isEqualToString:@"1"]){
-        [m_bottomLeftBtn setTitle:@"确认收款" forState:UIControlStateNormal];
+        [m_bottomLeftBtn setTitle:@"确认收款(全部付清)" forState:UIControlStateNormal];
         [m_bottomLeftBtn setBackgroundColor:KEY_COMMON_RED_CORLOR];
     }else if ([self.m_rep.m_state isEqualToString:@"2"]){
         m_bg.hidden = YES;
@@ -161,12 +162,18 @@
         [m_bottomLeftBtn setTitle:@"恢复工单" forState:UIControlStateNormal];
         [m_bottomLeftBtn setBackgroundColor:KEY_COMMON_GREEN_CORLOR];
     }
-    
+
+
     m_bottomRightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     m_bottomRightBtn.tag = 1;
     [m_bottomRightBtn setFrame:CGRectMake(MAIN_WIDTH/2, 40, MAIN_WIDTH/2, 50)];
     [m_bottomRightBtn setBackgroundColor:KEY_COMMON_BLUE_CORLOR];
-    [m_bottomRightBtn setTitle:@"保存编辑" forState:UIControlStateNormal];
+
+    if([self.m_rep.m_state isEqualToString:@"0"]){
+        [m_bottomRightBtn setTitle:@"保存编辑" forState:UIControlStateNormal];
+    }else if ([self.m_rep.m_state isEqualToString:@"1"]){
+        [m_bottomRightBtn setTitle:@"提车(挂帐)" forState:UIControlStateNormal];
+    }
     [m_bottomRightBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
     [m_bottomRightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [m_bottomRightBtn addTarget:self action:@selector(bottomRightBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -227,7 +234,7 @@
     
     if([self.m_rep.m_state isEqualToString:@"0"]){
         self.m_rep.m_state = @"1";
-        [self updateRepair:YES];
+        [self addNewItesms:YES];
     }else if([self.m_rep.m_state isEqualToString:@"1"]){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"请检查各项数据,确认收款后只能删除,无法撤销或修改,确认提交?" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
         alert.tag = 10000;
@@ -246,6 +253,14 @@
 
 - (void)bottomRightBtnClicked
 {
+    if([self.m_rep.m_state isEqualToString:@"1"]){//挂帐
+
+        OwnValueViewController *own = [[OwnValueViewController alloc]init];
+        own.m_ownDelegate = self;
+        [self.navigationController pushViewController:own animated:YES];
+        return;
+    }
+
     if(self.m_rep.m_entershoptime.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"进店时间未填" inSuperView:self.view withDuration:1];
@@ -285,14 +300,24 @@
     [self addNewItesms:NO];
 }
 
-- (void)updateGoodsStoredNum:(BOOL)isOut withItem:(ADTRepairItemInfo *)item
+- (void)updatePOneGoodsStoredNum:(BOOL)isOut withItem:(ADTRepairItemInfo *)item
 {
- 
+
 }
 
 - (void)updateAllGoodsStoredNum:(BOOL)isOut
 {
+    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+        if(item.m_itemType.integerValue == 0){
+            [HTTP_MANAGER updateOneGoodsStoreNumWith:item
+                                           withIsOut:isOut
+                                      successedBlock:^(NSDictionary *succeedResult) {
 
+            } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+            }];
+        }
+    }
 }
 
 - (void)addNewItesms:(BOOL)isBackAction
@@ -372,12 +397,10 @@
                        [self removeWaitingView];
                        if([succeedResult[@"code"]integerValue] == 1)
                        {
-
-                           //修完(才算是修改库存数量)时,提交收款，取消此订单，删除订单 同时修改对应商品库存数量;
+                           //修完后，相关商品出库
                            if(self.m_rep.m_state.integerValue == 1){
                                [self updateAllGoodsStoredNum:YES];
                            }
-
                            [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
                            [PubllicMaskViewHelper showTipViewWith:@"更新成功" inSuperView:self.view withDuration:1];
                            if(isNeedBack){
@@ -433,9 +456,16 @@
         alert.tag = 10002;
         [alert show];
     }else if ([self.m_rep.m_state isEqualToString:@"2"]){
-        UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除此工单",@"关闭提醒推送",@"打开提醒推送", nil];
-        alert.tag = 10003;
-        [alert show];
+        if(self.m_rep.m_ownMoney.integerValue == 0){
+            UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除此工单",@"关闭提醒推送",@"打开提醒推送", nil];
+            alert.tag = 10003;
+            [alert show];
+        }else{
+            UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"已结清尾款",@"关闭提醒推送",@"打开提醒推送", nil];
+            alert.tag = 10005;
+            [alert show];
+        }
+
     }else{
         UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"恢复此工单",@"删除此工单", nil];
         alert.tag = 10004;
@@ -1004,10 +1034,45 @@
         }else{
           
         }
+    }else if (alertView.tag == 10005){
+        if(buttonIndex == 1){
+            [self clearOwneMoney];
+        }
+        else if (buttonIndex == 2){
+            self.m_rep.m_isClose = YES;
+            self.m_rep.m_isreaded = YES;
+            [self updateRepair:NO];
+        }
+        else if (buttonIndex == 3){
+            self.m_rep.m_isClose = NO;
+            self.m_rep.m_isreaded = NO;
+            [self updateRepair:NO];
+        }
     }
     
 }
 
+- (void)clearOwneMoney
+{
+    [self showWaitingView];
+    [HTTP_MANAGER clearOwnMoney:self.m_rep.m_idFromNode
+                 successedBlock:^(NSDictionary *succeedResult) {
+                     [self removeWaitingView];
+                     if([succeedResult[@"code"] integerValue] == 1)
+                     {
+                         [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
+                         [PubllicMaskViewHelper showTipViewWith:@"更新成功" inSuperView:self.view withDuration:1];
+                         [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
+                     }
+                     else
+                     {
+                         [PubllicMaskViewHelper showTipViewWith:@"更新失败" inSuperView:self.view withDuration:1];
+                     }
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+        [self removeWaitingView];
+        [PubllicMaskViewHelper showTipViewWith:@"失败" inSuperView:self.view withDuration:1];
+    }];
+}
 - (void)revertRepair
 {
     [self showWaitingView];
@@ -1334,5 +1399,12 @@
 
 }
 
+#pragma mark - OwnValueViewControllerDelegate
+- (void)onOwnValueViewController:(NSInteger)ownMoney
+{
+    self.m_rep.m_ownMoney = [NSString stringWithFormat:@"%lu",ownMoney];
+    self.m_rep.m_state = @"2";
+    [self updateRepair:YES];
+}
 
 @end

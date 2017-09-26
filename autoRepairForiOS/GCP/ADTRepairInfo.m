@@ -32,7 +32,9 @@
     newRep.m_customremark = [info stringWithFilted:@"customremark"];
     newRep.m_iswatiinginshop = [info stringWithFilted:@"iswatiinginshop"].length == 0? @"0" : [info stringWithFilted:@"iswatiinginshop"];
     newRep.m_contactid = [info stringWithFilted:@"contactid"];
-    
+
+    newRep.m_ownMoney = [info stringWithFilted:@"ownnum"];
+
     NSArray *arr = info[@"items"];
     NSInteger total = 0;
     NSMutableArray *_insertArr = [NSMutableArray array];
