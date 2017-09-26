@@ -16,7 +16,7 @@
 @implementation WarehousePurchaseRejectedViewController
 
 - (id)init{
-    if(self= [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:YES withIsNeedBottobBar:NO withIsNeedNoneView:YES]){
+    if(self= [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:YES withIsNeedBottobBar:NO withIsNeedNoneView:YES]){
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -30,6 +30,11 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self requestData:YES];
+}
 
 
 - (void)didReceiveMemoryWarning {

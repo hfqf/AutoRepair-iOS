@@ -67,7 +67,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [title setText:self.m_isSelect ? @"选择分类": @"商品管理"];
+    [title setText:self.m_isSelect ? @"选择子分类": @"商品管理"];
 
     if(!self.m_isSelect)
     {

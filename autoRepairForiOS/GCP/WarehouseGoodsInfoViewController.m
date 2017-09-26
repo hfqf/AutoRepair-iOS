@@ -213,7 +213,7 @@
         [edit setText:self.m_goodsInfo.m_goodsencode];
     }else if (indexPath.row == 2){
         [edit setText:self.m_goodsInfo.m_category[@"name"]];
-        [edit setPlaceholder:@"必填"];
+        [edit setPlaceholder:@"必填,只能选择子分类"];
     }else if (indexPath.row == 3){
         [edit setText:self.m_goodsInfo.m_saleprice];
         edit.keyboardType = UIKeyboardTypeNumberPad;
@@ -424,7 +424,7 @@
 
         }else if (buttonIndex == 1){
             [self update];
-        }else{
+        }else if (buttonIndex == 2){
             [self delete];
         }
     }else if(actionSheet.tag == 1){
