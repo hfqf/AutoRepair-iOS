@@ -11,10 +11,7 @@
 @implementation BHBCustomBtn
 
 
-- (CGRect)imageRectForContentRect:(CGRect)contentRect{
-    CGRect rect = CGRectMake(0, (contentRect.size.height - ICONHEIGHT - TITLEHEIGHT) / 2, contentRect.size.width, ICONHEIGHT);
-    return rect;
-}
+
 
 - (CGRect)titleRectForContentRect:(CGRect)contentRect
 {

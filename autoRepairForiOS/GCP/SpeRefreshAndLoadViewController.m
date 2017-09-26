@@ -44,7 +44,7 @@ withIsNeedNoneView:(BOOL)isNeedNoneView
     self = [super init];
     if(self)
     {
-        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, DISTANCE_TOP+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-DISTANCE_TOP-HEIGHT_NAVIGATION-(isNeedBottom?(OS_ABOVE_IOS7?HEIGHT_MAIN_BOTTOM:HEIGHT_MAIN_BOTTOM+20):OS_ABOVE_IOS7 ? 0:20)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
+        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, DISTANCE_TOP+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-DISTANCE_TOP-HEIGHT_NAVIGATION-(isNeedBottom?HEIGHT_MAIN_BOTTOM:0)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
         
         
         UIView *bg = [[UIView alloc]initWithFrame:table.bounds];
@@ -57,6 +57,12 @@ withIsNeedNoneView:(BOOL)isNeedNoneView
         
         [table release];
         [self.view addSubview:self.tableView];
+
+        if (@available(iOS 11.0, *)) {
+            self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
     }
     return self;
 }
@@ -69,7 +75,7 @@ withIsNeedBottobBar:(BOOL)isNeedBottom
     self = [super init];
     if(self)
     {
-        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, DISTANCE_TOP+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-DISTANCE_TOP-HEIGHT_NAVIGATION-(isNeedBottom?(OS_ABOVE_IOS7?HEIGHT_MAIN_BOTTOM:HEIGHT_MAIN_BOTTOM+20):OS_ABOVE_IOS7 ? 0:20)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
+        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, DISTANCE_TOP+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-DISTANCE_TOP-HEIGHT_NAVIGATION-(isNeedBottom?HEIGHT_MAIN_BOTTOM:0)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
         
         
         UIView *bg = [[UIView alloc]initWithFrame:table.bounds];
@@ -101,7 +107,7 @@ withIsCustomNavigatiionHeight:(int)customNavHeight
     self = [super init];
     if(self)
     {
-        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, DISTANCE_TOP+customNavHeight, MAIN_WIDTH, MAIN_HEIGHT-DISTANCE_TOP-customNavHeight-(isNeedBottom?(OS_ABOVE_IOS7?HEIGHT_MAIN_BOTTOM:HEIGHT_MAIN_BOTTOM+20):OS_ABOVE_IOS7 ? 0:20)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
+        SpeCommonTableView * table =  [[SpeCommonTableView alloc]initWithFrame:CGRectMake(0, DISTANCE_TOP+HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-DISTANCE_TOP-HEIGHT_NAVIGATION-(isNeedBottom?HEIGHT_MAIN_BOTTOM:0)) Style:style withIsNeedPullDown:isNeedPullDownRefresh withIsNeedPullUpLoadMore:isNeesLoadMore withIsNeedBottobBar:isNeedBottom  withViewController:self];
         
         UIView *bg = [[UIView alloc]initWithFrame:table.bounds];
         [bg setBackgroundColor:[UIColor whiteColor]];

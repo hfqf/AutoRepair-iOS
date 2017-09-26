@@ -27,16 +27,19 @@
            [btn setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height-20)];
            [btn setImage:icon forState:UIControlStateNormal];
 
-           UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(btn.frame), frame.size.width, 20)];
+           [btn setImageEdgeInsets:UIEdgeInsetsMake((frame.size.height-20-30)/2, (frame.size.width-30)/2, (frame.size.height-20-30)/2, (frame.size.width-30)/2)];
+
+           UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(btn.frame)-10, frame.size.width, 25)];
            [tip setText:_title];
            [tip setTextAlignment:NSTextAlignmentCenter];
            [tip setTextColor:[UIColor blackColor]];
-           [tip setFont:[UIFont systemFontOfSize:15]];
+           [tip setFont:[UIFont systemFontOfSize:11]];
            [self addSubview:tip];
        }else{
            [btn setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
            [btn setTitle:_title forState:UIControlStateNormal];
-           [btn setTitleColor:KEY_COMMON_CORLOR forState:UIControlStateNormal];
+           [btn.titleLabel setFont:[UIFont systemFontOfSize:13]];
+           [btn setTitleColor:UIColorFromRGB(0x787878) forState:UIControlStateNormal];
        }
        [self addSubview:btn];
 

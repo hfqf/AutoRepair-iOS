@@ -44,7 +44,7 @@
         logo.center = CGPointMake(frame.size.width / 2, frame.size.height * 0.2);
         [self addSubview:logo];
         self.logo = logo;
-        BHBBottomBar * bar = [[BHBBottomBar alloc]initWithFrame:CGRectMake(0, frame.size.height - BHBBOTTOMHEIGHT, frame.size.width, BHBBOTTOMHEIGHT)];
+        BHBBottomBar * bar = [[BHBBottomBar alloc]initWithFrame:CGRectMake(0, frame.size.height*0.9, frame.size.width, BHBBOTTOMHEIGHT)];
         __weak typeof(self) weakSelf = self;
         bar.backClick = ^{
             [weakSelf.centerView scrollBack];
@@ -56,7 +56,7 @@
         };
         [self addSubview:bar];
         self.bottomBar = bar;
-        BHBCenterView * centerView = [[BHBCenterView alloc]initWithFrame:CGRectMake(0, self.frame.size.height * 0.37, self.frame.size.width, self.frame.size.height * 0.4)];
+        BHBCenterView * centerView = [[BHBCenterView alloc]initWithFrame:CGRectMake(0, self.frame.size.height * 0.3, self.frame.size.width, self.frame.size.height * 0.6)];
         [self addSubview:centerView];
         centerView.delegate = self;
         centerView.dataSource = self;

@@ -28,35 +28,8 @@
     [super viewDidLoad];
     [title setText:@"库存退货"];
 
-//    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-//    [addBtn setFrame:CGRectMake(MAIN_WIDTH-40, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
-//    //    [addBtn setTitle:@"添加" forState:UIControlStateNormal];
-//    [addBtn setImage:[UIImage imageNamed:@"moresetting"] forState:UIControlStateNormal];
-//    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
-//    [navigationBG addSubview:addBtn];
 }
 
-- (void)addBtnClicked
-{
-    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增商品",@"商品分类设置", nil];
-    [act showInView:self.view];
-}
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == 0)
-    {
-        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsAddNewViewController") alloc]init] animated:YES];
-
-    }else if (buttonIndex == 1){
-        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];
-    }else{
-
-    }
-}
 
 
 - (void)didReceiveMemoryWarning {

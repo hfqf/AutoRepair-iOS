@@ -7,7 +7,7 @@
 //
 
 #import "WarehouseWillPurchaseViewController.h"
-
+#import "WarehouseGoodsInfoViewController.h"
 #import "WarehouseGoodsInSubTypeListViewController.h"
 
 
@@ -50,6 +50,13 @@
     [super viewDidLoad];
     [title setText:@"物品采购"];
 
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-40, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
+    [addBtn setTitle:@"添加" forState:UIControlStateNormal];
+    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+    [navigationBG addSubview:addBtn];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,9 +67,10 @@
 
 - (void)addBtnClicked
 {
-
-    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增商品",@"商品分类设置",@"查看未启用商品", nil];
-    [act showInView:self.view];
+    WareHouseGoods *good = [[WareHouseGoods alloc]init];
+    good.m_isAddNew = YES;
+    WarehouseGoodsInfoViewController *add = [[WarehouseGoodsInfoViewController alloc]initWith:good];
+    [self.navigationController pushViewController:add animated:YES];
 }
 
 - (void)requestData:(BOOL)isRefresh
@@ -210,7 +218,10 @@
 {
     if(buttonIndex == 0)
     {
-        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsAddNewViewController") alloc]init] animated:YES];
+        WareHouseGoods *good = [[WareHouseGoods alloc]init];
+        good.m_isAddNew = YES;
+        WarehouseGoodsInfoViewController *add = [[WarehouseGoodsInfoViewController alloc]initWith:good];
+        [self.navigationController pushViewController:add animated:YES];
 
     }else if (buttonIndex == 1){
         [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];

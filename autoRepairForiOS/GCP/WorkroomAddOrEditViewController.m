@@ -227,7 +227,7 @@
     
     if([self.m_rep.m_state isEqualToString:@"0"]){
         self.m_rep.m_state = @"1";
-        [self updateRepair];
+        [self updateRepair:YES];
     }else if([self.m_rep.m_state isEqualToString:@"1"]){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"请检查各项数据,确认收款后只能删除,无法撤销或修改,确认提交?" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
         alert.tag = 10000;
@@ -236,7 +236,7 @@
         
     }else if([self.m_rep.m_state isEqualToString:@"3"]){
         self.m_rep.m_state = @"0";
-        [self updateRepair];
+        [self updateRepair:YES];
     }else{
         
     }
@@ -282,11 +282,20 @@
         return;
     }
 
-    [self addNewItesms];
+    [self addNewItesms:NO];
 }
 
+- (void)updateGoodsStoredNum:(BOOL)isOut withItem:(ADTRepairItemInfo *)item
+{
+ 
+}
 
-- (void)addNewItesms
+- (void)updateAllGoodsStoredNum:(BOOL)isOut
+{
+
+}
+
+- (void)addNewItesms:(BOOL)isBackAction
 {
 
     [self showWaitingView];
@@ -322,7 +331,7 @@
                                                    }
                                                }
 
-                                               [self updateRepair];
+                                               [self updateRepair:isBackAction];
 
                                            }else{
                                                [PubllicMaskViewHelper showTipViewWith:@"保存编辑失败" inSuperView:self.view withDuration:1];
@@ -340,7 +349,7 @@
 
 
 }
-- (void)updateRepair
+- (void)updateRepair:(BOOL)isNeedBack
 {
 
     NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
@@ -363,25 +372,33 @@
                        [self removeWaitingView];
                        if([succeedResult[@"code"]integerValue] == 1)
                        {
+
+                           //修完(才算是修改库存数量)时,提交收款，取消此订单，删除订单 同时修改对应商品库存数量;
+                           if(self.m_rep.m_state.integerValue == 1){
+                               [self updateAllGoodsStoredNum:YES];
+                           }
+
                            [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
                            [PubllicMaskViewHelper showTipViewWith:@"更新成功" inSuperView:self.view withDuration:1];
-                           [self requestData:YES];
+                           if(isNeedBack){
+                               [self.navigationController popViewControllerAnimated:YES];
+
+                           }else{
+                               [self requestData:YES];
+                           }
                        }
                        else
                        {
                            [PubllicMaskViewHelper showTipViewWith:@"更新失败" inSuperView:self.view withDuration:1];
                            
                        }
-                       
-                       
-                       
+
                    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
                        [self removeWaitingView];
                        [PubllicMaskViewHelper showTipViewWith:@"更新失败" inSuperView:self.view withDuration:1];
                    }];
-    
-    
 }
+
 
 - (void)categoryBtnClicked:(UIButton *)btn
 {
@@ -441,39 +458,25 @@
         if([self.m_rep.m_state isEqualToString:@"2"]){
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-            [self autoUpdateAndFinish];
+            if(self.m_rep.m_arrRepairItem.count == 0){
+                [self updateRepair:YES];
+            }else{
+                NSInteger idVaildNum = 0;
+                for(ADTRepairItemInfo *_item in self.m_rep.m_arrRepairItem){
+                    if(_item.m_id){
+                        idVaildNum++;
+                    }
+                }
+                if(idVaildNum != self.m_rep.m_arrRepairItem.count){
+                    [self addNewItesms:YES];
+                }else{
+                     [self updateRepair:YES];
+                }
+            }
         }
     }
 }
 
-- (void)autoUpdateAndFinish
-{
-    NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
-    [df1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-    [df1 setLocale:locale];
-    NSDate *date=[df1 dateFromString:self.m_rep.m_wantedcompletedtime];
-    
-    NSDate *dateToDay = [NSDate dateWithTimeInterval:[self.m_rep.m_repairCircle integerValue]*24*3600 sinceDate:date];//将获得当前时间
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd"];
-    [df setLocale:locale];
-    NSString *strDate = [df stringFromDate:dateToDay];
-    self.m_rep.m_targetDate = strDate;
-    
-    [self showWaitingView];
-    [HTTP_MANAGER updateOneRepair4:self.m_rep
-                    successedBlock:^(NSDictionary *succeedResult) {
-                        [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
-                        [self removeWaitingView];
-                        [self.navigationController popViewControllerAnimated:YES];
-
-                    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                        [self removeWaitingView];
-                        [self.navigationController popViewControllerAnimated:YES];
-                    }];
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -937,7 +940,7 @@
                             item.m_id = succeedResult[@"ret"][@"_id"];
                             [PubllicMaskViewHelper showTipViewWith:@"添加成功" inSuperView:self.view withDuration:1];
                             [self.m_rep.m_arrRepairItem addObject:item];
-                            [self updateRepair];
+                            [self updateRepair:NO];
                         }else{
                             [self removeWaitingView];
                             [PubllicMaskViewHelper showTipViewWith:@"添加失败" inSuperView:self.view withDuration:1];
@@ -961,7 +964,7 @@
     }else if (alertView.tag == 10000){
         if(buttonIndex == 1){
             self.m_rep.m_state = @"2";
-            [self updateRepair];
+            [self updateRepair:YES];
         }
     }else if(alertView.tag == 10001){
         if(buttonIndex == 1){
@@ -985,12 +988,12 @@
         else if (buttonIndex == 2){
             self.m_rep.m_isClose = YES;
             self.m_rep.m_isreaded = YES;
-            [self updateRepair];
+            [self updateRepair:NO];
         }
         else if (buttonIndex == 3){
             self.m_rep.m_isClose = NO;
             self.m_rep.m_isreaded = NO;
-            [self updateRepair];
+            [self updateRepair:NO];
         }
     }else if (alertView.tag == 10004){
         if(buttonIndex == 1){
@@ -1279,7 +1282,7 @@
             ADTRepairItemInfo *item = [[ADTRepairItemInfo alloc]init];
             item.m_repid = self.m_rep.m_idFromNode;
             item.m_contactid = self.m_rep.m_contactid;
-            item.m_price = good.m_costprice;
+            item.m_price = good.m_saleprice;
             item.m_num = good.m_selectedNum;
             item.m_type = good.m_name;
             item.m_itemType = @"0";

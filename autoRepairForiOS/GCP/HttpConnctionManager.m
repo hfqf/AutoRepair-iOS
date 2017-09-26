@@ -1174,7 +1174,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 {
     [self startNormalPostWith:@"/warehousegoodstoptype/addRef"
                      paragram:@{
-                                @"toptypeid":topId,
+                                @"id":topId,
                                 @"subids":subId,
                                 @"owner":[LoginUserUtil userTel],
                                 }
@@ -1674,7 +1674,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 {
     [self startNormalPostWith:@"/servicetoptype/addRef"
                      paragram:@{
-                                @"toptypeid":topId,
+                                @"id":topId,
                                 @"subids":subId,
                                 @"owner":[LoginUserUtil userTel],
                                 }

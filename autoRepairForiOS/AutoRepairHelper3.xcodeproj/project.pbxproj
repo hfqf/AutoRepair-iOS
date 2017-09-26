@@ -39,8 +39,6 @@
 		7D1BAA671F5C458700B03719 /* WarehouseGoodsSettingSubTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA651F5C458700B03719 /* WarehouseGoodsSettingSubTypeListViewController.m */; };
 		7D1BAA6A1F5CED8800B03719 /* WarehouseGoodsInSubTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA691F5CED8800B03719 /* WarehouseGoodsInSubTypeListViewController.m */; };
 		7D1BAA6B1F5CED8800B03719 /* WarehouseGoodsInSubTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA691F5CED8800B03719 /* WarehouseGoodsInSubTypeListViewController.m */; };
-		7D1BAA6E1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA6D1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m */; };
-		7D1BAA6F1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA6D1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m */; };
 		7D1BAA7A1F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA791F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m */; };
 		7D1BAA7B1F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA791F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m */; };
 		7D1BAA7E1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA7D1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m */; };
@@ -83,6 +81,252 @@
 		7D2046071F78E7F70061D6AD /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2046021F78E7D90061D6AD /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D2046081F78E7FC0061D6AD /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2046001F78E7D90061D6AD /* AipOcrSdk.framework */; };
 		7D2046091F78E7FC0061D6AD /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2046001F78E7D90061D6AD /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7D2046141F79423B0061D6AD /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FBF1E7982240071DC90 /* UIImageView+HighlightedWebCache.m */; };
+		7D2046151F79423B0061D6AD /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33021F64F1C700C2E69C /* WarehouseWillSaveToStoreGoodsViewController.m */; };
+		7D2046161F79423B0061D6AD /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FBD1E7982240071DC90 /* UIImage+MultiFormat.m */; };
+		7D2046171F79423B0061D6AD /* ServiceManaagerTopTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77D51F70C010001B0A7A /* ServiceManaagerTopTypeAddViewController.m */; };
+		7D2046181F79423B0061D6AD /* WorkroomListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D72B4781F243D5E00383D3D /* WorkroomListViewController.m */; };
+		7D2046191F79423B0061D6AD /* ADTRepairInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D432BE71AF218CB003F952B /* ADTRepairInfo.m */; };
+		7D20461A1F79423B0061D6AD /* WarehouseSupplierInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E3E1F541B2B00846ADE /* WarehouseSupplierInfoViewController.m */; };
+		7D20461B1F79423B0061D6AD /* HttpConnctionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE144A1DDE05B00082C0AB /* HttpConnctionManager.m */; };
+		7D20461C1F79423B0061D6AD /* WarehouseGoodsRejectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044BB1F77E4CE0061D6AD /* WarehouseGoodsRejectViewController.m */; };
+		7D20461D1F79423B0061D6AD /* WarehouseGoodPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */; };
+		7D20461E1F79423B0061D6AD /* WarehouseGoodsSettingTopTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA611F5C457500B03719 /* WarehouseGoodsSettingTopTypeListViewController.m */; };
+		7D20461F1F79423B0061D6AD /* WarehouseGoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA791F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m */; };
+		7D2046201F79423B0061D6AD /* AddNewCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D432BEE1AF21D9A003F952B /* AddNewCustomerViewController.m */; };
+		7D2046211F79423B0061D6AD /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E191A62AE770004F3F6 /* AFURLSessionManager.m */; };
+		7D2046221F79423B0061D6AD /* UIImageView+BHBSetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D37795C1E87945600560B70 /* UIImageView+BHBSetImage.m */; };
+		7D2046231F79423B0061D6AD /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E131A62AE770004F3F6 /* AFURLConnectionOperation.m */; };
+		7D2046241F79423B0061D6AD /* ConverUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426F321A62B9370004F3F6 /* ConverUtil.m */; };
+		7D2046251F79423B0061D6AD /* SpeSqliteUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D458AE41ADBBE0B00BCACAB /* SpeSqliteUpdateManager.m */; };
+		7D2046261F79423B0061D6AD /* WarehouseOtherPurchaseSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4391F6F71D200709A6C /* WarehouseOtherPurchaseSaveToStoreViewController.m */; };
+		7D2046271F79423B0061D6AD /* WarehouseOtherPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4351F6F71AD00709A6C /* WarehouseOtherPurchaseViewController.m */; };
+		7D2046281F79423B0061D6AD /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044C41F789C690061D6AD /* SBJson4StreamParser.m */; };
+		7D2046291F79423B0061D6AD /* BHBPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3779521E87945600560B70 /* BHBPopView.m */; };
+		7D20462A1F79423B0061D6AD /* WarehouseGoodsAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FA1F6269BF00C2E69C /* WarehouseGoodsAction.m */; };
+		7D20462B1F79423B0061D6AD /* LoginUserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DF51A62ABCA0004F3F6 /* LoginUserUtil.m */; };
+		7D20462C1F79423B0061D6AD /* CustomerOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4639491F3C96BA00783F38 /* CustomerOrdersViewController.m */; };
+		7D20462D1F79423B0061D6AD /* NSDictionary+ValueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB338C81E3F8C2C002DAE79 /* NSDictionary+ValueCheck.m */; };
+		7D20462E1F79423B0061D6AD /* SMSUIContactsFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB381DE3427F0032FBBC /* SMSUIContactsFriendsViewController.m */; };
+		7D20462F1F79423B0061D6AD /* ClassIconImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D300A1E798E3E0071DC90 /* ClassIconImageView.m */; };
+		7D2046301F79423B0061D6AD /* CustomerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D62151AF311CF00252B07 /* CustomerTableViewCell.m */; };
+		7D2046311F79423B0061D6AD /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E331A62AE770004F3F6 /* MJRefreshConst.m */; };
+		7D2046321F79423B0061D6AD /* UIImage+BHBEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D37795A1E87945600560B70 /* UIImage+BHBEffects.m */; };
+		7D2046331F79423B0061D6AD /* SMSSDKUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB281DE3427F0032FBBC /* SMSSDKUI.m */; };
+		7D2046341F79423B0061D6AD /* WarehouseGoodsStoreWarmingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B41D1F6F69BD00709A6C /* WarehouseGoodsStoreWarmingViewController.m */; };
+		7D2046351F79423B0061D6AD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E2A1A62AE770004F3F6 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D2046361F79423B0061D6AD /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FB01E7982240071DC90 /* SDWebImageDownloader.m */; };
+		7D2046371F79423B0061D6AD /* SMS_HYZBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB221DE3427F0032FBBC /* SMS_HYZBadgeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D2046381F79423B0061D6AD /* ADTRepairItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3F58961E93A8590007FCDA /* ADTRepairItemInfo.m */; };
+		7D2046391F79423B0061D6AD /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044C51F789C690061D6AD /* SBJson4StreamWriterState.m */; };
+		7D20463A1F79423B0061D6AD /* SpeRefreshAndLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC90261AEFBE9A00B4EB59 /* SpeRefreshAndLoadViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D20463B1F79423B0061D6AD /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FB21E7982240071DC90 /* SDWebImageDownloaderOperation.m */; };
+		7D20463C1F79423B0061D6AD /* SMS_MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB241DE3427F0032FBBC /* SMS_MBProgressHUD.m */; };
+		7D20463D1F79423B0061D6AD /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC90391AEFCD1F00B4EB59 /* SettingViewController.m */; };
+		7D20463E1F79423B0061D6AD /* UIView+BHBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D37795E1E87945600560B70 /* UIView+BHBAnimation.m */; };
+		7D20463F1F79423B0061D6AD /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC90361AEFC9A900B4EB59 /* SearchViewController.m */; };
+		7D2046401F79423B0061D6AD /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E371A62AE770004F3F6 /* MJRefreshHeaderView.m */; };
+		7D2046411F79423B0061D6AD /* WarehouseGoodsSettingSubTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA651F5C458700B03719 /* WarehouseGoodsSettingSubTypeListViewController.m */; };
+		7D2046421F79423B0061D6AD /* ServiceManaagerTopTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77CD1F70BFD5001B0A7A /* ServiceManaagerTopTypeListViewController.m */; };
+		7D2046431F79423B0061D6AD /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB081DE1688D0032FBBC /* LoginViewController.mm */; };
+		7D2046441F79423B0061D6AD /* WarehouseGoodPurchaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C330E1F6573A200C2E69C /* WarehouseGoodPurchaseInfoViewController.m */; };
+		7D2046451F79423B0061D6AD /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FB91E7982240071DC90 /* UIButton+WebCache.m */; };
+		7D2046461F79423B0061D6AD /* WarehouseGoodInAndOutRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4291F6F6AC800709A6C /* WarehouseGoodInAndOutRecordsViewController.m */; };
+		7D2046471F79423B0061D6AD /* NSArray+SortByFisrtChar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5DDD991E30B9380065FAED /* NSArray+SortByFisrtChar.m */; };
+		7D2046481F79423B0061D6AD /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044CA1F789C6B0061D6AD /* SBJson4StreamTokeniser.m */; };
+		7D2046491F79423B0061D6AD /* TabbarButtonsBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426F211A62B5D60004F3F6 /* TabbarButtonsBGView.m */; };
+		7D20464A1F79423B0061D6AD /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E0C1A62AE770004F3F6 /* AFHTTPSessionManager.m */; };
+		7D20464B1F79423B0061D6AD /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FAC1E7982240071DC90 /* SDWebImageCompat.m */; };
+		7D20464C1F79423B0061D6AD /* WarehousePurchaseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32F61F62694700C2E69C /* WarehousePurchaseInfo.m */; };
+		7D20464D1F79423B0061D6AD /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E311A62AE770004F3F6 /* MJRefreshBaseView.m */; };
+		7D20464E1F79423B0061D6AD /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2F671E7982240071DC90 /* EGOImageLoadConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D20464F1F79423B0061D6AD /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E0F1A62AE770004F3F6 /* AFNetworkReachabilityManager.m */; };
+		7D2046501F79423B0061D6AD /* SpeWebviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D62E6DD1F3E9691005C6155 /* SpeWebviewViewController.m */; };
+		7D2046511F79423B0061D6AD /* MainTabBarViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DE61A62AB440004F3F6 /* MainTabBarViewController.mm */; };
+		7D2046521F79423B0061D6AD /* PubllicMaskViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DF71A62ABCA0004F3F6 /* PubllicMaskViewHelper.m */; };
+		7D2046531F79423B0061D6AD /* WarehouseRejectSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044B71F779ED60061D6AD /* WarehouseRejectSaveToStoreViewController.m */; };
+		7D2046541F79423B0061D6AD /* UIView+JHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BFB3D1F2CB6DB00FD239D /* UIView+JHUD.m */; };
+		7D2046551F79423B0061D6AD /* FontSizeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DF91A62ABCA0004F3F6 /* FontSizeUtil.m */; };
+		7D2046561F79423B0061D6AD /* BHBItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D37794E1E87945600560B70 /* BHBItem.m */; };
+		7D2046571F79423B0061D6AD /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FBB1E7982240071DC90 /* UIImage+GIF.m */; };
+		7D2046581F79423B0061D6AD /* TabbarBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DDD1A62AACC0004F3F6 /* TabbarBaseViewController.m */; };
+		7D2046591F79423B0061D6AD /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E111A62AE770004F3F6 /* AFSecurityPolicy.m */; };
+		7D20465A1F79423B0061D6AD /* SqliteDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D458ADE1ADBBE0B00BCACAB /* SqliteDataManager.m */; };
+		7D20465B1F79423B0061D6AD /* EGOImageView+SetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E031A62ABD30004F3F6 /* EGOImageView+SetImage.m */; };
+		7D20465C1F79423B0061D6AD /* WarehouseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E0B1F513DFC00846ADE /* WarehouseItem.m */; };
+		7D20465D1F79423B0061D6AD /* WarehouseAddNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E1B1F53EB2D00846ADE /* WarehouseAddNewViewController.m */; };
+		7D20465E1F79423B0061D6AD /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB301DE3427F0032FBBC /* RegViewController.m */; };
+		7D20465F1F79423B0061D6AD /* UIButton+BHBSetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3779581E87945600560B70 /* UIButton+BHBSetImage.m */; };
+		7D2046601F79423B0061D6AD /* ServiceManaagerSubTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77D91F70C0DE001B0A7A /* ServiceManaagerSubTypeListViewController.m */; };
+		7D2046611F79423B0061D6AD /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FB71E7982240071DC90 /* SDWebImagePrefetcher.m */; };
+		7D2046621F79423B0061D6AD /* SectionsViewControllerFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D30141E799F260071DC90 /* SectionsViewControllerFriends.m */; };
+		7D2046631F79423B0061D6AD /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2F6C1E7982240071DC90 /* EGOImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D2046641F79423B0061D6AD /* WareHouseGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E131F53C37700846ADE /* WareHouseGoods.m */; };
+		7D2046651F79423B0061D6AD /* SMSUIVerificationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB3A1DE3427F0032FBBC /* SMSUIVerificationCodeViewController.m */; };
+		7D2046661F79423B0061D6AD /* XTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DE21A62AB020004F3F6 /* XTNavigationController.m */; };
+		7D2046671F79423B0061D6AD /* VerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB321DE3427F0032FBBC /* VerifyViewController.m */; };
+		7D2046681F79423B0061D6AD /* WarehousePurchaseEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C32FE1F62F78700C2E69C /* WarehousePurchaseEditView.m */; };
+		7D2046691F79423B0061D6AD /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044C81F789C6B0061D6AD /* SBJson4Parser.m */; };
+		7D20466A1F79423B0061D6AD /* WarehouseGoodsSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA551F5C2CBB00B03719 /* WarehouseGoodsSettingViewController.m */; };
+		7D20466B1F79423B0061D6AD /* SpeCommonTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC90291AEFBEBA00B4EB59 /* SpeCommonTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D20466C1F79423B0061D6AD /* WarehouseWillSaveToStoreGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C330A1F651B0100C2E69C /* WarehouseWillSaveToStoreGoodsTableViewCell.m */; };
+		7D20466D1F79423B0061D6AD /* ADTOrderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D46394D1F3CADFD00783F38 /* ADTOrderInfo.m */; };
+		7D20466E1F79423B0061D6AD /* ContactDeverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCBC9781DC2EF09006BA2C8 /* ContactDeverViewController.m */; };
+		7D20466F1F79423B0061D6AD /* JHUDAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BFB391F2CB6DB00FD239D /* JHUDAnimationView.m */; };
+		7D2046701F79423B0061D6AD /* InvitationViewControllerEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB2D1DE3427F0032FBBC /* InvitationViewControllerEx.m */; };
+		7D2046711F79423B0061D6AD /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E2C1A62AE770004F3F6 /* MBProgressHUD.m */; };
+		7D2046721F79423B0061D6AD /* WarehouseOtherPurchaseTakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B43D1F6F71FB00709A6C /* WarehouseOtherPurchaseTakeViewController.m */; };
+		7D2046731F79423B0061D6AD /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DB11A62AA120004F3F6 /* AppDelegate.mm */; };
+		7D2046741F79423B0061D6AD /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E0A1A62AE770004F3F6 /* AFHTTPRequestOperationManager.m */; };
+		7D2046751F79423B0061D6AD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E771A62AE770004F3F6 /* Reachability.m */; };
+		7D2046761F79423B0061D6AD /* CustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC90331AEFC6DC00B4EB59 /* CustomerViewController.m */; };
+		7D2046771F79423B0061D6AD /* ADTContacterInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D432BEA1AF2193E003F952B /* ADTContacterInfo.m */; };
+		7D2046781F79423B0061D6AD /* WarehouseSupplierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E361F54020500846ADE /* WarehouseSupplierViewController.m */; };
+		7D2046791F79423B0061D6AD /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB2B1DE3427F0032FBBC /* CustomCell.m */; };
+		7D20467A1F79423B0061D6AD /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FAE1E7982240071DC90 /* SDWebImageDecoder.m */; };
+		7D20467B1F79423B0061D6AD /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426F2E1A62B8DF0004F3F6 /* GTMBase64.m */; };
+		7D20467C1F79423B0061D6AD /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426EAC1A62AE770004F3F6 /* UIProgressView+AFNetworking.m */; };
+		7D20467D1F79423B0061D6AD /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DDB1A62AACC0004F3F6 /* BaseViewController.m */; };
+		7D20467E1F79423B0061D6AD /* BHBGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D37794C1E87945600560B70 /* BHBGroup.m */; };
+		7D20467F1F79423B0061D6AD /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426F281A62B8C20004F3F6 /* DES3Util.m */; };
+		7D2046801F79423B0061D6AD /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2F611E7982240071DC90 /* EGOCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D2046811F79423B0061D6AD /* WarehouseSupplierInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33061F650E0400C2E69C /* WarehouseSupplierInfo.m */; };
+		7D2046821F79423B0061D6AD /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FC11E7982240071DC90 /* UIImageView+WebCache.m */; };
+		7D2046831F79423B0061D6AD /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426EA71A62AE770004F3F6 /* UIButton+AFNetworking.m */; };
+		7D2046841F79423B0061D6AD /* LocalTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DF31A62ABCA0004F3F6 /* LocalTimeUtil.m */; };
+		7D2046851F79423B0061D6AD /* SectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB341DE3427F0032FBBC /* SectionsViewController.m */; };
+		7D2046861F79423B0061D6AD /* RepairPrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A10FB1E9D2DCF0049D76D /* RepairPrintViewController.m */; };
+		7D2046871F79423B0061D6AD /* WarehousePurchaseRejectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4311F6F718F00709A6C /* WarehousePurchaseRejectedViewController.m */; };
+		7D2046881F79423B0061D6AD /* AddRepairHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2904FB1AF134FF00039CEF /* AddRepairHistoryViewController.m */; };
+		7D2046891F79423B0061D6AD /* WarehouseGoodsStoreTotalPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4191F6F653300709A6C /* WarehouseGoodsStoreTotalPreviewViewController.m */; };
+		7D20468A1F79423B0061D6AD /* BHBCustomBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D37794A1E87945600560B70 /* BHBCustomBtn.m */; };
+		7D20468B1F79423B0061D6AD /* WarehousePurchaseRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B42D1F6F713E00709A6C /* WarehousePurchaseRecordsViewController.m */; };
+		7D20468C1F79423B0061D6AD /* ShareSdkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F0451EA5191D00B92895 /* ShareSdkUtil.m */; };
+		7D20468D1F79423B0061D6AD /* WareHouseManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E071F512CEB00846ADE /* WareHouseManagerViewController.m */; };
+		7D20468E1F79423B0061D6AD /* WarehouseGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA7D1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m */; };
+		7D20468F1F79423B0061D6AD /* EGOImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2F641E7982240071DC90 /* EGOImageButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D2046901F79423B0061D6AD /* ServiceManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77C91F70B908001B0A7A /* ServiceManagerViewController.m */; };
+		7D2046911F79423B0061D6AD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DAE1A62AA120004F3F6 /* main.m */; };
+		7D2046921F79423B0061D6AD /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E351A62AE770004F3F6 /* MJRefreshFooterView.m */; };
+		7D2046931F79423B0061D6AD /* DesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426F2B1A62B8CD0004F3F6 /* DesUtil.m */; };
+		7D2046941F79423B0061D6AD /* ReachabilityObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DF11A62ABCA0004F3F6 /* ReachabilityObserver.m */; };
+		7D2046951F79423B0061D6AD /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FAA1E7982240071DC90 /* SDImageCache.m */; };
+		7D2046961F79423B0061D6AD /* WarehouseSaveToStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C33121F65864100C2E69C /* WarehouseSaveToStoreViewController.m */; };
+		7D2046971F79423B0061D6AD /* WorkroomAddOrEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F0B131F27343200507356 /* WorkroomAddOrEditViewController.m */; };
+		7D2046981F79423B0061D6AD /* WarehouseSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E0F1F52AA9700846ADE /* WarehouseSettingViewController.m */; };
+		7D2046991F79423B0061D6AD /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB0D1DE18A200032FBBC /* RegisterViewController.m */; };
+		7D20469A1F79423B0061D6AD /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2F691E7982240071DC90 /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D20469B1F79423B0061D6AD /* TabbarCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426F241A62B5F40004F3F6 /* TabbarCustomButton.m */; };
+		7D20469C1F79423B0061D6AD /* WarehouseGoodsInSubTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA691F5CED8800B03719 /* WarehouseGoodsInSubTypeListViewController.m */; };
+		7D20469D1F79423B0061D6AD /* RepairHistotyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA54831AF4CDC700216905 /* RepairHistotyTableViewCell.m */; };
+		7D20469E1F79423B0061D6AD /* BHBPlaySoundTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3779501E87945600560B70 /* BHBPlaySoundTool.m */; };
+		7D20469F1F79423B0061D6AD /* YJLocalCountryData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0DEB261DE3427F0032FBBC /* YJLocalCountryData.m */; };
+		7D2046A01F79423B0061D6AD /* WarehouseGoodsSettingTopTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA591F5C44E800B03719 /* WarehouseGoodsSettingTopTypeAddViewController.m */; };
+		7D2046A11F79423B0061D6AD /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426EA51A62AE770004F3F6 /* UIAlertView+AFNetworking.m */; };
+		7D2046A21F79423B0061D6AD /* ChangeSkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3CB6E21EA65B2A004F14BE /* ChangeSkinViewController.m */; };
+		7D2046A31F79423B0061D6AD /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426EA91A62AE770004F3F6 /* UIImageView+AFNetworking.m */; };
+		7D2046A41F79423B0061D6AD /* CountOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3779421E8792ED00560B70 /* CountOnViewController.m */; };
+		7D2046A51F79423B0061D6AD /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E151A62AE770004F3F6 /* AFURLRequestSerialization.m */; };
+		7D2046A61F79423B0061D6AD /* WarehouseSupplierAddNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E3A1F541A7C00846ADE /* WarehouseSupplierAddNewViewController.m */; };
+		7D2046A71F79423B0061D6AD /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FC31E7982240071DC90 /* UIView+WebCacheOperation.m */; };
+		7D2046A81F79423B0061D6AD /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FA81E7982240071DC90 /* NSData+ImageContentType.m */; };
+		7D2046A91F79423B0061D6AD /* BHBCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3779481E87945600560B70 /* BHBCenterView.m */; };
+		7D2046AA1F79423B0061D6AD /* EmptyTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC902C1AEFBEC700B4EB59 /* EmptyTipView.m */; };
+		7D2046AB1F79423B0061D6AD /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8D2FB41E7982240071DC90 /* SDWebImageManager.m */; };
+		7D2046AC1F79423B0061D6AD /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044CC1F789C6B0061D6AD /* SBJson4Writer.m */; };
+		7D2046AD1F79423B0061D6AD /* WarehouseWillTakeGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4251F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m */; };
+		7D2046AE1F79423B0061D6AD /* ServiceManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044BF1F77FF500061D6AD /* ServiceManagerTableViewCell.m */; };
+		7D2046AF1F79423B0061D6AD /* ServiceManaagerSubTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1D77DD1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m */; };
+		7D2046B01F79423B0061D6AD /* WarehousePositionAddNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E321F53FB6C00846ADE /* WarehousePositionAddNewViewController.m */; };
+		7D2046B11F79423B0061D6AD /* WarehouseGoodsSettingSubTypeAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1BAA5D1F5C44FC00B03719 /* WarehouseGoodsSettingSubTypeAddViewController.m */; };
+		7D2046B21F79423B0061D6AD /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426EA31A62AE770004F3F6 /* UIActivityIndicatorView+AFNetworking.m */; };
+		7D2046B31F79423B0061D6AD /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E081A62AE770004F3F6 /* AFHTTPRequestOperation.m */; };
+		7D2046B41F79423B0061D6AD /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426EA11A62AE770004F3F6 /* AFNetworkActivityIndicatorManager.m */; };
+		7D2046B51F79423B0061D6AD /* JHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BFB371F2CB6DB00FD239D /* JHUD.m */; };
+		7D2046B61F79423B0061D6AD /* XXTEncrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426F1C1A62B4C00004F3F6 /* XXTEncrypt.m */; };
+		7D2046B71F79423B0061D6AD /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB510F51EA121180007D5D0 /* ResetPwdViewController.m */; };
+		7D2046B81F79423B0061D6AD /* UIImage+JHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BFB3B1F2CB6DB00FD239D /* UIImage+JHUD.m */; };
+		7D2046B91F79423B0061D6AD /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426EAE1A62AE770004F3F6 /* UIWebView+AFNetworking.m */; };
+		7D2046BA1F79423B0061D6AD /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044D01F789C6D0061D6AD /* SBJson4StreamParserState.m */; };
+		7D2046BB1F79423B0061D6AD /* AddNewCarcodeSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C76071E8B8EB3006C48CC /* AddNewCarcodeSelectViewController.m */; };
+		7D2046BC1F79423B0061D6AD /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426E171A62AE770004F3F6 /* AFURLResponseSerialization.m */; };
+		7D2046BD1F79423B0061D6AD /* EditUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3CB6E81EA70BD4004F14BE /* EditUserViewController.m */; };
+		7D2046BE1F79423B0061D6AD /* LocalImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D426DFB1A62ABCA0004F3F6 /* LocalImageHelper.m */; };
+		7D2046BF1F79423B0061D6AD /* WarehouseSelectGoodsToRepairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044B31F7618AB0061D6AD /* WarehouseSelectGoodsToRepairViewController.m */; };
+		7D2046C01F79423B0061D6AD /* BHBBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3779461E87945600560B70 /* BHBBottomBar.m */; };
+		7D2046C11F79423B0061D6AD /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2044CF1F789C6D0061D6AD /* SBJson4StreamWriter.m */; };
+		7D2046C21F79423B0061D6AD /* NewTipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC902F1AEFC05A00B4EB59 /* NewTipViewController.m */; };
+		7D2046C31F79423B0061D6AD /* WarehousePositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D005E2E1F53FB5100846ADE /* WarehousePositionViewController.m */; };
+		7D2046C41F79423B0061D6AD /* WarehouseWillPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D64B4211F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m */; };
+		7D2046C61F79423B0061D6AD /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D37793F1E87903600560B70 /* AssetsLibrary.framework */; };
+		7D2046C71F79423B0061D6AD /* PrintConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F00D1EA513EB00B92895 /* PrintConnector.framework */; };
+		7D2046C81F79423B0061D6AD /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F0171EA513EB00B92895 /* libWeiboSDK.a */; };
+		7D2046C91F79423B0061D6AD /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0DEB531DE342DB0032FBBC /* JavaScriptCore.framework */; };
+		7D2046CA1F79423B0061D6AD /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D448F5A1E247D55001536F4 /* UserNotifications.framework */; };
+		7D2046CB1F79423B0061D6AD /* ShareSDKUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F0091EA513EB00B92895 /* ShareSDKUI.framework */; };
+		7D2046CC1F79423B0061D6AD /* ShareSDKConfigFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F0061EA513EB00B92895 /* ShareSDKConfigFile.framework */; };
+		7D2046CD1F79423B0061D6AD /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF80D3F1E11FBFC0067FD49 /* libresolv.tbd */; };
+		7D2046CE1F79423B0061D6AD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0DEB511DE342D00032FBBC /* MessageUI.framework */; };
+		7D2046CF1F79423B0061D6AD /* ShareSDKConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F02D1EA513EB00B92895 /* ShareSDKConnector.framework */; };
+		7D2046D01F79423B0061D6AD /* QQConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F00E1EA513EB00B92895 /* QQConnector.framework */; };
+		7D2046D11F79423B0061D6AD /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2046001F78E7D90061D6AD /* AipOcrSdk.framework */; };
+		7D2046D21F79423B0061D6AD /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0DEB1A1DE3424C0032FBBC /* SMS_SDK.framework */; };
+		7D2046D31F79423B0061D6AD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCBC97E1DC2F2B8006BA2C8 /* CoreTelephony.framework */; };
+		7D2046D41F79423B0061D6AD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F191A62B2750004F3F6 /* CoreFoundation.framework */; };
+		7D2046D51F79423B0061D6AD /* BaiduBCEBOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D8D300D1E799A2C0071DC90 /* BaiduBCEBOS.framework */; };
+		7D2046D61F79423B0061D6AD /* jpush-ios-3.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF80D3B1E11FACB0067FD49 /* jpush-ios-3.0.0.a */; };
+		7D2046D71F79423B0061D6AD /* AipBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; };
+		7D2046D81F79423B0061D6AD /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F0021EA513EB00B92895 /* ShareSDK.framework */; };
+		7D2046D91F79423B0061D6AD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F171A62B26F0004F3F6 /* CFNetwork.framework */; };
+		7D2046DA1F79423B0061D6AD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F151A62B2630004F3F6 /* MobileCoreServices.framework */; };
+		7D2046DB1F79423B0061D6AD /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F131A62B2530004F3F6 /* libz.dylib */; };
+		7D2046DC1F79423B0061D6AD /* BaiduBCESTS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D8D300E1E799A2C0071DC90 /* BaiduBCESTS.framework */; };
+		7D2046DD1F79423B0061D6AD /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F0141EA513EB00B92895 /* TencentOpenAPI.framework */; };
+		7D2046DE1F79423B0061D6AD /* CopyConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F00B1EA513EB00B92895 /* CopyConnector.framework */; };
+		7D2046DF1F79423B0061D6AD /* BaiduBCEBasic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D8D300C1E799A2C0071DC90 /* BaiduBCEBasic.framework */; };
+		7D2046E01F79423B0061D6AD /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F111A62B24D0004F3F6 /* libstdc++.dylib */; };
+		7D2046E11F79423B0061D6AD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F0F1A62B2450004F3F6 /* libicucore.dylib */; };
+		7D2046E21F79423B0061D6AD /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F0D1A62B23B0004F3F6 /* ImageIO.framework */; };
+		7D2046E31F79423B0061D6AD /* ShareSDKExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F0071EA513EB00B92895 /* ShareSDKExtension.framework */; };
+		7D2046E41F79423B0061D6AD /* SinaWeiboConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F00F1EA513EB00B92895 /* SinaWeiboConnector.framework */; };
+		7D2046E51F79423B0061D6AD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F0B1A62B2310004F3F6 /* Security.framework */; };
+		7D2046E61F79423B0061D6AD /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F091A62B2230004F3F6 /* libiconv.dylib */; };
+		7D2046E71F79423B0061D6AD /* WechatConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F0111EA513EB00B92895 /* WechatConnector.framework */; };
+		7D2046E81F79423B0061D6AD /* jcore-ios-1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF80D3A1E11FACB0067FD49 /* jcore-ios-1.0.0.a */; };
+		7D2046E91F79423B0061D6AD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F071A62B21B0004F3F6 /* libsqlite3.dylib */; };
+		7D2046EA1F79423B0061D6AD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F051A62B2140004F3F6 /* SystemConfiguration.framework */; };
+		7D2046EB1F79423B0061D6AD /* SMSConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F0101EA513EB00B92895 /* SMSConnector.framework */; };
+		7D2046EC1F79423B0061D6AD /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173441F2E18BC00233B9B /* IdcardQuality.framework */; };
+		7D2046ED1F79423B0061D6AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F031A62B1F20004F3F6 /* CoreGraphics.framework */; };
+		7D2046EE1F79423B0061D6AD /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCBC97C1DC2F264006BA2C8 /* UMMobClick.framework */; };
+		7D2046EF1F79423B0061D6AD /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F0251EA513EB00B92895 /* libWeChatSDK.a */; };
+		7D2046F01F79423B0061D6AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426F011A62B1EC0004F3F6 /* UIKit.framework */; };
+		7D2046F11F79423B0061D6AD /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0DEB181DE3424C0032FBBC /* MOBFoundation.framework */; };
+		7D2046F21F79423B0061D6AD /* MailConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F00C1EA513EB00B92895 /* MailConnector.framework */; };
+		7D2046F31F79423B0061D6AD /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D45F02B1EA513EB00B92895 /* MOBFoundation.framework */; };
+		7D2046F41F79423B0061D6AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D426EFA1A62B0390004F3F6 /* Foundation.framework */; };
+		7D2046F51F79423B0061D6AD /* MOBFoundationEx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0DEB191DE3424C0032FBBC /* MOBFoundationEx.framework */; };
+		7D2046F61F79423B0061D6AD /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2046001F78E7D90061D6AD /* AipOcrSdk.framework */; };
+		7D2046F81F79423B0061D6AD /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D0DEB091DE1688D0032FBBC /* LoginViewController.xib */; };
+		7D2046F91F79423B0061D6AD /* music.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D3779561E87945600560B70 /* music.bundle */; };
+		7D2046FA1F79423B0061D6AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D426DB61A62AA120004F3F6 /* Main.storyboard */; };
+		7D2046FB1F79423B0061D6AD /* ShareSDKConfigFile.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F0051EA513EB00B92895 /* ShareSDKConfigFile.bundle */; };
+		7D2046FC1F79423B0061D6AD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D426DB91A62AA120004F3F6 /* Images.xcassets */; };
+		7D2046FD1F79423B0061D6AD /* ShareSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F02C1EA513EB00B92895 /* ShareSDK.bundle */; };
+		7D2046FE1F79423B0061D6AD /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D426E2E1A62AE770004F3F6 /* MJRefresh.bundle */; };
+		7D2046FF1F79423B0061D6AD /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 7D72B45D1F2362CE00383D3D /* aip.license */; };
+		7D2047001F79423B0061D6AD /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F0151EA513EB00B92895 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		7D2047011F79423B0061D6AD /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F0211EA513EB00B92895 /* WeiboSDK.bundle */; };
+		7D2047021F79423B0061D6AD /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F0081EA513EB00B92895 /* ShareSDKUI.bundle */; };
+		7D2047031F79423B0061D6AD /* images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D3779551E87945600560B70 /* images.bundle */; };
+		7D2047041F79423B0061D6AD /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F0261EA513EB00B92895 /* README.txt */; };
+		7D2047051F79423B0061D6AD /* SpeSqlSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D458AE51ADBBE0B00BCACAB /* SpeSqlSetting.plist */; };
+		7D2047061F79423B0061D6AD /* requirements.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D8D30431E7C46430071DC90 /* requirements.txt */; };
+		7D2047071F79423B0061D6AD /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D0DEB0E1DE18A200032FBBC /* RegisterViewController.xib */; };
+		7D2047081F79423B0061D6AD /* SMSSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7D0DEB3F1DE3427F0032FBBC /* SMSSDKUI.bundle */; };
+		7D20470A1F79423B0061D6AD /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7D20470B1F79423B0061D6AD /* IdcardQuality.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173441F2E18BC00233B9B /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7D20470C1F79423B0061D6AD /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2046001F78E7D90061D6AD /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D4173451F2E18BC00233B9B /* AipBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; };
 		7D4173461F2E18BC00233B9B /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D4173471F2E18BC00233B9B /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173441F2E18BC00233B9B /* IdcardQuality.framework */; };
@@ -504,6 +748,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		7D2047091F79423B0061D6AD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7D20470A1F79423B0061D6AD /* AipBase.framework in Embed Frameworks */,
+				7D20470B1F79423B0061D6AD /* IdcardQuality.framework in Embed Frameworks */,
+				7D20470C1F79423B0061D6AD /* AipOcrSdk.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7D4173341F2E0BA500233B9B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -601,8 +858,6 @@
 		7D1BAA651F5C458700B03719 /* WarehouseGoodsSettingSubTypeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsSettingSubTypeListViewController.m; sourceTree = "<group>"; };
 		7D1BAA681F5CED8800B03719 /* WarehouseGoodsInSubTypeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodsInSubTypeListViewController.h; sourceTree = "<group>"; };
 		7D1BAA691F5CED8800B03719 /* WarehouseGoodsInSubTypeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsInSubTypeListViewController.m; sourceTree = "<group>"; };
-		7D1BAA6C1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodsAddNewViewController.h; sourceTree = "<group>"; };
-		7D1BAA6D1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsAddNewViewController.m; sourceTree = "<group>"; };
 		7D1BAA781F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodsInfoViewController.h; sourceTree = "<group>"; };
 		7D1BAA791F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseGoodsInfoViewController.m; sourceTree = "<group>"; };
 		7D1BAA7C1F5DA2D100B03719 /* WarehouseGoodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseGoodsTableViewCell.h; sourceTree = "<group>"; };
@@ -645,6 +900,8 @@
 		7D2045E11F78C2B80061D6AD /* AutoRepairHelper3_os copy 2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AutoRepairHelper3_os copy 2-Info.plist"; path = "/Users/points/Documents/GitHub/AutoRepair-iOS/autoRepairForiOS/AutoRepairHelper3_os copy 2-Info.plist"; sourceTree = "<absolute>"; };
 		7D2046001F78E7D90061D6AD /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		7D2046021F78E7D90061D6AD /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
+		7D2047111F79423B0061D6AD /* AutoRepairHelper3_os_inshoue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoRepairHelper3_os_inshoue.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D2047121F79423C0061D6AD /* AutoRepairHelper3_os copy 22-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AutoRepairHelper3_os copy 22-Info.plist"; path = "/Users/points/Documents/GitHub/AutoRepair-iOS/autoRepairForiOS/AutoRepairHelper3_os copy 22-Info.plist"; sourceTree = "<absolute>"; };
 		7D2904FA1AF134FF00039CEF /* AddRepairHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRepairHistoryViewController.h; sourceTree = "<group>"; };
 		7D2904FB1AF134FF00039CEF /* AddRepairHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRepairHistoryViewController.m; sourceTree = "<group>"; };
 		7D37793F1E87903600560B70 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -993,6 +1250,62 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7D2046C51F79423B0061D6AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D2046C61F79423B0061D6AD /* AssetsLibrary.framework in Frameworks */,
+				7D2046C71F79423B0061D6AD /* PrintConnector.framework in Frameworks */,
+				7D2046C81F79423B0061D6AD /* libWeiboSDK.a in Frameworks */,
+				7D2046C91F79423B0061D6AD /* JavaScriptCore.framework in Frameworks */,
+				7D2046CA1F79423B0061D6AD /* UserNotifications.framework in Frameworks */,
+				7D2046CB1F79423B0061D6AD /* ShareSDKUI.framework in Frameworks */,
+				7D2046CC1F79423B0061D6AD /* ShareSDKConfigFile.framework in Frameworks */,
+				7D2046CD1F79423B0061D6AD /* libresolv.tbd in Frameworks */,
+				7D2046CE1F79423B0061D6AD /* MessageUI.framework in Frameworks */,
+				7D2046CF1F79423B0061D6AD /* ShareSDKConnector.framework in Frameworks */,
+				7D2046D01F79423B0061D6AD /* QQConnector.framework in Frameworks */,
+				7D2046D11F79423B0061D6AD /* AipOcrSdk.framework in Frameworks */,
+				7D2046D21F79423B0061D6AD /* SMS_SDK.framework in Frameworks */,
+				7D2046D31F79423B0061D6AD /* CoreTelephony.framework in Frameworks */,
+				7D2046D41F79423B0061D6AD /* CoreFoundation.framework in Frameworks */,
+				7D2046D51F79423B0061D6AD /* BaiduBCEBOS.framework in Frameworks */,
+				7D2046D61F79423B0061D6AD /* jpush-ios-3.0.0.a in Frameworks */,
+				7D2046D71F79423B0061D6AD /* AipBase.framework in Frameworks */,
+				7D2046D81F79423B0061D6AD /* ShareSDK.framework in Frameworks */,
+				7D2046D91F79423B0061D6AD /* CFNetwork.framework in Frameworks */,
+				7D2046DA1F79423B0061D6AD /* MobileCoreServices.framework in Frameworks */,
+				7D2046DB1F79423B0061D6AD /* libz.dylib in Frameworks */,
+				7D2046DC1F79423B0061D6AD /* BaiduBCESTS.framework in Frameworks */,
+				7D2046DD1F79423B0061D6AD /* TencentOpenAPI.framework in Frameworks */,
+				7D2046DE1F79423B0061D6AD /* CopyConnector.framework in Frameworks */,
+				7D2046DF1F79423B0061D6AD /* BaiduBCEBasic.framework in Frameworks */,
+				7D2046E01F79423B0061D6AD /* libstdc++.dylib in Frameworks */,
+				7D2046E11F79423B0061D6AD /* libicucore.dylib in Frameworks */,
+				7D2046E21F79423B0061D6AD /* ImageIO.framework in Frameworks */,
+				7D2046E31F79423B0061D6AD /* ShareSDKExtension.framework in Frameworks */,
+				7D2046E41F79423B0061D6AD /* SinaWeiboConnector.framework in Frameworks */,
+				7D2046E51F79423B0061D6AD /* Security.framework in Frameworks */,
+				7D2046E61F79423B0061D6AD /* libiconv.dylib in Frameworks */,
+				7D2046E71F79423B0061D6AD /* WechatConnector.framework in Frameworks */,
+				7D2046E81F79423B0061D6AD /* jcore-ios-1.0.0.a in Frameworks */,
+				7D2046E91F79423B0061D6AD /* libsqlite3.dylib in Frameworks */,
+				7D2046EA1F79423B0061D6AD /* SystemConfiguration.framework in Frameworks */,
+				7D2046EB1F79423B0061D6AD /* SMSConnector.framework in Frameworks */,
+				7D2046EC1F79423B0061D6AD /* IdcardQuality.framework in Frameworks */,
+				7D2046ED1F79423B0061D6AD /* CoreGraphics.framework in Frameworks */,
+				7D2046EE1F79423B0061D6AD /* UMMobClick.framework in Frameworks */,
+				7D2046EF1F79423B0061D6AD /* libWeChatSDK.a in Frameworks */,
+				7D2046F01F79423B0061D6AD /* UIKit.framework in Frameworks */,
+				7D2046F11F79423B0061D6AD /* MOBFoundation.framework in Frameworks */,
+				7D2046F21F79423B0061D6AD /* MailConnector.framework in Frameworks */,
+				7D2046F31F79423B0061D6AD /* MOBFoundation.framework in Frameworks */,
+				7D2046F41F79423B0061D6AD /* Foundation.framework in Frameworks */,
+				7D2046F51F79423B0061D6AD /* MOBFoundationEx.framework in Frameworks */,
+				7D2046F61F79423B0061D6AD /* AipOcrSdk.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7D4173CE1F2E26E900233B9B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1209,8 +1522,6 @@
 				7D1BAA7D1F5DA2D200B03719 /* WarehouseGoodsTableViewCell.m */,
 				7D1BAA781F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.h */,
 				7D1BAA791F5D9B6A00B03719 /* WarehouseGoodsInfoViewController.m */,
-				7D1BAA6C1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.h */,
-				7D1BAA6D1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m */,
 				7DC27EEB1F610EB80069F560 /* 采购 */,
 			);
 			name = "商品设置";
@@ -1518,6 +1829,7 @@
 				7D4CD9F01F235D38003619EB /* AutoRepairHelper3 copy-Info.plist */,
 				7D41741A1F2E26EA00233B9B /* AutoRepairHelper3_os copy-Info.plist */,
 				7D2045E11F78C2B80061D6AD /* AutoRepairHelper3_os copy 2-Info.plist */,
+				7D2047121F79423C0061D6AD /* AutoRepairHelper3_os copy 22-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1526,6 +1838,7 @@
 			children = (
 				7D4CD9EF1F235D37003619EB /* AutoRepairHelper3_os.app */,
 				7D4174191F2E26E900233B9B /* AutoRepairHelper3_os copy.app */,
+				7D2047111F79423B0061D6AD /* AutoRepairHelper3_os_inshoue.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2123,6 +2436,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7D2046121F79423B0061D6AD /* AutoRepairHelper3_os_inshoue */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D20470E1F79423B0061D6AD /* Build configuration list for PBXNativeTarget "AutoRepairHelper3_os_inshoue" */;
+			buildPhases = (
+				7D2046131F79423B0061D6AD /* Sources */,
+				7D2046C51F79423B0061D6AD /* Frameworks */,
+				7D2046F71F79423B0061D6AD /* Resources */,
+				7D2047091F79423B0061D6AD /* Embed Frameworks */,
+				7D20470D1F79423B0061D6AD /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AutoRepairHelper3_os_inshoue;
+			productName = GCP;
+			productReference = 7D2047111F79423B0061D6AD /* AutoRepairHelper3_os_inshoue.app */;
+			productType = "com.apple.product-type.application";
+		};
 		7D4173531F2E26E900233B9B /* AutoRepairHelper3_os copy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D4174161F2E26E900233B9B /* Build configuration list for PBXNativeTarget "AutoRepairHelper3_os copy" */;
@@ -2169,11 +2501,16 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Poitns;
 				TargetAttributes = {
+					7D2046121F79423B0061D6AD = {
+						DevelopmentTeam = 2U3JYNZ5R2;
+						ProvisioningStyle = Manual;
+					};
 					7D4173531F2E26E900233B9B = {
 						DevelopmentTeam = BJW9F34F29;
 					};
 					7D4CD8E21F235D37003619EB = {
-						DevelopmentTeam = 2U3JYNZ5R2;
+						DevelopmentTeam = BJW9F34F29;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -2193,11 +2530,36 @@
 			targets = (
 				7D4CD8E21F235D37003619EB /* AutoRepairHelper3_os */,
 				7D4173531F2E26E900233B9B /* AutoRepairHelper3_os copy */,
+				7D2046121F79423B0061D6AD /* AutoRepairHelper3_os_inshoue */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7D2046F71F79423B0061D6AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D2046F81F79423B0061D6AD /* LoginViewController.xib in Resources */,
+				7D2046F91F79423B0061D6AD /* music.bundle in Resources */,
+				7D2046FA1F79423B0061D6AD /* Main.storyboard in Resources */,
+				7D2046FB1F79423B0061D6AD /* ShareSDKConfigFile.bundle in Resources */,
+				7D2046FC1F79423B0061D6AD /* Images.xcassets in Resources */,
+				7D2046FD1F79423B0061D6AD /* ShareSDK.bundle in Resources */,
+				7D2046FE1F79423B0061D6AD /* MJRefresh.bundle in Resources */,
+				7D2046FF1F79423B0061D6AD /* aip.license in Resources */,
+				7D2047001F79423B0061D6AD /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				7D2047011F79423B0061D6AD /* WeiboSDK.bundle in Resources */,
+				7D2047021F79423B0061D6AD /* ShareSDKUI.bundle in Resources */,
+				7D2047031F79423B0061D6AD /* images.bundle in Resources */,
+				7D2047041F79423B0061D6AD /* README.txt in Resources */,
+				7D2047051F79423B0061D6AD /* SpeSqlSetting.plist in Resources */,
+				7D2047061F79423B0061D6AD /* requirements.txt in Resources */,
+				7D2047071F79423B0061D6AD /* RegisterViewController.xib in Resources */,
+				7D2047081F79423B0061D6AD /* SMSSDKUI.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7D4173FF1F2E26E900233B9B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2249,6 +2611,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7D20470D1F79423B0061D6AD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n\n# removes unused architectures.\n\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\n\ndo\n\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\n\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\n\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\n\ndo\n\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\n\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\n\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\n\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\n\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\n\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\n\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\n\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
+		};
 		7D41734C1F2E1BFB00233B9B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2265,6 +2640,190 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7D2046131F79423B0061D6AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D2046141F79423B0061D6AD /* UIImageView+HighlightedWebCache.m in Sources */,
+				7D2046151F79423B0061D6AD /* WarehouseWillSaveToStoreGoodsViewController.m in Sources */,
+				7D2046161F79423B0061D6AD /* UIImage+MultiFormat.m in Sources */,
+				7D2046171F79423B0061D6AD /* ServiceManaagerTopTypeAddViewController.m in Sources */,
+				7D2046181F79423B0061D6AD /* WorkroomListViewController.m in Sources */,
+				7D2046191F79423B0061D6AD /* ADTRepairInfo.m in Sources */,
+				7D20461A1F79423B0061D6AD /* WarehouseSupplierInfoViewController.m in Sources */,
+				7D20461B1F79423B0061D6AD /* HttpConnctionManager.m in Sources */,
+				7D20461C1F79423B0061D6AD /* WarehouseGoodsRejectViewController.m in Sources */,
+				7D20461D1F79423B0061D6AD /* WarehouseGoodPurchaseViewController.m in Sources */,
+				7D20461E1F79423B0061D6AD /* WarehouseGoodsSettingTopTypeListViewController.m in Sources */,
+				7D20461F1F79423B0061D6AD /* WarehouseGoodsInfoViewController.m in Sources */,
+				7D2046201F79423B0061D6AD /* AddNewCustomerViewController.m in Sources */,
+				7D2046211F79423B0061D6AD /* AFURLSessionManager.m in Sources */,
+				7D2046221F79423B0061D6AD /* UIImageView+BHBSetImage.m in Sources */,
+				7D2046231F79423B0061D6AD /* AFURLConnectionOperation.m in Sources */,
+				7D2046241F79423B0061D6AD /* ConverUtil.m in Sources */,
+				7D2046251F79423B0061D6AD /* SpeSqliteUpdateManager.m in Sources */,
+				7D2046261F79423B0061D6AD /* WarehouseOtherPurchaseSaveToStoreViewController.m in Sources */,
+				7D2046271F79423B0061D6AD /* WarehouseOtherPurchaseViewController.m in Sources */,
+				7D2046281F79423B0061D6AD /* SBJson4StreamParser.m in Sources */,
+				7D2046291F79423B0061D6AD /* BHBPopView.m in Sources */,
+				7D20462A1F79423B0061D6AD /* WarehouseGoodsAction.m in Sources */,
+				7D20462B1F79423B0061D6AD /* LoginUserUtil.m in Sources */,
+				7D20462C1F79423B0061D6AD /* CustomerOrdersViewController.m in Sources */,
+				7D20462D1F79423B0061D6AD /* NSDictionary+ValueCheck.m in Sources */,
+				7D20462E1F79423B0061D6AD /* SMSUIContactsFriendsViewController.m in Sources */,
+				7D20462F1F79423B0061D6AD /* ClassIconImageView.m in Sources */,
+				7D2046301F79423B0061D6AD /* CustomerTableViewCell.m in Sources */,
+				7D2046311F79423B0061D6AD /* MJRefreshConst.m in Sources */,
+				7D2046321F79423B0061D6AD /* UIImage+BHBEffects.m in Sources */,
+				7D2046331F79423B0061D6AD /* SMSSDKUI.m in Sources */,
+				7D2046341F79423B0061D6AD /* WarehouseGoodsStoreWarmingViewController.m in Sources */,
+				7D2046351F79423B0061D6AD /* JSONKit.m in Sources */,
+				7D2046361F79423B0061D6AD /* SDWebImageDownloader.m in Sources */,
+				7D2046371F79423B0061D6AD /* SMS_HYZBadgeView.m in Sources */,
+				7D2046381F79423B0061D6AD /* ADTRepairItemInfo.m in Sources */,
+				7D2046391F79423B0061D6AD /* SBJson4StreamWriterState.m in Sources */,
+				7D20463A1F79423B0061D6AD /* SpeRefreshAndLoadViewController.m in Sources */,
+				7D20463B1F79423B0061D6AD /* SDWebImageDownloaderOperation.m in Sources */,
+				7D20463C1F79423B0061D6AD /* SMS_MBProgressHUD.m in Sources */,
+				7D20463D1F79423B0061D6AD /* SettingViewController.m in Sources */,
+				7D20463E1F79423B0061D6AD /* UIView+BHBAnimation.m in Sources */,
+				7D20463F1F79423B0061D6AD /* SearchViewController.m in Sources */,
+				7D2046401F79423B0061D6AD /* MJRefreshHeaderView.m in Sources */,
+				7D2046411F79423B0061D6AD /* WarehouseGoodsSettingSubTypeListViewController.m in Sources */,
+				7D2046421F79423B0061D6AD /* ServiceManaagerTopTypeListViewController.m in Sources */,
+				7D2046431F79423B0061D6AD /* LoginViewController.mm in Sources */,
+				7D2046441F79423B0061D6AD /* WarehouseGoodPurchaseInfoViewController.m in Sources */,
+				7D2046451F79423B0061D6AD /* UIButton+WebCache.m in Sources */,
+				7D2046461F79423B0061D6AD /* WarehouseGoodInAndOutRecordsViewController.m in Sources */,
+				7D2046471F79423B0061D6AD /* NSArray+SortByFisrtChar.m in Sources */,
+				7D2046481F79423B0061D6AD /* SBJson4StreamTokeniser.m in Sources */,
+				7D2046491F79423B0061D6AD /* TabbarButtonsBGView.m in Sources */,
+				7D20464A1F79423B0061D6AD /* AFHTTPSessionManager.m in Sources */,
+				7D20464B1F79423B0061D6AD /* SDWebImageCompat.m in Sources */,
+				7D20464C1F79423B0061D6AD /* WarehousePurchaseInfo.m in Sources */,
+				7D20464D1F79423B0061D6AD /* MJRefreshBaseView.m in Sources */,
+				7D20464E1F79423B0061D6AD /* EGOImageLoadConnection.m in Sources */,
+				7D20464F1F79423B0061D6AD /* AFNetworkReachabilityManager.m in Sources */,
+				7D2046501F79423B0061D6AD /* SpeWebviewViewController.m in Sources */,
+				7D2046511F79423B0061D6AD /* MainTabBarViewController.mm in Sources */,
+				7D2046521F79423B0061D6AD /* PubllicMaskViewHelper.m in Sources */,
+				7D2046531F79423B0061D6AD /* WarehouseRejectSaveToStoreViewController.m in Sources */,
+				7D2046541F79423B0061D6AD /* UIView+JHUD.m in Sources */,
+				7D2046551F79423B0061D6AD /* FontSizeUtil.m in Sources */,
+				7D2046561F79423B0061D6AD /* BHBItem.m in Sources */,
+				7D2046571F79423B0061D6AD /* UIImage+GIF.m in Sources */,
+				7D2046581F79423B0061D6AD /* TabbarBaseViewController.m in Sources */,
+				7D2046591F79423B0061D6AD /* AFSecurityPolicy.m in Sources */,
+				7D20465A1F79423B0061D6AD /* SqliteDataManager.m in Sources */,
+				7D20465B1F79423B0061D6AD /* EGOImageView+SetImage.m in Sources */,
+				7D20465C1F79423B0061D6AD /* WarehouseItem.m in Sources */,
+				7D20465D1F79423B0061D6AD /* WarehouseAddNewViewController.m in Sources */,
+				7D20465E1F79423B0061D6AD /* RegViewController.m in Sources */,
+				7D20465F1F79423B0061D6AD /* UIButton+BHBSetImage.m in Sources */,
+				7D2046601F79423B0061D6AD /* ServiceManaagerSubTypeListViewController.m in Sources */,
+				7D2046611F79423B0061D6AD /* SDWebImagePrefetcher.m in Sources */,
+				7D2046621F79423B0061D6AD /* SectionsViewControllerFriends.m in Sources */,
+				7D2046631F79423B0061D6AD /* EGOImageView.m in Sources */,
+				7D2046641F79423B0061D6AD /* WareHouseGoods.m in Sources */,
+				7D2046651F79423B0061D6AD /* SMSUIVerificationCodeViewController.m in Sources */,
+				7D2046661F79423B0061D6AD /* XTNavigationController.m in Sources */,
+				7D2046671F79423B0061D6AD /* VerifyViewController.m in Sources */,
+				7D2046681F79423B0061D6AD /* WarehousePurchaseEditView.m in Sources */,
+				7D2046691F79423B0061D6AD /* SBJson4Parser.m in Sources */,
+				7D20466A1F79423B0061D6AD /* WarehouseGoodsSettingViewController.m in Sources */,
+				7D20466B1F79423B0061D6AD /* SpeCommonTableView.m in Sources */,
+				7D20466C1F79423B0061D6AD /* WarehouseWillSaveToStoreGoodsTableViewCell.m in Sources */,
+				7D20466D1F79423B0061D6AD /* ADTOrderInfo.m in Sources */,
+				7D20466E1F79423B0061D6AD /* ContactDeverViewController.m in Sources */,
+				7D20466F1F79423B0061D6AD /* JHUDAnimationView.m in Sources */,
+				7D2046701F79423B0061D6AD /* InvitationViewControllerEx.m in Sources */,
+				7D2046711F79423B0061D6AD /* MBProgressHUD.m in Sources */,
+				7D2046721F79423B0061D6AD /* WarehouseOtherPurchaseTakeViewController.m in Sources */,
+				7D2046731F79423B0061D6AD /* AppDelegate.mm in Sources */,
+				7D2046741F79423B0061D6AD /* AFHTTPRequestOperationManager.m in Sources */,
+				7D2046751F79423B0061D6AD /* Reachability.m in Sources */,
+				7D2046761F79423B0061D6AD /* CustomerViewController.m in Sources */,
+				7D2046771F79423B0061D6AD /* ADTContacterInfo.m in Sources */,
+				7D2046781F79423B0061D6AD /* WarehouseSupplierViewController.m in Sources */,
+				7D2046791F79423B0061D6AD /* CustomCell.m in Sources */,
+				7D20467A1F79423B0061D6AD /* SDWebImageDecoder.m in Sources */,
+				7D20467B1F79423B0061D6AD /* GTMBase64.m in Sources */,
+				7D20467C1F79423B0061D6AD /* UIProgressView+AFNetworking.m in Sources */,
+				7D20467D1F79423B0061D6AD /* BaseViewController.m in Sources */,
+				7D20467E1F79423B0061D6AD /* BHBGroup.m in Sources */,
+				7D20467F1F79423B0061D6AD /* DES3Util.m in Sources */,
+				7D2046801F79423B0061D6AD /* EGOCache.m in Sources */,
+				7D2046811F79423B0061D6AD /* WarehouseSupplierInfo.m in Sources */,
+				7D2046821F79423B0061D6AD /* UIImageView+WebCache.m in Sources */,
+				7D2046831F79423B0061D6AD /* UIButton+AFNetworking.m in Sources */,
+				7D2046841F79423B0061D6AD /* LocalTimeUtil.m in Sources */,
+				7D2046851F79423B0061D6AD /* SectionsViewController.m in Sources */,
+				7D2046861F79423B0061D6AD /* RepairPrintViewController.m in Sources */,
+				7D2046871F79423B0061D6AD /* WarehousePurchaseRejectedViewController.m in Sources */,
+				7D2046881F79423B0061D6AD /* AddRepairHistoryViewController.m in Sources */,
+				7D2046891F79423B0061D6AD /* WarehouseGoodsStoreTotalPreviewViewController.m in Sources */,
+				7D20468A1F79423B0061D6AD /* BHBCustomBtn.m in Sources */,
+				7D20468B1F79423B0061D6AD /* WarehousePurchaseRecordsViewController.m in Sources */,
+				7D20468C1F79423B0061D6AD /* ShareSdkUtil.m in Sources */,
+				7D20468D1F79423B0061D6AD /* WareHouseManagerViewController.m in Sources */,
+				7D20468E1F79423B0061D6AD /* WarehouseGoodsTableViewCell.m in Sources */,
+				7D20468F1F79423B0061D6AD /* EGOImageButton.m in Sources */,
+				7D2046901F79423B0061D6AD /* ServiceManagerViewController.m in Sources */,
+				7D2046911F79423B0061D6AD /* main.m in Sources */,
+				7D2046921F79423B0061D6AD /* MJRefreshFooterView.m in Sources */,
+				7D2046931F79423B0061D6AD /* DesUtil.m in Sources */,
+				7D2046941F79423B0061D6AD /* ReachabilityObserver.m in Sources */,
+				7D2046951F79423B0061D6AD /* SDImageCache.m in Sources */,
+				7D2046961F79423B0061D6AD /* WarehouseSaveToStoreViewController.m in Sources */,
+				7D2046971F79423B0061D6AD /* WorkroomAddOrEditViewController.m in Sources */,
+				7D2046981F79423B0061D6AD /* WarehouseSettingViewController.m in Sources */,
+				7D2046991F79423B0061D6AD /* RegisterViewController.m in Sources */,
+				7D20469A1F79423B0061D6AD /* EGOImageLoader.m in Sources */,
+				7D20469B1F79423B0061D6AD /* TabbarCustomButton.m in Sources */,
+				7D20469C1F79423B0061D6AD /* WarehouseGoodsInSubTypeListViewController.m in Sources */,
+				7D20469D1F79423B0061D6AD /* RepairHistotyTableViewCell.m in Sources */,
+				7D20469E1F79423B0061D6AD /* BHBPlaySoundTool.m in Sources */,
+				7D20469F1F79423B0061D6AD /* YJLocalCountryData.m in Sources */,
+				7D2046A01F79423B0061D6AD /* WarehouseGoodsSettingTopTypeAddViewController.m in Sources */,
+				7D2046A11F79423B0061D6AD /* UIAlertView+AFNetworking.m in Sources */,
+				7D2046A21F79423B0061D6AD /* ChangeSkinViewController.m in Sources */,
+				7D2046A31F79423B0061D6AD /* UIImageView+AFNetworking.m in Sources */,
+				7D2046A41F79423B0061D6AD /* CountOnViewController.m in Sources */,
+				7D2046A51F79423B0061D6AD /* AFURLRequestSerialization.m in Sources */,
+				7D2046A61F79423B0061D6AD /* WarehouseSupplierAddNewViewController.m in Sources */,
+				7D2046A71F79423B0061D6AD /* UIView+WebCacheOperation.m in Sources */,
+				7D2046A81F79423B0061D6AD /* NSData+ImageContentType.m in Sources */,
+				7D2046A91F79423B0061D6AD /* BHBCenterView.m in Sources */,
+				7D2046AA1F79423B0061D6AD /* EmptyTipView.m in Sources */,
+				7D2046AB1F79423B0061D6AD /* SDWebImageManager.m in Sources */,
+				7D2046AC1F79423B0061D6AD /* SBJson4Writer.m in Sources */,
+				7D2046AD1F79423B0061D6AD /* WarehouseWillTakeGoodsViewController.m in Sources */,
+				7D2046AE1F79423B0061D6AD /* ServiceManagerTableViewCell.m in Sources */,
+				7D2046AF1F79423B0061D6AD /* ServiceManaagerSubTypeAddViewController.m in Sources */,
+				7D2046B01F79423B0061D6AD /* WarehousePositionAddNewViewController.m in Sources */,
+				7D2046B11F79423B0061D6AD /* WarehouseGoodsSettingSubTypeAddViewController.m in Sources */,
+				7D2046B21F79423B0061D6AD /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				7D2046B31F79423B0061D6AD /* AFHTTPRequestOperation.m in Sources */,
+				7D2046B41F79423B0061D6AD /* AFNetworkActivityIndicatorManager.m in Sources */,
+				7D2046B51F79423B0061D6AD /* JHUD.m in Sources */,
+				7D2046B61F79423B0061D6AD /* XXTEncrypt.m in Sources */,
+				7D2046B71F79423B0061D6AD /* ResetPwdViewController.m in Sources */,
+				7D2046B81F79423B0061D6AD /* UIImage+JHUD.m in Sources */,
+				7D2046B91F79423B0061D6AD /* UIWebView+AFNetworking.m in Sources */,
+				7D2046BA1F79423B0061D6AD /* SBJson4StreamParserState.m in Sources */,
+				7D2046BB1F79423B0061D6AD /* AddNewCarcodeSelectViewController.m in Sources */,
+				7D2046BC1F79423B0061D6AD /* AFURLResponseSerialization.m in Sources */,
+				7D2046BD1F79423B0061D6AD /* EditUserViewController.m in Sources */,
+				7D2046BE1F79423B0061D6AD /* LocalImageHelper.m in Sources */,
+				7D2046BF1F79423B0061D6AD /* WarehouseSelectGoodsToRepairViewController.m in Sources */,
+				7D2046C01F79423B0061D6AD /* BHBBottomBar.m in Sources */,
+				7D2046C11F79423B0061D6AD /* SBJson4StreamWriter.m in Sources */,
+				7D2046C21F79423B0061D6AD /* NewTipViewController.m in Sources */,
+				7D2046C31F79423B0061D6AD /* WarehousePositionViewController.m in Sources */,
+				7D2046C41F79423B0061D6AD /* WarehouseWillPurchaseViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7D4173541F2E26E900233B9B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2435,7 +2994,6 @@
 				7D4173C51F2E26E900233B9B /* ResetPwdViewController.m in Sources */,
 				7D4173C61F2E26E900233B9B /* UIImage+JHUD.m in Sources */,
 				7D4173C71F2E26E900233B9B /* UIWebView+AFNetworking.m in Sources */,
-				7D1BAA6F1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m in Sources */,
 				7D2044D71F789D150061D6AD /* SBJson4StreamParserState.m in Sources */,
 				7D4173C81F2E26E900233B9B /* AddNewCarcodeSelectViewController.m in Sources */,
 				7D4173C91F2E26E900233B9B /* AFURLResponseSerialization.m in Sources */,
@@ -2620,7 +3178,6 @@
 				7D4CD98E1F235D37003619EB /* ResetPwdViewController.m in Sources */,
 				7D5BFB431F2CB6DB00FD239D /* UIImage+JHUD.m in Sources */,
 				7D4CD9901F235D37003619EB /* UIWebView+AFNetworking.m in Sources */,
-				7D1BAA6E1F5CEDC900B03719 /* WarehouseGoodsAddNewViewController.m in Sources */,
 				7D2044D61F789D150061D6AD /* SBJson4StreamParserState.m in Sources */,
 				7D4CD9911F235D37003619EB /* AddNewCarcodeSelectViewController.m in Sources */,
 				7D4CD9921F235D37003619EB /* AFURLResponseSerialization.m in Sources */,
@@ -2650,6 +3207,110 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7D20470F1F79423B0061D6AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: qifei huangfu (LMDV42LR62)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2U3JYNZ5R2;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SMS_SDK",
+					"$(PROJECT_DIR)/GCP",
+					"$(PROJECT_DIR)/EasyPR-iOS-master",
+					"$(PROJECT_DIR)/EasyPR",
+					"$(PROJECT_DIR)/GCP/ShareSDK",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/PlatformConnector",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/AipOcrSdk",
+					"$(PROJECT_DIR)/sdk/device",
+					"$(PROJECT_DIR)/sdk/simulator",
+				);
+				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper3-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include/",
+					"$(SRCROOT)/",
+				);
+				INFOPLIST_FILE = "AutoRepairHelper3_os copy 22-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/jpush",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/PlatformSDK/WeChatSDK",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kj.xzs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9993c620-43d2-4ccd-bc74-dded1e654ada";
+				PROVISIONING_PROFILE_SPECIFIER = xis;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Debug;
+		};
+		7D2047101F79423B0061D6AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: qifei huangfu (BJW9F34F29)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2U3JYNZ5R2;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SMS_SDK",
+					"$(PROJECT_DIR)/GCP",
+					"$(PROJECT_DIR)/EasyPR-iOS-master",
+					"$(PROJECT_DIR)/EasyPR",
+					"$(PROJECT_DIR)/GCP/ShareSDK",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/PlatformConnector",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/AipOcrSdk",
+					"$(PROJECT_DIR)/sdk/device",
+					"$(PROJECT_DIR)/sdk/simulator",
+				);
+				GCC_PREFIX_HEADER = "GCP/AutoRepairHelper3-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include/",
+					"$(SRCROOT)/",
+				);
+				INFOPLIST_FILE = "AutoRepairHelper3_os copy 22-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/jpush",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+					"$(PROJECT_DIR)/GCP/ShareSDK/Support/PlatformSDK/WeChatSDK",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kj.xzs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9993c620-43d2-4ccd-bc74-dded1e654ada";
+				PROVISIONING_PROFILE_SPECIFIER = xis;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Release;
+		};
 		7D4174171F2E26E900233B9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2848,8 +3509,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: qifei huangfu (LMDV42LR62)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 2U3JYNZ5R2;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = BJW9F34F29;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2883,10 +3545,10 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kj.xzs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9993c620-43d2-4ccd-bc74-dded1e654ada";
-				PROVISIONING_PROFILE_SPECIFIER = xis;
+				PROVISIONING_PROFILE = "3e607b8a-125a-4f25-97b0-38f32ba43220";
+				PROVISIONING_PROFILE_SPECIFIER = "汽修dev";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -2900,7 +3562,8 @@
 				CODE_SIGN_ENTITLEMENTS = AutoRepairHelper/AutoRepairHelper.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: qifei huangfu (BJW9F34F29)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 2U3JYNZ5R2;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = BJW9F34F29;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2934,10 +3597,10 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kj.xzs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfqf.autorepairhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9993c620-43d2-4ccd-bc74-dded1e654ada";
-				PROVISIONING_PROFILE_SPECIFIER = xis;
+				PROVISIONING_PROFILE = "e41bcd99-9862-411c-948e-fac582b372b2";
+				PROVISIONING_PROFILE_SPECIFIER = "汽车修理小助手";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -2946,6 +3609,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7D20470E1F79423B0061D6AD /* Build configuration list for PBXNativeTarget "AutoRepairHelper3_os_inshoue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D20470F1F79423B0061D6AD /* Debug */,
+				7D2047101F79423B0061D6AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7D4174161F2E26E900233B9B /* Build configuration list for PBXNativeTarget "AutoRepairHelper3_os copy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

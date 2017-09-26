@@ -138,9 +138,11 @@
 
                                     if([succeedResult[@"code"]integerValue] == 1){
 
-                                        NSMutableArray *arrSub = [NSMutableArray arrayWithArray:self.m_parentInfo[@"subtype"]];
+                                        NSMutableArray *arrSub  = [NSMutableArray array];
+                                        for(NSDictionary *dic in self.m_parentInfo[@"subtype"]){
+                                            [arrSub addObject:dic[@"_id"]];
+                                        }
                                         [arrSub addObject:succeedResult[@"ret"][@"_id"]];
-
                                         [HTTP_MANAGER addNewServiceTopTypeRefWith:arrSub
                                                                         withTopId:self.m_parentInfo[@"_id"] successedBlock:^(NSDictionary *succeedResult) {
 

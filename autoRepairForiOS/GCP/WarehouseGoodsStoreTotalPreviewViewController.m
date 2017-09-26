@@ -8,6 +8,7 @@
 
 #import "WarehouseGoodsStoreTotalPreviewViewController.h"
 #import "WarehouseGoodsInfoViewController.h"
+#import "WarehouseGoodsInfoViewController.h"
 @interface WarehouseGoodsStoreTotalPreviewViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
 
 @end
@@ -27,13 +28,13 @@
     [super viewDidLoad];
     [title setText:@"库存总览"];
 
-    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-40, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
-    //    [addBtn setTitle:@"添加" forState:UIControlStateNormal];
-    [addBtn setImage:[UIImage imageNamed:@"moresetting"] forState:UIControlStateNormal];
-    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
-    [navigationBG addSubview:addBtn];
+//    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+//    [addBtn setFrame:CGRectMake(MAIN_WIDTH-40, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
+//    //    [addBtn setTitle:@"添加" forState:UIControlStateNormal];
+//    [addBtn setImage:[UIImage imageNamed:@"moresetting"] forState:UIControlStateNormal];
+//    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+//    [navigationBG addSubview:addBtn];
 }
 
 - (void)addBtnClicked
@@ -48,7 +49,10 @@
 {
     if(buttonIndex == 0)
     {
-        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsAddNewViewController") alloc]init] animated:YES];
+        WareHouseGoods *good = [[WareHouseGoods alloc]init];
+        good.m_isAddNew = YES;
+        WarehouseGoodsInfoViewController *add = [[WarehouseGoodsInfoViewController alloc]initWith:good];
+        [self.navigationController pushViewController:add animated:YES];
 
     }else if (buttonIndex == 1){
         [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];

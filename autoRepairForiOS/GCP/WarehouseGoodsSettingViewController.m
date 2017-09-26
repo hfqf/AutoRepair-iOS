@@ -8,6 +8,7 @@
 
 #import "WarehouseGoodsSettingViewController.h"
 #import "WarehouseGoodsInSubTypeListViewController.h"
+#import "WarehouseGoodsInfoViewController.h"
 @interface WarehouseTopTypeInfo()
 
 @end
@@ -90,7 +91,7 @@
 - (void)addBtnClicked
 {
 
-    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"商品分类设置", nil];
+    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增商品",@"分类设置", nil];
 //
 //    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增商品",@"商品分类设置",@"查看未启用商品", nil];
     [act showInView:self.view];
@@ -243,16 +244,18 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-     [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];
-//    if(buttonIndex == 0)
-//    {
-//        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsAddNewViewController") alloc]init] animated:YES];
-//
-//    }else if (buttonIndex == 1){
-//            [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];
-//    }else{
-//
-//    }
+    if(buttonIndex == 0)
+    {
+        WareHouseGoods *good = [[WareHouseGoods alloc]init];
+        good.m_isAddNew = YES;
+        WarehouseGoodsInfoViewController *add = [[WarehouseGoodsInfoViewController alloc]initWith:good];
+        [self.navigationController pushViewController:add animated:YES];
+
+    }else if (buttonIndex == 1){
+            [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];
+    }else{
+
+    }
 }
 
 @end

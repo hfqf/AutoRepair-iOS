@@ -11,6 +11,7 @@
 #import "WarehouseGoodPurchaseInfoViewController.h"
 #import "WarehouseSaveToStoreViewController.h"
 #import "WarehouseRejectSaveToStoreViewController.h"
+#import "WarehouseGoodsInfoViewController.h"
 @interface WarehouseWillSaveToStoreGoodsViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,WarehouseWillSaveToStoreGoodsTableViewCellDelegate>
 @end
 
@@ -131,7 +132,10 @@
 {
     if(buttonIndex == 0)
     {
-        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsAddNewViewController") alloc]init] animated:YES];
+        WareHouseGoods *good = [[WareHouseGoods alloc]init];
+        good.m_isAddNew = YES;
+        WarehouseGoodsInfoViewController *add = [[WarehouseGoodsInfoViewController alloc]initWith:good];
+        [self.navigationController pushViewController:add animated:YES];
 
     }else if (buttonIndex == 1){
         [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingTopTypeListViewController") alloc]init] animated:YES];

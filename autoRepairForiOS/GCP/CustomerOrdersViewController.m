@@ -71,7 +71,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#define WIDTH_LEFT  160
+#define WIDTH_LEFT  130
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return  self.m_arrData.count;
@@ -159,7 +159,7 @@
     UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(WIDTH_LEFT+6,CGRectGetMaxY(lab6.frame)+20, MAIN_WIDTH-WIDTH_LEFT-20, 18)];
     [lab7 setBackgroundColor:[UIColor clearColor]];
     [lab7 setTextAlignment:NSTextAlignmentLeft];
-    [lab7 setFont:[UIFont systemFontOfSize:15]];
+    [lab7 setFont:[UIFont systemFontOfSize:11]];
     [lab7 setTextColor:[UIColor blackColor]];
     [cell addSubview:lab7];
     

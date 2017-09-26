@@ -146,19 +146,22 @@
 
 - (void)addBtnClicked
 {
-    BHBItem * item0 = [[BHBItem alloc]initWithTitle:@"扫描车牌识别客户(新用户到新增页面,老客户到详情页)" Icon:@"ic_tabbar_compose_camera"];
+    BHBItem * item0 = [[BHBItem alloc]initWithTitle:@"扫描车牌" Icon:@"ic_tabbar_compose_camera"];
     BHBItem * item1 = [[BHBItem alloc]initWithTitle:@"手动添加客户" Icon:@"ic_tabbar_compose_weibo"];
     BHBItem * item2 = [[BHBItem alloc]initWithTitle:@"添加维修记录" Icon:@"ic_tabbar_compose_icon_add_highlighted"];
+
+    BHBItem * item3 = [[BHBItem alloc]initWithTitle:@"仓库管理" Icon:@"item_warehouse"];
+    BHBItem * item4 = [[BHBItem alloc]initWithTitle:@"服务管理" Icon:@"item_service"];
     
     //添加popview
     [BHBPopView showToView:self.view.window
-                 withItems:@[item0,item1,item2]
+                 withItems:@[item0,item1,item2,item3,item4]
             andSelectBlock:^(BHBItem *item) {
                 if ([item isKindOfClass:[BHBGroup class]]) {
                     NSLog(@"选中%@分组",item.title);
                 }else{
                     NSLog(@"选中%@项",item.title);
-                    if([item.title isEqualToString:@"扫描车牌识别客户(新用户到新增页面,老客户到详情页)"])
+                    if([item.title isEqualToString:@"扫描车牌"])
                     {
                         UIViewController * vc = [AipGeneralVC ViewControllerWithDelegate:self];
                         [self presentViewController:vc animated:YES completion:nil];
@@ -174,7 +177,7 @@
                             }
                         }
                         
-                    }else
+                    }else if([item.title isEqualToString:@"添加维修记录"])
                     {
                         [self selectWithIndex:0];
                         NSArray *arr = self.viewControllers;
@@ -184,6 +187,10 @@
                                 [target addBtnClicked];
                             }
                         }
+                    }else if([item.title isEqualToString:@"仓库管理"]){
+                        [self.navigationController pushViewController:[[NSClassFromString(@"WareHouseManagerViewController") alloc]init] animated:YES];
+                    }else if([item.title isEqualToString:@"服务管理"]){
+                            [self.navigationController pushViewController:[[NSClassFromString(@"ServiceManagerViewController") alloc]init] animated:YES];
                     }
 
 

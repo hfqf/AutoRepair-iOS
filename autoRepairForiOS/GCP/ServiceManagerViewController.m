@@ -33,14 +33,24 @@
     [super viewDidLoad];
     [title setText:self.m_isSelect ? @"选择服务" : @"服务管理"];
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-40, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
-    [addBtn setTitle:@"确认" forState:UIControlStateNormal];
-    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
-    [navigationBG addSubview:addBtn];
+    if(self.m_isSelect){
+        [addBtn addTarget:self action:@selector(addBtnClicked1) forControlEvents:UIControlEventTouchUpInside];
+        [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
+        [addBtn setTitle:@"确认" forState:UIControlStateNormal];
+        [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+        [navigationBG addSubview:addBtn];
+    }
+
 }
 
 - (void)addBtnClicked
+{
+
+    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"新增分类", nil];
+    [act showInView:self.view];
+}
+
+- (void)addBtnClicked1
 {
     if(self.m_selectDelegate && [self.m_selectDelegate respondsToSelector:@selector(onSelectedServices:)]){
         [self.m_selectDelegate onSelectedServices:self.m_arrData];

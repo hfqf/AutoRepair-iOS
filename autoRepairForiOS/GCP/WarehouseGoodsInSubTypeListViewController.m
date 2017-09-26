@@ -7,7 +7,6 @@
 //
 
 #import "WarehouseGoodsInSubTypeListViewController.h"
-#import "WarehouseGoodsAddNewViewController.h"
 #import "WarehouseGoodsInfoViewController.h"
 #import "WarehouseGoodsTableViewCell.h"
 @interface WarehouseGoodsInSubTypeListViewController ()<UITableViewDelegate,UITableViewDataSource>

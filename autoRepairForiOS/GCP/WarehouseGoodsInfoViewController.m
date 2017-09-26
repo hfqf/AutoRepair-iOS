@@ -8,7 +8,6 @@
 
 #import "WarehouseGoodsInfoViewController.h"
 #import "WarehouseGoodsSettingViewController.h"
-#import "WarehouseGoodsAddNewViewController.h"
 #import "WarehouseGoodPurchaseViewController.h"
 @interface WarehouseGoodsInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,WarehouseGoodsSettingViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property(nonatomic,strong)WareHouseGoods *m_goodsInfo;

@@ -67,11 +67,16 @@
                                withTopId:self.m_parentInfo[@"_id"]
                           successedBlock:^(NSDictionary *succeedResult) {
 
-                              NSMutableArray *arrSub = [NSMutableArray arrayWithArray:self.m_parentInfo[@"subtype"]];
+
+                              NSMutableArray *arrSub  = [NSMutableArray array];
+                              for(NSString *_id in self.m_parentInfo[@"subtype"]){
+                                  [arrSub addObject:_id];
+                              }
                               [arrSub addObject:succeedResult[@"ret"][@"_id"]];
 
                               [HTTP_MANAGER addNewGoodsTopTypeRefWith:arrSub
-                                                            withTopId:self.m_parentInfo[@"_id"] successedBlock:^(NSDictionary *succeedResult) {
+                                                            withTopId:self.m_parentInfo[@"_id"]
+                                                       successedBlock:^(NSDictionary *succeedResult) {
 
                                                                 [self removeWaitingView];
                                                                 if([succeedResult[@"code"]integerValue] == 1){

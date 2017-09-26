@@ -24,22 +24,22 @@
         self.m_arrData = @[
                            @{@"category":@"库存管理",
                              @"items":@[
-                                     @{@"icon":@"",@"title":@"库存总览",@"type":@"5"},
+                                     @{@"icon":@"warehouse_zl",@"title":@"库存总览",@"type":@"5"},
 //                                     @{@"icon":@"",@"title":@"库存盘点",@"type":@"6"},
-                                     @{@"icon":@"",@"title":@"物品采购",@"type":@"9"},
-                                     @{@"icon":@"",@"title":@"物品入库",@"type":@"10"},
+                                     @{@"icon":@"warehouse_cg",@"title":@"物品采购",@"type":@"9"},
+                                     @{@"icon":@"warehouse_rk",@"title":@"物品入库",@"type":@"10"},
 //                                     @{@"icon":@"",@"title":@"物品领料",@"type":@"11"},
-                                     @{@"icon":@"",@"title":@"采购记录",@"type":@"8"},
+                                     @{@"icon":@"warehouse_cgjl",@"title":@"采购记录",@"type":@"8"},
 //                                     @{@"icon":@"",@"title":@"出入库记录",@"type":@"7"},
-                                     @{@"icon":@"",@"title": @"库存退货",@"type":@"12"},
-                                     @{@"icon":@"",@"title":@"库存预警",@"type":@"4"},
+                                     @{@"icon":@"warehouse_th",@"title": @"库存退货",@"type":@"12"},
+                                     @{@"icon":@"warehouse_yj",@"title":@"库存预警",@"type":@"4"},
                                      ]},
                            @{@"category":@"库房设置",
                              @"items":@[
-                                     @{@"icon":@"",@"title":@"供应商管理",@"type":@"13"},
-                                     @{@"icon":@"",@"title":@"仓库管理",@"type":@"14"},
+                                     @{@"icon":@"warehouse_gys",@"title":@"供应商管理",@"type":@"13"},
+                                     @{@"icon":@"warehouse_ckgl",@"title":@"仓库管理",@"type":@"14"},
 //                                     @{@"icon":@"",@"title":@"基础设置",@"type":@"15"},
-                                     @{@"icon":@"",@"title":@"商品管理",@"type":@"15"},
+                                     @{@"icon":@"warehouse_spgl",@"title":@"商品管理",@"type":@"15"},
 
                                      ]},
                            ];

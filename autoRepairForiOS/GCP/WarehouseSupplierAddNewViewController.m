@@ -62,17 +62,17 @@
     [self.m_currentTexfField resignFirstResponder];
 
     if(self.m_value1.length == 0){
-        [PubllicMaskViewHelper showTipViewWith:@"仓库名不能为空" inSuperView:self.view withDuration:1];
+        [PubllicMaskViewHelper showTipViewWith:@"供应商不能为空" inSuperView:self.view withDuration:1];
         return;
     }
 
     if(self.m_value2.length == 0){
-        [PubllicMaskViewHelper showTipViewWith:@"仓库名不能为空" inSuperView:self.view withDuration:1];
+        [PubllicMaskViewHelper showTipViewWith:@"联系人不能为空" inSuperView:self.view withDuration:1];
         return;
     }
 
     if(self.m_value3.length == 0){
-        [PubllicMaskViewHelper showTipViewWith:@"仓库名不能为空" inSuperView:self.view withDuration:1];
+        [PubllicMaskViewHelper showTipViewWith:@"手机号不能为空" inSuperView:self.view withDuration:1];
         return;
     }
 
@@ -134,13 +134,13 @@
     [edit setFont:[UIFont systemFontOfSize:14]];
     if(indexPath.row == 0){
         [edit setText:self.m_value1];
-        [edit setPlaceholder:@"请输入供应商"];
+        [edit setPlaceholder:@"必填,请输入供应商"];
     }else if (indexPath.row == 1){
         [edit setText:self.m_value2];
-        [edit setPlaceholder:@"请输入联系人"];
+        [edit setPlaceholder:@"必填,请输入联系人"];
     }else if (indexPath.row == 2){
         [edit setText:self.m_value3];
-        [edit setPlaceholder:@"请输入手机号"];
+        [edit setPlaceholder:@"必填,请输入手机号"];
     }else if (indexPath.row == 3){
         [edit setText:self.m_value4];
         [edit setPlaceholder:@"请输入地址"];
