@@ -139,15 +139,6 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(addNewContactForEasyPR:) name:KEY_AUTO_ADD_CONTACT object:nil];
 
 
-    if(!self.m_isAdd){
-        UIButton *orderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [orderBtn addTarget:self action:@selector(orderBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        [orderBtn setFrame:CGRectMake(0, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
-        [orderBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
-        [orderBtn setTitle:@"预约" forState:UIControlStateNormal];
-        [orderBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
-        [navigationBG addSubview:orderBtn];
-    }
 
     [title setText:@"客户"];
     

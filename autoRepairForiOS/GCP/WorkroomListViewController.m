@@ -10,7 +10,7 @@
 #import "RepairHistotyTableViewCell.h"
 #import "CustomerViewController.h"
 #import "WorkroomAddOrEditViewController.h"
-@interface WorkroomListViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,CustomerViewControllerDelegate,CustomerViewControllerDelegate1>
+@interface WorkroomListViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,CustomerViewControllerDelegate,CustomerViewControllerDelegate1,UIActionSheetDelegate>
 {
     UIView *m_tipView;
     UITextField *m_searchTextFiled;
@@ -70,7 +70,21 @@
     [addBtn setTitle:@"开单" forState:UIControlStateNormal];
     [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
+
+    UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [setBtn addTarget:self action:@selector(setBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [setBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
+    [setBtn setFrame:CGRectMake(0, DISTANCE_TOP,100, HEIGHT_NAVIGATION)];
+    [setBtn setTitle:@"收费项目" forState:UIControlStateNormal];
+    [setBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+    [navigationBG addSubview:setBtn];
     [self createButtons];
+}
+
+- (void)setBtnClicked
+{
+    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"收费项目管理" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"仓库管理(材料设置)",@"服务管理(服务设置)", nil];
+    [act showInView:self.view];
 }
 
 - (void)forceRefresh
@@ -305,4 +319,13 @@
     [self requestData:YES];
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+        [self.navigationController pushViewController:[[NSClassFromString(@"WareHouseManagerViewController") alloc]init] animated:YES];
+
+    }else{
+        [self.navigationController pushViewController:[[NSClassFromString(@"ServiceManagerViewController") alloc]init] animated:YES];
+    }
+}
 @end

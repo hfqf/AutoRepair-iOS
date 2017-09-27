@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,21 +35,43 @@
 
 
     [self showWaitingView];
-    [HTTP_MANAGER addNewServiceTopTypeWith:self.m_value1
-                          successedBlock:^(NSDictionary *succeedResult) {
-                              [self removeWaitingView];
-                              if([succeedResult[@"code"]integerValue] == 1){
-                                  [self.navigationController popViewControllerAnimated:YES];
-                              }else{
-                                  [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
-                              }
+    if(self.m_currentInfo){
+        [HTTP_MANAGER updateOneServiceTopTypeWith:self.m_value1
+                                           withId:self.m_currentInfo[@"_id"]
+                                successedBlock:^(NSDictionary *succeedResult) {
+                                    [self removeWaitingView];
+                                    if([succeedResult[@"code"]integerValue] == 1){
+                                        [self.navigationController popViewControllerAnimated:YES];
+                                    }else{
+                                        [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                                    }
 
-                          } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
 
-                              [self removeWaitingView];
-                              [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+                                    [self removeWaitingView];
+                                    [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
 
-                          }];
+                                }];
+
+    }else{
+        [HTTP_MANAGER addNewServiceTopTypeWith:self.m_value1
+                                successedBlock:^(NSDictionary *succeedResult) {
+                                    [self removeWaitingView];
+                                    if([succeedResult[@"code"]integerValue] == 1){
+                                        [self.navigationController popViewControllerAnimated:YES];
+                                    }else{
+                                        [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
+                                    }
+
+                                } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                    [self removeWaitingView];
+                                    [PubllicMaskViewHelper showTipViewWith:@"新建失败" inSuperView:self.view withDuration:1];
+
+                                }];
+
+    }
+
 }
 
 

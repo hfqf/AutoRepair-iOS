@@ -1822,6 +1822,7 @@
 		7D426DA01A62AA120004F3F6 = {
 			isa = PBXGroup;
 			children = (
+				7D426DD31A62AA640004F3F6 /* PublicDefine.h */,
 				7D2045FE1F78E7D90061D6AD /* sdk */,
 				7D4173431F2E18BC00233B9B /* AipBase.framework */,
 				7D4173441F2E18BC00233B9B /* IdcardQuality.framework */,
@@ -1852,7 +1853,6 @@
 			isa = PBXGroup;
 			children = (
 				7D426F261A62B6520004F3F6 /* PublicADT.h */,
-				7D426DD31A62AA640004F3F6 /* PublicDefine.h */,
 				7D426DD41A62AA640004F3F6 /* SpeLog.h */,
 				7D426DB01A62AA120004F3F6 /* AppDelegate.h */,
 				7D426DB11A62AA120004F3F6 /* AppDelegate.mm */,

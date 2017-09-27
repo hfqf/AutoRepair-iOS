@@ -10,7 +10,7 @@
 #define  XXT_xinjiang_PublicDefine_h
 
 
-#define  KEY_IS_DEV                                 0 //是否是测试环境
+#define  KEY_IS_DEV                                 1 //是否是测试环境
 #define  KEY_IS_DEVICE                              0 //是否是真机运行
 #define  KEY_IS_PRODUCT_SERVER                      0 //是否是正式商用环境，否则是欲上线正式环境
 

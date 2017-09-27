@@ -1809,7 +1809,37 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+#pragma mark - 出入库记录
+- (void)addNewGoodsInOutRecoedeWith:(NSString *)type
+                       withRemak:(NSString *)remark
+                          withGoodsId:(NSString *)goodsId
+                          withNum:(NSString *)num
+                  successedBlock:(SuccessedBlock)success
+                     failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodsinoutrecord/add"
+                     paragram:@{
+                                @"type":type,
+                                @"owner":[LoginUserUtil userTel],
+                                @"dealer":[LoginUserUtil userId],
+                                @"goods":goodsId,
+                                @"remark":remark,
+                                @"num":num
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
 
+- (void)queryGoodsInOutRecoedesWith:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/warehousegoodsinoutrecord/query"
+                     paragram:@{
+                                @"owner":[LoginUserUtil userTel],
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
 
 
 @end

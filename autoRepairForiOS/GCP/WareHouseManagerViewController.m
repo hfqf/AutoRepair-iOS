@@ -30,7 +30,7 @@
                                      @{@"icon":@"warehouse_rk",@"title":@"物品入库",@"type":@"10"},
 //                                     @{@"icon":@"",@"title":@"物品领料",@"type":@"11"},
                                      @{@"icon":@"warehouse_cgjl",@"title":@"采购记录",@"type":@"8"},
-//                                     @{@"icon":@"",@"title":@"出入库记录",@"type":@"7"},
+                                     @{@"icon":@"warehouse_crk",@"title":@"出入库记录",@"type":@"7"},
                                      @{@"icon":@"warehouse_th",@"title": @"库存退货",@"type":@"12"},
                                      @{@"icon":@"warehouse_yj",@"title":@"库存预警",@"type":@"4"},
                                      ]},

@@ -10,8 +10,11 @@
 #import "ServiceManaagerSubTypeListViewController.h"
 #import "ServiceManaagerSubTypeAddViewController.h"
 #import "ServiceManagerTableViewCell.h"
-@interface ServiceManagerViewController ()<UIActionSheetDelegate,ServiceManagerTableViewCellDelegate>
+#import "ServiceManaagerTopTypeAddViewController.h"
+@interface ServiceManagerViewController ()<UIActionSheetDelegate,ServiceManagerTableViewCellDelegate,UIAlertViewDelegate>
 @property(nonatomic,copy)NSMutableDictionary *m_selectedDic;
+@property(assign)NSInteger m_currentIndex;
+@property(nonatomic,strong)NSDictionary *m_subInfo;
 @end
 
 @implementation ServiceManagerViewController
@@ -138,17 +141,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    WarehouseTopTypeInfo *info = [self.m_arrData objectAtIndex:indexPath.section];
-//    NSArray *arr = info.m_info[@"subtype"];
-//
-//    NSDictionary *_info = [arr objectAtIndex:indexPath.row];
-//    if(self.m_isSelect){
-//        [self.m_selectDelegate onSelectGoodsType:_info];
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }else{
-//        ServiceManaagerSubTypeAddViewController *list = [[ServiceManaagerSubTypeAddViewController alloc]initWithServiceInfo:_info];
-//        [self.navigationController pushViewController:list animated:YES];
-//    }
+    WarehouseTopTypeInfo *info = [self.m_arrData objectAtIndex:indexPath.section];
+    NSArray *arr = info.m_info[@"subtype"];
+    NSDictionary *_info = [arr objectAtIndex:indexPath.row];
+    self.m_subInfo = _info;
+    UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"编辑",@"删除", nil ];
+    alert.tag = 1;
+    [alert show];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -165,10 +164,63 @@
 
 - (void)sectionHeaderBtn:(UIButton *)btn
 {
-    WarehouseTopTypeInfo *info = [self.m_arrData objectAtIndex:btn.tag];
-    ServiceManaagerSubTypeAddViewController *add = [[ServiceManaagerSubTypeAddViewController alloc]initWith:info.m_info];
-    [self.navigationController pushViewController:add animated:YES];
-    
+    self.m_currentIndex = btn.tag;
+    UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"新增服务",@"编辑",@"删除", nil ];
+    alert.tag = 0;
+    [alert show];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+
+    if(alertView.tag == 0){
+        WarehouseTopTypeInfo *info = [self.m_arrData objectAtIndex:self.m_currentIndex];
+
+
+        if(buttonIndex == 0){
+
+        }else if (buttonIndex == 1){
+            ServiceManaagerSubTypeAddViewController *add = [[ServiceManaagerSubTypeAddViewController alloc]initWith:info.m_info];
+            [self.navigationController pushViewController:add animated:YES];
+
+        }else if (buttonIndex == 2){
+
+            ServiceManaagerTopTypeAddViewController *vc = [[ServiceManaagerTopTypeAddViewController alloc]initWith:info.m_info];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (buttonIndex == 3){
+            [HTTP_MANAGER delOneServiceTopTypeWith:info.m_info[@"_id"]
+                                    successedBlock:^(NSDictionary *succeedResult) {
+                                        if([succeedResult[@"code"]integerValue] == 1){
+                                            [self requestData:YES];
+                                        }
+
+                                    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                    }];
+        }
+    }else{
+        if(buttonIndex == 0){
+
+        }else if (buttonIndex == 1){//编辑
+            ServiceManaagerSubTypeAddViewController *edit = [[ServiceManaagerSubTypeAddViewController alloc]initWithServiceInfo:self.m_subInfo];
+            [self.navigationController pushViewController:edit animated:YES];
+        }else if (buttonIndex == 2){//删除
+            [HTTP_MANAGER delOneServiceSubTypeWith:self.m_subInfo[@"_id"]
+                                    successedBlock:^(NSDictionary *succeedResult) {
+                                        if([succeedResult[@"code"]integerValue] == 1){
+                                            [self requestData:YES];
+                                        }
+
+                                    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                    }];
+
+        }else if (buttonIndex == 3){
+
+        }
+    }
+
 }
 
 #pragma mark - UIActionSheetDelegate

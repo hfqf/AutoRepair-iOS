@@ -541,4 +541,15 @@ typedef void (^FailBlock)(NSError *error);
                              withId:(NSString *)_id
                      successedBlock:(SuccessedBlock)success
                         failedBolck:(FailedBlock)failed;
+
+#pragma mark - 出入库记录
+- (void)addNewGoodsInOutRecoedeWith:(NSString *)type
+                          withRemak:(NSString *)remark
+                        withGoodsId:(NSString *)goodsId
+                            withNum:(NSString *)num
+                     successedBlock:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
+
+- (void)queryGoodsInOutRecoedesWith:(SuccessedBlock)success
+                        failedBolck:(FailedBlock)failed;
 @end

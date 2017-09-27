@@ -312,6 +312,20 @@
             [HTTP_MANAGER updateOneGoodsStoreNumWith:item
                                            withIsOut:isOut
                                       successedBlock:^(NSDictionary *succeedResult) {
+                                          if([succeedResult[@"code"]integerValue] == 1){
+
+                                              //保存出入库记录
+                                              [HTTP_MANAGER addNewGoodsInOutRecoedeWith:isOut ? @"2" : @"3"
+                                                                              withRemak:@""
+                                                                            withGoodsId:item.m_goodsId
+                                                                                withNum:item.m_num
+                                                                         successedBlock:^(NSDictionary *succeedResult) {
+
+                                                                         } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                                                         }];
+
+                                          }
 
             } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
 

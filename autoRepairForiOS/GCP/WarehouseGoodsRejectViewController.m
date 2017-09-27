@@ -271,6 +271,20 @@
     [HTTP_MANAGER updateOneGoodsForRejectWith:self.m_goodsInfo
                                   successedBlock:^(NSDictionary *succeedResult) {
                                       [self removeWaitingView];
+                                      if([succeedResult[@"code"]integerValue] ==1 ){
+
+                                          //保存出入库记录
+                                          [HTTP_MANAGER addNewGoodsInOutRecoedeWith:@"4"
+                                                                          withRemak:@""
+                                                                        withGoodsId:self.m_goodsInfo.m_id
+                                                                            withNum:self.m_goodsInfo.m_rejectNum
+                                                                     successedBlock:^(NSDictionary *succeedResult) {
+
+                                                                     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                                                     }];
+
+                                      }
                                       [self backBtnClicked];
 
     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {

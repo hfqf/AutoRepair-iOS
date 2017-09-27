@@ -399,6 +399,18 @@
                                                 [HTTP_MANAGER saveBuyedOneGoodsWith:good
                                                                      successedBlock:^(NSDictionary *succeedResult) {
                                                                          if([succeedResult[@"code"]integerValue] == 1){
+
+                                                                             //保存出入库记录
+                                                                             [HTTP_MANAGER addNewGoodsInOutRecoedeWith:@"1"
+                                                                                                             withRemak:@""
+                                                                                                           withGoodsId:good.m_id
+                                                                                                               withNum:good.m_purchaseNum
+                                                                                                        successedBlock:^(NSDictionary *succeedResult) {
+
+                                                                             } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                                                             }];
+
                                                                              [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
                                                                              [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
                                                                          }else{
