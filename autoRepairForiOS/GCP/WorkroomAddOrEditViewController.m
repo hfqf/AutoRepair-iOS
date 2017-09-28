@@ -40,7 +40,7 @@
 @property(nonatomic,strong) ADTRepairInfo *m_rep;
 @property(assign)NSInteger m_currentIndex;
 
-@property (nonatomic,strong)ADTRepairItemInfo *m_delItem;
+@property(assign)NSInteger m_delItemIndex;
 @end
 
 @implementation WorkroomAddOrEditViewController
@@ -342,7 +342,7 @@
         return;
     }
     [self showWaitingView];
-    [HTTP_MANAGER deleteRepairItems:self.m_rep.m_contactid
+    [HTTP_MANAGER deleteRepairItems:self.m_rep.m_idFromNode
                      successedBlock:^(NSDictionary *succeedResult) {
 
                          NSMutableArray *arr = [NSMutableArray array];
@@ -939,7 +939,7 @@
 
 - (void)delBtnClicked:(UIButton *)btn
 {
-    self.m_delItem = [self.m_rep.m_arrRepairItem objectAtIndex:btn.tag];
+    self.m_delItemIndex = btn.tag;
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认删除此收费项目?" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
     alert.tag = 1;
     [alert show];
@@ -1155,7 +1155,7 @@
                         [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
 
                         
-                        [HTTP_MANAGER deleteRepairItems:self.m_rep.m_carCode
+                        [HTTP_MANAGER deleteRepairItems:self.m_rep.m_idFromNode
                                          successedBlock:^(NSDictionary *succeedResult) {
                             
                             
@@ -1178,17 +1178,19 @@
 - (void)delItem
 {
 
-    if(self.m_delItem.m_id == nil){
-        [self.m_rep.m_arrRepairItem removeObject:self.m_delItem];
+    ADTRepairItemInfo *item = [self.m_rep.m_arrRepairItem objectAtIndex:self.m_delItemIndex];
+
+    if(item.m_id == nil){
+        [self.m_rep.m_arrRepairItem removeObjectAtIndex:self.m_delItemIndex];
         [self requestData:YES];
     }else{
-        [HTTP_MANAGER deleteRepairItem:self.m_delItem
+        [HTTP_MANAGER deleteRepairItem:item
                         successedBlock:^(NSDictionary *succeedResult) {
                             [self removeWaitingView];
                             if([succeedResult[@"code"]integerValue] == 1){
                                 [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
                                 [PubllicMaskViewHelper showTipViewWith:@"删除成功" inSuperView:self.view withDuration:1];
-                                [self.m_rep.m_arrRepairItem removeObject:self.m_delItem];
+                                [self.m_rep.m_arrRepairItem removeObjectAtIndex:self.m_delItemIndex];
                                 [self requestData:YES];
                             }else{
                                 [self removeWaitingView];

@@ -206,9 +206,13 @@ typedef void (^FailBlock)(NSError *error);
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed;
 
-- (void)deleteRepairItems:(NSString *)contactId
+- (void)deleteRepairItems:(NSString *)repId
            successedBlock:(SuccessedBlock)success
               failedBolck:(FailedBlock)failed;
+
+- (void)deleteContactItems:(NSString *)contactId
+            successedBlock:(SuccessedBlock)success
+               failedBolck:(FailedBlock)failed;
 
 - (void)queryAllRepairItem:(NSString *)repId
         successedBlock:(SuccessedBlock)success

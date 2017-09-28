@@ -363,5 +363,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window {
+    return self.isAllowRotation  ? UIInterfaceOrientationMaskLandscape : UIInterfaceOrientationMaskPortrait;
+}
 
 @end

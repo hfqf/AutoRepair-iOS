@@ -422,7 +422,7 @@
                         {
                             [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
 
-                            [HTTP_MANAGER deleteRepairItems:self.m_currentData.m_carCode successedBlock:^(NSDictionary *succeedResult) {
+                            [HTTP_MANAGER deleteContactItems:self.m_currentData.m_carCode successedBlock:^(NSDictionary *succeedResult) {
                                 
                                 
                             } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {

@@ -7,6 +7,7 @@
 //
 
 #import "XTNavigationController.h"
+#import "NewCountOnWebViewController.h"
 @interface XTNavigationController ()
 
 @end
@@ -46,14 +47,26 @@
     //PUBLIC_RELEASE(m_navigationBar);
 }
 
--(NSUInteger)supportedInterfaceOrientations
+- (BOOL)shouldAutorotate
 {
-    return [self.topViewController supportedInterfaceOrientations];
+    NSArray *arr = self.viewControllers;
+    for(UIViewController *vc in arr){
+       if ([vc isKindOfClass:NSClassFromString(@"NewCountOnWebViewController")]) {
+           NewCountOnWebViewController *New = (NewCountOnWebViewController *)vc;
+           [New setFrame:self.view.frame];
+           return YES;
+       }
+    }
+    return NO;
+}
+//设置支持的屏幕旋转方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return self.interfaceOrientationMask == 0 ? UIInterfaceOrientationMaskAll : self.interfaceOrientationMask;
 }
 
--(BOOL)shouldAutorotate
-{
-    return NO;
+//设置presentation方式展示的屏幕方向
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return self.interfaceOrientation;
 }
 
 

@@ -13,6 +13,7 @@
 #import "CustomerViewController.h"
 #import "RepairPrintViewController.h"
 #import "SettingViewController.h"
+#import "CountOnViewController.h"
 #import "BHBItem.h"
 #import "BHBPopView.h"
 
@@ -211,7 +212,7 @@
     CustomerViewController *vc2 = [[CustomerViewController alloc]init];
     vc2.m_delegate = self;
     
-    RepairPrintViewController *vc3 = [[RepairPrintViewController alloc]init];
+    CountOnViewController *vc3 = [[CountOnViewController alloc]init];
     vc3.m_delegate = self;
     
     SettingViewController *vc4 = [[SettingViewController alloc]init];

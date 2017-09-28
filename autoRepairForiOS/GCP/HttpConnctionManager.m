@@ -689,12 +689,22 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
-- (void)deleteRepairItems:(NSString *)contactId
+- (void)deleteRepairItems:(NSString *)repId
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed{
     [self startNormalPostWith:@"/repairitem/delAll" paragram:@{
-                                                            @"contactid":contactId
+                                                            @"repid":repId
                                                             }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)deleteContactItems:(NSString *)contactId
+           successedBlock:(SuccessedBlock)success
+              failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/repairitem/delAll" paragram:@{
+                                                               @"contactid":contactId
+                                                               }
                successedBlock:success
                   failedBolck:failed];
 }

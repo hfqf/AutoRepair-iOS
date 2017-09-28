@@ -748,6 +748,9 @@
 		7D72B47A1F243D5E00383D3D /* WorkroomListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D72B4781F243D5E00383D3D /* WorkroomListViewController.m */; };
 		7DC27EEE1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */; };
 		7DC27EEF1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */; };
+		7DCF80A41F7BFD21009C6ACE /* NewCountOnWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCF80A31F7BFD21009C6ACE /* NewCountOnWebViewController.m */; };
+		7DCF80A51F7BFD21009C6ACE /* NewCountOnWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCF80A31F7BFD21009C6ACE /* NewCountOnWebViewController.m */; };
+		7DCF80A61F7BFD21009C6ACE /* NewCountOnWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCF80A31F7BFD21009C6ACE /* NewCountOnWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1232,6 +1235,8 @@
 		7DCBC9781DC2EF09006BA2C8 /* ContactDeverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDeverViewController.m; sourceTree = "<group>"; };
 		7DCBC97C1DC2F264006BA2C8 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		7DCBC97E1DC2F2B8006BA2C8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		7DCF80A21F7BFD21009C6ACE /* NewCountOnWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewCountOnWebViewController.h; sourceTree = "<group>"; };
+		7DCF80A31F7BFD21009C6ACE /* NewCountOnWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewCountOnWebViewController.m; sourceTree = "<group>"; };
 		7DDA54821AF4CDC700216905 /* RepairHistotyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairHistotyTableViewCell.h; sourceTree = "<group>"; };
 		7DDA54831AF4CDC700216905 /* RepairHistotyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairHistotyTableViewCell.m; sourceTree = "<group>"; };
 		7DF80D3A1E11FACB0067FD49 /* jcore-ios-1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.0.0.a"; sourceTree = "<group>"; };
@@ -2173,6 +2178,8 @@
 			children = (
 				7D3779411E8792ED00560B70 /* CountOnViewController.h */,
 				7D3779421E8792ED00560B70 /* CountOnViewController.m */,
+				7DCF80A21F7BFD21009C6ACE /* NewCountOnWebViewController.h */,
+				7DCF80A31F7BFD21009C6ACE /* NewCountOnWebViewController.m */,
 				7D5A10FA1E9D2DCF0049D76D /* RepairPrintViewController.h */,
 				7D5A10FB1E9D2DCF0049D76D /* RepairPrintViewController.m */,
 			);
@@ -2817,6 +2824,7 @@
 				7D2046B61F79423B0061D6AD /* XXTEncrypt.m in Sources */,
 				7D2046B71F79423B0061D6AD /* ResetPwdViewController.m in Sources */,
 				7D2046B81F79423B0061D6AD /* UIImage+JHUD.m in Sources */,
+				7DCF80A61F7BFD21009C6ACE /* NewCountOnWebViewController.m in Sources */,
 				7D2046B91F79423B0061D6AD /* UIWebView+AFNetworking.m in Sources */,
 				7D2046BA1F79423B0061D6AD /* SBJson4StreamParserState.m in Sources */,
 				7D2046BB1F79423B0061D6AD /* AddNewCarcodeSelectViewController.m in Sources */,
@@ -3002,6 +3010,7 @@
 				7D4173C41F2E26E900233B9B /* XXTEncrypt.m in Sources */,
 				7D4173C51F2E26E900233B9B /* ResetPwdViewController.m in Sources */,
 				7D4173C61F2E26E900233B9B /* UIImage+JHUD.m in Sources */,
+				7DCF80A51F7BFD21009C6ACE /* NewCountOnWebViewController.m in Sources */,
 				7D4173C71F2E26E900233B9B /* UIWebView+AFNetworking.m in Sources */,
 				7D2044D71F789D150061D6AD /* SBJson4StreamParserState.m in Sources */,
 				7D4173C81F2E26E900233B9B /* AddNewCarcodeSelectViewController.m in Sources */,
@@ -3187,6 +3196,7 @@
 				7D4CD98D1F235D37003619EB /* XXTEncrypt.m in Sources */,
 				7D4CD98E1F235D37003619EB /* ResetPwdViewController.m in Sources */,
 				7D5BFB431F2CB6DB00FD239D /* UIImage+JHUD.m in Sources */,
+				7DCF80A41F7BFD21009C6ACE /* NewCountOnWebViewController.m in Sources */,
 				7D4CD9901F235D37003619EB /* UIWebView+AFNetworking.m in Sources */,
 				7D2044D61F789D150061D6AD /* SBJson4StreamParserState.m in Sources */,
 				7D4CD9911F235D37003619EB /* AddNewCarcodeSelectViewController.m in Sources */,
