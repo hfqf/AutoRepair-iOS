@@ -91,7 +91,7 @@
 - (void)addBtnClicked
 {
 
-    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增商品",@"分类设置", nil];
+    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增商品(需要先设置分类)",@"分类设置(新增.编辑,删除)", nil];
 //
 //    UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"新增商品",@"商品分类设置",@"查看未启用商品", nil];
     [act showInView:self.view];

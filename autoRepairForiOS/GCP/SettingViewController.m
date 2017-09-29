@@ -62,6 +62,7 @@
 {
     [super viewWillAppear:animated];
     [self requestData:YES];
+    [self.tableView setFrame:CGRectMake(0, 64, MAIN_WIDTH, MAIN_HEIGHT-64-HEIGHT_MAIN_BOTTOM)];
 }
 
 - (void)addBtnClicked
@@ -209,7 +210,7 @@
 
     else if(indexPath.section == 1)
     {
-        UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 200, 200)];
+        UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 10, 200,20)];
         [_tit setTextColor:UIColorFromRGB(0x4D4D4D)];
         [_tit setFont:[UIFont systemFontOfSize:16]];
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.section]];

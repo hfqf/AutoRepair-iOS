@@ -41,11 +41,10 @@
 - (void)backBtnClicked
 {
     XTNavigationController *navi = (XTNavigationController *)self.navigationController;
-
     if(navi.interfaceOrientation ==  UIInterfaceOrientationLandscapeLeft)
     {
+        [backBtn setTitle:@"返回" forState:UIControlStateNormal];
         [self forceOrientationPortrait];
-        [super performSelector:@selector(backBtnClicked) withObject:nil afterDelay:0.5];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -101,7 +100,7 @@
         [btn setFrame:CGRectMake(5,CGRectGetMaxY(m_input2.frame)+5, MAIN_WIDTH-10, 30)];
         btn.layer.cornerRadius =2;
         [btn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
-        [btn setTitle:@"开始查询维修记录" forState:UIControlStateNormal];
+        [btn setTitle:@"开始查询" forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
         [bg addSubview:btn];
@@ -240,6 +239,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [title setText:@"统计"];
+    [backBtn setTitle:@"竖屏" forState:UIControlStateNormal];
 
 //    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -296,7 +296,7 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    [self showWaitingView];
+//    [self showWaitingView];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

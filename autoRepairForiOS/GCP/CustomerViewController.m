@@ -27,7 +27,7 @@
 - (id)initForSelectContact:(NSString *)key
 {
     self.m_isAdd = YES;
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:YES withIsNeedNoneView:YES];
     if (self)
     {
         self.tableView.delegate = self;
@@ -129,6 +129,7 @@
 {
     [super viewWillAppear:animated];
     [self requestData:YES];
+    [self.tableView setFrame:CGRectMake(0, 64, MAIN_WIDTH, MAIN_HEIGHT-64-HEIGHT_MAIN_BOTTOM)];
 }
 
 

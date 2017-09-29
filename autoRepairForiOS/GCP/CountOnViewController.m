@@ -25,17 +25,17 @@
         self.m_arrData = @[
                            @{@"category":@"报表",
                              @"items":@[
-                                     @{@"icon":@"",@"title":@"新增客户数",@"type":@"0"},
-                                     @{@"icon":@"",@"title":@"新增开单数",@"type":@"1"},
-                                     @{@"icon":@"",@"title":@"材料销售记录",@"type":@"2"},
+                                     @{@"icon":@"warehouse_xzkhs",@"title":@"新增客户数",@"type":@"0"},
+                                     @{@"icon":@"warehouse_xzkds",@"title":@"新增开单数",@"type":@"1"},
+//                                     @{@"icon":@"",@"title":@"材料销售记录",@"type":@"2"},
 //                                     @{@"icon":@"",@"title":@"服务销售记录",@"type":@"3"},
-                                      @{@"icon":@"",@"title":@"工单明细",@"type":@"4"},
+                                      @{@"icon":@"warehouse_gdmx",@"title":@"工单明细",@"type":@"4"},
                                      ]},
                            @{@"category":@"财务",
                              @"items":@[
-                                     @{@"icon":@"",@"title":@"收入统计",@"type":@"10"},
-                                     @{@"icon":@"",@"title":@"支出统计",@"type":@"11"},
-                                     @{@"icon":@"",@"title":@"挂帐统计",@"type":@"12"},
+                                     @{@"icon":@"warehouse_srtj",@"title":@"收入统计",@"type":@"10"},
+                                     @{@"icon":@"warehouse_zctj",@"title":@"支出统计",@"type":@"11"},
+                                     @{@"icon":@"warehouse_gztj",@"title":@"挂帐统计",@"type":@"12"},
                                      ]},
                            ];
     }
@@ -58,6 +58,7 @@
 - (void)requestData:(BOOL)isRefresh
 {
     [self reloadDeals];
+    [self.tableView setFrame:CGRectMake(0, 64, MAIN_WIDTH, MAIN_HEIGHT-64-HEIGHT_MAIN_BOTTOM)];
 }
 
 

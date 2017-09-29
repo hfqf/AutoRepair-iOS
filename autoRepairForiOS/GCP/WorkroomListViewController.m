@@ -68,14 +68,18 @@
     [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
     [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
     [addBtn setTitle:@"开单" forState:UIControlStateNormal];
+//    [addBtn setImage:[UIImage imageNamed:@"sfsz"] forState:UIControlStateNormal];
     [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
 
     UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [setBtn addTarget:self action:@selector(setBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [setBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
-    [setBtn setFrame:CGRectMake(0, DISTANCE_TOP,100, HEIGHT_NAVIGATION)];
-    [setBtn setTitle:@"收费项目" forState:UIControlStateNormal];
+    [setBtn setFrame:CGRectMake(0, DISTANCE_TOP,50, 44)];
+    [setBtn setImageEdgeInsets:UIEdgeInsetsMake(10, 10,10,10)];
+//    [setBtn setTitle:@"收费项目" forState:UIControlStateNormal];
+    [setBtn setImage:[UIImage imageNamed:@"sfsz"] forState:UIControlStateNormal];
+
     [setBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     [navigationBG addSubview:setBtn];
     [self createButtons];
@@ -95,6 +99,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(m_tipView.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(m_tipView.frame)-HEIGHT_MAIN_BOTTOM)];
+
 }
 
 - (void)createButtons
@@ -322,7 +328,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 0){
-        [self.navigationController pushViewController:[[NSClassFromString(@"WareHouseManagerViewController") alloc]init] animated:YES];
+        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingViewController") alloc]init] animated:YES];
 
     }else{
         [self.navigationController pushViewController:[[NSClassFromString(@"ServiceManagerViewController") alloc]init] animated:YES];

@@ -9,7 +9,7 @@
 #import "WarehouseSelectGoodsToRepairViewController.h"
 
 #import "WarehouseGoodsInfoViewController.h"
-@interface WarehouseSelectGoodsToRepairViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
+@interface WarehouseSelectGoodsToRepairViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIAlertViewDelegate>
 @property(nonatomic,copy)NSMutableDictionary *m_dicSelected;
 @end
 
@@ -72,6 +72,11 @@
             self.m_arrData = arr;
         }
         [self reloadDeals];
+
+        if(self.m_arrData.count == 0){
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"您还未添加任何商品或材料" message:@"马上添加?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
+            [alert show];
+        }
     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
         [self removeWaitingView];
         [self reloadDeals];
@@ -216,7 +221,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    WareHouseGoods *good = [self.m_arrData objectAtIndex:indexPath.row];
+    WarehouseGoodsInfoViewController *add = [[WarehouseGoodsInfoViewController alloc]initWith:good];
+    [self.navigationController pushViewController:add animated:YES];
+}
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+
+    }else if (buttonIndex == 1){
+        [self.navigationController pushViewController:[[NSClassFromString(@"WarehouseGoodsSettingViewController") alloc]init] animated:YES];
+    }else if (buttonIndex == 2){
+
+    }
 }
 
 @end

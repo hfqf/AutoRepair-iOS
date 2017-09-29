@@ -15,6 +15,7 @@
 @property(nonatomic,copy)NSMutableDictionary *m_selectedDic;
 @property(assign)NSInteger m_currentIndex;
 @property(nonatomic,strong)NSDictionary *m_subInfo;
+@property(assign)BOOL m_isAddFirst;
 @end
 
 @implementation ServiceManagerViewController
@@ -105,6 +106,12 @@
             self.m_arrData = arrRet;
         }
         [self reloadDeals];
+
+        if(self.m_arrData.count == 0 && self.m_selectedDic != nil){
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"您还未添加任何服务" message:@"马上添加?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好", nil];
+            alert.tag = 2;
+            [alert show];
+        }
 
     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
         [self removeWaitingView];
@@ -199,7 +206,7 @@
 
                                     }];
         }
-    }else{
+    }else if(alertView.tag == 1){
         if(buttonIndex == 0){
 
         }else if (buttonIndex == 1){//编辑
@@ -217,6 +224,14 @@
                                     }];
 
         }else if (buttonIndex == 3){
+
+        }
+    }else if (alertView.tag == 2){
+        if(buttonIndex == 0){
+
+        }else if (buttonIndex == 1){
+            [self.navigationController pushViewController:[[NSClassFromString(@"ServiceManagerViewController") alloc]init] animated:YES];
+        }else if (buttonIndex == 2){
 
         }
     }

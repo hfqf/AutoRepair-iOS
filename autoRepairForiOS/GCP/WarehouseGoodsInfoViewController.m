@@ -475,7 +475,8 @@
                        [self removeWaitingView];
 
                        if([succeedResult[@"code"]integerValue] == 1){
-                           [self.navigationController popViewControllerAnimated:YES];
+                            [PubllicMaskViewHelper showTipViewWith:@"添加成功,请不要忘了在商品详情页采购它哦!" inSuperView:self.view withDuration:2];
+                           [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:2];
                        }else{
                            [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];
                        }
