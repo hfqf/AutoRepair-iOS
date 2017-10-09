@@ -143,16 +143,16 @@
 
     [title setText:@"客户"];
     
-    m_num = [[UILabel alloc]initWithFrame:CGRectMake(40,-5+DISTANCE_TOP, 20, 20)];
-    m_num.clipsToBounds = YES;
-    m_num.textAlignment = NSTextAlignmentCenter;
-    m_num.layer.cornerRadius = 10;
-    m_num.textColor = [UIColor whiteColor];
-    m_num.backgroundColor = [UIColor redColor];
-    m_num.font = [UIFont systemFontOfSize:10];
-    m_num.hidden = YES;
-    [navigationBG addSubview:m_num];
-    
+//    m_num = [[UILabel alloc]initWithFrame:CGRectMake(40,-5+DISTANCE_TOP, 20, 20)];
+//    m_num.clipsToBounds = YES;
+//    m_num.textAlignment = NSTextAlignmentCenter;
+//    m_num.layer.cornerRadius = 10;
+//    m_num.textColor = [UIColor whiteColor];
+//    m_num.backgroundColor = [UIColor redColor];
+//    m_num.font = [UIFont systemFontOfSize:10];
+//    m_num.hidden = YES;
+//    [navigationBG addSubview:m_num];
+
     
     if(!self.m_isAdd)
     {

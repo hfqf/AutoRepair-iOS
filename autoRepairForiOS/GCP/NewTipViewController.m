@@ -246,12 +246,12 @@
         [self.navigationController pushViewController:add animated:YES];
     }else{
         self.m_index = indexPath.row;
-        ADTOrderInfo *info = [self.m_arrData objectAtIndex:indexPath.section];
+        ADTOrderInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
         if(info.m_state.integerValue == 1){
-            UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"直接删除",@"查看该客户详情", nil];
+            UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"直接删除",@"查看该客户详情",@"开单", nil];
             [act showInView:self.view];
         }else{
-            UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"设置为已读,并发微信通知给客户",@"直接删除",@"查看该客户详情", nil];
+            UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"设置为已读,并发微信通知给客户",@"直接删除",@"查看该客户详情",@"开单", nil];
             [act showInView:self.view];
         }
     }
@@ -334,14 +334,14 @@
 {
     ADTOrderInfo *info = [self.m_arrData objectAtIndex:self.m_index];
     ADTContacterInfo *con = [DB_Shared contactWithOpenId:info.m_openid];
-    if(actionSheet.numberOfButtons == 3){
+    if(actionSheet.numberOfButtons == 4){
         if(buttonIndex == 0){
             [self delOrder];
         }else if (buttonIndex == 1){
             AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithContacer:con];
             [self.navigationController pushViewController:vc animated:YES];
         }else if (buttonIndex == 2){
-
+            [self startRepair:con];
         }
     }else{
         if(buttonIndex == 0){
@@ -351,10 +351,42 @@
         }else if (buttonIndex == 2){
             AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithContacer:con];
             [self.navigationController pushViewController:vc animated:YES];
+        }else if (buttonIndex == 3){
+            [self startRepair:con];
         }
     }
 }
 
+- (void)startRepair:(ADTContacterInfo *)contact
+{
+    ADTOrderInfo *order = [self.m_arrData objectAtIndex:self.m_index];
+    ADTRepairInfo *rep = [ADTRepairInfo initWith:contact];
+    rep.m_repairType =order.m_info;
+    [self showWaitingView];
+    [HTTP_MANAGER addNewRepair4:rep
+                 successedBlock:^(NSDictionary *succeedResult) {
+                     [self removeWaitingView];
+                     rep.m_idFromNode = succeedResult[@"ret"][@"_id"];
+                     rep.m_state = @"0";
+                     rep.m_owner = [LoginUserUtil userTel];
+
+                     if([succeedResult[@"code"]integerValue] == 1)
+                     {
+                         [PubllicMaskViewHelper showTipViewWith:@"开单成功" inSuperView:self.view  withDuration:1];
+                         WorkroomAddOrEditViewController *add = [[WorkroomAddOrEditViewController alloc]initWith:rep];
+                         [self.navigationController pushViewController:add animated:YES];
+                     }
+                     else
+                     {
+                         [PubllicMaskViewHelper showTipViewWith:@"开单失败" inSuperView:self.view  withDuration:1];
+                     }
+
+                 } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                     [self removeWaitingView];
+                     [PubllicMaskViewHelper showTipViewWith:@"开单失败" inSuperView:self.view  withDuration:1];
+
+                 }];
+}
 - (void)updateOrder
 {
     [self showWaitingView];
