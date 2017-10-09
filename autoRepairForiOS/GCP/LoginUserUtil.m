@@ -232,6 +232,12 @@
     return ret == nil ? 0 : [ret integerValue];
 }
 
++ (BOOL)isNeedDirectaddItem
+{
+    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_ADDITEM_SET];
+    return ret == nil ? NO : [ret integerValue] == 1;
+}
+
 ///查看绑定的设备是否变化,如果变化肯定要上传本地数据,并下载所有之前数据
 + (BOOL)isDeviceModifyed
 {

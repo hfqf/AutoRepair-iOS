@@ -202,6 +202,10 @@ typedef void (^FailBlock)(NSError *error);
        successedBlock:(SuccessedBlock)success
           failedBolck:(FailedBlock)failed;
 
+- (void)addRepairItem2:(ADTRepairItemInfo *)info
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed;
+
 - (void)deleteRepairItem:(ADTRepairItemInfo *)info
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed;
@@ -556,4 +560,10 @@ typedef void (^FailBlock)(NSError *error);
 
 - (void)queryGoodsInOutRecoedesWith:(SuccessedBlock)success
                         failedBolck:(FailedBlock)failed;
+
+#pragma mark - 3.4.1
+///更新添加收费项目设置
+- (void)updateAddItemSet:(NSString *)type
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed;
 @end

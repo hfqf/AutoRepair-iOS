@@ -495,6 +495,7 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 #define KEY_AUTO_SHOP_NAME          @"KEY_AUTO_SHOP_NAME"
 #define KEY_AUTO_ADDRESS            @"KEY_AUTO_ADDRESS"
 #define KEY_AUTO_LOGIN              @"KEY_AUTO_LOGIN"
+#define KEY_AUTO_ADDITEM_SET        @"KEY_AUTO_ADDITEM_SET"
 #define KEY_UDID                     [[UIDevice currentDevice]identifierForVendor].UUIDString.length == 0 ? @"0" :  [[UIDevice currentDevice]identifierForVendor].UUIDString
 
 

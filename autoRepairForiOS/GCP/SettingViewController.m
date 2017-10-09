@@ -131,6 +131,7 @@
     self.m_arrData = @[
                        @"个人资料",
                        @"最新公告",
+                       @"工单收费项目方式设置",
                        @"微信公众号使用指南",
                        @"将小助手分享给好友",
                        @"去苹果商店写评论",
@@ -158,8 +159,7 @@
 //    }];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSInteger)high:(NSIndexPath *)indexPath{
     if(indexPath.section == 0)
     {
         return INFO_HIGH;
@@ -168,8 +168,12 @@
     {
         return 200;
     }
-    
     return 80;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self high:indexPath];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -218,16 +222,36 @@
         
         [cell addSubview:web];
     }
-    else
-    {
+    else if(indexPath.section == 2){
+        UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 30, 200, 20)];
+        [_tit setTextColor:UIColorFromRGB(0x4D4D4D)];
+        [_tit setFont:[UIFont systemFontOfSize:16]];
+        [_tit setText:[self.m_arrData objectAtIndex:indexPath.section]];
+        [cell addSubview:_tit];
+
+        UILabel *_tip = [[UILabel alloc]initWithFrame:CGRectMake( MAIN_WIDTH/2, 10, MAIN_WIDTH/2-10, 20)];
+        [_tip setTextAlignment:NSTextAlignmentRight];
+        [_tip setTextColor:UIColorFromRGB(0x4D4D4D)];
+        [_tip setFont:[UIFont systemFontOfSize:16]];
+        [_tip setText:@"是否直接手动录入"];
+        [cell addSubview:_tip];
+
+        UISwitch *switcher = [[UISwitch alloc]initWithFrame:CGRectMake(MAIN_WIDTH-80,35, 70, 40)];
+        switcher.on = [LoginUserUtil isNeedDirectaddItem];
+        [cell addSubview:switcher];
+        [switcher addTarget:self action:@selector(setAddItemType:) forControlEvents:UIControlEventValueChanged];
+    }else{
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         UILabel *_tit = [[UILabel alloc]initWithFrame:CGRectMake( 10, 30, 200, 20)];
         [_tit setTextColor:UIColorFromRGB(0x4D4D4D)];
         [_tit setFont:[UIFont systemFontOfSize:16]];
         [_tit setText:[self.m_arrData objectAtIndex:indexPath.section]];
         [cell addSubview:_tit];
-    
     }
+
+    UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0, [self high:indexPath]-0.5, MAIN_WIDTH, 0.5)];
+    [sep setBackgroundColor:KEY_COMMON_LIGHT_BLUE_CORLOR];
+    [cell addSubview:sep];
     return cell;
 }
 
@@ -239,31 +263,34 @@
     }else if(indexPath.section == 1)
     {
         
+    }else if(indexPath.section == 2)
+    {
+
     }
-    else if (indexPath.section == 2)
+    else if (indexPath.section == 3)
     {
         SpeWebviewViewController *webVC = [[SpeWebviewViewController alloc]initWithUrl:@"http://mp.weixin.qq.com/s?__biz=MzIyMzg5Njc4Mg==&mid=2247483662&idx=1&sn=f0a9af0bacfca75b9b04b4d4aee3f8b2&chksm=e81674afdf61fdb9b7160d2fd72354e44e927360105cebd478f31c1198761dac501abb16b7e8&mpshare=1&scene=23&srcid=0807PP6HLwRGmnp5Kx2QnFTc#rd" withTitle:@"微信公众号使用指南"];
         [self.navigationController pushViewController:webVC animated:YES];
     }
-    else if (indexPath.section == 3)
+    else if (indexPath.section == 4)
     {
         [ShareSdkUtil startShare:@"汽修小助手是为个人和中小型汽车修理厂商提供一个管理客户及修理记录的工具。" url:@"https://itunes.apple.com/cn/app/%E6%B1%BD%E4%BF%AE%E5%B0%8F%E5%8A%A9%E6%89%8B/id1106728499?mt=8" title:@"分享汽修小助手"];
     }
-    else if (indexPath.section == 4)
+    else if (indexPath.section == 5)
     {
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/%E6%B1%BD%E4%BF%AE%E5%B0%8F%E5%8A%A9%E6%89%8B/id1106728499?mt=8"]];
     }
-    else if (indexPath.section == 5)
+    else if (indexPath.section == 6)
     {
         [self.navigationController pushViewController:[[NSClassFromString(@"ResetPwdViewController") alloc]init] animated:YES];
     }
-    else if (indexPath.section == 6)
+    else if (indexPath.section == 7)
     {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确定退出?" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 1;
         [alert show];
     }
-    else if (indexPath.section == 7){
+    else if (indexPath.section == 8){
         [self.navigationController pushViewController:[[NSClassFromString(@"WareHouseManagerViewController") alloc]init] animated:YES];
     }
     else
@@ -428,5 +455,24 @@
 - (void)onRefreshParentData
 {
     [self requestData:YES];
+}
+
+- (void)setAddItemType:(UISwitch *)switcher
+{
+    [self showWaitingView];
+    [HTTP_MANAGER updateAddItemSet:!switcher.on ? @"0" : @"1"
+                    successedBlock:^(NSDictionary *succeedResult) {
+                        [self removeWaitingView];
+                        if([succeedResult[@"code"]integerValue] == 1){
+                            [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view withDuration:1];
+                            [[NSUserDefaults standardUserDefaults]setObject:!switcher.on ? @"0" : @"1" forKey:KEY_AUTO_ADDITEM_SET];
+
+                        }else{
+                            [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
+                        }
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+        [self removeWaitingView];
+        [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view withDuration:1];
+    }];
 }
 @end

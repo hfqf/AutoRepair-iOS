@@ -98,4 +98,6 @@
 + (NSString *)totalMoneyOfToday;
 
 + (NSString *)totalRepairNumOfToday;
+
++ (BOOL)isNeedDirectaddItem;
 @end

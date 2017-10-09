@@ -274,6 +274,8 @@ return jsonString;
 
                               [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
 
+                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"isdirectadditem"] forKey:KEY_AUTO_ADDITEM_SET];
+
                               [self queryContacts];
                               
                               [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:KEY_IS_FIRST_LOGIN];

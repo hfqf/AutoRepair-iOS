@@ -670,10 +670,27 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                            @"price":info.m_price,
                                                            @"num":info.m_num,
                                                            @"type":info.m_type,
-                                                            @"itemtype":info.m_itemType,
-                                                            @"goods":info.m_goodsId,
-                                                            @"service":info.m_serviceId
+                                                            @"itemtype":safeStringWith(info.m_itemType),
+                                                            @"goods":safeStringWith(info.m_goodsId),
+                                                            @"service":safeStringWith(info.m_serviceId)
                                                            }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)addRepairItem2:(ADTRepairItemInfo *)info
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/repairitem/add1" paragram:@{
+                                                            @"repid":info.m_repid == nil ? @"" : info.m_repid,
+                                                            @"contactid":info.m_contactid == nil ? @"" :info.m_contactid,
+                                                            @"price":info.m_price,
+                                                            @"num":info.m_num,
+                                                            @"type":info.m_type,
+                                                            @"itemtype":safeStringWith(info.m_itemType),
+                                                            @"goods":safeStringWith(info.m_goodsId),
+                                                            @"service":safeStringWith(info.m_serviceId)
+                                                            }
                successedBlock:success
                   failedBolck:failed];
 }
@@ -692,7 +709,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
 - (void)deleteRepairItems:(NSString *)repId
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed{
-    [self startNormalPostWith:@"/repairitem/delAll" paragram:@{
+    [self startNormalPostWith:@"/repairitem/delOneRepairAll" paragram:@{
                                                             @"repid":repId
                                                             }
                successedBlock:success
@@ -973,7 +990,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
-#pragma mark - 3.5
+#pragma mark - 3.4
 
 #pragma mark - 库房管理
 
@@ -1851,5 +1868,19 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+#pragma mark - 3.4.1
+///更新添加收费项目设置
+- (void)updateAddItemSet:(NSString *)type
+    successedBlock:(SuccessedBlock)success
+       failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/users/updateUserAddItemSet"
+                     paragram:@{
+                                @"isdirectadditem":type,
+                                @"tel":[LoginUserUtil userTel]
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
 
 @end
