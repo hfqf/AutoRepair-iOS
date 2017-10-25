@@ -119,6 +119,9 @@
 
                                                                [self removeWaitingView];
                                                                if([succeedResult[@"code"]integerValue] == 1){
+                                                                   NSMutableDictionary *newInfo = [NSMutableDictionary dictionaryWithDictionary:self.m_parentInfo];
+                                                                   [newInfo setObject:arrSub forKey:@"subtype"];
+                                                                   [self.m_refreshDelegate onRefreshTopInfo:arrSub];
                                                                    [self.navigationController popViewControllerAnimated:YES];
                                                                }else{
                                                                    [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view withDuration:1];

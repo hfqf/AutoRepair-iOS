@@ -566,4 +566,13 @@ typedef void (^FailBlock)(NSError *error);
 - (void)updateAddItemSet:(NSString *)type
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed;
+
+#pragma mark - 3.4.3
+- (void)getAllRepairsWithState2:(NSString *)state
+                     withLastId:(NSString *)lastId
+                       withSize:(NSInteger )size
+                      contactid:(NSString *)contactid
+                        carCode:(NSString *)carCode
+                 successedBlock:(SuccessedBlock)success
+                    failedBolck:(FailedBlock)failed;
 @end

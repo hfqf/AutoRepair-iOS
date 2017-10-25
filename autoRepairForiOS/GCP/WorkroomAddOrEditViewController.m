@@ -960,6 +960,7 @@
 
 - (void)addItemBtnClicked
 {
+    [m_currentTextFiled resignFirstResponder];
     if(m_payDesc.text.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"收费项目不能为空" inSuperView:self.view withDuration:1];
@@ -996,7 +997,7 @@
                             [PubllicMaskViewHelper showTipViewWith:@"添加成功" inSuperView:self.view withDuration:1];
                             [self.m_rep.m_arrRepairItem addObject:item];
                             [self reloadDeals];
-                            [self updateRepair:NO];
+//                            [self updateRepair:NO];
                         }else{
                             [self removeWaitingView];
                             [PubllicMaskViewHelper showTipViewWith:@"添加失败" inSuperView:self.view withDuration:1];

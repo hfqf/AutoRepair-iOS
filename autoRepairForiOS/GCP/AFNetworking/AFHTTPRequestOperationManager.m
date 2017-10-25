@@ -149,6 +149,7 @@
     //由于不想加蒙板处理多线程请求时出现的返回错误,现在每次在新请求的时候先取消掉所有的之前线程,确保每次只有一个线程
 //    [self.operationQueue  cancelAllOperations];
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters];
+    [request setTimeoutInterval:10];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self.operationQueue addOperation:operation];
     SpeLog(@"parameters==%@",parameters);

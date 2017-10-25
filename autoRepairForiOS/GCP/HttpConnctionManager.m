@@ -1883,4 +1883,42 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+#pragma mark - 3.4.3
+
+- (void)getAllRepairsWithState2:(NSString *)state
+                      withLastId:(NSString *)lastId
+                      withSize:(NSInteger )size
+                     contactid:(NSString *)contactid
+                       carCode:(NSString *)carCode
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    NSString *path = nil;
+    if(state.integerValue == 4){
+        path = @"/repair/queryAllWithStateAndOwned";
+        state = @"2";
+    }else{
+        path = @"/repair/queryAllWithState2";
+    }
+    [self startNormalPostWith:path
+                     paragram:
+     (contactid == nil && carCode == nil) ?
+     @{
+       @"state":state,
+       @"pagesize":[NSString stringWithFormat:@"%ld",(long)size],
+       @"insertTime":lastId,
+       @"owner":[LoginUserUtil userTel],
+       }:
+     @{
+       @"state":state,
+       @"pagesize":[NSString stringWithFormat:@"%ld",(long)size],
+       @"insertTime":lastId,
+       @"owner":[LoginUserUtil userTel],
+       @"carcode":carCode,
+       @"contactid":contactid
+       }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
 @end

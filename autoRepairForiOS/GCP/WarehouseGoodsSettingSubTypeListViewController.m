@@ -8,7 +8,7 @@
 
 #import "WarehouseGoodsSettingSubTypeListViewController.h"
 #import "WarehouseGoodsSettingSubTypeAddViewController.h"
-@interface WarehouseGoodsSettingSubTypeListViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIAlertViewDelegate>
+@interface WarehouseGoodsSettingSubTypeListViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIAlertViewDelegate,WarehouseGoodsSettingSubTypeAddViewControllerDelegate>
 @property(assign)NSInteger m_selectIndex;
 @end
 
@@ -16,7 +16,7 @@
 
 -(id)initWith:(NSDictionary *)info
 {
-    self.m_parentInfo = info;
+    self.m_parentInfo = [NSMutableDictionary dictionaryWithDictionary:info];
     if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES])
     {
         self.tableView.dataSource = self;
@@ -49,6 +49,7 @@
 - (void)addBtnClicked
 {
     WarehouseGoodsSettingSubTypeAddViewController *add = [[WarehouseGoodsSettingSubTypeAddViewController alloc]initWith:self.m_parentInfo];
+    add.m_refreshDelegate = self;
     [self.navigationController pushViewController:add animated:YES];
 }
 
@@ -121,6 +122,7 @@
 
     }else if (buttonIndex == 1){
         WarehouseGoodsSettingSubTypeAddViewController *sub = [[WarehouseGoodsSettingSubTypeAddViewController alloc]initWithForEdit:info];
+        sub.m_refreshDelegate = self;
         [self.navigationController pushViewController:sub animated:YES];
     }else if (buttonIndex == 2){
         [HTTP_MANAGER delOneGoodsSubTypeWith:info[@"_id"]
@@ -131,6 +133,13 @@
                               }];
     }
 }
+
+
+- (void)onRefreshTopInfo:(NSArray *)arrSubIds
+{
+    [self.m_parentInfo setObject:arrSubIds forKey:@"subtype"];
+}
+
 
 
 

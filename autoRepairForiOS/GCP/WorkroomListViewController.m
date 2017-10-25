@@ -167,16 +167,18 @@
 {
     self.m_isRequesting = YES;
     [m_searchTextFiled setText:self.m_contact.m_carCode];
+    NSString *lastTime= nil;
     if(isRefresh){
-        self.m_page = 0;
+        lastTime = [LocalTimeUtil getCurrentTime];
     }else{
-        self.m_page++;
+        ADTRepairInfo *rep = [self.m_arrData lastObject];
+        lastTime = rep.m_insertTime;
     }
     NSString *state = [NSString stringWithFormat:@"%lu",(long)self.m_currentIndex];
     [self showWaitingView];
-    [HTTP_MANAGER getAllRepairsWithState: state
-                                withPage:self.m_page
-                                withSize:self.m_contact == nil ? 20 : 1000
+    [HTTP_MANAGER getAllRepairsWithState2:state
+                                withLastId:safeStringWith(lastTime) 
+                                withSize:20
                                contactid:self.m_contact.m_idFromServer
                                  carCode:self.m_contact.m_carCode
                           successedBlock:^(NSDictionary *succeedResult) {
