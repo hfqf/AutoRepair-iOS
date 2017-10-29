@@ -18,12 +18,6 @@
 {
      UIView *m_tipView;
 }
-@property (nonatomic,strong) NSArray *m_arrCategory;
-
-@property (nonatomic,strong) NSArray *m_arrBtn;
-
-@property(nonatomic,assign)NSInteger m_currentIndex;
-
 @property(nonatomic,assign)NSInteger m_page;
 
 @property(assign)NSInteger m_index;
@@ -34,7 +28,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:YES withIsNeedNoneView:YES];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
     if (self)
     {
         self.tableView.delegate = self;
@@ -49,7 +43,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(m_tipView.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(m_tipView.frame)-HEIGHT_MAIN_BOTTOM)];
 
 }
 
@@ -60,10 +53,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    backBtn.hidden = YES;
-    [title setText:@"提醒"];
+    [title setText:@"工单提醒"];
 
-    [self createButtons];
+//    [self createButtons];
 }
 
 - (void)createButtons

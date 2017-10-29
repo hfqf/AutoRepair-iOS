@@ -271,7 +271,7 @@
 + (NSString *)shopName
 {
     NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_SHOP_NAME];
-    return ret == nil ?@"一流4s店" :ret;
+    return ret == nil ?@"" :ret;
 }
 
 + (BOOL)isAutoLogined
@@ -283,20 +283,20 @@
 + (NSString *)address
 {
     NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_ADDRESS];
-    return ret == nil ?@"一流4s店" :ret;
+    return ret == nil ?@"" :ret;
 }
 
 + (NSString *)totalMoneyOfToday;
 {
     NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_SHOP_NAME];
-    return ret == nil ?@"一流4s店" :ret;
+    return ret == nil ?@"0" :ret;
 }
 
 
 + (NSString *)totalRepairNumOfToday
 {
     NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_SHOP_NAME];
-    return ret == nil ?@"一流4s店" :ret;
+    return ret == nil ?@"0" :ret;
 }
 
 + (NSString *)headUrl

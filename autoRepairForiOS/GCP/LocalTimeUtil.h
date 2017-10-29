@@ -18,6 +18,8 @@
 
 + (NSString *)getCurrentTime2;
 
++ (NSString *)getCurrentTime3;
+
 
 + (BOOL)isToday:(NSString *)time;
 

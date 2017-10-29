@@ -575,4 +575,38 @@ typedef void (^FailBlock)(NSError *error);
                         carCode:(NSString *)carCode
                  successedBlock:(SuccessedBlock)success
                     failedBolck:(FailedBlock)failed;
+
+#pragma mark - bbs
+- (void)addNewBBS:(NSString *)senderid
+       sendername:(NSString *)sendername
+           avatar:(NSString *)avatar
+          content:(NSString *)content
+         imageurl:(NSString *)imageurl
+   successedBlock:(SuccessedBlock)success
+      failedBolck:(FailedBlock)failed;
+
+- (void)queryBBSList:(NSString *)lastTime
+      successedBlock:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed;
+
+- (void)updateBBSRefs:(NSString *)_id
+                  ref:(NSArray *)ref
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed;
+
+- (void)addNewBBSComment:(NSString *)senderid
+              sendername:(NSString *)sendername
+                  avatar:(NSString *)avatar
+                 content:(NSString *)content
+                   bbsId:(NSString *)bbsId
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed;
+
+- (void)delBBS:(NSString *)_id
+ successedBlock:(SuccessedBlock)success
+    failedBolck:(FailedBlock)failed;
+
+#pragma mark - 广告
+- (void)getgHomeAdvs:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed;
 @end

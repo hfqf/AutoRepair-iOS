@@ -61,7 +61,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    backBtn.hidden = YES;
+//    backBtn.hidden = YES;
     [title setText:@"工单"];
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -72,16 +72,16 @@
     [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
 
-    UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [setBtn addTarget:self action:@selector(setBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [setBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
-    [setBtn setFrame:CGRectMake(0, DISTANCE_TOP,50, 44)];
-    [setBtn setImageEdgeInsets:UIEdgeInsetsMake(10, 10,10,10)];
-//    [setBtn setTitle:@"收费项目" forState:UIControlStateNormal];
-    [setBtn setImage:[UIImage imageNamed:@"sfsz"] forState:UIControlStateNormal];
-
-    [setBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
-    [navigationBG addSubview:setBtn];
+//    UIButton *setBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [setBtn addTarget:self action:@selector(setBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+//    [setBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
+//    [setBtn setFrame:CGRectMake(0, DISTANCE_TOP,50, 44)];
+//    [setBtn setImageEdgeInsets:UIEdgeInsetsMake(10, 10,10,10)];
+////    [setBtn setTitle:@"收费项目" forState:UIControlStateNormal];
+//    [setBtn setImage:[UIImage imageNamed:@"sfsz"] forState:UIControlStateNormal];
+//
+//    [setBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+//    [navigationBG addSubview:setBtn];
     [self createButtons];
 }
 
@@ -208,7 +208,7 @@
                                       NSMutableArray *arr = [NSMutableArray arrayWithArray:self.m_arrData];
                                       for(NSDictionary *info in succeedResult[@"ret"])
                                       {
-                                          NSInteger index = [succeedResult[@"ret"] indexOfObject:info]+1+self.m_page*20;
+                                          NSInteger index = [succeedResult[@"ret"] indexOfObject:info]+1+self.m_arrData.count;
                                           ADTRepairInfo*_rep = [ADTRepairInfo from:info];
                                           _rep.m_index = [NSString stringWithFormat:@"%ld", (long)index];
                                           ADTContacterInfo *con = [DB_Shared contactWithCarCode:_rep.m_carCode withContactId:_rep.m_contactid];

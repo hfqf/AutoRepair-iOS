@@ -95,7 +95,7 @@
     [UIView animateKeyframesWithDuration:0.3
                                    delay:0
                                  options:UIViewKeyframeAnimationOptionCalculationModeDiscrete animations:^{
-        [self.view setFrame:CGRectMake(0,-height,MAIN_WIDTH, MAIN_HEIGHT)];
+        [self.view setFrame:CGRectMake(0,-height/2,MAIN_WIDTH, MAIN_HEIGHT)];
 
     } completion:^(BOOL finished) {
         

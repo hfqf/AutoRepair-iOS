@@ -289,13 +289,10 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确定退出?" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 1;
         [alert show];
-    }
-    else if (indexPath.section == 8){
-        [self.navigationController pushViewController:[[NSClassFromString(@"WareHouseManagerViewController") alloc]init] animated:YES];
-    }
-    else
-    {
-        [self.navigationController pushViewController:[[NSClassFromString(@"ServiceManagerViewController") alloc]init] animated:YES];
+    }else if (indexPath.section == 8){
+        [self.navigationController pushViewController:[[NSClassFromString(@"LlxViewController") alloc]init] animated:YES];
+    }else if (indexPath.section == 9){
+        [self.navigationController pushViewController:[[NSClassFromString(@"HomeMenuViewController") alloc]init] animated:YES];
     }
 }
 

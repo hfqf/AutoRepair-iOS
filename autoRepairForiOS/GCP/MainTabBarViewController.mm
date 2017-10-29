@@ -20,6 +20,7 @@
 #import <objc/runtime.h>
 #import <AipOcrSdk/AipOcrSdk.h>
 #import "WorkroomListViewController.h"
+#import "HomeMenuViewController.h"
 @interface MainTabBarViewController ()<AipOcrDelegate,UIActionSheetDelegate>
 {
     
@@ -77,7 +78,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#define NUM_TAB 5
+#define NUM_TAB 2
 #pragma mark -  BaseViewControllerDelegate
 
 - (void)initData
@@ -100,31 +101,15 @@
         NSString *selectedImg = nil;
         if(i==0)
         {
-            title = @"工单";
-            unSelectedImg = @"wrench_un";
-            selectedImg = @"wrench_un";
-        }else if(i==1)
-        {
-            title = @"提醒";
-            unSelectedImg = @"clock_un";
-            selectedImg = @"clock_un";
-        }else if (i==2)
-        {
-            title = @"客户";
-            unSelectedImg = @"people_un";
-            selectedImg = @"people_un";
-        }
-        else if (i==3)
-        {
-            title = @"统计";
-            unSelectedImg =  @"tongji_on";
-            selectedImg = @"tongji_on";
+            title = @"工作台";
+            unSelectedImg = @"tab_work_un";
+            selectedImg = @"tab_work_on";
         }
         else
         {
             title = @"我的";
-            unSelectedImg = @"setup";
-            selectedImg = @"setup";
+            unSelectedImg = @"tab_set_un";
+            selectedImg = @"tab_set_on";
         }
         [arrTitle addObject:title];
         [arrUnSelectedImg addObject:unSelectedImg];
@@ -148,15 +133,15 @@
 - (void)addBtnClicked
 {
     BHBItem * item0 = [[BHBItem alloc]initWithTitle:@"扫描车牌" Icon:@"ic_tabbar_compose_camera"];
-    BHBItem * item1 = [[BHBItem alloc]initWithTitle:@"手动添加客户" Icon:@"ic_tabbar_compose_weibo"];
-    BHBItem * item2 = [[BHBItem alloc]initWithTitle:@"添加维修记录" Icon:@"ic_tabbar_compose_icon_add_highlighted"];
+//    BHBItem * item1 = [[BHBItem alloc]initWithTitle:@"手动添加客户" Icon:@"ic_tabbar_compose_weibo"];
+//    BHBItem * item2 = [[BHBItem alloc]initWithTitle:@"添加维修记录" Icon:@"ic_tabbar_compose_icon_add_highlighted"];
+//
+//    BHBItem * item3 = [[BHBItem alloc]initWithTitle:@"仓库管理" Icon:@"item_warehouse"];
+//    BHBItem * item4 = [[BHBItem alloc]initWithTitle:@"服务管理" Icon:@"item_service"];
 
-    BHBItem * item3 = [[BHBItem alloc]initWithTitle:@"仓库管理" Icon:@"item_warehouse"];
-    BHBItem * item4 = [[BHBItem alloc]initWithTitle:@"服务管理" Icon:@"item_service"];
-    
     //添加popview
     [BHBPopView showToView:self.view.window
-                 withItems:@[item0,item1,item2,item3,item4]
+                 withItems:@[item0]
             andSelectBlock:^(BHBItem *item) {
                 if ([item isKindOfClass:[BHBGroup class]]) {
                     NSLog(@"选中%@分组",item.title);
@@ -203,21 +188,21 @@
 //生成tabbar子ViewController
 - (void)initViewControllers
 {
-    WorkroomListViewController *vc0 = [[WorkroomListViewController alloc]init];
+    HomeMenuViewController *vc0 = [[HomeMenuViewController alloc]init];
     vc0.m_delegate = self;
-    
-    NewTipViewController *vc1 = [[NewTipViewController alloc]init];
-    vc1.m_delegate = self;
-    
-    CustomerViewController *vc2 = [[CustomerViewController alloc]init];
-    vc2.m_delegate = self;
-    
-    CountOnViewController *vc3 = [[CountOnViewController alloc]init];
-    vc3.m_delegate = self;
-    
+//
+//    NewTipViewController *vc1 = [[NewTipViewController alloc]init];
+//    vc1.m_delegate = self;
+//
+//    CustomerViewController *vc2 = [[CustomerViewController alloc]init];
+//    vc2.m_delegate = self;
+//
+//    CountOnViewController *vc3 = [[CountOnViewController alloc]init];
+//    vc3.m_delegate = self;
+//
     SettingViewController *vc4 = [[SettingViewController alloc]init];
     vc4.m_delegate = self;
-    self.viewControllers = @[vc0,vc1,vc2,vc3,vc4];
+    self.viewControllers = @[vc0,vc4];
 }
 
 //选择了第几个一级界面

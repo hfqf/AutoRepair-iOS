@@ -27,7 +27,7 @@
 - (id)initForSelectContact:(NSString *)key
 {
     self.m_isAdd = YES;
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:YES withIsNeedNoneView:YES];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
     if (self)
     {
         self.tableView.delegate = self;
@@ -72,7 +72,7 @@
 - (id)init
 {
     self.m_isAdd = NO;
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:YES];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO];
     if (self)
     {
         self.m_arrIndexTitle = [[UILocalizedIndexedCollation currentCollation]sectionTitles];
@@ -129,7 +129,7 @@
 {
     [super viewWillAppear:animated];
     [self requestData:YES];
-    [self.tableView setFrame:CGRectMake(0, 64, MAIN_WIDTH, MAIN_HEIGHT-64-HEIGHT_MAIN_BOTTOM)];
+    [self.tableView setFrame:CGRectMake(0, 64, MAIN_WIDTH, MAIN_HEIGHT-64)];
 }
 
 
@@ -156,7 +156,6 @@
     
     if(!self.m_isAdd)
     {
-        backBtn.hidden = YES;
         UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
         [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];

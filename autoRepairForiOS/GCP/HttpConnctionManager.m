@@ -1921,4 +1921,92 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+#pragma mark - bbs
+   - (void)addNewBBS:(NSString *)senderid
+          sendername:(NSString *)sendername
+             avatar:(NSString *)avatar
+            content:(NSString *)content
+           imageurl:(NSString *)imageurl
+     successedBlock:(SuccessedBlock)success
+        failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/bbs/add"
+                     paragram:@{
+                                @"senderid":senderid,
+                                @"sendername":sendername,
+                                @"avatar":avatar,
+                                @"content":content,
+                                @"imageurl":imageurl,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)queryBBSList:(NSString *)lastTime
+      successedBlock:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/bbs/query"
+                     paragram:@{
+                                @"pagesize":@"20",
+                                @"insertTime":lastTime,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)updateBBSRefs:(NSString *)_id
+                  ref:(NSArray *)ref
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/bbs/updateRef"
+                     paragram:@{
+                                @"id":_id,
+                                @"ref":ref,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)addNewBBSComment:(NSString *)senderid
+       sendername:(NSString *)sendername
+           avatar:(NSString *)avatar
+          content:(NSString *)content
+         bbsId:(NSString *)bbsId
+   successedBlock:(SuccessedBlock)success
+      failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/bbscomment/add"
+                     paragram:@{
+                                @"senderid":senderid,
+                                @"sendername":sendername,
+                                @"avatar":avatar,
+                                @"content":content,
+                                @"bbsId":bbsId,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)delBBS:(NSString *)_id
+      successedBlock:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/bbs/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 广告
+
+- (void)getgHomeAdvs:(SuccessedBlock)success
+         failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/adv/query"
+                     paragram:@{
+                                @"type":@"0",
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
 @end

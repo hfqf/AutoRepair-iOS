@@ -14,7 +14,7 @@
 #define  KEY_IS_DEVICE                              0 //是否是真机运行
 #define  KEY_IS_PRODUCT_SERVER                      1 //是否是正式商用环境，否则是欲上线正式环境
 
-#define  SERVER                       KEY_IS_DEV ?( KEY_IS_DEVICE ? @"http://192.168.30.17:18080" : @"http://localhost:18080")   :          (KEY_IS_PRODUCT_SERVER ? @"http://autorepairhelper.duapp.com" :@"http://autoreview.duapp.com")
+#define  SERVER                       KEY_IS_DEV ?( KEY_IS_DEVICE ? @"http://192.168.3.112:18080" : @"http://localhost:18080")   :          (KEY_IS_PRODUCT_SERVER ? @"http://autorepairhelper.duapp.com" :@"http://autoreview.duapp.com")
 #define  JPUSH_APPKEY                 @"2c333bb853fee953412917d3"
 #define  JPUSH_SECRET                 @"78b67cb91bdd80f8c0fa92a9"
 

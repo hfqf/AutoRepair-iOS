@@ -21,6 +21,12 @@
 @property (nonatomic,assign) BOOL  m_isNeedNoneView;
 @property (nonatomic,assign) BOOL  m_isRequesting;
 @property (nonatomic,copy) NSArray *m_arrData;
+
+@property (nonatomic,strong) NSArray *m_arrCategory;
+
+@property (nonatomic,strong) NSArray *m_arrBtn;
+
+@property(nonatomic,assign)NSInteger m_currentIndex;
 @property (nonatomic,strong) NSMutableDictionary *m_parentInfo;
 @property (nonatomic,copy) NSMutableDictionary *m_currentInfo;
 

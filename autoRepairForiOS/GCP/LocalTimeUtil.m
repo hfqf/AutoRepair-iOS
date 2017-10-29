@@ -36,7 +36,7 @@
 
 + (NSString *)getCurrentTime
 {
-    NSDate *dateToDay = [NSDate date];//将获得当前时间
+    NSDate *dateToDay = [NSDate dateWithTimeIntervalSinceNow:1000];//将获得当前时间
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
@@ -50,6 +50,17 @@
     NSDate *dateToDay = [NSDate date];//将获得当前时间
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyyMMddHHmmss"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    [df setLocale:locale];
+    NSString *strDate = [df stringFromDate:dateToDay];
+    return strDate;
+}
+
++ (NSString *)getCurrentTime3
+{
+    NSDate *dateToDay = [NSDate date];//将获得当前时间
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyyMMddHHmmssSSS"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     [df setLocale:locale];
     NSString *strDate = [df stringFromDate:dateToDay];
