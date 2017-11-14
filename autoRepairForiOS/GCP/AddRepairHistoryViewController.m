@@ -420,7 +420,6 @@
            
                         if([succeedResult[@"code"] integerValue] == 1)
                         {
-                            [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
 
                             [HTTP_MANAGER deleteContactItems:self.m_currentData.m_carCode successedBlock:^(NSDictionary *succeedResult) {
                                 
@@ -517,7 +516,6 @@
                            {
 
                                    [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view withDuration:1];
-                                   [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
 
                                    [self performSelector:@selector(backToMainTab) withObject:nil afterDelay:1];
                            }
@@ -546,8 +544,6 @@
                         
             if([succeedResult[@"code"]integerValue] == 1)
             {
-
-                    [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
 
                     [PubllicMaskViewHelper showTipViewWith:@"添加成功" inSuperView:self.view  withDuration:1];
                     [self.m_delegate onRefreshParentData];
@@ -594,7 +590,6 @@
         [HTTP_MANAGER updateOneRepair:self.m_currentData
                        successedBlock:^(NSDictionary *succeedResult) {
                            
-                               [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
 
                                [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view withDuration:1];
                            
@@ -844,7 +839,6 @@
                         if([succeedResult[@"code"]integerValue] == 1){
                             [self.m_currentData.m_arrRepairItem removeObjectAtIndex:btn.tag];
                             [self reloadDeals];
-                            [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
                         }else{
                             [self removeWaitingView];
                             [PubllicMaskViewHelper showTipViewWith:@"操作失败" inSuperView:self.view withDuration:1];

@@ -26,19 +26,23 @@
 
 SINGLETON_FOR_CLASS(SqliteDataManager)
 
+
 -(BOOL)execSql:(NSString *)sql
 {
-    char *err = NULL;
-    if (sqlite3_exec(m_db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK)
-    {
-        SpeLog(@"数据库操作:%@失败!====%s",sql,err);
-        return NO;
+    @synchronized (self){
+        char *err = NULL;
+        if (sqlite3_exec(m_db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK)
+        {
+            SpeLog(@"数据库操作:%@失败!====%s",sql,err);
+            return NO;
+        }
+        else
+        {
+            SpeLog(@"操作数据成功==sql:%@",sql);
+        }
+        return YES;
     }
-    else
-    {
-        SpeLog(@"操作数据成功==sql:%@",sql);
-    }
-    return YES;
+
 }
 
 #pragma mark -  数据库操作

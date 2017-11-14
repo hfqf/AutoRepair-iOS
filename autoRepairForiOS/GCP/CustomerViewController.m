@@ -288,7 +288,7 @@
             
             NSArray *arrVcs = self.navigationController.viewControllers;
             for(UIViewController *vi in arrVcs){
-                if([vi isKindOfClass:NSClassFromString(@"MainTabBarViewController")]){
+                if([vi isKindOfClass:NSClassFromString(@"WorkroomListViewController")]){
                     [self.navigationController popToViewController:vi animated:YES];
                 }
             }

@@ -11,12 +11,12 @@
 #import "SpeWebviewViewController.h"
 @interface HomeMenuViewController ()<MXCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MXCycleScrollView *cycleScrollView;
-@property(nonatomic,strong)NSArray *m_arrAds;
+@property(nonatomic,strong)NSMutableArray *m_arrAds;
 @end
 
 
 #define kNumCell      4
-#define  HIGH_ADS     120
+#define  HIGH_ADS     MAIN_WIDTH/2
 
 @implementation HomeMenuViewController
 - (id)init
@@ -56,16 +56,12 @@
                              },];
         [self reloadDeals];
         [HTTP_MANAGER getgHomeAdvs:^(NSDictionary *succeedResult) {
-
             if([succeedResult[@"code"]integerValue]==1){
-                self.m_arrAds = succeedResult[@"ret"];
+                self.m_arrAds = [NSMutableArray arrayWithArray:succeedResult[@"ret"]];
                 if(self.m_arrAds.count > 0){
                     self.tableView.tableHeaderView = [self headereView:succeedResult[@"ret"]];
                 }
             }
-            [self reloadDeals];
-
-
         } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
 
         }];

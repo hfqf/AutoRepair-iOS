@@ -21,6 +21,7 @@
 #import <AipOcrSdk/AipOcrSdk.h>
 #import "WorkroomListViewController.h"
 #import "HomeMenuViewController.h"
+#import "AddNewCustomerViewController.h"
 @interface MainTabBarViewController ()<AipOcrDelegate,UIActionSheetDelegate>
 {
     
@@ -225,7 +226,7 @@
     hud.margin = 10.f;
     hud.yOffset = 0;
     hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:100];
+    [hud hide:YES afterDelay:5];
 }
 
 - (void)removeWaitingView
@@ -286,7 +287,26 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     NSString *ret = [actionSheet buttonTitleAtIndex:buttonIndex];
-    [[NSNotificationCenter defaultCenter]postNotificationName:KEY_AUTO_ADD_CONTACT object:ret];
-    [self selectWithIndex:1];
+
+
+    NSString *carcode = ret;
+    NSArray *arr = [DB_Shared quertAllCustoms:carcode];
+    if(arr.count == 0){
+        AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithCarcode:carcode];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if(arr.count == 1){
+        ADTContacterInfo *con = [arr firstObject];
+        con.m_isAddNew = NO;
+        AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithContacer:con];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        UIActionSheet *act = [[UIActionSheet alloc]init];
+        act.delegate = self;
+        act.title = @"此车牌号有多客户,请选择客户";
+        for(ADTContacterInfo *_info in arr){
+            [act addButtonWithTitle:_info.m_tel];
+        }
+        [act showInView:self.view];
+    }
 }
 @end

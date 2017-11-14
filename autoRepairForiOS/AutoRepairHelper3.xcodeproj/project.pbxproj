@@ -2917,6 +2917,11 @@
 					7D4CD8E21F235D37003619EB = {
 						DevelopmentTeam = BJW9F34F29;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

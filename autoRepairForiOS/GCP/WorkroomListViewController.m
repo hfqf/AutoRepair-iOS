@@ -16,12 +16,6 @@
     UITextField *m_searchTextFiled;
 }
 
-@property (nonatomic,strong) NSArray *m_arrCategory;
-
-@property (nonatomic,strong) NSArray *m_arrBtn;
-
-@property(nonatomic,assign)NSInteger m_currentIndex;
-
 @property(nonatomic,assign)NSInteger m_page;
 
 @property(nonatomic,strong) ADTContacterInfo *m_contact;
@@ -31,7 +25,7 @@
 
 -(id)init
 {
-    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:YES withIsNeedBottobBar:YES withIsNeedNoneView:YES])
+    if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:YES withIsNeedBottobBar:NO withIsNeedNoneView:YES])
     {
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
@@ -53,7 +47,6 @@
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.tableView setBackgroundColor:UIColorFromRGB(0xf5f5f5)];
         
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(forceRefresh) name:KEY_REPAIRS_UPDATED object:nil];
     }
     return self;
 }
@@ -272,6 +265,7 @@
 {
     ADTRepairInfo *rep = [self.m_arrData objectAtIndex:indexPath.section];
     WorkroomAddOrEditViewController *add = [[WorkroomAddOrEditViewController alloc]initWith:rep];
+    add.m_delegate = self;
     [self.navigationController pushViewController:add animated:YES];
 }
 
@@ -292,6 +286,7 @@
                     {
                         [PubllicMaskViewHelper showTipViewWith:@"开单成功" inSuperView:self.view  withDuration:1];
                         WorkroomAddOrEditViewController *add = [[WorkroomAddOrEditViewController alloc]initWith:rep];
+                        add.m_delegate = self;
                         [self.navigationController pushViewController:add animated:YES];
                     }
                     else
@@ -335,5 +330,10 @@
     }else{
         [self.navigationController pushViewController:[[NSClassFromString(@"ServiceManagerViewController") alloc]init] animated:YES];
     }
+}
+
+- (void)onRefreshParentData
+{
+    [self requestData:YES];
 }
 @end

@@ -26,6 +26,8 @@
 
 @property(nonatomic,weak)id<HttpConnctionManagerDelegate>delegate;
 
+@property(nonatomic,strong) ADTRepairInfo *m_rep;
+
 
 
 SINGLETON_FOR_HEADER(HttpConnctionManager);

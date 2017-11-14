@@ -43,6 +43,7 @@
     self.m_carcode = carcode;
     if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO])
      {
+         
          self.m_currentData = [[ADTContacterInfo alloc]init];
          self.m_currentData.m_carCode = carcode;
          self.m_currentData.m_isAddNew = YES;
@@ -490,7 +491,6 @@
                       {
                         if([DB_Shared  updateCustomer:self.m_currentData])
                         {
-                            [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_SYNCED object:nil];
                             [self backBtnClicked];
                         }
                       }
@@ -562,7 +562,6 @@
                             [self removeWaitingView];
                             if([succeedResult[@"code"]integerValue] == 1)
                             {
-                                [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
 
                                 [PubllicMaskViewHelper showTipViewWith:@"操作成功" inSuperView:self.view  withDuration:1];
 
@@ -586,7 +585,6 @@
                                 {
                                     if([DB_Shared deleteCustomAndRepairHisotry:self.m_currentData.m_idFromServer with:self.m_currentData.m_carCode])
                                     {
-                                        [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
 
                                         [self backBtnClicked];
                                     }

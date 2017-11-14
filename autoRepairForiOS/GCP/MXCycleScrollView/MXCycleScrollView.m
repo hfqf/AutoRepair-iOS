@@ -41,7 +41,7 @@ typedef void(^MXClickHandler)(NSInteger index);
         self.imageView.backgroundColor = [UIColor whiteColor];
     
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:placeholder];
-        [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
+//        [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
         self.imageView.clipsToBounds = YES;
         [self addSubview:self.imageView];
         
@@ -157,6 +157,8 @@ typedef void(^MXClickHandler)(NSInteger index);
     self.pageControlView = [[MXPageControlView alloc]initWithFrame:CGRectMake(0, self.height-MXPageControlHeight, kScreenWidth, MXPageControlHeight)];
     //self.pageControlView.dotWidth = 5;
     //self.pageControlView.dotMargin = 5;
+    [self.pageControlView setPageIndicatorTintColor:[UIColor lightGrayColor]];
+    [self.pageControlView setCurrentPageIndicatorTintColor:KEY_COMMON_CORLOR];
     [self addSubview:_pageControlView];
 }
 

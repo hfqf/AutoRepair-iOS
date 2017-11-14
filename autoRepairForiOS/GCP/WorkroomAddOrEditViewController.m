@@ -33,12 +33,8 @@
     UITextView *m_currentTextView;
 }
 
-@property (nonatomic,strong) NSArray *m_arrCategory;
 
-@property (nonatomic,strong) NSArray *m_arrBtn;
 
-@property(nonatomic,strong) ADTRepairInfo *m_rep;
-@property(assign)NSInteger m_currentIndex;
 
 @property(assign)NSInteger m_delItemIndex;
 @end
@@ -49,17 +45,17 @@
 {
     if(self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:NO withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO])
     {
-        self.m_rep = rep;
+        HTTP_MANAGER.m_rep = rep;
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.tableView setBackgroundColor:UIColorFromRGB(0xf5f5f5)];
         [self createButtons];
-        if(![self.m_rep.m_state isEqualToString:@"2"]){
+        if(![HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"]){
             [self createBottomView];
         }
         self.tableView.delegate = self;
-        [self.tableView setFrame:CGRectMake(0, 64+40, MAIN_WIDTH, MAIN_HEIGHT-64-40- ([self.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
+        [self.tableView setFrame:CGRectMake(0, 64+40, MAIN_WIDTH, MAIN_HEIGHT-64-40- ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
         [self requestData:YES];
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:)name:UIKeyboardDidShowNotification object:nil];
@@ -82,7 +78,7 @@
 - (void)keyboardDidHide:(NSNotification*)aNotification
 
 {
-    [self.tableView setFrame:CGRectMake(0, 64+40, MAIN_WIDTH, MAIN_HEIGHT-64-40- ([self.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
+    [self.tableView setFrame:CGRectMake(0, 64+40, MAIN_WIDTH, MAIN_HEIGHT-64-40- ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
 }
 
 - (void)viewDidLoad {
@@ -150,15 +146,15 @@
     [m_bottomLeftBtn addTarget:self action:@selector(bottomLeftBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [m_bg addSubview:m_bottomLeftBtn];
     
-    if([self.m_rep.m_state isEqualToString:@"0"]){
+    if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"0"]){
         [m_bottomLeftBtn setTitle:@"提交结账" forState:UIControlStateNormal];
         [m_bottomLeftBtn setBackgroundColor:KEY_COMMON_LIGHT_BLUE_CORLOR];
-    }else if ([self.m_rep.m_state isEqualToString:@"1"]){
+    }else if ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"1"]){
         [m_bottomLeftBtn setTitle:@"确认收款(全部付清)" forState:UIControlStateNormal];
         [m_bottomLeftBtn setBackgroundColor:KEY_COMMON_RED_CORLOR];
-    }else if ([self.m_rep.m_state isEqualToString:@"2"]){
+    }else if ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"]){
         m_bg.hidden = YES;
-    }else if ([self.m_rep.m_state isEqualToString:@"3"]){
+    }else if ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"3"]){
         [m_bottomLeftBtn setTitle:@"恢复工单" forState:UIControlStateNormal];
         [m_bottomLeftBtn setBackgroundColor:KEY_COMMON_GREEN_CORLOR];
     }
@@ -169,9 +165,9 @@
     [m_bottomRightBtn setFrame:CGRectMake(MAIN_WIDTH/2, 40, MAIN_WIDTH/2, 50)];
     [m_bottomRightBtn setBackgroundColor:KEY_COMMON_BLUE_CORLOR];
 
-    if([self.m_rep.m_state isEqualToString:@"0"]){
+    if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"0"]){
         [m_bottomRightBtn setTitle:@"保存编辑" forState:UIControlStateNormal];
-    }else if ([self.m_rep.m_state isEqualToString:@"1"]){
+    }else if ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"1"]){
         [m_bottomRightBtn setTitle:@"提车(挂帐)" forState:UIControlStateNormal];
     }
     [m_bottomRightBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
@@ -185,64 +181,64 @@
 
 - (void)isWaitingInShopSwitcher:(UISwitch *)ch
 {
-    self.m_rep.m_iswatiinginshop = ch.on ? @"1" : @"0";
+    HTTP_MANAGER.m_rep.m_iswatiinginshop = ch.on ? @"1" : @"0";
 }
 
 - (void)isClosePushSwitcher:(UISwitch *)ch
 {
-    self.m_rep.m_isClose = ch.on ? YES : NO;
+    HTTP_MANAGER.m_rep.m_isClose = ch.on ? YES : NO;
 }
 
 - (void)bottomLeftBtnClicked
 {
-    if(self.m_rep.m_entershoptime.length == 0)
+    if(HTTP_MANAGER.m_rep.m_entershoptime.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"进店时间未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_km.length == 0)
+    if(HTTP_MANAGER.m_rep.m_km.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"进店里程未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_wantedcompletedtime.length == 0)
+    if(HTTP_MANAGER.m_rep.m_wantedcompletedtime.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"预计提车时间未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_repairType.length == 0)
+    if(HTTP_MANAGER.m_rep.m_repairType.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"维修内容未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_repairCircle.length == 0)
+    if(HTTP_MANAGER.m_rep.m_repairCircle.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"提醒周期未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_repairCircle.integerValue == 0)
+    if(HTTP_MANAGER.m_rep.m_repairCircle.integerValue == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"提醒周期必须大于0" inSuperView:self.view withDuration:1];
         return;
     }
     
     
-    if([self.m_rep.m_state isEqualToString:@"0"]){
-        self.m_rep.m_state = @"1";
+    if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"0"]){
+        HTTP_MANAGER.m_rep.m_state = @"1";
         [self addNewItesms:YES];
-    }else if([self.m_rep.m_state isEqualToString:@"1"]){
+    }else if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"1"]){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"请检查各项数据,确认收款后只能删除,无法撤销或修改,确认提交?" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
         alert.tag = 10000;
         [alert show];
-    }else if([self.m_rep.m_state isEqualToString:@"2"]){
+    }else if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"]){
         
-    }else if([self.m_rep.m_state isEqualToString:@"3"]){
-        self.m_rep.m_state = @"0";
+    }else if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"3"]){
+        HTTP_MANAGER.m_rep.m_state = @"0";
         [self updateRepair:YES];
     }else{
         
@@ -253,7 +249,7 @@
 
 - (void)bottomRightBtnClicked
 {
-    if([self.m_rep.m_state isEqualToString:@"1"]){//挂帐
+    if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"1"]){//挂帐
 
         OwnValueViewController *own = [[OwnValueViewController alloc]init];
         own.m_ownDelegate = self;
@@ -261,37 +257,37 @@
         return;
     }
 
-    if(self.m_rep.m_entershoptime.length == 0)
+    if(HTTP_MANAGER.m_rep.m_entershoptime.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"进店时间未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_km.length == 0)
+    if(HTTP_MANAGER.m_rep.m_km.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"进店里程未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_wantedcompletedtime.length == 0)
+    if(HTTP_MANAGER.m_rep.m_wantedcompletedtime.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"预计提车时间未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_repairType.length == 0)
+    if(HTTP_MANAGER.m_rep.m_repairType.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"维修内容未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_repairCircle.length == 0)
+    if(HTTP_MANAGER.m_rep.m_repairCircle.length == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"提醒周期未填" inSuperView:self.view withDuration:1];
         return;
     }
     
-    if(self.m_rep.m_repairCircle.integerValue == 0)
+    if(HTTP_MANAGER.m_rep.m_repairCircle.integerValue == 0)
     {
         [PubllicMaskViewHelper showTipViewWith:@"提醒周期必须大于0" inSuperView:self.view withDuration:1];
         return;
@@ -307,7 +303,7 @@
 
 - (void)updateAllGoodsStoredNum:(BOOL)isOut
 {
-    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+    for(ADTRepairItemInfo *item in HTTP_MANAGER.m_rep.m_arrRepairItem){
         if(item.m_itemType.integerValue == 0 && (item.m_goodsId || item.m_serviceId)){
             [HTTP_MANAGER updateOneGoodsStoreNumWith:item
                                            withIsOut:isOut
@@ -336,17 +332,17 @@
 
 - (void)addNewItesms:(BOOL)isBackAction
 {
-    if(self.m_rep.m_arrRepairItem.count == 0){
-        self.m_rep.m_state = @"0";
+    if(HTTP_MANAGER.m_rep.m_arrRepairItem.count == 0){
+        HTTP_MANAGER.m_rep.m_state = @"0";
         [PubllicMaskViewHelper showTipViewWith:@"还未选择收费项目" inSuperView:self.view withDuration:1];
         return;
     }
     [self showWaitingView];
-    [HTTP_MANAGER deleteRepairItems:self.m_rep.m_idFromNode
+    [HTTP_MANAGER deleteRepairItems:HTTP_MANAGER.m_rep.m_idFromNode
                      successedBlock:^(NSDictionary *succeedResult) {
 
                          NSMutableArray *arr = [NSMutableArray array];
-                         for(ADTRepairItemInfo *itemInfo in self.m_rep.m_arrRepairItem){
+                         for(ADTRepairItemInfo *itemInfo in HTTP_MANAGER.m_rep.m_arrRepairItem){
                              NSMutableDictionary *dic = [NSMutableDictionary dictionary];
                              [dic setObject:itemInfo.m_repid == nil ? @"" : itemInfo.m_repid forKey:@"repid"];
                              [dic setObject:itemInfo.m_contactid == nil ? @"" :itemInfo.m_contactid forKey:@"contactid"];
@@ -368,7 +364,7 @@
                                                NSArray *arrRet =succeedResult[@"ret"];
                                                for(NSDictionary *cell in arrRet){
                                                    NSInteger index = [arrRet indexOfObject:cell];
-                                                   ADTRepairItemInfo *item  = [self.m_rep.m_arrRepairItem objectAtIndex:index];
+                                                   ADTRepairItemInfo *item  = [HTTP_MANAGER.m_rep.m_arrRepairItem objectAtIndex:index];
                                                    item.m_id = cell[@"_id"];
                                                }
                                                [self updateRepair:isBackAction];
@@ -396,27 +392,27 @@
     [df1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     [df1 setLocale:locale];
-    NSDate *date=[df1 dateFromString:self.m_rep.m_wantedcompletedtime];
+    NSDate *date=[df1 dateFromString:HTTP_MANAGER.m_rep.m_wantedcompletedtime];
     
-    NSDate *dateToDay = [NSDate dateWithTimeInterval:[self.m_rep.m_repairCircle integerValue]*24*3600 sinceDate:date];//将获得当前时间
+    NSDate *dateToDay = [NSDate dateWithTimeInterval:[HTTP_MANAGER.m_rep.m_repairCircle integerValue]*24*3600 sinceDate:date];//将获得当前时间
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd"];
     [df setLocale:locale];
     NSString *strDate = [df stringFromDate:dateToDay];
-    self.m_rep.m_targetDate = strDate;
+    HTTP_MANAGER.m_rep.m_targetDate = strDate;
     
     [self showWaitingView];
-    [HTTP_MANAGER updateOneRepair4:self.m_rep
+    [HTTP_MANAGER updateOneRepair4:HTTP_MANAGER.m_rep
                    successedBlock:^(NSDictionary *succeedResult) {
                        
                        [self removeWaitingView];
                        if([succeedResult[@"code"]integerValue] == 1)
                        {
                            //修完后，相关商品出库
-                           if(self.m_rep.m_state.integerValue == 1){
+                           if(HTTP_MANAGER.m_rep.m_state.integerValue == 1){
                                [self updateAllGoodsStoredNum:YES];
                            }
-                           [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
+                           [self onRefreshParentData];
                            [PubllicMaskViewHelper showTipViewWith:@"更新成功" inSuperView:self.view withDuration:1];
                            if(isNeedBack){
                                [self.navigationController popViewControllerAnimated:YES];
@@ -462,16 +458,16 @@
 
 - (void)addBtnClicked
 {
-    if([self.m_rep.m_state isEqualToString:@"0"]){
+    if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"0"]){
         UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"取消此工单",@"删除此工单", nil];
         alert.tag = 10002;
         [alert show];
-    }else if ([self.m_rep.m_state isEqualToString:@"1"]){
+    }else if ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"1"]){
         UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"取消此工单",@"删除此工单", nil];
         alert.tag = 10002;
         [alert show];
-    }else if ([self.m_rep.m_state isEqualToString:@"2"]){
-        if(self.m_rep.m_ownMoney.integerValue == 0){
+    }else if ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"]){
+        if(HTTP_MANAGER.m_rep.m_ownMoney.integerValue == 0){
             UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除此工单",@"关闭提醒推送",@"打开提醒推送", nil];
             alert.tag = 10003;
             [alert show];
@@ -491,28 +487,28 @@
 
 - (void)checkIsNoneInput
 {
-    if(self.m_rep.m_entershoptime.length == 0||
-       self.m_rep.m_km.length == 0||
-       self.m_rep.m_wantedcompletedtime.length == 0||
-       self.m_rep.m_repairType.length == 0||
-       self.m_rep.m_repairCircle.length == 0){
+    if(HTTP_MANAGER.m_rep.m_entershoptime.length == 0||
+       HTTP_MANAGER.m_rep.m_km.length == 0||
+       HTTP_MANAGER.m_rep.m_wantedcompletedtime.length == 0||
+       HTTP_MANAGER.m_rep.m_repairType.length == 0||
+       HTTP_MANAGER.m_rep.m_repairCircle.length == 0){
         UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"当前工单未编辑完成,确认返回?" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
         alert.tag = 10001;
         [alert show];
     }else{
-        if([self.m_rep.m_state isEqualToString:@"2"]){
+        if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"]){
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-            if(self.m_rep.m_arrRepairItem.count == 0){
+            if(HTTP_MANAGER.m_rep.m_arrRepairItem.count == 0){
                 [self updateRepair:YES];
             }else{
                 NSInteger idVaildNum = 0;
-                for(ADTRepairItemInfo *_item in self.m_rep.m_arrRepairItem){
+                for(ADTRepairItemInfo *_item in HTTP_MANAGER.m_rep.m_arrRepairItem){
                     if(_item.m_id){
                         idVaildNum++;
                     }
                 }
-                if(idVaildNum != self.m_rep.m_arrRepairItem.count){
+                if(idVaildNum != HTTP_MANAGER.m_rep.m_arrRepairItem.count){
                     [self addNewItesms:YES];
                 }else{
                      [self updateRepair:YES];
@@ -530,9 +526,9 @@
 
 - (void)requestData:(BOOL)isRefresh
 {
-    [self.m_rep updateTotalPrice];
+    [HTTP_MANAGER.m_rep updateTotalPrice];
     [self reloadDeals];
-    [m_totalLab setText:[NSString stringWithFormat:@"总计:¥ %lu",(long)self.m_rep.m_totalPrice]];
+    [m_totalLab setText:[NSString stringWithFormat:@"总计:¥ %lu",(long)HTTP_MANAGER.m_rep.m_totalPrice]];
 }
 
 
@@ -568,7 +564,7 @@
             return 2;
         }
     }else{
-        return self.m_rep.m_arrRepairItem.count;
+        return HTTP_MANAGER.m_rep.m_arrRepairItem.count;
     }
     return 1;
 }
@@ -579,7 +575,7 @@
     if(self.m_currentIndex == 0){
         return INDEX_0_CELL_HIGH;
     }else{
-        return [self.m_rep.m_state isEqualToString:@"2"] || [self.m_rep.m_state isEqualToString:@"3"]  ? 0 : INPUT_ITEM_HIGH;
+        return [HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] || [HTTP_MANAGER.m_rep.m_state isEqualToString:@"3"]  ? 0 : INPUT_ITEM_HIGH;
     }
     return 10;
 }
@@ -619,7 +615,7 @@
         [vi addSubview:sep];
         return vi;
     }else{
-        if([self.m_rep.m_state isEqualToString:@"2"] ||  [self.m_rep.m_state isEqualToString:@"3"]){
+        if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] ||  [HTTP_MANAGER.m_rep.m_state isEqualToString:@"3"]){
             UIView *vi = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, 0)];
             return vi;
         }else{
@@ -725,7 +721,7 @@
                 [content setFont:[UIFont systemFontOfSize:14]];
                 [cell addSubview:content];
                 
-                ADTContacterInfo *con = [DB_Shared contactWithCarCode:self.m_rep.m_carCode withContactId:self.m_rep.m_idFromNode];
+                ADTContacterInfo *con = [DB_Shared contactWithCarCode:HTTP_MANAGER.m_rep.m_carCode withContactId:HTTP_MANAGER.m_rep.m_idFromNode];
                 if(indexPath.row == 0){
                     [tip setText:@"客户"];
                     [content setText:con.m_userName];
@@ -761,7 +757,7 @@
                     input.tag = 100;
                     [cell addSubview:input];
                     [tip setText:@"入店时间"];
-                    [input setText:self.m_rep.m_entershoptime];
+                    [input setText:HTTP_MANAGER.m_rep.m_entershoptime];
                 }else if (indexPath.row == 1)
                 {
                     input.tag = 101;
@@ -769,13 +765,13 @@
                     [tip setText:@"入店里程(KM)"];
                     input.keyboardType = UIKeyboardTypeNumberPad;
                     [input setPlaceholder:@"必填"];
-                    [input setText:self.m_rep.m_km];
+                    [input setText:HTTP_MANAGER.m_rep.m_km];
                 }else if (indexPath.row == 2)
                 {
                     [tip setText:@"是否在店等"];
                     UISwitch *switcher1 = [[UISwitch alloc]initWithFrame:CGRectMake(140,(INDEX_0_CELL_HIGH-30)/2, 30, 30)];
-                    switcher1.on = [self.m_rep.m_iswatiinginshop isEqualToString:@"1"];
-                    switcher1.enabled = ![self.m_rep.m_state isEqualToString:@"2"];;
+                    switcher1.on = [HTTP_MANAGER.m_rep.m_iswatiinginshop isEqualToString:@"1"];
+                    switcher1.enabled = ![HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"];;
                     [switcher1 addTarget:self action:@selector(isWaitingInShopSwitcher:) forControlEvents:UIControlEventValueChanged];
                     [cell addSubview:switcher1];
                 }else if (indexPath.row == 3)
@@ -783,14 +779,14 @@
                     input.tag = 103;
                     [cell addSubview:input];
                     [tip setText:@"预计提车时间"];
-                    [input setText:self.m_rep.m_wantedcompletedtime];
+                    [input setText:HTTP_MANAGER.m_rep.m_wantedcompletedtime];
                     [input setPlaceholder:@"必填"];
                 }else if (indexPath.row == 4)
                 {
                     input.tag = 104;
                     [cell addSubview:input];
                     [tip setText:@"客户备注"];
-                    [input setText:self.m_rep.m_customremark];
+                    [input setText:HTTP_MANAGER.m_rep.m_customremark];
                 }
             }else if (indexPath.section == 2){
                 
@@ -803,10 +799,10 @@
                     [cell addSubview:input];
                     input.returnKeyType = UIReturnKeyDone;
                     [tip setText:@"维修内容"];
-                    if(self.m_rep.m_repairType.length == 0){
+                    if(HTTP_MANAGER.m_rep.m_repairType.length == 0){
                         [input setText:@"必填"];
                     }else{
-                        [input setText:self.m_rep.m_repairType];
+                        [input setText:HTTP_MANAGER.m_rep.m_repairType];
                     }
                 }else
                 {
@@ -819,7 +815,7 @@
                     input.returnKeyType = UIReturnKeyDone;
                     input.tag = 105;
                     [tip setText:@"维修备注"];
-                    [input setText:self.m_rep.m_more];
+                    [input setText:HTTP_MANAGER.m_rep.m_more];
                 }
             }else{
                 
@@ -833,15 +829,15 @@
                     input.textColor = KEY_COMMON_GRAY_CORLOR;
                     [cell addSubview:input];
                     input.keyboardType = UIKeyboardTypeNumberPad;
-                    [input setText:self.m_rep.m_repairCircle];
+                    [input setText:HTTP_MANAGER.m_rep.m_repairCircle];
                     input.tag = 106;
                     [input setPlaceholder:@"必填(天)"];
                 }else
                 {
                     [tip setText:@"是否关闭提醒"];
                     UISwitch *switcher1 = [[UISwitch alloc]initWithFrame:CGRectMake(140,(INDEX_0_CELL_HIGH-30)/2, 30, 30)];
-                    switcher1.on = self.m_rep.m_isClose;
-                    switcher1.enabled = ![self.m_rep.m_state isEqualToString:@"2"];;;
+                    switcher1.on = HTTP_MANAGER.m_rep.m_isClose;
+                    switcher1.enabled = ![HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"];;;
                     [switcher1 addTarget:self action:@selector(isClosePushSwitcher:) forControlEvents:UIControlEventValueChanged];
                     [cell addSubview:switcher1];
                 }
@@ -856,7 +852,7 @@
         static NSString * identify = @"spe2";
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        ADTRepairItemInfo*item = [self.m_rep.m_arrRepairItem objectAtIndex:indexPath.row];
+        ADTRepairItemInfo*item = [HTTP_MANAGER.m_rep.m_arrRepairItem objectAtIndex:indexPath.row];
         
         UILabel *repairType = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, MAIN_WIDTH-35, 20)];
         [repairType setTextAlignment:NSTextAlignmentLeft];
@@ -886,7 +882,7 @@
         [cell addSubview:totalPrice];
         
         
-        if(![self.m_rep.m_state isEqualToString:@"2"]){
+        if(![HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"]){
             UIButton *delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             delBtn.tag = indexPath.row;
             [delBtn setFrame:CGRectMake(MAIN_WIDTH-30, 0, 30, 30)];
@@ -934,10 +930,10 @@
             UIDatePicker *picker = (UIDatePicker *)vi;
             NSString *time = [LocalTimeUtil getLocalTimeWith3:[picker date]];
             if(picker.tag == 0){
-                self.m_rep.m_entershoptime = time;
+                HTTP_MANAGER.m_rep.m_entershoptime = time;
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
             }else{
-                self.m_rep.m_wantedcompletedtime = time;
+                HTTP_MANAGER.m_rep.m_wantedcompletedtime = time;
                 [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
             }
         }
@@ -979,8 +975,8 @@
         return;
     }
     ADTRepairItemInfo *item = [[ADTRepairItemInfo alloc]init];
-    item.m_repid = self.m_rep.m_idFromNode;
-    item.m_contactid = self.m_rep.m_contactid;
+    item.m_repid = HTTP_MANAGER.m_rep.m_idFromNode;
+    item.m_contactid = HTTP_MANAGER.m_rep.m_contactid;
     item.m_price = m_payPrice.text;
     item.m_num = m_payNum.text;
     item.m_type = m_payDesc.text;
@@ -995,7 +991,7 @@
                         if([succeedResult[@"code"]integerValue] == 1){
                             item.m_id = succeedResult[@"ret"][@"_id"];
                             [PubllicMaskViewHelper showTipViewWith:@"添加成功" inSuperView:self.view withDuration:1];
-                            [self.m_rep.m_arrRepairItem addObject:item];
+                            [HTTP_MANAGER.m_rep.m_arrRepairItem addObject:item];
                             [self reloadDeals];
 //                            [self updateRepair:NO];
                         }else{
@@ -1010,6 +1006,12 @@
 
 }
 
+- (void)onRefreshParentData{
+    if(self.m_delegate && [self.m_delegate respondsToSelector:@selector(onRefreshParentData)]){
+        [self.m_delegate onRefreshParentData];
+    }
+}
+
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1020,12 +1022,12 @@
         }
     }else if (alertView.tag == 10000){
         if(buttonIndex == 1){
-            self.m_rep.m_state = @"2";
+            HTTP_MANAGER.m_rep.m_state = @"2";
             [self updateRepair:YES];
         }
     }else if(alertView.tag == 10001){
         if(buttonIndex == 1){
-            if(self.m_rep.m_isAddNewRepair){
+            if(HTTP_MANAGER.m_rep.m_isAddNewRepair){
                 [self deleteOneRepairServerAndLocalDB];
             }else{
                 [self.navigationController popViewControllerAnimated:YES];
@@ -1043,13 +1045,13 @@
             [self deleteOneRepairServerAndLocalDB];
         }
         else if (buttonIndex == 2){
-            self.m_rep.m_isClose = YES;
-            self.m_rep.m_isreaded = YES;
+            HTTP_MANAGER.m_rep.m_isClose = YES;
+            HTTP_MANAGER.m_rep.m_isreaded = YES;
             [self updateRepair:NO];
         }
         else if (buttonIndex == 3){
-            self.m_rep.m_isClose = NO;
-            self.m_rep.m_isreaded = NO;
+            HTTP_MANAGER.m_rep.m_isClose = NO;
+            HTTP_MANAGER.m_rep.m_isreaded = NO;
             [self updateRepair:NO];
         }
     }else if (alertView.tag == 10004){
@@ -1066,13 +1068,13 @@
             [self clearOwneMoney];
         }
         else if (buttonIndex == 2){
-            self.m_rep.m_isClose = YES;
-            self.m_rep.m_isreaded = YES;
+            HTTP_MANAGER.m_rep.m_isClose = YES;
+            HTTP_MANAGER.m_rep.m_isreaded = YES;
             [self updateRepair:NO];
         }
         else if (buttonIndex == 3){
-            self.m_rep.m_isClose = NO;
-            self.m_rep.m_isreaded = NO;
+            HTTP_MANAGER.m_rep.m_isClose = NO;
+            HTTP_MANAGER.m_rep.m_isreaded = NO;
             [self updateRepair:NO];
         }
     }
@@ -1082,12 +1084,12 @@
 - (void)clearOwneMoney
 {
     [self showWaitingView];
-    [HTTP_MANAGER clearOwnMoney:self.m_rep.m_idFromNode
+    [HTTP_MANAGER clearOwnMoney:HTTP_MANAGER.m_rep.m_idFromNode
                  successedBlock:^(NSDictionary *succeedResult) {
                      [self removeWaitingView];
                      if([succeedResult[@"code"] integerValue] == 1)
                      {
-                         [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
+                         [self onRefreshParentData];
                          [PubllicMaskViewHelper showTipViewWith:@"更新成功" inSuperView:self.view withDuration:1];
                          [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
                      }
@@ -1103,13 +1105,13 @@
 - (void)revertRepair
 {
     [self showWaitingView];
-    [HTTP_MANAGER revertRepair3:self.m_rep.m_idFromNode
+    [HTTP_MANAGER revertRepair3:HTTP_MANAGER.m_rep.m_idFromNode
                  successedBlock:^(NSDictionary *succeedResult) {
                      [self removeWaitingView];
                      if([succeedResult[@"code"] integerValue] == 1)
                      {
                          [self updateAllGoodsStoredNum:NO];
-                         [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
+                         [self onRefreshParentData];
                          [PubllicMaskViewHelper showTipViewWith:@"取消成功" inSuperView:self.view withDuration:1];
                          [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
                      }
@@ -1128,13 +1130,13 @@
 - (void)cancelRepair
 {
     [self showWaitingView];
-    [HTTP_MANAGER cancelRepair3:self.m_rep.m_idFromNode
+    [HTTP_MANAGER cancelRepair3:HTTP_MANAGER.m_rep.m_idFromNode
                 successedBlock:^(NSDictionary *succeedResult) {
                     [self removeWaitingView];
                     if([succeedResult[@"code"] integerValue] == 1)
                     {
                         [self updateAllGoodsStoredNum:NO];
-                        [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
+                        [self onRefreshParentData];
                         [PubllicMaskViewHelper showTipViewWith:@"取消成功" inSuperView:self.view withDuration:1];
                         [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
                     }
@@ -1153,18 +1155,18 @@
 - (void)deleteOneRepairServerAndLocalDB
 {
     [self showWaitingView];
-    [HTTP_MANAGER delOneRepair:self.m_rep
+    [HTTP_MANAGER delOneRepair:HTTP_MANAGER.m_rep
                 successedBlock:^(NSDictionary *succeedResult) {
                     [self removeWaitingView];
                     if([succeedResult[@"code"] integerValue] == 1)
                     {
 //                        [self updateAllGoodsStoredNum:NO];
 
-                        [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
+                        [self onRefreshParentData];
                         [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:1];
 
                         
-                        [HTTP_MANAGER deleteRepairItems:self.m_rep.m_idFromNode
+                        [HTTP_MANAGER deleteRepairItems:HTTP_MANAGER.m_rep.m_idFromNode
                                          successedBlock:^(NSDictionary *succeedResult) {
                             
                             
@@ -1187,19 +1189,19 @@
 - (void)delItem
 {
 
-    ADTRepairItemInfo *item = [self.m_rep.m_arrRepairItem objectAtIndex:self.m_delItemIndex];
+    ADTRepairItemInfo *item = [HTTP_MANAGER.m_rep.m_arrRepairItem objectAtIndex:self.m_delItemIndex];
 
     if(item.m_id == nil){
-        [self.m_rep.m_arrRepairItem removeObjectAtIndex:self.m_delItemIndex];
+        [HTTP_MANAGER.m_rep.m_arrRepairItem removeObjectAtIndex:self.m_delItemIndex];
         [self requestData:YES];
     }else{
         [HTTP_MANAGER deleteRepairItem:item
                         successedBlock:^(NSDictionary *succeedResult) {
                             [self removeWaitingView];
                             if([succeedResult[@"code"]integerValue] == 1){
-                                [[NSNotificationCenter defaultCenter]postNotificationName:KEY_REPAIRS_UPDATED object:nil];
+                                [self onRefreshParentData];
                                 [PubllicMaskViewHelper showTipViewWith:@"删除成功" inSuperView:self.view withDuration:1];
-                                [self.m_rep.m_arrRepairItem removeObjectAtIndex:self.m_delItemIndex];
+                                [HTTP_MANAGER.m_rep.m_arrRepairItem removeObjectAtIndex:self.m_delItemIndex];
                                 [self requestData:YES];
                             }else{
                                 [self removeWaitingView];
@@ -1269,17 +1271,17 @@
     if(textField.tag == 100){
         
     }else if (textField.tag == 101){
-        self.m_rep.m_km = textField.text;
+        HTTP_MANAGER.m_rep.m_km = textField.text;
     }else if (textField.tag == 102){
         
     }else if (textField.tag == 103){
         
     }else if (textField.tag == 104){
-        self.m_rep.m_customremark = textField.text;
+        HTTP_MANAGER.m_rep.m_customremark = textField.text;
     }else if (textField.tag == 105){
-        self.m_rep.m_more = textField.text;
+        HTTP_MANAGER.m_rep.m_more = textField.text;
     }else if (textField.tag == 106){
-        self.m_rep.m_repairCircle = textField.text;
+        HTTP_MANAGER.m_rep.m_repairCircle = textField.text;
     }else if (textField.tag == 107){
         
     }
@@ -1292,17 +1294,17 @@
     if(textField.tag == 100){
         
     }else if (textField.tag == 101){
-        self.m_rep.m_km = textField.text;
+        HTTP_MANAGER.m_rep.m_km = textField.text;
     }else if (textField.tag == 102){
         
     }else if (textField.tag == 103){
         
     }else if (textField.tag == 104){
-        self.m_rep.m_customremark = textField.text;
+        HTTP_MANAGER.m_rep.m_customremark = textField.text;
     }else if (textField.tag == 105){
-        self.m_rep.m_more = textField.text;
+        HTTP_MANAGER.m_rep.m_more = textField.text;
     }else if (textField.tag == 106){
-        self.m_rep.m_repairCircle = textField.text;
+        HTTP_MANAGER.m_rep.m_repairCircle = textField.text;
     }else if (textField.tag == 107){
         
     }
@@ -1331,7 +1333,7 @@
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
-    self.m_rep.m_repairType = textView.text;
+    HTTP_MANAGER.m_rep.m_repairType = textView.text;
     return  YES;
 }
 
@@ -1348,7 +1350,7 @@
 - (void)addGoodsItemBtnClicked
 {
     NSMutableDictionary *selectedNum = [NSMutableDictionary dictionary];
-    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+    for(ADTRepairItemInfo *item in HTTP_MANAGER.m_rep.m_arrRepairItem){
         if(item.m_itemType.integerValue == 0 && item.m_num.integerValue >0){
             [selectedNum setObject:item.m_num forKey:[NSString stringWithFormat:@"0_%@",item.m_type]];
         }
@@ -1361,7 +1363,7 @@
 - (void)addServicesItemBtnClicked
 {
     NSMutableDictionary *selectedNum = [NSMutableDictionary dictionary];
-    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+    for(ADTRepairItemInfo *item in HTTP_MANAGER.m_rep.m_arrRepairItem){
         if(item.m_itemType.integerValue == 1 && item.m_num.integerValue >0){
             [selectedNum setObject:item.m_num forKey:[NSString stringWithFormat:@"1_%@",item.m_type]];
         }
@@ -1378,8 +1380,8 @@
     for(WareHouseGoods *good in arrGoods){
         if(good.m_selectedNum.integerValue > 0){
             ADTRepairItemInfo *item = [[ADTRepairItemInfo alloc]init];
-            item.m_repid = self.m_rep.m_idFromNode;
-            item.m_contactid = self.m_rep.m_contactid;
+            item.m_repid = HTTP_MANAGER.m_rep.m_idFromNode;
+            item.m_contactid = HTTP_MANAGER.m_rep.m_contactid;
             item.m_price = good.m_saleprice;
             item.m_num = good.m_selectedNum;
             item.m_type = good.m_name;
@@ -1390,13 +1392,13 @@
         }
     }
 
-    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+    for(ADTRepairItemInfo *item in HTTP_MANAGER.m_rep.m_arrRepairItem){
         if(item.m_itemType.integerValue == 1){
             [arr addObject:item];
         }
     }
 
-    self.m_rep.m_arrRepairItem = arr;
+    HTTP_MANAGER.m_rep.m_arrRepairItem = arr;
     [self addNewItesms:NO];
 }
 
@@ -1404,7 +1406,7 @@
 - (void)onSelectedServices:(NSArray *)arrServices
 {
     NSMutableArray *arr= [NSMutableArray array];
-    for(ADTRepairItemInfo *item in self.m_rep.m_arrRepairItem){
+    for(ADTRepairItemInfo *item in HTTP_MANAGER.m_rep.m_arrRepairItem){
         if(item.m_itemType.integerValue == 0){
             [arr addObject:item];
         }
@@ -1414,8 +1416,8 @@
         for(WarehouseSubTypeInfo *sub in top.m_arrTypes){
             if(sub.m_selectedNum.integerValue > 0){
                 ADTRepairItemInfo *item = [[ADTRepairItemInfo alloc]init];
-                item.m_repid = self.m_rep.m_idFromNode;
-                item.m_contactid = self.m_rep.m_contactid;
+                item.m_repid = HTTP_MANAGER.m_rep.m_idFromNode;
+                item.m_contactid = HTTP_MANAGER.m_rep.m_contactid;
                 item.m_price = sub.m_price;
                 item.m_num = sub.m_selectedNum;
                 item.m_type = sub.m_name;
@@ -1427,7 +1429,7 @@
         }
     }
 
-    self.m_rep.m_arrRepairItem = arr;
+    HTTP_MANAGER.m_rep.m_arrRepairItem = arr;
     [self addNewItesms:NO];
 
 }
@@ -1435,8 +1437,8 @@
 #pragma mark - OwnValueViewControllerDelegate
 - (void)onOwnValueViewController:(NSInteger)ownMoney
 {
-    self.m_rep.m_ownMoney = [NSString stringWithFormat:@"%lu",ownMoney];
-    self.m_rep.m_state = @"2";
+    HTTP_MANAGER.m_rep.m_ownMoney = [NSString stringWithFormat:@"%lu",ownMoney];
+    HTTP_MANAGER.m_rep.m_state = @"2";
     [self updateRepair:YES];
 }
 

@@ -142,6 +142,7 @@
     hudView.messageLabel.text = @"加载中...";
     
     [hudView showAtView:self.view hudType:JHUDLoadingTypeCircle];
+    [hudView hideAfterDelay:5];
 }
 
 - (void)showWaitingViewWith:(int)delay
