@@ -14,6 +14,8 @@
 #import "ADTOrderInfo.h"
 #import "NSDictionary+ValueCheck.m"
 #import "AddNewCustomerViewController.h"
+#import "ADTContacterInfo.h"
+#import "CustomerTableViewCell.h"
 @interface NewTipViewController()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
      UIView *m_tipView;
@@ -28,7 +30,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:NO];
     if (self)
     {
         self.tableView.delegate = self;
@@ -53,15 +55,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [title setText:@"工单提醒"];
+    [title setText:@"到期提醒"];
 
-//    [self createButtons];
+    [self createButtons];
 }
 
 - (void)createButtons
 {
     self.m_currentIndex = 0;
-    self.m_arrCategory = @[@"工单提醒",@"预约提醒"];
+    self.m_arrCategory = @[@"到期工单",@"到期年审",@"到期保险"];
 
     NSMutableArray *arr = [NSMutableArray array];
     for(int i =0 ;i<self.m_arrCategory.count;i++)
@@ -79,7 +81,7 @@
     m_tipView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame)+36, MAIN_WIDTH/self.m_arrCategory.count, 4)];
     [self.view addSubview:m_tipView];
     [m_tipView setBackgroundColor:KEY_COMMON_CORLOR];
-    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(m_tipView.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(m_tipView.frame)-HEIGHT_MAIN_BOTTOM)];
+    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(m_tipView.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(m_tipView.frame))];
 }
 
 #pragma mark - private
@@ -121,9 +123,12 @@
 
 - (NSInteger)high:(NSIndexPath *)indexPath
 {
-    ADTOrderInfo *info = [self.m_arrData objectAtIndex:indexPath.section];
-    CGSize size = [FontSizeUtil sizeOfString:[NSString stringWithFormat:@"预约内容:%@",info.m_info] withFont:[UIFont systemFontOfSize:15] withWidth:MAIN_WIDTH-WIDTH_LEFT-20];
-    return size.height+80;
+    if(self.m_currentIndex == 0){
+        ADTOrderInfo *info = [self.m_arrData objectAtIndex:indexPath.section];
+        CGSize size = [FontSizeUtil sizeOfString:[NSString stringWithFormat:@"预约内容:%@",info.m_info] withFont:[UIFont systemFontOfSize:15] withWidth:MAIN_WIDTH-WIDTH_LEFT-20];
+        return size.height+80;
+    }
+     return 60;
 }
 
 
@@ -150,80 +155,11 @@
         cell.info = info;
         return cell;
     }else{
-        static NSString * identify = @"spe";
-        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
-        cell.backgroundColor=[UIColor whiteColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-        UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, WIDTH_LEFT, 18)];
-        [lab1 setBackgroundColor:[UIColor clearColor]];
-        [lab1 setTextAlignment:NSTextAlignmentLeft];
-        [lab1 setFont:[UIFont systemFontOfSize:14]];
-        [lab1 setTextColor:[UIColor blackColor]];
-        [cell addSubview:lab1];
-
-        UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(5, 27, WIDTH_LEFT, 18)];
-        [lab2 setBackgroundColor:[UIColor clearColor]];
-        [lab2 setTextAlignment:NSTextAlignmentLeft];
-        [lab2 setFont:[UIFont systemFontOfSize:14]];
-        [lab2 setTextColor:[UIColor blackColor]];
-        [cell addSubview:lab2];
-
-        UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(5,50, WIDTH_LEFT, 18)];
-        [lab3 setBackgroundColor:[UIColor clearColor]];
-        [lab3 setTextAlignment:NSTextAlignmentLeft];
-        [lab3 setFont:[UIFont systemFontOfSize:14]];
-        [lab3 setTextColor:[UIColor blackColor]];
-        [cell addSubview:lab3];
-
-        UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(5,70, WIDTH_LEFT, 18)];
-        [lab4 setBackgroundColor:[UIColor clearColor]];
-        [lab4 setTextAlignment:NSTextAlignmentLeft];
-        [lab4 setFont:[UIFont systemFontOfSize:15]];
-        [lab4 setTextColor:[UIColor blackColor]];
-        [cell addSubview:lab4];
-
-        UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(WIDTH_LEFT+5,0, 0.5, [self high:indexPath])];
-        [sep setBackgroundColor:KEY_COMMON_GRAY_CORLOR];
-        sep.hidden = YES;
-        [cell addSubview:sep];
-
-        UILabel *lab5 = [[UILabel alloc]initWithFrame:CGRectMake(WIDTH_LEFT+6,5, MAIN_WIDTH-WIDTH_LEFT-20, 18)];
-        [lab5 setBackgroundColor:[UIColor clearColor]];
-        [lab5 setTextAlignment:NSTextAlignmentLeft];
-        [lab5 setFont:[UIFont systemFontOfSize:15]];
-        [lab5 setTextColor:[UIColor blackColor]];
-        [cell addSubview:lab5];
-
-        ADTOrderInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
-        ADTContacterInfo *con = [DB_Shared contactWithOpenId:info.m_openid];
-        CGSize size = [FontSizeUtil sizeOfString:[NSString stringWithFormat:@"预约内容:%@",info.m_info] withFont:[UIFont systemFontOfSize:15] withWidth:MAIN_WIDTH-WIDTH_LEFT-20];
-
-        UILabel *lab6 = [[UILabel alloc]initWithFrame:CGRectMake(WIDTH_LEFT+6,30, MAIN_WIDTH-WIDTH_LEFT-20, size.height)];
-        lab6.numberOfLines = 0;
-        [lab6 setBackgroundColor:[UIColor clearColor]];
-        [lab6 setTextAlignment:NSTextAlignmentLeft];
-        [lab6 setFont:[UIFont systemFontOfSize:15]];
-        [lab6 setTextColor:[UIColor blackColor]];
-        [cell addSubview:lab6];
-
-        UILabel *lab7 = [[UILabel alloc]initWithFrame:CGRectMake(WIDTH_LEFT+6,CGRectGetMaxY(lab6.frame)+20, MAIN_WIDTH-WIDTH_LEFT-20, 18)];
-        [lab7 setBackgroundColor:[UIColor clearColor]];
-        [lab7 setTextAlignment:NSTextAlignmentLeft];
-        [lab7 setFont:[UIFont systemFontOfSize:11]];
-        [lab7 setTextColor:[UIColor blackColor]];
-        [cell addSubview:lab7];
-
-
-        [lab1 setText:[NSString stringWithFormat:@"客户:%@",con.m_userName]];
-        [lab2 setText:[NSString stringWithFormat:@"车牌:%@",con.m_carCode]];
-        [lab3 setText:[NSString stringWithFormat:@"车型:%@",con.m_carType]];
-        [lab4 setText:info.m_state.integerValue == 1 ?@"已处理":@"未处理"];
-        [lab4 setTextColor:info.m_state.integerValue == 1 ?KEY_COMMON_LIGHT_BLUE_CORLOR : [UIColor blackColor]];
-        [lab5 setText:[NSString stringWithFormat:@"预约时间:%@",info.m_time]];
-        [lab6 setText:[NSString stringWithFormat:@"预约内容:%@",info.m_info]];
-        [lab7 setText:[NSString stringWithFormat:@"提交时间:%@",info.m_inserttime]];
+        static NSString * identify = @"spe1";
+        CustomerTableViewCell *cell = [[CustomerTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        ADTContacterInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
+        cell.infoData = info;
         return cell;
     }
     return [[UITableViewCell alloc]init];
@@ -237,21 +173,18 @@
         WorkroomAddOrEditViewController *add = [[WorkroomAddOrEditViewController alloc]initWith:rep];
         [self.navigationController pushViewController:add animated:YES];
     }else{
-        self.m_index = indexPath.row;
-        ADTOrderInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
-        if(info.m_state.integerValue == 1){
-            UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"直接删除",@"查看该客户详情",@"开单", nil];
-            [act showInView:self.view];
-        }else{
-            UIActionSheet *act = [[UIActionSheet alloc]initWithTitle:@"选择操作" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"设置为已读,并发微信通知给客户",@"直接删除",@"查看该客户详情",@"开单", nil];
-            [act showInView:self.view];
-        }
+
+        ADTContacterInfo *info = [self.m_arrData objectAtIndex:indexPath.row];
+        AddNewCustomerViewController *vc = [[AddNewCustomerViewController  alloc]initWithContacer:info];
+        vc.m_delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 
 }
 
 - (void)requestData:(BOOL)isRefresh
 {
+    self.m_arrData = nil;
     [self showWaitingView];
     if(self.m_currentIndex == 0){
         [HTTP_MANAGER queryAllTipedRepair:[LoginUserUtil userTel]
@@ -283,32 +216,86 @@
                                   [self removeWaitingView];
                                   [self reloadDeals];
                               }];
-    }else{
-        [HTTP_MANAGER queryCustomerOrders:^(NSDictionary *succeedResult) {
-            [self removeWaitingView];
-            if([succeedResult[@"code"]integerValue] == 1){
-                NSMutableArray *_arr = [NSMutableArray array];
-                for(NSDictionary *_info in succeedResult[@"ret"]){
-                    ADTOrderInfo *info = [[ADTOrderInfo alloc]init];
-                    info.m_openid = [_info stringWithFilted:@"openid"];
-                    info.m_time = [_info stringWithFilted:@"time"];
-                    info.m_info = [_info stringWithFilted:@"info"];
-                    info.m_state = [_info stringWithFilted:@"state"];
-                    info.m_confirmtime = [_info stringWithFilted:@"confirmtime"];
-                    info.m_owner = [_info stringWithFilted:@"owner"];
-                    info.m_inserttime = [_info stringWithFilted:@"inserttime"];
-                    info.m_id = [_info stringWithFilted:@"_id"];
-                    [_arr addObject:info];
-                }
-                self.m_arrData = _arr;
-                [self reloadDeals];
-            }
+    }else if(self.m_currentIndex == 1){
+        [HTTP_MANAGER queryAllYearCheckTiped:[LoginUserUtil userTel]
+                              successedBlock:^(NSDictionary *succeedResult) {
+                                    [self removeWaitingView];
+                                  if([succeedResult[@"code"]integerValue] == 1)
+                                  {
+                                      NSMutableArray *_arr = [NSMutableArray array];
+                                      NSArray * arr = succeedResult[@"ret"];
+                                      if(arr.count > 0)
+                                      {
+                                          for(NSDictionary *info in arr)
+                                          {
+                                              ADTContacterInfo *newCon = [[ADTContacterInfo alloc]init];
+                                              newCon.m_owner = info[@"owner"];
+                                              newCon.m_carType = info[@"cartype"];
+                                              newCon.m_carCode = [info stringWithFilted:@"carcode"];
+                                              newCon.m_userName = info[@"name"];
+                                              newCon.m_tel = info[@"tel"];
+                                              newCon.m_idFromServer = info[@"_id"];
+                                              newCon.m_strInsertTime = [info stringWithFilted:@"inserttime"];
+                                              newCon.m_strIsBindWeixin = info[@"isbindweixin"];
+                                              newCon.m_strWeixinOPneid = info[@"weixinopenid"];
+                                              newCon.m_strVin = info[@"vin"];
+                                              newCon.m_strCarRegistertTime = info[@"carregistertime"];
+                                              newCon.m_strHeadUrl = info[@"headurl"];
+                                              newCon.m_strSafeCompany = [[info stringWithFilted:@"safecompany"]length] == 0 ? @"" : [info stringWithFilted: @"safecompany"];
+                                              newCon.m_strSafeNextTime = [[info stringWithFilted:@"safenexttime"]length] == 0? @"" : [info stringWithFilted: @"safenexttime"];
+                                              newCon.m_strYearCheckNextTime = [[info stringWithFilted:@"yearchecknexttime"]length] == 0 ? @"" :[info stringWithFilted:@"yearchecknexttime"];
+                                              [_arr addObject:newCon];
+                                          }
+                                      }
+                                      self.m_arrData = _arr;
+                                  }
+                                  [self reloadDeals];
 
 
         } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
             [self removeWaitingView];
             [self reloadDeals];
         }];
+    }else{
+        [HTTP_MANAGER queryAllSafeTiped:[LoginUserUtil userTel]
+                              successedBlock:^(NSDictionary *succeedResult) {
+                                  [self removeWaitingView];
+                                  if([succeedResult[@"code"]integerValue] == 1)
+                                  {
+                                      NSMutableArray *_arr = [NSMutableArray array];
+                                      NSArray * arr = succeedResult[@"ret"];
+                                      if(arr.count > 0)
+                                      {
+                                          for(NSDictionary *info in arr)
+                                          {
+                                              ADTContacterInfo *newCon = [[ADTContacterInfo alloc]init];
+                                              newCon.m_owner = info[@"owner"];
+                                              newCon.m_carType = info[@"cartype"];
+                                              newCon.m_carCode = [info stringWithFilted:@"carcode"];
+                                              newCon.m_userName = info[@"name"];
+                                              newCon.m_tel = info[@"tel"];
+                                              newCon.m_idFromServer = info[@"_id"];
+                                              newCon.m_strInsertTime = [info stringWithFilted:@"inserttime"];
+                                              newCon.m_strIsBindWeixin = info[@"isbindweixin"];
+                                              newCon.m_strWeixinOPneid = info[@"weixinopenid"];
+                                              newCon.m_strVin = info[@"vin"];
+                                              newCon.m_strCarRegistertTime = info[@"carregistertime"];
+                                              newCon.m_strHeadUrl = info[@"headurl"];
+                                              newCon.m_strSafeCompany = [[info stringWithFilted:@"safecompany"]length] == 0 ? @"" : [info stringWithFilted: @"safecompany"];
+                                              newCon.m_strSafeNextTime = [[info stringWithFilted:@"safenexttime"]length] == 0? @"" : [info stringWithFilted: @"safenexttime"];
+                                              newCon.m_strYearCheckNextTime = [[info stringWithFilted:@"yearchecknexttime"]length] == 0 ? @"" :[info stringWithFilted:@"yearchecknexttime"];
+                                              [_arr addObject:newCon];
+                                          }
+                                      }
+                                      self.m_arrData = _arr;
+                                  }
+                                  [self reloadDeals];
+
+
+                              } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+                                  [self removeWaitingView];
+                                  [self reloadDeals];
+                              }];
     }
 
 }

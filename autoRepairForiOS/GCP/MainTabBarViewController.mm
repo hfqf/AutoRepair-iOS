@@ -124,7 +124,7 @@
     
     
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn setFrame:CGRectMake((MAIN_WIDTH-50)/2, MAIN_HEIGHT-HEIGHT_MAIN_BOTTOM-60, 50, 50)];
+    [addBtn setFrame:CGRectMake((MAIN_WIDTH-40)/2, MAIN_HEIGHT-HEIGHT_MAIN_BOTTOM-42, 40, 40)];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setImage:[UIImage imageNamed:@"ic_tabbar_compose_icon_add_highlighted"] forState:UIControlStateNormal];
     [self.view addSubview:addBtn];

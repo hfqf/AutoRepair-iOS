@@ -49,14 +49,14 @@
 
 - (BOOL)shouldAutorotate
 {
-    NSArray *arr = self.viewControllers;
-    for(UIViewController *vc in arr){
-       if ([vc isKindOfClass:NSClassFromString(@"NewCountOnWebViewController")]) {
-           NewCountOnWebViewController *New = (NewCountOnWebViewController *)vc;
-           [New setFrame:self.view.frame];
-           return YES;
-       }
-    }
+//    NSArray *arr = self.viewControllers;
+//    for(UIViewController *vc in arr){
+//       if ([vc isKindOfClass:NSClassFromString(@"NewCountOnWebViewController")]) {
+//           NewCountOnWebViewController *New = (NewCountOnWebViewController *)vc;
+//           [New setFrame:self.view.frame];
+//           return YES;
+//       }
+//    }
     return NO;
 }
 //设置支持的屏幕旋转方向

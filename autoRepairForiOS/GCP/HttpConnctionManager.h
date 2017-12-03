@@ -100,6 +100,12 @@ typedef void (^FailBlock)(NSError *error);
   successedBlock:(SuccessedBlock)success
      failedBolck:(FailedBlock)failed;
 
+///重置密码2
+- (void)regetPwd2:(NSString *)tel
+          withPwd:(NSString *)pwd
+   successedBlock:(SuccessedBlock)success
+      failedBolck:(FailedBlock)failed;
+
 ///更新头像
 - (void)updateHead:(NSString *)headUrl
     successedBlock:(SuccessedBlock)success
@@ -142,6 +148,16 @@ typedef void (^FailBlock)(NSError *error);
 - (void)queryAllContacts:(NSString *)owner
           successedBlock:(SuccessedBlock)success
              failedBolck:(FailedBlock)failed;
+
+
+///获取所有联系人
+- (void)queryAllYearCheckTiped:(NSString *)owner
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed;
+///获取所有联系人
+- (void)queryAllSafeTiped:(NSString *)owner
+           successedBlock:(SuccessedBlock)success
+              failedBolck:(FailedBlock)failed;
 
 #pragma mark - 维修记录
 
@@ -611,4 +627,27 @@ typedef void (^FailBlock)(NSError *error);
 #pragma mark - 广告
 - (void)getgHomeAdvs:(SuccessedBlock)success
          failedBolck:(FailedBlock)failed;
+
+#pragma mark - 职工
+- (void)employeeAddNew:(NSDictionary *)info
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed;
+
+- (void)employeeUpdate:(NSDictionary *)info
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed;
+
+- (void)employeeLogin:(NSString *)name
+              withPwd:(NSString *)pwd
+          withCreater:(NSString *)creater
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed;
+
+- (void)employeeDel:(NSString *)_id
+     successedBlock:(SuccessedBlock)success
+        failedBolck:(FailedBlock)failed;
+
+- (void)employeeQuery:(NSString *)tel
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed;
 @end

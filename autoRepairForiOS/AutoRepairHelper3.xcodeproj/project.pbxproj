@@ -462,6 +462,9 @@
 		7D2CAA2D1FA22F81000B9B77 /* UIImage+STExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2CAA2B1FA22F80000B9B77 /* UIImage+STExt.m */; };
 		7D2CAA2E1FA22F81000B9B77 /* UIImage+STExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2CAA2B1FA22F80000B9B77 /* UIImage+STExt.m */; };
 		7D2CAA2F1FA22F81000B9B77 /* UIImage+STExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2CAA2B1FA22F80000B9B77 /* UIImage+STExt.m */; };
+		7D39A5541FCFFE360020A490 /* EmployeeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D39A5531FCFFE360020A490 /* EmployeeListViewController.m */; };
+		7D39A5551FCFFE370020A490 /* EmployeeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D39A5531FCFFE360020A490 /* EmployeeListViewController.m */; };
+		7D39A5561FCFFE370020A490 /* EmployeeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D39A5531FCFFE360020A490 /* EmployeeListViewController.m */; };
 		7D4173451F2E18BC00233B9B /* AipBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; };
 		7D4173461F2E18BC00233B9B /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173431F2E18BC00233B9B /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D4173471F2E18BC00233B9B /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4173441F2E18BC00233B9B /* IdcardQuality.framework */; };
@@ -878,6 +881,12 @@
 		7D6F0B151F27343200507356 /* WorkroomAddOrEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F0B131F27343200507356 /* WorkroomAddOrEditViewController.m */; };
 		7D72B45F1F2362CE00383D3D /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 7D72B45D1F2362CE00383D3D /* aip.license */; };
 		7D72B47A1F243D5E00383D3D /* WorkroomListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D72B4781F243D5E00383D3D /* WorkroomListViewController.m */; };
+		7D8E3D8D1FD15F00008F507C /* AddNewEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E3D8C1FD15F00008F507C /* AddNewEmployeeViewController.m */; };
+		7D8E3D8E1FD15F00008F507C /* AddNewEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E3D8C1FD15F00008F507C /* AddNewEmployeeViewController.m */; };
+		7D8E3D8F1FD15F00008F507C /* AddNewEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E3D8C1FD15F00008F507C /* AddNewEmployeeViewController.m */; };
+		7D8E3D921FD16DD9008F507C /* ADTEmployeeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E3D911FD16DD9008F507C /* ADTEmployeeInfo.m */; };
+		7D8E3D931FD16DD9008F507C /* ADTEmployeeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E3D911FD16DD9008F507C /* ADTEmployeeInfo.m */; };
+		7D8E3D941FD16DD9008F507C /* ADTEmployeeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E3D911FD16DD9008F507C /* ADTEmployeeInfo.m */; };
 		7DC27EEE1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */; };
 		7DC27EEF1F6123150069F560 /* WarehouseGoodPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC27EED1F6123150069F560 /* WarehouseGoodPurchaseViewController.m */; };
 		7DCF80A41F7BFD21009C6ACE /* NewCountOnWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DCF80A31F7BFD21009C6ACE /* NewCountOnWebViewController.m */; };
@@ -1181,6 +1190,8 @@
 		7D37795C1E87945600560B70 /* UIImageView+BHBSetImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BHBSetImage.m"; sourceTree = "<group>"; };
 		7D37795D1E87945600560B70 /* UIView+BHBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BHBAnimation.h"; sourceTree = "<group>"; };
 		7D37795E1E87945600560B70 /* UIView+BHBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BHBAnimation.m"; sourceTree = "<group>"; };
+		7D39A5521FCFFE360020A490 /* EmployeeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmployeeListViewController.h; sourceTree = "<group>"; };
+		7D39A5531FCFFE360020A490 /* EmployeeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmployeeListViewController.m; sourceTree = "<group>"; };
 		7D3CB6E11EA65B2A004F14BE /* ChangeSkinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeSkinViewController.h; sourceTree = "<group>"; };
 		7D3CB6E21EA65B2A004F14BE /* ChangeSkinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeSkinViewController.m; sourceTree = "<group>"; };
 		7D3CB6E71EA70BD4004F14BE /* EditUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserViewController.h; sourceTree = "<group>"; };
@@ -1463,6 +1474,10 @@
 		7D8D30131E799F260071DC90 /* SectionsViewControllerFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionsViewControllerFriends.h; sourceTree = "<group>"; };
 		7D8D30141E799F260071DC90 /* SectionsViewControllerFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionsViewControllerFriends.m; sourceTree = "<group>"; };
 		7D8D30431E7C46430071DC90 /* requirements.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = requirements.txt; sourceTree = "<group>"; };
+		7D8E3D8B1FD15F00008F507C /* AddNewEmployeeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddNewEmployeeViewController.h; sourceTree = "<group>"; };
+		7D8E3D8C1FD15F00008F507C /* AddNewEmployeeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddNewEmployeeViewController.m; sourceTree = "<group>"; };
+		7D8E3D901FD16DD9008F507C /* ADTEmployeeInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADTEmployeeInfo.h; sourceTree = "<group>"; };
+		7D8E3D911FD16DD9008F507C /* ADTEmployeeInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADTEmployeeInfo.m; sourceTree = "<group>"; };
 		7DAE14491DDE05B00082C0AB /* HttpConnctionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConnctionManager.h; sourceTree = "<group>"; };
 		7DAE144A1DDE05B00082C0AB /* HttpConnctionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpConnctionManager.m; sourceTree = "<group>"; };
 		7DB338C71E3F8C2C002DAE79 /* NSDictionary+ValueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ValueCheck.h"; sourceTree = "<group>"; };
@@ -2195,6 +2210,19 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		7D39A5511FCFFE100020A490 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				7D39A5521FCFFE360020A490 /* EmployeeListViewController.h */,
+				7D39A5531FCFFE360020A490 /* EmployeeListViewController.m */,
+				7D8E3D8B1FD15F00008F507C /* AddNewEmployeeViewController.h */,
+				7D8E3D8C1FD15F00008F507C /* AddNewEmployeeViewController.m */,
+				7D8E3D901FD16DD9008F507C /* ADTEmployeeInfo.h */,
+				7D8E3D911FD16DD9008F507C /* ADTEmployeeInfo.m */,
+			);
+			name = Employee;
+			sourceTree = "<group>";
+		};
 		7D426DA01A62AA120004F3F6 = {
 			isa = PBXGroup;
 			children = (
@@ -2294,6 +2322,7 @@
 				7DB510F51EA121180007D5D0 /* ResetPwdViewController.m */,
 				7D426DE51A62AB440004F3F6 /* MainTabBarViewController.h */,
 				7D426DE61A62AB440004F3F6 /* MainTabBarViewController.mm */,
+				7D39A5511FCFFE100020A490 /* Employee */,
 				7D2CA9451FA22BB7000B9B77 /* BBS */,
 				7D005E051F512C9F00846ADE /* ServiceManger */,
 				7D005E041F512C9200846ADE /* WarehouseManager */,
@@ -3147,6 +3176,7 @@
 				7D2046561F79423B0061D6AD /* BHBItem.m in Sources */,
 				7D2046571F79423B0061D6AD /* UIImage+GIF.m in Sources */,
 				7D2CAA241FA22E56000B9B77 /* PSTGridLayoutItem.m in Sources */,
+				7D8E3D8F1FD15F00008F507C /* AddNewEmployeeViewController.m in Sources */,
 				7D2CA9A41FA22CC8000B9B77 /* TZPhotoPickerController.m in Sources */,
 				7D2CA9CA1FA22D8E000B9B77 /* MWCaptionView.m in Sources */,
 				7D2046581F79423B0061D6AD /* TabbarBaseViewController.m in Sources */,
@@ -3253,6 +3283,7 @@
 				7D2046AD1F79423B0061D6AD /* WarehouseWillTakeGoodsViewController.m in Sources */,
 				7D2CAA1E1FA22E4F000B9B77 /* PSTCollectionViewUpdateItem.m in Sources */,
 				7D2CA9DF1FA22DAE000B9B77 /* MWZoomingScrollView.m in Sources */,
+				7D39A5561FCFFE370020A490 /* EmployeeListViewController.m in Sources */,
 				7D2046AE1F79423B0061D6AD /* ServiceManagerTableViewCell.m in Sources */,
 				7D2CA9951FA22CB1000B9B77 /* TZImageCropManager.m in Sources */,
 				7D2046AF1F79423B0061D6AD /* ServiceManaagerSubTypeAddViewController.m in Sources */,
@@ -3283,6 +3314,7 @@
 				7D2046C01F79423B0061D6AD /* BHBBottomBar.m in Sources */,
 				7D2046C11F79423B0061D6AD /* SBJson4StreamWriter.m in Sources */,
 				7D2046C21F79423B0061D6AD /* NewTipViewController.m in Sources */,
+				7D8E3D941FD16DD9008F507C /* ADTEmployeeInfo.m in Sources */,
 				7D2046C31F79423B0061D6AD /* WarehousePositionViewController.m in Sources */,
 				7D2046C41F79423B0061D6AD /* WarehouseWillPurchaseViewController.m in Sources */,
 				7D2CAA061FA22E2D000B9B77 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
@@ -3382,6 +3414,7 @@
 				7D4173811F2E26E900233B9B /* BHBItem.m in Sources */,
 				7D4173821F2E26E900233B9B /* UIImage+GIF.m in Sources */,
 				7D2CAA231FA22E55000B9B77 /* PSTGridLayoutItem.m in Sources */,
+				7D8E3D8E1FD15F00008F507C /* AddNewEmployeeViewController.m in Sources */,
 				7D2CA9A31FA22CC7000B9B77 /* TZPhotoPickerController.m in Sources */,
 				7D2CA9C91FA22D8D000B9B77 /* MWCaptionView.m in Sources */,
 				7D4173831F2E26E900233B9B /* TabbarBaseViewController.m in Sources */,
@@ -3488,6 +3521,7 @@
 				7D64B4271F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */,
 				7D2CAA1D1FA22E4E000B9B77 /* PSTCollectionViewUpdateItem.m in Sources */,
 				7D2CA9DE1FA22DAE000B9B77 /* MWZoomingScrollView.m in Sources */,
+				7D39A5551FCFFE370020A490 /* EmployeeListViewController.m in Sources */,
 				7D2044C11F77FF500061D6AD /* ServiceManagerTableViewCell.m in Sources */,
 				7D2CA9941FA22CB1000B9B77 /* TZImageCropManager.m in Sources */,
 				7D1D77DF1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */,
@@ -3518,6 +3552,7 @@
 				7D4173CC1F2E26E900233B9B /* BHBBottomBar.m in Sources */,
 				7D2044DB1F789D1A0061D6AD /* SBJson4StreamWriter.m in Sources */,
 				7D4173CD1F2E26E900233B9B /* NewTipViewController.m in Sources */,
+				7D8E3D931FD16DD9008F507C /* ADTEmployeeInfo.m in Sources */,
 				7D005E301F53FB5100846ADE /* WarehousePositionViewController.m in Sources */,
 				7D64B4231F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m in Sources */,
 				7D2CAA051FA22E2D000B9B77 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
@@ -3617,6 +3652,7 @@
 				7D4CD9281F235D37003619EB /* BHBItem.m in Sources */,
 				7D4CD9291F235D37003619EB /* UIImage+GIF.m in Sources */,
 				7D2CAA221FA22E55000B9B77 /* PSTGridLayoutItem.m in Sources */,
+				7D8E3D8D1FD15F00008F507C /* AddNewEmployeeViewController.m in Sources */,
 				7D2CA9A21FA22CC6000B9B77 /* TZPhotoPickerController.m in Sources */,
 				7D2CA9C81FA22D8C000B9B77 /* MWCaptionView.m in Sources */,
 				7D4CD92A1F235D37003619EB /* TabbarBaseViewController.m in Sources */,
@@ -3723,6 +3759,7 @@
 				7D64B4261F6F6A8A00709A6C /* WarehouseWillTakeGoodsViewController.m in Sources */,
 				7D2CAA1C1FA22E4E000B9B77 /* PSTCollectionViewUpdateItem.m in Sources */,
 				7D2CA9DD1FA22DAD000B9B77 /* MWZoomingScrollView.m in Sources */,
+				7D39A5541FCFFE360020A490 /* EmployeeListViewController.m in Sources */,
 				7D2044C01F77FF500061D6AD /* ServiceManagerTableViewCell.m in Sources */,
 				7D2CA9931FA22CB0000B9B77 /* TZImageCropManager.m in Sources */,
 				7D1D77DE1F70C110001B0A7A /* ServiceManaagerSubTypeAddViewController.m in Sources */,
@@ -3753,6 +3790,7 @@
 				7D4CD9971F235D37003619EB /* BHBBottomBar.m in Sources */,
 				7D2044DA1F789D1A0061D6AD /* SBJson4StreamWriter.m in Sources */,
 				7D4CD9981F235D37003619EB /* NewTipViewController.m in Sources */,
+				7D8E3D921FD16DD9008F507C /* ADTEmployeeInfo.m in Sources */,
 				7D005E2F1F53FB5100846ADE /* WarehousePositionViewController.m in Sources */,
 				7D64B4221F6F69FA00709A6C /* WarehouseWillPurchaseViewController.m in Sources */,
 				7D2CAA041FA22E2C000B9B77 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,

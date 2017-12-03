@@ -40,4 +40,5 @@
     #import "NSDictionary+ValueCheck.h"
     #import "WarehousePurchaseInfo.h"
     #import "WarehouseSupplierInfo.h"
+    #import "ADTEmployeeInfo.h"
 #endif

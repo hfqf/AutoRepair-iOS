@@ -159,7 +159,7 @@
 
     if(self.selectedPhotos.count == 0){
         [self showWaitingView];
-        [HTTP_MANAGER addNewBBS:[LoginUserUtil userTel]
+        [HTTP_MANAGER addNewBBS:[LoginUserUtil singnalTel]
                      sendername:[LoginUserUtil userName]
                          avatar:[LoginUserUtil headUrl]
                         content:self.m_input.text

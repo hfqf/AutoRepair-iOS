@@ -55,9 +55,9 @@
     [title setText:@"汽修圈"];
     UIButton *slideBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [slideBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [slideBtn setFrame:CGRectMake(MAIN_WIDTH-80,20, 70, 44)];
+    [slideBtn setFrame:CGRectMake(MAIN_WIDTH-80,HEIGHT_STATUSBAR, 70, 44)];
     [slideBtn setTitle:@"发帖" forState:UIControlStateNormal];
-    [slideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [slideBtn setTitleColor:backBtn.titleLabel.textColor forState:UIControlStateNormal];
     [navigationBG addSubview:slideBtn];
 }
 
@@ -261,7 +261,7 @@ delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 
     [self showWaitingView];
-    [HTTP_MANAGER addNewBBSComment:[LoginUserUtil userTel]
+    [HTTP_MANAGER addNewBBSComment:[LoginUserUtil userId]
                         sendername:[LoginUserUtil userName]
                             avatar:[LoginUserUtil headUrl]
                            content:textField.text

@@ -39,7 +39,7 @@
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     if(self.m_isSelect){
         [addBtn addTarget:self action:@selector(addBtnClicked1) forControlEvents:UIControlEventTouchUpInside];
-        [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
+        [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP,40, 44)];
         [addBtn setTitle:@"确认" forState:UIControlStateNormal];
         [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
         [navigationBG addSubview:addBtn];

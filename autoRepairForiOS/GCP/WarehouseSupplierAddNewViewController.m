@@ -49,7 +49,7 @@
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, 44)];
     [addBtn setTitle:@"保存" forState:UIControlStateNormal];
     [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
 

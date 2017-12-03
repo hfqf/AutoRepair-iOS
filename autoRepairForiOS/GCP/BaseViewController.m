@@ -66,7 +66,7 @@
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
     
-    navigationBG = [[UIImageView alloc]initWithFrame:CGRectMake(0,0, MAIN_WIDTH, HEIGHT_NAVIGATION+DISTANCE_TOP)];
+    navigationBG = [[UIImageView alloc]initWithFrame:CGRectMake(0,0, MAIN_WIDTH, HEIGHT_NAVIGATION)];
     navigationBG.userInteractionEnabled = YES;
     [navigationBG setBackgroundColor:UIColorFromRGB(0Xf6f6f6)];
     [self.view setBackgroundColor:[UIColor whiteColor]];
@@ -80,16 +80,13 @@
     [backBtn addTarget:self action:@selector(backBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [navigationBG addSubview:backBtn];
     
-    title= [[UILabel alloc]initWithFrame:CGRectMake(100, DISTANCE_TOP+5, 120, 34)];
-    [title setFrame:CGRectMake(20,5,MAIN_WIDTH-40, title.frame.size.height)];
-    title.center = CGPointMake(MAIN_WIDTH/2.0, OS_ABOVE_IOS7?(HEIGHT_STATUSBAR+HEIGHT_NAVIGATION/2.0):HEIGHT_NAVIGATION/2.0);
+    title= [[UILabel alloc]initWithFrame:CGRectMake(50,DISTANCE_TOP+7,MAIN_WIDTH-100, 30)];
     [title setFont:[UIFont systemFontOfSize:19]];
     [title setBackgroundColor:[UIColor clearColor]];
-    title.hidden = NO;
     [title setText:self.title];
     [title setTextAlignment:NSTextAlignmentCenter];
     [title setTextColor:UIColorFromRGB(0x787878)];
-    [self.view addSubview:title];
+    [navigationBG addSubview:title];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle

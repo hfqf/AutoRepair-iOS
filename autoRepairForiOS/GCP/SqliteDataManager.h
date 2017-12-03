@@ -26,9 +26,6 @@ SINGLETON_FOR_HEADER(SqliteDataManager)
 
 - (BOOL)insertNewCustom:(ADTContacterInfo *)info;
 
-///同时还要修改所有 所有维修记录里的carcode
-- (BOOL)updateCustom:(NSDictionary *)info;
-
 - (BOOL)updateCustomer:(ADTContacterInfo *)info;
 
 - (BOOL)updateCustomHeadUrl:(NSString *)url;

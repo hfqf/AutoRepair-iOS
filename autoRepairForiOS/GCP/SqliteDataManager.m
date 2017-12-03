@@ -64,20 +64,15 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (BOOL)insertNewCustom:(ADTContacterInfo *)info
 {
-    NSString *sql = [NSString stringWithFormat:@"INSERT INTO 'contactsTable' ( 'carCode','name','tel','carType','owner','idFromNode','inserttime','isbindweixin','weixinopenid','vin','carregistertime','headurl') VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",info.m_carCode,info.m_userName,info.m_tel,info.m_carType,info.m_owner,info.m_idFromServer,info.m_strInsertTime,info.m_strIsBindWeixin,info.m_strWeixinOPneid,info.m_strVin,info.m_strCarRegistertTime,info.m_strHeadUrl];
+    NSString *sql = [NSString stringWithFormat:@"INSERT INTO 'contactsTable' ( 'carCode','name','tel','carType','owner','idFromNode','inserttime','isbindweixin','weixinopenid','vin','carregistertime','headurl','safecompany','safenexttime','yearchecknexttime') VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",info.m_carCode,info.m_userName,info.m_tel,info.m_carType,info.m_owner,info.m_idFromServer,info.m_strInsertTime,info.m_strIsBindWeixin,info.m_strWeixinOPneid,info.m_strVin,info.m_strCarRegistertTime,info.m_strHeadUrl,info.m_strSafeCompany,info.m_strSafeNextTime,info.m_strYearCheckNextTime];
     return [self execSql:sql];
 }
 
-- (BOOL)updateCustom:(NSDictionary *)info
-{
-    
-    return [self execSql: [NSString stringWithFormat:@"update contactsTable set name = '%@' , carCode = '%@',carType = '%@' ,tel= '%@' ,inserttime='%@' ,isbindweixin='%@',weixinopenid='%@',vin='%@',carregistertime='%@',headurl='%@'  where  idFromNode = '%@'",info[@"name"],info[@"carCode"],info[@"carType"],info[@"tel" ],info[@"id"],info[@"inserttime"],info[@"isbindweixin"],info[@"weixinopenid"],info[@"vin"],info[@"carregistertime"],info[@"headurl"]]];
-}
 
 
 - (BOOL)updateCustomer:(ADTContacterInfo *)info
 {
-    return [self execSql: [NSString stringWithFormat:@"update contactsTable set name = '%@' , carCode = '%@',carType = '%@' ,tel= '%@' ,inserttime='%@' ,isbindweixin='%@',weixinopenid='%@',vin='%@',carregistertime='%@',headurl='%@'  where  idFromNode = '%@'",info.m_userName,info.m_carCode,info.m_carType,info.m_tel,info.m_strInsertTime,info.m_strIsBindWeixin,info.m_strWeixinOPneid,info.m_strVin,info.m_strCarRegistertTime,info.m_strHeadUrl,info.m_idFromServer]];
+    return [self execSql: [NSString stringWithFormat:@"update contactsTable set name = '%@' , carCode = '%@',carType = '%@' ,tel= '%@' ,inserttime='%@' ,isbindweixin='%@',weixinopenid='%@',vin='%@',carregistertime='%@',headurl='%@',safecompany='%@',safenexttime='%@',yearchecknexttime='%@'  where  idFromNode = '%@'",info.m_userName,info.m_carCode,info.m_carType,info.m_tel,info.m_strInsertTime,info.m_strIsBindWeixin,info.m_strWeixinOPneid,info.m_strVin,info.m_strCarRegistertTime,info.m_strHeadUrl,info.m_strSafeCompany,info.m_strSafeNextTime,info.m_strYearCheckNextTime,info.m_idFromServer]];
 }
 
 - (BOOL)updateCustomHeadUrl:(ADTContacterInfo *)contact
@@ -243,6 +238,45 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
         else
         {
             info.m_strHeadUrl = [NSString stringWithCString:ret  encoding:NSUTF8StringEncoding];
+        }
+    }
+
+    if(count > 12){
+        char *ret = (char *)sqlite3_column_text(statement, 12);
+        if(ret == NULL)
+        {
+            //传空没关系,新版本第一次登录会上传所有本地数据,这个字段用不到
+            info.m_strSafeCompany = @"0";
+        }
+        else
+        {
+            info.m_strSafeCompany = [NSString stringWithCString:ret  encoding:NSUTF8StringEncoding];
+        }
+    }
+
+    if(count > 13){
+        char *ret = (char *)sqlite3_column_text(statement, 13);
+        if(ret == NULL)
+        {
+            //传空没关系,新版本第一次登录会上传所有本地数据,这个字段用不到
+            info.m_strSafeNextTime = @"0";
+        }
+        else
+        {
+            info.m_strSafeNextTime = [NSString stringWithCString:ret  encoding:NSUTF8StringEncoding];
+        }
+    }
+
+    if(count > 14){
+        char *ret = (char *)sqlite3_column_text(statement, 14);
+        if(ret == NULL)
+        {
+            //传空没关系,新版本第一次登录会上传所有本地数据,这个字段用不到
+            info.m_strYearCheckNextTime = @"0";
+        }
+        else
+        {
+            info.m_strYearCheckNextTime = [NSString stringWithCString:ret  encoding:NSUTF8StringEncoding];
         }
     }
     

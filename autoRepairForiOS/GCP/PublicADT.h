@@ -143,4 +143,11 @@ typedef enum SearchTYpe
     enum_search_askAndAnswer
 }enum_search_type;
 
+
+typedef NS_ENUM(NSUInteger, ENUM_ROLE_TYPE) {
+    ENUM_ROLE_TYPE_CREATER   = 0,    ///< 动态、说说、相册、日志选项[全部]
+    ENUM_ROLE_TYPE_AUTOREPAIRER    = 1,    ///< 动态、说说、相册、日志选项[我的]
+    ENUM_ROLE_TYPE_STORE = 2     ///< 动态、说说、相册、日志选项[好友的]
+};
+
 #endif

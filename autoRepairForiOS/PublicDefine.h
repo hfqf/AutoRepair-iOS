@@ -29,7 +29,6 @@
 #define  IS_FIRST_LAUNCH               @"IS_FIRST_LAUNCH"
 #define  NOT_FIRST_LAUNCH              @"NOT_FIRST_LAUNCH"
 
-#define  HEIGHT_MAIN_BOTTOM            49
 
 #define  MAIN_HEIGHT                  [UIScreen mainScreen].bounds.size.height
 #define  MAIN_WIDTH                   [UIScreen mainScreen].bounds.size.width
@@ -51,8 +50,12 @@ id = nil;\
 }
 
 #define  HEIGHT_SEGEMENT_RES           30
-#define  HEIGHT_NAVIGATION             44
-#define  HEIGHT_STATUSBAR              20
+#define  iPhoneX                        (MAIN_WIDTH == 375.f && MAIN_HEIGHT == 812.f ? YES : NO)
+#define  HEIGHT_STATUSBAR              (iPhoneX  ? 44  : 20)
+#define  HEIGHT_NAVIGATION              (44 + HEIGHT_STATUSBAR)
+#define  HEIGHT_TAB_BOTTOM             (iPhoneX ? (49.f+34.f) : 49.f)
+#define  HEIGHT_MAIN_BOTTOM             HEIGHT_TAB_BOTTOM
+#define  HEIGHT_TAB_Safe_Bottom_Margin         (iPhoneX ? 34.f : 0.f)
 
 #define  OS_ABOVE_IOS8                 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 ? 1 : 0)
 
@@ -60,7 +63,7 @@ id = nil;\
 #define  OS_ABOVE_IOS6                 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
 
 #define  SCREEN_EQUAL_480              (MAIN_HEIGHT == 480 ? YES :NO )
-#define  DISTANCE_TOP                  ((OS_ABOVE_IOS7) ? 20 :0)
+#define  DISTANCE_TOP                  HEIGHT_STATUSBAR
 
 #define  CIRCLE_TOP                 ((OS_ABOVE_IOS7) ? 0 :20)
 #define  HEIGTH_IS_ABOVE_480                  ((int)MAIN_HEIGHT >= 480)
@@ -496,6 +499,7 @@ extern NSString  *NotiAddNewClassSuccess ;   ///< 加入新的班级成功
 #define KEY_AUTO_ADDRESS            @"KEY_AUTO_ADDRESS"
 #define KEY_AUTO_LOGIN              @"KEY_AUTO_LOGIN"
 #define KEY_AUTO_ADDITEM_SET        @"KEY_AUTO_ADDITEM_SET"
+#define KEY_IS_EMPLOYEE_LOGIN       @"KEY_IS_EMPLOYEE_LOGIN"
 #define KEY_UDID                     [[UIDevice currentDevice]identifierForVendor].UUIDString.length == 0 ? @"0" :  [[UIDevice currentDevice]identifierForVendor].UUIDString
 
 

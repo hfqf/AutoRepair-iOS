@@ -125,7 +125,7 @@
 - (void)setCurrentData:(ADTLxxItemInfo *)currentData
 {
     _currentData = currentData;
-    m_delBtn.hidden = ![currentData.m_userId isEqualToString:[LoginUserUtil userTel]];
+    m_delBtn.hidden = ![currentData.m_userId isEqualToString:[LoginUserUtil singnalTel]];
     [m_head sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",currentData.m_userAvatar]] placeholderImage:[UIImage imageNamed:@"app_icon"]];
     [m_nameLab setText:currentData.m_userName];
     [m_timeLab setText:currentData.m_createTime];

@@ -153,7 +153,7 @@
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, 44)];
     [addBtn setTitle:self.m_currentData.m_isAddNew ?@"保存" : @"保存" forState:UIControlStateNormal];
     [addBtn setTitleColor:UIColorFromRGB(0x777777) forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
@@ -162,7 +162,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return !self.m_currentData.m_isAddNew ? 7 : 6;
+    return self.m_currentData.m_isAddNew ? 9 : 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -177,7 +177,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 6 ? 4 : 1;
+    return section == 9 ? 4 : 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -337,9 +337,84 @@
         [m_registerTimeTypeInput setTextColor:[UIColor blackColor]];
         m_registerTimeTypeInput.returnKeyType = UIReturnKeyDone;
         [m_registerTimeTypeInput setText:self.m_currentData.m_strCarRegistertTime];
-        [m_registerTimeTypeInput setPlaceholder:@"将用于推送年审到期时间"];
+        [m_registerTimeTypeInput setPlaceholder:@"车辆注册时间"];
         [cell addSubview:m_registerTimeTypeInput];
         
+    }else if (indexPath.section == 6)
+    {
+        UILabel *tip4 = [[UILabel alloc]initWithFrame:CGRectMake(10,10, 80, 40)];
+        tip4.numberOfLines = 0;
+        [tip4  setBackgroundColor:[UIColor clearColor]];
+        [tip4 setFont:[UIFont systemFontOfSize:14]];
+        [tip4 setText:@"下次年审时间:"];
+        [cell addSubview:tip4];
+
+        if(m_yearCheckTimeInput == nil)
+        {
+            m_yearCheckTimeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        }
+        m_yearCheckTimeInput.backgroundColor = [UIColor whiteColor];
+        [m_yearCheckTimeInput setFont:[UIFont systemFontOfSize:14]];
+        m_yearCheckTimeInput.layer.cornerRadius = 3;
+        m_yearCheckTimeInput.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        m_yearCheckTimeInput.layer.borderWidth = 0.5;
+        m_yearCheckTimeInput.delegate = self;
+        [m_yearCheckTimeInput setTextColor:[UIColor blackColor]];
+        m_yearCheckTimeInput.returnKeyType = UIReturnKeyDone;
+        [m_yearCheckTimeInput setText:self.m_currentData.m_strYearCheckNextTime];
+        [m_yearCheckTimeInput setPlaceholder:@"车辆下次年审时间"];
+        [cell addSubview:m_yearCheckTimeInput];
+
+    }else if (indexPath.section == 7)
+    {
+        UILabel *tip4 = [[UILabel alloc]initWithFrame:CGRectMake(10,10, 80, 40)];
+        tip4.numberOfLines = 0;
+        [tip4  setBackgroundColor:[UIColor clearColor]];
+        [tip4 setFont:[UIFont systemFontOfSize:14]];
+        [tip4 setText:@" 保险公司:"];
+        [cell addSubview:tip4];
+
+        if(m_safeCompanyInput == nil)
+        {
+            m_safeCompanyInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        }
+        m_safeCompanyInput.backgroundColor = [UIColor whiteColor];
+        [m_safeCompanyInput setFont:[UIFont systemFontOfSize:14]];
+        m_safeCompanyInput.layer.cornerRadius = 3;
+        m_safeCompanyInput.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        m_safeCompanyInput.layer.borderWidth = 0.5;
+        m_safeCompanyInput.delegate = self;
+        [m_safeCompanyInput setTextColor:[UIColor blackColor]];
+        m_safeCompanyInput.returnKeyType = UIReturnKeyDone;
+        [m_safeCompanyInput setText:self.m_currentData.m_strSafeCompany];
+        [m_safeCompanyInput setPlaceholder:@"保险公司"];
+        [cell addSubview:m_safeCompanyInput];
+
+    }else if (indexPath.section == 8)
+    {
+        UILabel *tip4 = [[UILabel alloc]initWithFrame:CGRectMake(10,10, 80, 40)];
+        tip4.numberOfLines = 0;
+        [tip4  setBackgroundColor:[UIColor clearColor]];
+        [tip4 setFont:[UIFont systemFontOfSize:14]];
+        [tip4 setText:@"下次保险时间:"];
+        [cell addSubview:tip4];
+
+        if(m_safeNextTimeInput == nil)
+        {
+            m_safeNextTimeInput = [[UITextField alloc]initWithFrame:CGRectMake(100,15, MAIN_WIDTH-120, 30)];
+        }
+        m_safeNextTimeInput.backgroundColor = [UIColor whiteColor];
+        [m_safeNextTimeInput setFont:[UIFont systemFontOfSize:14]];
+        m_safeNextTimeInput.layer.cornerRadius = 3;
+        m_safeNextTimeInput.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
+        m_safeNextTimeInput.layer.borderWidth = 0.5;
+        m_safeNextTimeInput.delegate = self;
+        [m_safeNextTimeInput setTextColor:[UIColor blackColor]];
+        m_safeNextTimeInput.returnKeyType = UIReturnKeyDone;
+        [m_safeNextTimeInput setText:self.m_currentData.m_strSafeNextTime];
+        [m_safeNextTimeInput setPlaceholder:@"下次保险时间"];
+        [cell addSubview:m_safeNextTimeInput];
+
     }else
     {
         if(indexPath.row == 0)
@@ -491,6 +566,9 @@
                       {
                         if([DB_Shared  updateCustomer:self.m_currentData])
                         {
+                            if(self.m_delegate && [self.m_delegate respondsToSelector:@selector(onRefreshParentData)]){
+                                [self.m_delegate onRefreshParentData];
+                            }
                             [self backBtnClicked];
                         }
                       }
@@ -563,6 +641,7 @@
                             if([succeedResult[@"code"]integerValue] == 1)
                             {
 
+
                                 [PubllicMaskViewHelper showTipViewWith:@"操作成功" inSuperView:self.view  withDuration:1];
 
                             }else{
@@ -585,6 +664,9 @@
                                 {
                                     if([DB_Shared deleteCustomAndRepairHisotry:self.m_currentData.m_idFromServer with:self.m_currentData.m_carCode])
                                     {
+                                        if(self.m_delegate && [self.m_delegate respondsToSelector:@selector(onRefreshParentData)]){
+                                            [self.m_delegate onRefreshParentData];
+                                        }
 
                                         [self backBtnClicked];
                                     }
@@ -630,7 +712,14 @@
         self.m_currentData.m_strVin = textField.text;
     }else if (textField == m_registerTimeTypeInput){
         self.m_currentData.m_strCarRegistertTime = textField.text;
+    }else if (textField == m_safeCompanyInput){
+        self.m_currentData.m_strSafeCompany = textField.text;
+    }else if (textField == m_safeNextTimeInput){
+        self.m_currentData.m_strSafeNextTime = textField.text;
+    }else if (textField == m_yearCheckTimeInput){
+        self.m_currentData.m_strYearCheckNextTime = textField.text;
     }
+    
     return YES;
 }
 
@@ -666,6 +755,50 @@
           textField.inputView = inputBg;
           return YES;
     }
+    else if(textField == m_yearCheckTimeInput)
+    {
+        UIView *inputBg = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, 200)];
+        UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [cancelBtn setFrame:CGRectMake(10, 10, 40, 30)];
+        [cancelBtn setTitleColor:KEY_COMMON_CORLOR forState:UIControlStateNormal];
+        [inputBg addSubview:cancelBtn];
+        UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [confirmBtn addTarget:self action:@selector(confirmBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [confirmBtn setTitle:@"完成" forState:UIControlStateNormal];
+        [confirmBtn setFrame:CGRectMake(MAIN_WIDTH-60, 10, 40, 30)];
+        [confirmBtn setTitleColor:KEY_COMMON_CORLOR forState:UIControlStateNormal];
+        [inputBg addSubview:confirmBtn];
+        UIDatePicker *picker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 50, MAIN_WIDTH-100, 140)];
+        picker.tag = 6;
+        picker.datePickerMode = UIDatePickerModeDate;
+        [inputBg addSubview:picker];
+        textField.inputView = inputBg;
+        return YES;
+    }
+    else if(textField == m_safeNextTimeInput)
+    {
+        UIView *inputBg = [[UIView alloc]initWithFrame:CGRectMake(0, 0, MAIN_WIDTH, 200)];
+        UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [cancelBtn setFrame:CGRectMake(10, 10, 40, 30)];
+        [cancelBtn setTitleColor:KEY_COMMON_CORLOR forState:UIControlStateNormal];
+        [inputBg addSubview:cancelBtn];
+        UIButton *confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [confirmBtn addTarget:self action:@selector(confirmBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [confirmBtn setTitle:@"完成" forState:UIControlStateNormal];
+        [confirmBtn setFrame:CGRectMake(MAIN_WIDTH-60, 10, 40, 30)];
+        [confirmBtn setTitleColor:KEY_COMMON_CORLOR forState:UIControlStateNormal];
+        [inputBg addSubview:confirmBtn];
+        UIDatePicker *picker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 50, MAIN_WIDTH-100, 140)];
+        picker.tag = 8;
+        picker.datePickerMode = UIDatePickerModeDate;
+        [inputBg addSubview:picker];
+        textField.inputView = inputBg;
+        return YES;
+    }
 
     return YES;
 }
@@ -685,11 +818,30 @@
         if([vi isKindOfClass:[UIDatePicker class]])
         {
             UIDatePicker *picker = (UIDatePicker *)vi;
+
             NSString *time = [LocalTimeUtil getLocalTimeWith:[picker date]];
-            [m_registerTimeTypeInput setText:time];
-            [m_registerTimeTypeInput resignFirstResponder];
-            m_registerTimeTypeInput.inputView = nil;
-            self.m_currentData.m_strCarRegistertTime = time;
+
+            if(picker.tag == 5){
+                [m_registerTimeTypeInput setText:time];
+                [m_registerTimeTypeInput resignFirstResponder];
+                m_registerTimeTypeInput.inputView = nil;
+                self.m_currentData.m_strCarRegistertTime = time;
+            }
+
+            if(picker.tag == 6){
+                [m_yearCheckTimeInput setText:time];
+                [m_yearCheckTimeInput resignFirstResponder];
+                m_yearCheckTimeInput.inputView = nil;
+                self.m_currentData.m_strYearCheckNextTime = time;
+            }
+
+            if(picker.tag == 8){
+                [m_safeNextTimeInput setText:time];
+                [m_safeNextTimeInput resignFirstResponder];
+                m_safeNextTimeInput.inputView = nil;
+                self.m_currentData.m_strSafeNextTime = time;
+            }
+
             
             return;
         }

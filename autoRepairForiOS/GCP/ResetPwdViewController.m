@@ -189,28 +189,55 @@
             {
                 
                 [self showWaitingView];
-                
-                [HTTP_MANAGER regetPwd:input1.text
-                                withPwd:input2.text
-                         successedBlock:^(NSDictionary *succeedResult) {
-                                         [self removeWaitingView];
-                                         if([succeedResult[@"code"]integerValue] == 1)
-                                         {
-                                             [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view  withDuration:2];
-                                             [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:2];
-                                         }
-                                         else
-                                         {
-                                             [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:2];
-                                         }
-                                         
-                                         
-                                     } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-                                         
-                                         [self removeWaitingView];
-                                         [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view  withDuration:1];
-                                         
-                                     }];
+
+                if([LoginUserUtil currentRole]==ENUM_ROLE_TYPE_CREATER){
+                    [HTTP_MANAGER regetPwd:input1.text
+                                   withPwd:input2.text
+                            successedBlock:^(NSDictionary *succeedResult) {
+                                [self removeWaitingView];
+                                if([succeedResult[@"code"]integerValue] == 1)
+                                {
+                                    [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view  withDuration:2];
+                                    [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:2];
+                                }
+                                else
+                                {
+                                    [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:2];
+                                }
+
+
+                            } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                [self removeWaitingView];
+                                [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view  withDuration:1];
+
+                            }];
+
+                }else{
+                    [HTTP_MANAGER regetPwd2:input1.text
+                                   withPwd:input2.text
+                            successedBlock:^(NSDictionary *succeedResult) {
+                                [self removeWaitingView];
+                                if([succeedResult[@"code"]integerValue] == 1)
+                                {
+                                    [PubllicMaskViewHelper showTipViewWith:@"修改成功" inSuperView:self.view  withDuration:2];
+                                    [self performSelector:@selector(backBtnClicked) withObject:nil afterDelay:2];
+                                }
+                                else
+                                {
+                                    [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:2];
+                                }
+
+
+                            } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                                [self removeWaitingView];
+                                [PubllicMaskViewHelper showTipViewWith:@"修改失败" inSuperView:self.view  withDuration:1];
+
+                            }];
+
+                }
+
             }
         }
         else

@@ -23,6 +23,10 @@
 @property (nonatomic,strong) NSString *m_strHeadUrl;
 @property (nonatomic,strong) NSString *m_strFirstChar;
 
+@property (nonatomic,strong) NSString *m_strSafeCompany;
+@property (nonatomic,strong) NSString *m_strSafeNextTime;
+@property (nonatomic,strong) NSString *m_strYearCheckNextTime;
+
 @property (assign)BOOL m_isSearch;
 @property (assign)BOOL m_isAddNew;
 

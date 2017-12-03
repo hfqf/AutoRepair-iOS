@@ -10,7 +10,7 @@
 #define INDEX_0_CELL_HIGH  50
 #define INDEX_1_CELL_HIGH  50
 #define INPUT_ITEM_HIGH    ([LoginUserUtil isNeedDirectaddItem]?170:50)
-#define HIGH_BOTTOM        90
+#define HIGH_BOTTOM        (90)
 
 #import "WorkroomAddOrEditViewController.h"
 #import "WarehouseSelectGoodsToRepairViewController.h"
@@ -52,10 +52,16 @@
         [self.tableView setBackgroundColor:UIColorFromRGB(0xf5f5f5)];
         [self createButtons];
         if(![HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"]){
-            [self createBottomView];
+            if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_CREATER){
+                [self createBottomView];
+            }else{
+                if(![HTTP_MANAGER.m_rep.m_state isEqualToString:@"1"]){
+                    [self createBottomView];
+                }
+            }
         }
         self.tableView.delegate = self;
-        [self.tableView setFrame:CGRectMake(0, 64+40, MAIN_WIDTH, MAIN_HEIGHT-64-40- ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
+        [self.tableView setFrame:CGRectMake(0, HEIGHT_NAVIGATION+40, MAIN_WIDTH, MAIN_HEIGHT-HEIGHT_NAVIGATION-40- ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
         [self requestData:YES];
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:)name:UIKeyboardDidShowNotification object:nil];
@@ -78,20 +84,23 @@
 - (void)keyboardDidHide:(NSNotification*)aNotification
 
 {
-    [self.tableView setFrame:CGRectMake(0, 64+40, MAIN_WIDTH, MAIN_HEIGHT-64-40- ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
+    [self.tableView setFrame:CGRectMake(0, HEIGHT_NAVIGATION+40, MAIN_WIDTH, MAIN_HEIGHT-HEIGHT_NAVIGATION-40- ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [title setText:@"工单处理"];
-    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-HEIGHT_NAVIGATION, DISTANCE_TOP,HEIGHT_NAVIGATION, HEIGHT_NAVIGATION)];
-    [addBtn setImage:[UIImage imageNamed:@"moresetting"] forState:UIControlStateNormal];
-//    [addBtn setTitle:@"更多" forState:UIControlStateNormal];
-    [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
-    [navigationBG addSubview:addBtn];
+    if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_CREATER){
+        UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
+        [addBtn setFrame:CGRectMake(MAIN_WIDTH-HEIGHT_NAVIGATION, DISTANCE_TOP,HEIGHT_NAVIGATION, 44)];
+        [addBtn setImage:[UIImage imageNamed:@"moresetting"] forState:UIControlStateNormal];
+        //    [addBtn setTitle:@"更多" forState:UIControlStateNormal];
+        [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
+        [navigationBG addSubview:addBtn];
+    }
+
     
     [backBtn removeTarget:self action:@selector(backBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [backBtn addTarget:self action:@selector(checkIsNoneInput) forControlEvents:UIControlEventTouchUpInside];
@@ -138,16 +147,16 @@
     
     m_bottomLeftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     m_bottomLeftBtn.tag = 0;
-    [m_bottomLeftBtn setFrame:CGRectMake(0, 40, MAIN_WIDTH/2, 50)];
+    [m_bottomLeftBtn setFrame:CGRectMake(0, 40, MAIN_WIDTH/2, HIGH_BOTTOM-40)];
     [m_bottomLeftBtn setBackgroundColor:KEY_COMMON_LIGHT_BLUE_CORLOR];
-    [m_bottomLeftBtn setTitle:@"提交结账" forState:UIControlStateNormal];
+    [m_bottomLeftBtn setTitle:@"维修完毕" forState:UIControlStateNormal];
     [m_bottomLeftBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
     [m_bottomLeftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [m_bottomLeftBtn addTarget:self action:@selector(bottomLeftBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [m_bg addSubview:m_bottomLeftBtn];
     
     if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"0"]){
-        [m_bottomLeftBtn setTitle:@"提交结账" forState:UIControlStateNormal];
+        [m_bottomLeftBtn setTitle:@"维修完毕" forState:UIControlStateNormal];
         [m_bottomLeftBtn setBackgroundColor:KEY_COMMON_LIGHT_BLUE_CORLOR];
     }else if ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"1"]){
         [m_bottomLeftBtn setTitle:@"确认收款(全部付清)" forState:UIControlStateNormal];
@@ -162,7 +171,7 @@
 
     m_bottomRightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     m_bottomRightBtn.tag = 1;
-    [m_bottomRightBtn setFrame:CGRectMake(MAIN_WIDTH/2, 40, MAIN_WIDTH/2, 50)];
+    [m_bottomRightBtn setFrame:CGRectMake(MAIN_WIDTH/2, 40, MAIN_WIDTH/2, HIGH_BOTTOM-40)];
     [m_bottomRightBtn setBackgroundColor:KEY_COMMON_BLUE_CORLOR];
 
     if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"0"]){
@@ -890,7 +899,11 @@
             
             [delBtn setImage:[UIImage imageNamed:@"no"] forState:UIControlStateNormal];
             [cell addSubview:delBtn];
+            if([HTTP_MANAGER.m_rep.m_state isEqualToString:@"1"] && [LoginUserUtil currentRole] != ENUM_ROLE_TYPE_CREATER){
+                delBtn.hidden = YES;
+            }
         }
+
 
         
         UIView *sep = [[UIView alloc]initWithFrame:CGRectMake(0,INDEX_1_CELL_HIGH-0.5, MAIN_WIDTH, 0.5)];

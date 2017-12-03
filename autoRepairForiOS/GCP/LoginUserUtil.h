@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 Points. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-
+#import "PublicADT.h"
 @interface LoginUserUtil : NSObject
 
 //+ (long long)loginUserId;
@@ -89,6 +89,8 @@
 
 + (BOOL)isAutoLogined;
 
++ (BOOL)isEmployeeLogin;
+
 + (NSString *)address;
 
 + (NSString *)headUrl;
@@ -100,4 +102,10 @@
 + (NSString *)totalRepairNumOfToday;
 
 + (BOOL)isNeedDirectaddItem;
+
++ (ENUM_ROLE_TYPE)currentRole;
+
++ (NSDictionary *)userInfo;
+
++ (NSString *)singnalTel;
 @end

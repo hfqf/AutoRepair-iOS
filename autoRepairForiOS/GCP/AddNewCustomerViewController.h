@@ -19,6 +19,11 @@
     UITextField *m_carTypeInput;
     UITextField *m_vinTypeInput;
     UITextField *m_registerTimeTypeInput;
+
+    UITextField *m_yearCheckTimeInput;
+    UITextField *m_safeCompanyInput;
+    UITextField *m_safeNextTimeInput;
+
     
     
     EGOImageView *head;

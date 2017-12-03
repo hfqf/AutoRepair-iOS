@@ -129,7 +129,7 @@
 {
     [super viewWillAppear:animated];
     [self requestData:YES];
-    [self.tableView setFrame:CGRectMake(0, 64, MAIN_WIDTH, MAIN_HEIGHT-64)];
+    [self.tableView setFrame:CGRectMake(0, HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-HEIGHT_NAVIGATION)];
 }
 
 
@@ -158,7 +158,7 @@
     {
         UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+        [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, 44)];
         [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
         [addBtn setTitle:@"添加" forState:UIControlStateNormal];
         [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];

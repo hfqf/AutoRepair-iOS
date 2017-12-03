@@ -312,6 +312,21 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                   failedBolck:failed];
 }
 
+///重置密码2
+- (void)regetPwd2:(NSString *)tel
+         withPwd:(NSString *)pwd
+  successedBlock:(SuccessedBlock)success
+     failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/employee/regetpwd"
+                     paragram:@{
+                                @"pwd":pwd,
+                                @"tel":tel
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
 ///更新头像
 - (void)updateHead:(NSString *)headUrl
   successedBlock:(SuccessedBlock)success
@@ -367,6 +382,9 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                         @"headurl":newContact.m_strHeadUrl == nil ? @"":newContact.m_strHeadUrl,
                                                         @"vin":newContact.m_strVin == nil ? @"": newContact.m_strVin,
                                                         @"carregistertime":newContact.m_strCarRegistertTime == nil ? @"" : newContact.m_strCarRegistertTime,
+                                                        @"safecompany":newContact.m_strSafeCompany,
+                                                        @"safenexttime":newContact.m_strSafeNextTime,
+                                                        @"yearchecknexttime":newContact.m_strYearCheckNextTime,
                                                         
                                                         } successedBlock:success failedBolck:failed];
 }
@@ -393,7 +411,10 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                            @"tel":newContact.m_tel,
                                                            @"cartype":newContact.m_carType,
                                                            @"owner":[LoginUserUtil userTel],
-                                                           @"id":newContact.m_idFromServer
+                                                           @"id":newContact.m_idFromServer,
+                                                           @"safecompany":newContact.m_strSafeCompany,
+                                                           @"safenexttime":newContact.m_strSafeNextTime,
+                                                           @"yearchecknexttime":newContact.m_strYearCheckNextTime,
                                                            } successedBlock:success failedBolck:failed];
 
 }
@@ -411,6 +432,34 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                successedBlock:success
                   failedBolck:failed];
     
+}
+
+///获取所有联系人
+- (void)queryAllYearCheckTiped:(NSString *)owner
+          successedBlock:(SuccessedBlock)success
+             failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/contact/queryAllYearCheckTiped"
+                     paragram:@{
+                                @"owner":owner
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+
+}
+
+///获取所有联系人
+- (void)queryAllSafeTiped:(NSString *)owner
+                successedBlock:(SuccessedBlock)success
+                   failedBolck:(FailedBlock)failed
+{
+    [self startNormalPostWith:@"/contact/queryAllSafeTiped"
+                     paragram:@{
+                                @"owner":owner
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+
 }
 
 
@@ -432,6 +481,9 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                              @"vin":newContact.m_strVin.length==0?@"":newContact.m_strVin,
                              @"carregistertime":newContact.m_strCarRegistertTime.length == 0 ? @"":newContact.m_strCarRegistertTime,
                              @"headurl":newContact.m_strHeadUrl.length==0?@"":newContact.m_strHeadUrl,
+                                @"safecompany":safeStringWith(newContact.m_strSafeCompany),
+                                @"safenexttime":safeStringWith(newContact.m_strSafeNextTime),
+                                @"yearchecknexttime":safeStringWith(newContact.m_strYearCheckNextTime),
                              }
                successedBlock:success failedBolck:failed];
     
@@ -1992,6 +2044,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
          failedBolck:(FailedBlock)failed{
     [self startNormalPostWith:@"/bbs/del"
                      paragram:@{
+                                @"senderid":[LoginUserUtil singnalTel],
                                 @"id":_id,
                                 }
                successedBlock:success
@@ -2005,6 +2058,61 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
     [self startNormalPostWith:@"/adv/query"
                      paragram:@{
                                 @"type":@"0",
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+#pragma mark - 职工
+- (void)employeeAddNew:(NSDictionary *)info
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/employee/add"
+                     paragram:info
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)employeeUpdate:(NSDictionary *)info
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/employee/update"
+                     paragram:info
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)employeeLogin:(NSString *)name
+              withPwd:(NSString *)pwd
+          withCreater:(NSString *)creater
+        successedBlock:(SuccessedBlock)success
+           failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/employee/login"
+                     paragram:@{
+                                @"tel":name,
+                                @"pwd":pwd
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)employeeDel:(NSString *)_id
+       successedBlock:(SuccessedBlock)success
+          failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/employee/del"
+                     paragram:@{
+                                @"id":_id,
+                                }
+               successedBlock:success
+                  failedBolck:failed];
+}
+
+- (void)employeeQuery:(NSString *)tel
+     successedBlock:(SuccessedBlock)success
+        failedBolck:(FailedBlock)failed{
+    [self startNormalPostWith:@"/employee/query"
+                     paragram:@{
+                                @"creatertel":tel,
                                 }
                successedBlock:success
                   failedBolck:failed];

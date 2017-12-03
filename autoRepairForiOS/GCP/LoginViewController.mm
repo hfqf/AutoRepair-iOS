@@ -140,10 +140,11 @@
         [m_checkBtn removeFromSuperview];
         m_checkBtn = nil;
     }
-    m_checkBtn.selected = [LoginUserUtil isAutoLogined];
+    m_checkBtn.selected = [LoginUserUtil isEmployeeLogin];
     [m_checkBtn addTarget:self action:@selector(checkBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [m_checkBtn setFrame:CGRectMake(20, CGRectGetMinY(self.loginBtn.frame)-35, 30, 30)];
     [m_checkBtn setImage:[UIImage imageNamed:@"check_un"] forState:UIControlStateNormal];
+    [m_checkBtn setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
     [m_checkBtn setImage:[UIImage imageNamed:@"check_on"] forState:UIControlStateSelected];
     [self.view addSubview:m_checkBtn];
     
@@ -152,8 +153,8 @@
         m_tip = nil;
     }
     
-    m_tip = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(m_checkBtn.frame)+5, CGRectGetMinY(m_checkBtn.frame)+5, 100, 20)];
-    [m_tip setText:@"是否记住密码"];
+    m_tip = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(m_checkBtn.frame)+35, CGRectGetMinY(m_checkBtn.frame)+5, 100, 20)];
+    [m_tip setText:@"员工登录"];
     [m_tip setTextAlignment:NSTextAlignmentLeft];
     [m_tip setFont:[UIFont systemFontOfSize:14]];
     [m_tip setTextColor:KEY_COMMON_GRAY_CORLOR];
@@ -164,7 +165,8 @@
 - (void)checkBtnClicked:(UIButton *)btn
 {
     m_checkBtn.selected = !btn.selected;
-    [[NSUserDefaults standardUserDefaults]setObject:m_checkBtn.selected?@"1":@"0" forKey:KEY_AUTO_LOGIN];
+
+    [[NSUserDefaults standardUserDefaults]setObject:m_checkBtn.selected?@"1":@"0" forKey:KEY_IS_EMPLOYEE_LOGIN];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -183,6 +185,14 @@
     self.pwdInput.text = nil;
     if([LoginUserUtil isAutoLogined]){
         self.pwdInput.text = [LoginUserUtil loginedPwd];
+        if(self.nameInput.text.length == 0)
+        {
+            return;
+        }
+
+        if(self.pwdInput.text.length == 0){
+            return;
+        }
         [self loginBtnClicked:nil];
     }
     
@@ -251,49 +261,87 @@ return jsonString;
     
     [self showWaitingView];
 
-    
+    if([LoginUserUtil isEmployeeLogin]){
+        [self loginEmplyee];
+    }else{
+        [self loginManager];
+    }
+}
+
+- (void)loginEmplyee
+{
+    [HTTP_MANAGER employeeLogin:self.nameInput.text
+                        withPwd:self.pwdInput.text
+                    withCreater:@""
+                 successedBlock:^(NSDictionary *succeedResult) {
+                     if([succeedResult[@"code"]integerValue]==1){
+                         NSDictionary *employee = succeedResult[@"ret"];
+                         [[NSUserDefaults standardUserDefaults]setObject:employee[@"username"] forKey:KEY_AUTO_NAME];
+                         [[NSUserDefaults standardUserDefaults]setObject:[employee stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
+                         [[NSUserDefaults standardUserDefaults]setObject:[employee stringWithFilted:@"_id"] forKey:KEY_AUTO_ID];
+                         [self processLoginReturned:succeedResult];
+                         [self queryContacts];
+
+                     }else{
+                         [self removeWaitingView];
+                         [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:1];
+                     }
+
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+        [self removeWaitingView];
+        [PubllicMaskViewHelper showTipViewWith:@"登录失败" inSuperView:self.view  withDuration:1];
+    }];
+}
+
+- (void)processLoginReturned:(NSDictionary *)succeedResult
+{
+    [LoginUserUtil writeDictionaryToPlist:succeedResult[@"ret"]];
+
+    [[NSUserDefaults standardUserDefaults]setObject:self.nameInput.text forKey:KEY_LOGINED_NAME];
+    [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"pwd"] forKey:KEY_LOGINED_PWD];
+
+    [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"username"] forKey:KEY_AUTO_NAME];
+    [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"tel"] forKey:KEY_AUTO_TEL];
+    [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"viplevel"] forKey:KEY_AUTO_LEVEL];
+    [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"devicemodifyed"] forKey:KEY_AUTO_UDID_MODIFYED];
+    [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"shopname"] forKey:KEY_AUTO_SHOP_NAME];
+    [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
+
+
+    [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"_id"] forKey:KEY_AUTO_ID];
+
+    [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
+
+    [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"isdirectadditem"] forKey:KEY_AUTO_ADDITEM_SET];
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:KEY_IS_FIRST_LOGIN];
+}
+
+- (void)loginManager
+{
     [HTTP_MANAGER startLoginWithName:self.nameInput.text
                              withPwd:self.pwdInput.text
                       successedBlock:^(NSDictionary *succeedResult) {
-                          
+
                           if([succeedResult[@"code"]integerValue] == 1)
                           {
-                              
-                              [[NSUserDefaults standardUserDefaults]setObject:self.nameInput.text forKey:KEY_LOGINED_NAME];
-                              [[NSUserDefaults standardUserDefaults]setObject:self.pwdInput.text forKey:KEY_LOGINED_PWD];
-                              
-                              [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"username"] forKey:KEY_AUTO_NAME];
-                              [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"tel"] forKey:KEY_AUTO_TEL];
-                              [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"viplevel"] forKey:KEY_AUTO_LEVEL];
-                               [[NSUserDefaults standardUserDefaults]setObject:succeedResult[@"ret"][@"devicemodifyed"] forKey:KEY_AUTO_UDID_MODIFYED];
-                               [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"shopname"] forKey:KEY_AUTO_SHOP_NAME];
-                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
-                              
 
-                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"_id"] forKey:KEY_AUTO_ID];
-
-                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"headurl"] forKey:KEY_AUTO_HEAD];
-
-                              [[NSUserDefaults standardUserDefaults]setObject:[succeedResult[@"ret"] stringWithFilted:@"isdirectadditem"] forKey:KEY_AUTO_ADDITEM_SET];
-
+                              [self processLoginReturned:succeedResult];
                               [self queryContacts];
-                              
-                              [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:KEY_IS_FIRST_LOGIN];
-                              
+
                           }
                           else
                           {
                               [self removeWaitingView];
                               [PubllicMaskViewHelper showTipViewWith:succeedResult[@"msg"] inSuperView:self.view  withDuration:1];
                           }
-        
-    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-        
-        [self removeWaitingView];
-        [PubllicMaskViewHelper showTipViewWith:@"登录失败" inSuperView:self.view  withDuration:1];
-        
-    }];
-    
+
+                      } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+                          [self removeWaitingView];
+                          [PubllicMaskViewHelper showTipViewWith:@"登录失败" inSuperView:self.view  withDuration:1];
+
+                      }];
 }
 
 
@@ -324,6 +372,9 @@ return jsonString;
                                     newCon.m_strVin = info[@"vin"];
                                     newCon.m_strCarRegistertTime = info[@"carregistertime"];
                                     newCon.m_strHeadUrl = info[@"headurl"];
+                                    newCon.m_strSafeCompany = [[info stringWithFilted:@"safecompany"]length] == 0 ? @"" : [info stringWithFilted: @"safecompany"];
+                                    newCon.m_strSafeNextTime = [[info stringWithFilted:@"safenexttime"]length] == 0? @"" : [info stringWithFilted: @"safenexttime"];
+                                    newCon.m_strYearCheckNextTime = [[info stringWithFilted:@"yearchecknexttime"]length] == 0 ? @"" :[info stringWithFilted:@"yearchecknexttime"];
                                     [[SqliteDataManager sharedInstance]insertNewCustom:newCon];
                                 }
                             }

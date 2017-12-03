@@ -60,7 +60,7 @@
 
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP,40, 44)];
     [addBtn setImage:[UIImage imageNamed:@"moresetting"] forState:UIControlStateNormal];
     [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];

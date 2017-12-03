@@ -56,7 +56,7 @@
 - (void)requestData:(BOOL)isRefresh
 {
     [self reloadDeals];
-    [self.tableView setFrame:CGRectMake(0, 64, MAIN_WIDTH, MAIN_HEIGHT-64-HEIGHT_MAIN_BOTTOM)];
+    [self.tableView setFrame:CGRectMake(0, HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-HEIGHT_NAVIGATION)];
 }
 
 

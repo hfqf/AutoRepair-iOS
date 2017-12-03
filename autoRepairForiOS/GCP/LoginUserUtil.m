@@ -162,6 +162,7 @@
     return  [dic writeToFile:path atomically:YES];
 }
 
+
 + (NSDictionary *)readDictionartFromPlist
 {
     NSString * path = [self pathOfCurrentLoginer];
@@ -270,15 +271,28 @@
 
 + (NSString *)shopName
 {
-    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_SHOP_NAME];
-    return ret == nil ?@"" :ret;
+    NSDictionary *info =  [self userInfo];
+    if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_CREATER){
+        return [info stringWithFilted:@"shopname"];
+    }
+
+    NSDictionary *_info =  [self userInfo][@"creater"];
+    return [_info stringWithFilted:@"shopname"];
 }
 
 + (BOOL)isAutoLogined
 {
-    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_LOGIN];
+    return YES;
+//    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_LOGIN];
+//    return ret == nil ?NO :[ret isEqualToString:@"1"];
+}
+
++ (BOOL)isEmployeeLogin
+{
+    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_IS_EMPLOYEE_LOGIN];
     return ret == nil ?NO :[ret isEqualToString:@"1"];
 }
+
 
 + (NSString *)address
 {
@@ -301,7 +315,12 @@
 
 + (NSString *)headUrl
 {
-    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_HEAD];
+    if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_CREATER){
+        NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_HEAD];
+        return ret == nil ?@"" :[NSString stringWithFormat:@"%@/%@",BOS_SERVER,ret];
+    }
+
+    NSString *ret = [self userInfo][@"headurl"];
     return ret == nil ?@"" :[NSString stringWithFormat:@"%@/%@",BOS_SERVER,ret];
 }
 
@@ -319,5 +338,26 @@
     }else{ // ios7 一下
         return [[UIApplication sharedApplication] enabledRemoteNotificationTypes]  == UIRemoteNotificationTypeNone;
     }
+}
+
++ (ENUM_ROLE_TYPE)currentRole
+{
+    if([LoginUserUtil isEmployeeLogin]){
+        NSInteger type = [[self userInfo][@"roletype"]integerValue];
+        return type;
+    }
+    return  ENUM_ROLE_TYPE_CREATER;
+}
+
++ (NSDictionary *)userInfo
+{
+    NSString * path = [self pathOfCurrentLoginer];
+    NSDictionary * dic = [NSDictionary dictionaryWithContentsOfFile:path];
+    return dic;
+}
+
++ (NSString *)singnalTel
+{
+    return [self userInfo][@"tel"];
 }
 @end

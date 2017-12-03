@@ -27,28 +27,28 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self forceOrientationPortrait];
+//    [self forceOrientationPortrait];
 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    [self forceOrientationLandscapeLeft];
+//    [self forceOrientationLandscapeLeft];
 
 }
 
-- (void)backBtnClicked
-{
-    XTNavigationController *navi = (XTNavigationController *)self.navigationController;
-    if(navi.interfaceOrientation ==  UIInterfaceOrientationLandscapeLeft)
-    {
-        [backBtn setTitle:@"返回" forState:UIControlStateNormal];
-        [self forceOrientationPortrait];
-    }else{
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
+//- (void)backBtnClicked
+//{
+//    XTNavigationController *navi = (XTNavigationController *)self.navigationController;
+//    if(navi.interfaceOrientation ==  UIInterfaceOrientationLandscapeLeft)
+//    {
+//        [backBtn setTitle:@"返回" forState:UIControlStateNormal];
+//        [self forceOrientationPortrait];
+//    }else{
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//}
 
 
 - (id)initWith:(NSInteger)type{
@@ -239,7 +239,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [title setText:@"统计"];
-    [backBtn setTitle:@"竖屏" forState:UIControlStateNormal];
+//    [backBtn setTitle:@"竖屏" forState:UIControlStateNormal];
 
 //    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];

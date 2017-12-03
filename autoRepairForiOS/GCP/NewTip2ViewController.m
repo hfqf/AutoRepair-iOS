@@ -18,12 +18,6 @@
 {
     UIView *m_tipView;
 }
-@property (nonatomic,strong) NSArray *m_arrCategory;
-
-@property (nonatomic,strong) NSArray *m_arrBtn;
-
-@property(nonatomic,assign)NSInteger m_currentIndex;
-
 @property(nonatomic,assign)NSInteger m_page;
 
 @property(assign)NSInteger m_index;
@@ -34,7 +28,7 @@
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:YES];
+    self = [super initWithStyle:UITableViewStylePlain withIsNeedPullDown:YES withIsNeedPullUpLoadMore:NO withIsNeedBottobBar:NO withIsNeedNoneView:NO];
     if (self)
     {
         self.tableView.delegate = self;
@@ -87,7 +81,6 @@
     m_tipView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame)+36, MAIN_WIDTH/self.m_arrCategory.count, 4)];
     [self.view addSubview:m_tipView];
     [m_tipView setBackgroundColor:KEY_COMMON_CORLOR];
-    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(m_tipView.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(m_tipView.frame)-HEIGHT_MAIN_BOTTOM)];
 }
 
 #pragma mark - private

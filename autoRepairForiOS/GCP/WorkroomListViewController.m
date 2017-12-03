@@ -59,7 +59,7 @@
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP,40, HEIGHT_NAVIGATION)];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP,40, 44)];
     [addBtn setTitle:@"开单" forState:UIControlStateNormal];
 //    [addBtn setImage:[UIImage imageNamed:@"sfsz"] forState:UIControlStateNormal];
     [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
@@ -92,14 +92,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(m_tipView.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(m_tipView.frame)-HEIGHT_MAIN_BOTTOM)];
+    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(m_tipView.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(m_tipView.frame))];
 
 }
 
 - (void)createButtons
 {
     self.m_currentIndex = 0;
-    self.m_arrCategory = @[@"维修中",@"已修完",@"已提车",@"已取消",@"挂帐中"];
+    self.m_arrCategory =  @[@"维修中",@"已修完",@"已提车",@"已取消",@"挂帐中"];
     
     NSMutableArray *arr = [NSMutableArray array];
     for(int i =0 ;i<self.m_arrCategory.count;i++)
@@ -117,7 +117,7 @@
     m_tipView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(navigationBG.frame)+36, MAIN_WIDTH/self.m_arrCategory.count, 4)];
     [self.view addSubview:m_tipView];
     [m_tipView setBackgroundColor:KEY_COMMON_CORLOR];
-    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(m_tipView.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(m_tipView.frame)-HEIGHT_MAIN_BOTTOM)];
+    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(m_tipView.frame), MAIN_WIDTH,MAIN_HEIGHT-CGRectGetMaxY(m_tipView.frame))];
 }
 
 #pragma mark - private

@@ -50,19 +50,20 @@
     
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn addTarget:self action:@selector(addBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, HEIGHT_NAVIGATION)];
+    [addBtn setFrame:CGRectMake(MAIN_WIDTH-50, DISTANCE_TOP, 40, 44)];
     [addBtn setTitle:@"编辑" forState:UIControlStateNormal];
     [addBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
 
     [addBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     [navigationBG addSubview:addBtn];
+    addBtn.hidden = [LoginUserUtil currentRole] != ENUM_ROLE_TYPE_CREATER;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self requestData:YES];
-    [self.tableView setFrame:CGRectMake(0, 64, MAIN_WIDTH, MAIN_HEIGHT-64-HEIGHT_MAIN_BOTTOM)];
+    [self.tableView setFrame:CGRectMake(0, HEIGHT_NAVIGATION, MAIN_WIDTH, MAIN_HEIGHT-HEIGHT_NAVIGATION-HEIGHT_MAIN_BOTTOM)];
 }
 
 - (void)addBtnClicked
@@ -92,19 +93,25 @@
     UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(head.frame)+10, MAIN_WIDTH, 20)];
     [name setTextAlignment:NSTextAlignmentCenter];
     [name setTextColor:KEY_COMMON_GRAY_CORLOR];
-    [name setFont:[UIFont systemFontOfSize:16]];
+    [name setFont:[UIFont systemFontOfSize:14]];
     [name setBackgroundColor:[UIColor clearColor]];
     [name setText:[NSString stringWithFormat:@"用户名:%@",[LoginUserUtil userName]]];
     [bg addSubview:name];
     
-    UILabel *shopName = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(name.frame), MAIN_WIDTH, 20)];
+    UILabel *shopName = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(name.frame)+5, MAIN_WIDTH, 20)];
     [shopName setTextAlignment:NSTextAlignmentCenter];
     [shopName setTextColor:KEY_COMMON_GRAY_CORLOR];
     [shopName setFont:[UIFont systemFontOfSize:14]];
     [shopName setBackgroundColor:[UIColor clearColor]];
-    [shopName setText:[NSString stringWithFormat:@"门店名:%@",[LoginUserUtil shopName]]];
+    if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_CREATER){
+        [shopName setText:[NSString stringWithFormat:@"门店名:%@",[LoginUserUtil shopName]]];
+    }else{
+        if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_AUTOREPAIRER){
+            [shopName setText:[NSString stringWithFormat:@"员工身份:技师"]];
+        }
+    }
     [bg addSubview:shopName];
-    
+
     UILabel *address = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(shopName.frame), MAIN_WIDTH, 35)];
     address.numberOfLines = 0;
     [address setTextAlignment:NSTextAlignmentCenter];
@@ -112,7 +119,13 @@
     [address setTextColor:KEY_COMMON_GRAY_CORLOR];
     [address setFont:[UIFont systemFontOfSize:14]];
     [address setBackgroundColor:[UIColor clearColor]];
-    [address setText:[NSString stringWithFormat:@"门店地址:%@",[LoginUserUtil address]]];
+    if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_CREATER){
+        [address setText:[NSString stringWithFormat:@"门店地址:%@",[LoginUserUtil address]]];
+    }else{
+        if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_AUTOREPAIRER){
+            [address setText:[NSString stringWithFormat:@"绑定手机:%@",[LoginUserUtil userInfo][@"tel"]]];
+        }
+    }
     [bg addSubview:address];
     return bg;
     
@@ -129,7 +142,7 @@
 - (void)requestData:(BOOL)isRefresh
 {
     self.m_arrData = @[
-                       @"个人资料",
+                       [LoginUserUtil currentRole] == ENUM_ROLE_TYPE_CREATER ? @"个人资料" : @"员工个人资料",
                        @"最新公告",
                        @"工单收费项目方式设置",
                        @"微信公众号使用指南",
@@ -301,6 +314,7 @@
     if(alertView.tag == 1){
         if(buttonIndex == 1){
             [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:KEY_AUTO_LOGIN];
+            [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:KEY_LOGINED_PWD];
             [[EGOCache globalCache]clearCache];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }

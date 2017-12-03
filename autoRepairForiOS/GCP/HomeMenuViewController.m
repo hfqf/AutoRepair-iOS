@@ -16,7 +16,7 @@
 
 
 #define kNumCell      4
-#define  HIGH_ADS     MAIN_WIDTH/2
+#define  HIGH_ADS     120
 
 @implementation HomeMenuViewController
 - (id)init
@@ -26,34 +26,74 @@
         self.tableView.dataSource = self;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-        self.m_arrData= @[
-                          @{@"name":@"工单",
-                            @"icon":@"home_gd"
-                              },
-                          @{@"name":@"预约单",
-                            @"icon":@"home_yy"
-                            },
-                          @{@"name":@"客户管理",
-                            @"icon":@"home_kh"
-                            },
-                          @{@"name":@"到期提醒",
-                            @"icon":@"home_tx"
-                            },
-                          @{@"name":@"仓库管理",
-                            @"icon":@"home_ck"
-                            },
-                          @{@"name":@"服务管理",
-                            @"icon":@"home_fw"
-                            },
-                          @{@"name":@"报表统计",
-                            @"icon":@"home_bb"
-                            },
-                          @{@"name":@"收支统计",
-                            @"icon":@"home_sz"
-                            },
-                          @{@"name":@"汽修圈",
-                            @"icon":@"home_lt"
-                             },];
+        if(![LoginUserUtil isEmployeeLogin]){
+            self.m_arrData=
+                @[
+                  @{@"name":@"工单",
+                    @"icon":@"home_gd",
+                    @"class":@"WorkroomListViewController"
+                    },
+                  @{@"name":@"预约单",
+                    @"icon":@"home_yy",
+                    @"class":@"NewTip2ViewController"
+                    },
+                  @{@"name":@"客户管理",
+                    @"icon":@"home_kh",
+                    @"class":@"CustomerViewController"
+                    },
+                  @{@"name":@"到期提醒",
+                    @"icon":@"home_tx",
+                    @"class":@"NewTipViewController"
+                    },
+                  @{@"name":@"仓库管理",
+                    @"icon":@"home_ck",
+                    @"class":@"WareHouseManagerViewController"
+                    },
+                  @{@"name":@"服务管理",
+                    @"icon":@"home_fw",
+                    @"class":@"ServiceManagerViewController"
+                    },
+                  @{@"name":@"报表统计",
+                    @"icon":@"home_bb",
+                    @"class":@"CountOnViewController"
+                    },
+                  @{@"name":@"收支统计",
+                    @"icon":@"home_sz",
+                    @"class":@"CountOnView2Controller"
+                    },
+                  @{@"name":@"汽修圈",
+                    @"icon":@"home_lt",
+                    @"class":@"LlxViewController"
+                    },
+                  @{@"name":@"员工管理",
+                    @"icon":@"home_yg",
+                    @"class":@"EmployeeListViewController"
+                    },
+                  ];
+        }else{
+            self.m_arrData =     @[
+                                   @{@"name":@"工单",
+                                     @"icon":@"home_gd",
+                                     @"class":@"WorkroomListViewController"
+                                     },
+                                   @{@"name":@"预约单",
+                                     @"icon":@"home_yy",
+                                     @"class":@"NewTip2ViewController"
+                                     },
+                                   @{@"name":@"客户管理",
+                                     @"icon":@"home_kh",
+                                     @"class":@"CustomerViewController"
+                                     },
+                                   @{@"name":@"到期提醒",
+                                     @"icon":@"home_tx",
+                                     @"class":@"NewTipViewController"
+                                     },
+                                   @{@"name":@"汽修圈",
+                                     @"icon":@"home_lt",
+                                     @"class":@"LlxViewController"
+                                     },];
+        }
+
         [self reloadDeals];
         [HTTP_MANAGER getgHomeAdvs:^(NSDictionary *succeedResult) {
             if([succeedResult[@"code"]integerValue]==1){
@@ -110,7 +150,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = ceil(self.m_arrData.count*1.0/kNumCell);
-    return MAIN_WIDTH/kNumCell*1.2*row;
+    return MAIN_WIDTH/kNumCell*1*row;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,16 +170,16 @@
         [btn addTarget:self action:@selector(menuBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         btn.layer.borderColor = UIColorFromRGB(0xebebeb).CGColor;
         btn.layer.borderWidth = 0.5;
-        [btn setFrame:CGRectMake(width*coulmn, row*width*1.2, width, width*1.2)];
+        [btn setFrame:CGRectMake(width*coulmn, row*width*1, width, width*1)];
         [btn setImage:[UIImage imageNamed:info[@"icon"]] forState:0];
-        [btn setImageEdgeInsets:UIEdgeInsetsMake((width*1.2-25)/2,(width-25)/2,(width*1.2-25)/2,(width-25)/2)];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(((width*1-25)/2)-10,(width-25)/2,((width*1-25)/2)+10,(width-25)/2)];
         [cell addSubview:btn];
 
-        UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake(0, width*1.2/2+20, width, 20)];
+        UILabel *tip = [[UILabel alloc]initWithFrame:CGRectMake(0, width*1/2+10, width, 20)];
         [tip setTextAlignment:NSTextAlignmentCenter];
         [tip setText:info[@"name"]];
         [tip setTextColor:UIColorFromRGB(0x333333)];
-        [tip setFont:[UIFont systemFontOfSize:15]];
+        [tip setFont:[UIFont systemFontOfSize:13]];
         [btn addSubview:tip];
     }
 
@@ -149,25 +189,8 @@
 
 - (void)menuBtnClicked:(UIButton *)btn
 {
-    if(btn.tag == 0){
-        [self.navigationController pushViewController:[[NSClassFromString(@"WorkroomListViewController") alloc]init] animated:YES];
-    }else if (btn.tag == 1){
-        [self.navigationController pushViewController:[[NSClassFromString(@"NewTip2ViewController") alloc]init] animated:YES];
-    }else if (btn.tag == 2){
-        [self.navigationController pushViewController:[[NSClassFromString(@"CustomerViewController") alloc]init] animated:YES];
-    }else if (btn.tag == 3){
-        [self.navigationController pushViewController:[[NSClassFromString(@"NewTipViewController") alloc]init] animated:YES];
-    }else if (btn.tag == 4){
-        [self.navigationController pushViewController:[[NSClassFromString(@"WareHouseManagerViewController") alloc]init] animated:YES];
-    }else if (btn.tag == 5){
-        [self.navigationController pushViewController:[[NSClassFromString(@"ServiceManagerViewController") alloc]init] animated:YES];
-    }else if (btn.tag == 6){
-         [self.navigationController pushViewController:[[NSClassFromString(@"CountOnViewController") alloc]init] animated:YES];
-    }else if (btn.tag == 7){
-        [self.navigationController pushViewController:[[NSClassFromString(@"CountOnView2Controller") alloc]init] animated:YES];
-    }else if (btn.tag == 8){
-        [self.navigationController pushViewController:[[NSClassFromString(@"LlxViewController") alloc]init] animated:YES];
-    }
+    NSDictionary *info = self.m_arrData[btn.tag];
+    [self.navigationController pushViewController:[[NSClassFromString(info[@"class"]) alloc]init] animated:YES];
 }
 #pragma mark - MXCycleScrollViewDelegate
 

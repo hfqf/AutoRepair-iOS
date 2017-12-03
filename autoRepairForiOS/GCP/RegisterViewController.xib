@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBd-jH-l4r">
-                    <rect key="frame" x="20" y="70" width="68" height="21"/>
+                    <rect key="frame" x="20" y="100" width="68" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="Hqn-mf-ftE"/>
                         <constraint firstAttribute="width" constant="68" id="cue-cB-jBq"/>
@@ -38,7 +38,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="勿有特殊字符" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KO9-89-f4n">
-                    <rect key="frame" x="108" y="66" width="247" height="30"/>
+                    <rect key="frame" x="108" y="96" width="247" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="265" id="KX0-3X-hAh"/>
                         <constraint firstAttribute="height" constant="30" id="wud-ic-dWI"/>
@@ -55,7 +55,7 @@
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQ6-cB-dOm">
-                    <rect key="frame" x="20" y="111" width="68" height="21"/>
+                    <rect key="frame" x="20" y="141" width="68" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="68" id="2wk-jo-Nyx"/>
                         <constraint firstAttribute="height" constant="21" id="e8T-pm-iMF"/>
@@ -65,7 +65,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="很重要,将用于登录" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bdx-kG-i4x">
-                    <rect key="frame" x="108" y="107" width="247" height="30"/>
+                    <rect key="frame" x="108" y="137" width="247" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="mMV-FO-M8c"/>
                     </constraints>
@@ -76,7 +76,7 @@
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbh-mM-e1i">
-                    <rect key="frame" x="20" y="152" width="68" height="21"/>
+                    <rect key="frame" x="20" y="182" width="68" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="PJ3-bA-hP5"/>
                         <constraint firstAttribute="width" constant="68" id="zoK-3R-kIV"/>
@@ -86,7 +86,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="不能超过八位" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QiB-Qi-fSR">
-                    <rect key="frame" x="108" y="148" width="247" height="30"/>
+                    <rect key="frame" x="108" y="178" width="247" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="kef-46-Aa5"/>
                     </constraints>
@@ -97,7 +97,7 @@
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码确认" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BbA-Bd-Wbe">
-                    <rect key="frame" x="20" y="193" width="68" height="21"/>
+                    <rect key="frame" x="20" y="223" width="68" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="6l2-oI-p93"/>
                         <constraint firstAttribute="width" constant="68" id="RxH-yG-rde"/>
@@ -107,7 +107,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="再次确认密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wts-2q-aUt">
-                    <rect key="frame" x="108" y="188" width="247" height="30"/>
+                    <rect key="frame" x="108" y="218" width="247" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="lfK-6f-RBL"/>
                     </constraints>
@@ -118,7 +118,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tT-KG-Njl">
-                    <rect key="frame" x="20" y="371" width="335" height="40"/>
+                    <rect key="frame" x="20" y="401" width="335" height="40"/>
                     <color key="backgroundColor" red="0.70769230770000002" green="0.021319421547526182" blue="0.25690445164367942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Fmc-V2-Ldp"/>
@@ -132,7 +132,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="门店地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhT-Bo-f86">
-                    <rect key="frame" x="20" y="234" width="68" height="21"/>
+                    <rect key="frame" x="20" y="264" width="68" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="68" id="E8y-CB-X05"/>
                         <constraint firstAttribute="height" constant="21" id="r9f-bx-026"/>
@@ -142,7 +142,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="选填,将用于填写微信推送内容" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2La-Mg-7FI">
-                    <rect key="frame" x="108" y="229" width="247" height="30"/>
+                    <rect key="frame" x="108" y="259" width="247" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="YDV-OF-TtH"/>
                     </constraints>
@@ -153,7 +153,7 @@
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="门店名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15O-QB-K7y">
-                    <rect key="frame" x="20" y="275" width="68" height="21"/>
+                    <rect key="frame" x="20" y="305" width="68" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="8Wk-gc-gU4"/>
                         <constraint firstAttribute="width" constant="68" id="Cq0-3B-fPR"/>
@@ -163,7 +163,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="选填,将用于填写微信推送内容" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WFa-Rv-khL">
-                    <rect key="frame" x="108" y="270" width="247" height="30"/>
+                    <rect key="frame" x="108" y="300" width="247" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="ojN-Zh-1rv"/>
                     </constraints>
@@ -174,7 +174,7 @@
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="下载渠道" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfN-MV-Z5B">
-                    <rect key="frame" x="20" y="316" width="68" height="21"/>
+                    <rect key="frame" x="20" y="346" width="68" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="78r-ub-2se"/>
                         <constraint firstAttribute="width" constant="68" id="WzU-D9-Bry"/>
@@ -184,7 +184,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="选填,从哪里知道该软件的介绍" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CTa-zd-o5n">
-                    <rect key="frame" x="108" y="311" width="247" height="30"/>
+                    <rect key="frame" x="108" y="341" width="247" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="ZEr-7Q-gCA"/>
                     </constraints>
@@ -211,7 +211,7 @@
                 <constraint firstItem="KO9-89-f4n" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="EJi-vt-nqp"/>
                 <constraint firstItem="BbA-Bd-Wbe" firstAttribute="top" secondItem="pbh-mM-e1i" secondAttribute="bottom" constant="20" id="Fhz-R1-uGe"/>
                 <constraint firstAttribute="trailing" secondItem="WFa-Rv-khL" secondAttribute="trailing" constant="20" id="HSv-z7-Lku"/>
-                <constraint firstItem="nBd-jH-l4r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="JYJ-tc-wcn"/>
+                <constraint firstItem="nBd-jH-l4r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="JYJ-tc-wcn"/>
                 <constraint firstItem="WFa-Rv-khL" firstAttribute="centerY" secondItem="15O-QB-K7y" secondAttribute="centerY" id="L3G-pM-m7c"/>
                 <constraint firstItem="Bdx-kG-i4x" firstAttribute="leading" secondItem="eQ6-cB-dOm" secondAttribute="trailing" constant="20" id="OEQ-1V-uIH"/>
                 <constraint firstAttribute="trailing" secondItem="wts-2q-aUt" secondAttribute="trailing" constant="20" id="Peo-ac-qAU"/>
