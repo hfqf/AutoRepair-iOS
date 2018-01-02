@@ -57,7 +57,7 @@
 //           return YES;
 //       }
 //    }
-    return NO;
+    return YES;
 }
 //设置支持的屏幕旋转方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {

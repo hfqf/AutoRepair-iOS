@@ -17,6 +17,7 @@
 #import "ServiceManagerViewController.h"
 #import "SBJson4.h"
 #import "OwnValueViewController.h"
+#import "SpeWebviewViewController.h"
 @interface WorkroomAddOrEditViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate,UITextViewDelegate,UIScrollViewDelegate,WarehouseSelectGoodsToRepairViewControllerDelegate,WarehouseGoodsSettingViewControllerDelegate,OwnValueViewControllerDelegate>
 {
     UIView *m_tipView;
@@ -51,18 +52,22 @@
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.tableView setBackgroundColor:UIColorFromRGB(0xf5f5f5)];
         [self createButtons];
+
+        self.tableView.delegate = self;
+        [self.tableView setFrame:CGRectMake(0, HEIGHT_NAVIGATION+40, MAIN_WIDTH, MAIN_HEIGHT-HEIGHT_NAVIGATION-40- ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
+        [self requestData:YES];
         if(![HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"]){
             if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_CREATER){
                 [self createBottomView];
             }else{
                 if(![HTTP_MANAGER.m_rep.m_state isEqualToString:@"1"]){
                     [self createBottomView];
+                }else{
+                    [self.tableView setFrame:CGRectMake(0, HEIGHT_NAVIGATION+40, MAIN_WIDTH, MAIN_HEIGHT-HEIGHT_NAVIGATION-40)];
+
                 }
             }
         }
-        self.tableView.delegate = self;
-        [self.tableView setFrame:CGRectMake(0, HEIGHT_NAVIGATION+40, MAIN_WIDTH, MAIN_HEIGHT-HEIGHT_NAVIGATION-40- ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"] ?0:HIGH_BOTTOM))];
-        [self requestData:YES];
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardDidShow:)name:UIKeyboardDidShowNotification object:nil];
         //注册键盘消失通知；
@@ -477,11 +482,11 @@
         [alert show];
     }else if ([HTTP_MANAGER.m_rep.m_state isEqualToString:@"2"]){
         if(HTTP_MANAGER.m_rep.m_ownMoney.integerValue == 0){
-            UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除此工单",@"关闭提醒推送",@"打开提醒推送", nil];
+            UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除此工单",@"关闭提醒推送",@"打开提醒推送",@"打印工单", nil];
             alert.tag = 10003;
             [alert show];
         }else{
-            UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"已结清尾款",@"关闭提醒推送",@"打开提醒推送", nil];
+            UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"选择操作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"已结清尾款",@"关闭提醒推送",@"打开提醒推送",@"打印工单", nil];
             alert.tag = 10005;
             [alert show];
         }
@@ -1066,6 +1071,9 @@
             HTTP_MANAGER.m_rep.m_isClose = NO;
             HTTP_MANAGER.m_rep.m_isreaded = NO;
             [self updateRepair:NO];
+        }else if (buttonIndex == 4){
+            SpeWebviewViewController *web = [[SpeWebviewViewController alloc]initWithUrl:[NSString stringWithFormat:@"%@/repair/printAllItems?repid=%@",SERVER,HTTP_MANAGER.m_rep.m_idFromNode] withTitle:@"打印工单"];
+            [self.navigationController pushViewController:web animated:YES];
         }
     }else if (alertView.tag == 10004){
         if(buttonIndex == 1){
@@ -1089,6 +1097,9 @@
             HTTP_MANAGER.m_rep.m_isClose = NO;
             HTTP_MANAGER.m_rep.m_isreaded = NO;
             [self updateRepair:NO];
+        }else if (buttonIndex == 4){
+            SpeWebviewViewController *web = [[SpeWebviewViewController alloc]initWithUrl:[NSString stringWithFormat:@"%@/repair/printAllItems?repid=%@",SERVER,HTTP_MANAGER.m_rep.m_idFromNode] withTitle:@"打印工单"];
+            [self.navigationController pushViewController:web animated:YES];
         }
     }
     

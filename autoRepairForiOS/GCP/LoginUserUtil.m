@@ -217,8 +217,13 @@
 #pragma mark -  当前项目
 + (NSString *)userTel
 {
-    NSString *ret = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_AUTO_TEL];
-    return ret == nil ? @"" : ret;
+    NSDictionary *info =  [self userInfo];
+    if([LoginUserUtil currentRole] == ENUM_ROLE_TYPE_CREATER){
+        return [info stringWithFilted:@"tel"];
+    }
+
+    NSDictionary *_info =  [self userInfo][@"creater"];
+    return [_info stringWithFilted:@"tel"];
 }
 
 + (NSString *)userName

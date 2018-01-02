@@ -77,7 +77,9 @@
     [ShareSDK registerApp:sharesdk_appkey
           activePlatforms:@[
                             @(SSDKPlatformTypeWechat),
-                            @(SSDKPlatformTypeQQ)]
+                            @(SSDKPlatformTypeQQ),
+                            @(SSDKPlatformTypePrint),
+                            @(SSDKPlatformTypeSMS)]
                  onImport:^(SSDKPlatformType platformType)
      {
          switch (platformType)

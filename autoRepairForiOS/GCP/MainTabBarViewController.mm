@@ -252,7 +252,11 @@
         NSMutableString *message = [NSMutableString string];
         if(result[@"words_result"]){
             for(NSDictionary *obj in result[@"words_result"]){
-                [message appendFormat:@"%@", obj[@"words"]];
+                NSString *carCode = obj[@"words"];
+                carCode= [carCode stringByReplacingOccurrencesOfString:@"I" withString:@"1"];
+                carCode = [carCode stringByReplacingOccurrencesOfString:@"o" withString:@"0"];
+                carCode = [carCode stringByReplacingOccurrencesOfString:@"O" withString:@"0"];
+                [message appendFormat:@"%@",carCode];
             }
         }else{
             [message appendFormat:@"%@", result];
@@ -308,5 +312,14 @@
         }
         [act showInView:self.view];
     }
+}
+
+- (BOOL)shouldAutorotate{
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
 }
 @end

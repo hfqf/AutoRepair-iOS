@@ -172,6 +172,24 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    #if KEY_IS_DEV
+
+    #else
+
+    [HTTP_MANAGER checkUpdateVersion:^(NSDictionary *succeedResult) {
+
+        if([succeedResult[@"code"]integerValue] == 1){
+            [self showVersionUpdateView:succeedResult[@"ret"]];
+        }
+
+    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
+
+    }];
+
+    #endif
+
+
     [self.loginBtn setBackgroundColor:PUBLIC_BACKGROUND_COLOR];
     [self.registerBtn setTitleColor:KEY_COMMON_GRAY_CORLOR forState:UIControlStateNormal];
     self.registerBtn.layer.borderColor =  UIColorFromRGB(0xf5f5f5).CGColor;
@@ -195,24 +213,7 @@
         }
         [self loginBtnClicked:nil];
     }
-    
-    
-#if KEY_IS_DEV
- 
-#else
 
-    [HTTP_MANAGER checkUpdateVersion:^(NSDictionary *succeedResult) {
-        
-        if([succeedResult[@"code"]integerValue] == 1){
-            [self showVersionUpdateView:succeedResult[@"ret"]];
-        }
-        
-    } failedBolck:^(AFHTTPRequestOperation *response, NSError *error) {
-        
-    }];
-    
-    
-#endif
 }
 
 

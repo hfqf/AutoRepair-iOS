@@ -64,7 +64,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (BOOL)insertNewCustom:(ADTContacterInfo *)info
 {
-    NSString *sql = [NSString stringWithFormat:@"INSERT INTO 'contactsTable' ( 'carCode','name','tel','carType','owner','idFromNode','inserttime','isbindweixin','weixinopenid','vin','carregistertime','headurl','safecompany','safenexttime','yearchecknexttime') VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",info.m_carCode,info.m_userName,info.m_tel,info.m_carType,info.m_owner,info.m_idFromServer,info.m_strInsertTime,info.m_strIsBindWeixin,info.m_strWeixinOPneid,info.m_strVin,info.m_strCarRegistertTime,info.m_strHeadUrl,info.m_strSafeCompany,info.m_strSafeNextTime,info.m_strYearCheckNextTime];
+    NSString *sql = [NSString stringWithFormat:@"INSERT INTO 'contactsTable' ( 'carCode','name','tel','carType','owner','idFromNode','inserttime','isbindweixin','weixinopenid','vin','carregistertime','headurl','safecompany','safenexttime','yearchecknexttime') VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",info.m_carCode,info.m_userName,info.m_tel,info.m_carType,info.m_owner,info.m_idFromServer,info.m_strInsertTime,info.m_strIsBindWeixin,info.m_strWeixinOPneid,info.m_strVin,info.m_strCarRegistertTime,info.m_strHeadUrl,safeStringWith(info.m_strSafeCompany) ,safeStringWith(info.m_strSafeNextTime),safeStringWith(info.m_strYearCheckNextTime)];
     return [self execSql:sql];
 }
 
@@ -72,7 +72,7 @@ SINGLETON_FOR_CLASS(SqliteDataManager)
 
 - (BOOL)updateCustomer:(ADTContacterInfo *)info
 {
-    return [self execSql: [NSString stringWithFormat:@"update contactsTable set name = '%@' , carCode = '%@',carType = '%@' ,tel= '%@' ,inserttime='%@' ,isbindweixin='%@',weixinopenid='%@',vin='%@',carregistertime='%@',headurl='%@',safecompany='%@',safenexttime='%@',yearchecknexttime='%@'  where  idFromNode = '%@'",info.m_userName,info.m_carCode,info.m_carType,info.m_tel,info.m_strInsertTime,info.m_strIsBindWeixin,info.m_strWeixinOPneid,info.m_strVin,info.m_strCarRegistertTime,info.m_strHeadUrl,info.m_strSafeCompany,info.m_strSafeNextTime,info.m_strYearCheckNextTime,info.m_idFromServer]];
+    return [self execSql: [NSString stringWithFormat:@"update contactsTable set name = '%@' , carCode = '%@',carType = '%@' ,tel= '%@' ,inserttime='%@' ,isbindweixin='%@',weixinopenid='%@',vin='%@',carregistertime='%@',headurl='%@',safecompany='%@',safenexttime='%@',yearchecknexttime='%@'  where  idFromNode = '%@'",info.m_userName,info.m_carCode,info.m_carType,info.m_tel,info.m_strInsertTime,info.m_strIsBindWeixin,info.m_strWeixinOPneid,info.m_strVin,info.m_strCarRegistertTime,info.m_strHeadUrl,safeStringWith(info.m_strSafeCompany),safeStringWith(info.m_strSafeNextTime),safeStringWith(info.m_strYearCheckNextTime),info.m_idFromServer]];
 }
 
 - (BOOL)updateCustomHeadUrl:(ADTContacterInfo *)contact

@@ -382,9 +382,9 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                         @"headurl":newContact.m_strHeadUrl == nil ? @"":newContact.m_strHeadUrl,
                                                         @"vin":newContact.m_strVin == nil ? @"": newContact.m_strVin,
                                                         @"carregistertime":newContact.m_strCarRegistertTime == nil ? @"" : newContact.m_strCarRegistertTime,
-                                                        @"safecompany":newContact.m_strSafeCompany,
-                                                        @"safenexttime":newContact.m_strSafeNextTime,
-                                                        @"yearchecknexttime":newContact.m_strYearCheckNextTime,
+                                                        @"safecompany":safeStringWith(newContact.m_strSafeCompany),
+                                                        @"safenexttime":safeStringWith(newContact.m_strSafeNextTime),
+                                                        @"yearchecknexttime":safeStringWith(newContact.m_strYearCheckNextTime),
                                                         
                                                         } successedBlock:success failedBolck:failed];
 }
@@ -412,9 +412,9 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData)
                                                            @"cartype":newContact.m_carType,
                                                            @"owner":[LoginUserUtil userTel],
                                                            @"id":newContact.m_idFromServer,
-                                                           @"safecompany":newContact.m_strSafeCompany,
-                                                           @"safenexttime":newContact.m_strSafeNextTime,
-                                                           @"yearchecknexttime":newContact.m_strYearCheckNextTime,
+                                                           @"safecompany":safeStringWith(newContact.m_strSafeCompany),
+                                                           @"safenexttime":safeStringWith(newContact.m_strSafeNextTime),
+                                                           @"yearchecknexttime":safeStringWith(newContact.m_strYearCheckNextTime),
                                                            } successedBlock:success failedBolck:failed];
 
 }
